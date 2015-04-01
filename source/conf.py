@@ -86,6 +86,9 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# Include the list of substitutions
+rst_prolog = file('substitutions.txt').read()
+
 
 # -- Options for HTML output ---------------------------------------------------
 

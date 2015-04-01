@@ -1,21 +1,15 @@
 .. _user-manual:
 
+***********
 User Manual
-************
+***********
+
+.. rubric:: Phosphoros User Manual contents
+
+.. toctree::
    
-Introduction
-============
-
-.. _first-steps:
-
-First Steps with Phosphoros
-===========================
-
-Command Line Interface Reference
-================================
-
-GUI Reference
-=============
-
-File Format Reference
-=====================
+   intro
+   tutorial
+   cli
+   gui
+   format
