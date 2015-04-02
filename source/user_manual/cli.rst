@@ -59,7 +59,7 @@ Actions List
    
 .. option:: display_dataset, DD
 
-   Displays the SED data a template in the library |br|
+   Displays the SED data for a template in the library |br|
    Alternative executable: ``PhosphorosDisplayDataset``
    
 .. option:: vs_specz, VS
@@ -495,3 +495,145 @@ Contains options for controlling the algorithm used for the PHZ calculation.
    NOTE: The MAX option does not follow beyesian statistics |br|
    - BAYESIAN: Performs integration over the numerical axes. Currently non
    numerical axes are assumed to contain equally distributed values.
+   
+Browse Auxiliary Data Options
+=============================
+
+.. program:: PhosphorosLsAux   
+   
+.. option:: -data-root-path
+
+   The directory containing the data files, organized in folders
+   
+.. option:: -group
+
+   List the contents of the given group
+   
+.. option:: -data
+
+   Print the data of the given dataset
+   
+   
+Display Template Options
+========================
+
+.. program:: DisplayTemplate 
+
+Input section
+-------------
+
+.. option:: -photometry-grid-file
+
+   The file containing the templates photometries. This file should be created with
+   the :option:`Phosphoros -build_templates` action. Note that the given grid must contain
+   photometries for the same filters with the input catalog.  
+
+Axis informations section
+-------------------------
+
+.. option:: -sed
+
+   Show the SED axis values
+   
+.. option:: -redcurve
+
+   Show the reddening curve axis values
+   
+.. option:: -ebv
+
+   Show the E(B-V) axis values
+   
+.. option:: -z
+
+   Show the redshift axis values
+   
+Single Template photometry section
+----------------------------------
+   
+.. option:: -phot
+
+   Show the photometry of the cell (SED,REDCURVE,EBV,Z) (zero based indices)
+   
+Display Dataset Options
+=======================
+
+.. program:: DisplayDataset 
+
+Data Management section
+-----------------------
+
+.. option:: -sed-root-path (required)
+
+   The directory containing the SED datasets, organized in folders
+
+.. option:: -reddening-curve-root-path (required)
+
+   The directory containing the Reddening Curve datasets, organized in folders
+   
+Axis informations section
+-------------------------
+
+.. option:: -sed-name
+
+   The name of the SED.
+
+.. option:: -reddening-curve-name
+
+   The name of the reddening curve.
+   
+.. option:: -ebv-value
+
+   The E(B-V) value.
+   
+.. option:: -z-value
+
+   The redshift value
+
+Algorithm Configuration section
+-------------------------------
+
+.. option:: -igm-absorption-type
+
+   The algorithm used for calculating the IGM absorption. One of OFF, MADAU
+
+
+
+Photo-z Vs Spetro-z Options
+===========================
+
+.. program:: PhosphorosVsSpecZ 
+
+.. option:: --files, -f
+
+   Input file(s) to read (catalog)
+
+.. option:: --id, -i
+
+   The name of the ID column (default: ID)
+   
+.. option:: --specz , -s
+
+   The name of the spectroscopic redshift column (default: ZSPEC)
+
+.. option:: --phz, -p
+
+   The name of the photometric redshift column (default: Z)
+
+.. option:: --display, -d
+
+   Disables the plot window
+ 
+ 
+Display Likelihood Options
+==========================
+ 
+.. program:: PhosphorosDisplayLikelihood
+
+.. option:: --file, -f
+
+   FITS file containing the likelihood grid
+   
+.. option:: --plot-type, -p
+
+   The type of plot to show (one of Ebv, Sed, Z, Sed-Z, Ebv-Z, Sed-Ebv, Sed-Ebv-Z)
+
