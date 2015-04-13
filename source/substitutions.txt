@@ -8,3 +8,4 @@
 
 .. |CLI| replace:: :abbr:`CLI (Command Line Interface)`
 .. |GUI| replace:: :abbr:`GUI (Graphical User Interface)`
+.. |IGM| replace:: :abbr:`IGM (Intergalactic Medium)`
