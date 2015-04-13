@@ -4,6 +4,13 @@
 
    <br />
 
+.. Some useful unicode substitutions for units
+
+.. |AA| unicode:: U+212B
+.. |mu| unicode:: U+03BC
+.. |sigma| unicode:: U+03C3
+.. |alpha| unicode:: U+03B1
+
 .. List of abbreviations
 
 .. |CLI| replace:: :abbr:`CLI (Command Line Interface)`
