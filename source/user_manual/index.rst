@@ -7,6 +7,7 @@ User Manual
 .. rubric:: Phosphoros User Manual contents
 
 .. toctree::
+   :numbered:
    
    intro
    tutorial
