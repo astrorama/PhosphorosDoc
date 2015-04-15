@@ -37,6 +37,12 @@ Instructions of how to download and install the Phosphoros software
 User manual, containing a :ref:`tutorial <first-steps>` and the full Phosphoros
 user reference
 
+*********************
+:ref:`algo-reference`
+*********************
+
+Extended description of the implemented algorithm
+
 ***********************
 :ref:`developer-manual`
 ***********************

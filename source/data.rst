@@ -4,6 +4,13 @@
 Data Repository
 ***************
 
+Example Configuration Files
+===========================
+
+:download:`BuildTemplates.conf </_static/BuildTemplates.conf>` |BR|
+:download:`DeriveZeroPoints.conf </_static/DeriveZeroPoints.conf>` |BR|
+:download:`FitTemplates.conf </_static/FitTemplates.conf>` |BR|
+
 MER Challenge Data
 ==================
 
