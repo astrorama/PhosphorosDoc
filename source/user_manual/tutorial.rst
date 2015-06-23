@@ -4,6 +4,28 @@
 First Steps with Phosphoros
 ***************************
 
+Directory Structure
+===================
+
+Phosphoros provides a default directory structure as follows:
+
+.. image:: directory_structure.png
+   :align: center
+
+- `PHOSPHOROS_ROOT` :  root path environment variable of the Phospohoros directory structure (default: *$HOME/Phosphoros*)
+- `catalog-type, group_name` (in RED) : are directories created from parameter values defined by the user in the Phosphoros configuration files(see config/*.conf)
+- `Directories` (in BLUE) : as "Catalogs, Auxiliarydata etc..." are directories automatically created by Phosphoros by default, you can not changed them
+- `Files` (in Orange) : are files created by Phophoros as intermediate products
+
+Directory description
+---------------------
+
+- `Catalogs` : photometry catalogs are stored there defining a "catalog-type" from the parameter option
+- `AuxiliaryData`
+- `IntermediateProducts`
+- `Result`
+- `config`
+                   
 Executing Phosphoros
 ====================
 
