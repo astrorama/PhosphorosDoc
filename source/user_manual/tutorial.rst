@@ -12,25 +12,48 @@ Phosphoros provides a default directory structure as follows:
 .. image:: directory_structure.png
    :align: center
 
-- `PHOSPHOROS_ROOT` :  root path environment variable of the Phospohoros directory structure (default: *$HOME/Phosphoros*)
-- `catalog-type, group_name` (in Red) : are directories created from parameter values defined by the user in the Phosphoros configuration files(see config/*.conf)
-- `Directories` (in Blue) : as "Catalogs, Auxiliarydata etc..." are directories automatically created by Phosphoros by default, you can not changed them
-- `Files` (in Orange) : are files created by Phophoros as intermediate products
+- **PHOSPHOROS_ROOT** :  
+                      Root path environment variable of the Phospohoros directory structure (default: **$HOME/Phosphoros**)
+- **catalog-type, group_name** (in Red) : 
+                      Directories created from parameter values defined by the user in the Phosphoros configuration files(see config/*.conf)
+- **Directories** (in Blue) : 
+                       As "Catalogs, Auxiliarydata etc..." these directories are automatically created by Phosphoros by default, you can not changed them
+- **Files** (in Orange) : 
+                       Files created by Phophoros as intermediate products
 
 Directory description
 ---------------------
 
-.. role:: blue
-
 - **Catalogs** : 
-                photometry catalogs are :blue:`stored` there defining a "catalog-type" provided by the user from the "catalog-type" 
-                parameter option 
+                Photometry catalogs are put there under a "catalog-type" directory which is provided by the user when setting the 
+                "catalog-type" parameter option 
 - **AuxiliaryData** : 
-                directory where are stored the seds, filters, and the reddening curves files. A "group-name" is provided by the user 
-                from the "group-name" parameter option
+                Directory where are stored the seds, filters, and the reddening curves files. A "group-name" directory is provided by 
+                the user when setting the "group-name" parameter option
 - **IntermediateProducts** :
+                Phosphoros intermediate products are stored there and each data product is related to a "catalog-type", the one defined in
+                the "Catalog directory". Three files could be produced there:
+                      * model_grid.dat : model grid binary file under the ModelGrid directory (default file name, configurable) 
+                      * filter_mapping.txt : map the filter names (default file name, not configurable)
+                      * photometric_corrections.txt : file containing the photometric corrections values(default file name, configurable)
 - **Result** :
+               Phosphoros output files are written there in the "catalog-type" and "catalog_file_name" directories. For a "catalog-type"
+               you could have several photometric catalog files, alias "catalog_file_name". 
+               Files you could find in "catalog_file_name" directory are:
+                      * phz_cat.fits : Phosphoros output catalog(default filename, configurable)
+                      * pdf.fits : all PDFs are stored in this file(default filename, configurable)
+                      * "Source ID".fits : posteriors result files, one file per source ID, under the "posteriors" directory (default filename, not configurable) 
+               
 - **config** :
+              Phosphoros configuration files(*.conf) are stored as follows:
+                   * PhosphorosComputeModelGrid.conf
+                   * PhosphorosComputeModelSed.conf
+                   * PhosphorosComputePhotometricCorrections.conf
+                   * PhosphorosComputeRedshifts.conf
+                   * PhosphorosDisplayModelGrid.conf
+                   * PhosphorosLsAux.conf
+
+              Files produce by the Phosphoros GUI application are stored under the "GUI" directory
                    
 Executing Phosphoros
 ====================
