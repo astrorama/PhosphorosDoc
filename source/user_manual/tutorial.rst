@@ -45,7 +45,7 @@ Directory description
                       * "Source ID".fits : posteriors result files, one file per source ID, under the "posteriors" directory (default filename, not configurable) 
                
 - **config** :
-              Phosphoros configuration files(*.conf) are stored as follows:
+              Phosphoros configuration files(*.conf) are stored there. 
                    * PhosphorosComputeModelGrid.conf
                    * PhosphorosComputeModelSed.conf
                    * PhosphorosComputePhotometricCorrections.conf
