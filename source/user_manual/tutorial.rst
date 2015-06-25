@@ -53,7 +53,7 @@ Directory description
                    * PhosphorosDisplayModelGrid.conf
                    * PhosphorosLsAux.conf
 
-              Files produce by the Phosphoros GUI application are stored under the "GUI" directory
+              Files produced by the Phosphoros GUI application are stored under the "GUI" directory
                    
 Executing Phosphoros
 ====================
