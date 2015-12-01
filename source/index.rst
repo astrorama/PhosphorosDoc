@@ -59,4 +59,4 @@ Changelog between the different Phosphoros versions
 :ref:`data`
 ***********
 
-Download SED templates, filter transmissions and example catalogs
+Download SED templates, filter transmissions and catalogs
