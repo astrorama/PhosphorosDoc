@@ -34,6 +34,8 @@ Axes Priors
 Generic Prior
 -------------
 
+.. _posterior-investigation:
+    
 Posterior Investigation
 =======================
 

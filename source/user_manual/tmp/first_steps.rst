@@ -20,6 +20,8 @@ computed photometries.
 
 This is at theoretical level. Diagrams should be used, files or directories not.
 
+.. _directory-organization:
+    
 Directory organization
 ======================
 
@@ -79,6 +81,8 @@ action::
    > Phosphoros GUI
 
 
+.. _setup-input-data:
+    
 Setting up the input data
 =========================
 
@@ -92,6 +96,8 @@ Import using the GUI
 Import manually
 ---------------
 
+.. _catalog-column-mapping:
+    
 Mapping the catalog columns
 ===========================
 
@@ -105,6 +111,8 @@ CLI how-to
 
 filter_mapping.txt explanation
 
+.. _parameter-space-definition:
+    
 Defining the model parameter space
 ==================================
 
