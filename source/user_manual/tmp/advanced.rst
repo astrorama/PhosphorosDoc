@@ -5,13 +5,24 @@ Advanced Phosphoros Features
 
 Here goes everything else, described in a manual way (not like a reference)
 
+.. _directory_howto_section:
+
+How to modify the default directory structure
+=============================================
+
+GUI
+---
+
+CLI
+---
+
 Axis Collapse options
 =====================
 
 Sparse Grid
 ===========
 
-Explenation of what it is
+Explanation of what it is
 
 GUI
 ---
