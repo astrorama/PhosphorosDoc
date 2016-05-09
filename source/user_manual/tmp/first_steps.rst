@@ -182,14 +182,14 @@ corresponding files must be located into
 
 and
 
-    > $HOME/Phosphoros/Catalogs/COSMOS/...
+    > $HOME/Phosphoros/Catalogs/Challenge2/...
 
 respectively.
 
 Auxiliary Data
 --------------
 
-All other input files are referred to as ``Auxiliary`` data. They comprise the following types.
+All input files which are not catalogs are referred to as ``Auxiliary`` data. They comprise the following types.
 
 **Filter transmission curves**: characterise the full transmission in the range [0, 1], including the
     telescope optic, the filter itself and the detector efficiency.
@@ -203,21 +203,47 @@ All other input files are referred to as ``Auxiliary`` data. They comprise the f
 The input files corresponding to these three types of data must be formatted as ASCII tables, with |AA| wavelengths
 in the first column and specific values in the second one.
 
-GUI:
-----
+CLI: Managing Auxiliary Data
+----------------------------
 
-Import manually
----------------
+In order to make auxiliary data available to data analysis, they first have to be imported inside the Phosphoros directory structure.
+
+The most convenient way to do this is to download a tar file containing already a large set of Filters, SEDs and Reddening curve
+from this location (TBD). This file must then be expanded at the correct location.::
+
+    > cd ~
+    > cd Phosphoros (or cd $PHOSPHOROS_ROOT)
+    > wget http://www.isdc.unige.ch/phosphoros/data/other/quickstart.tar.gz (TBReplaced with correct file)
+    > tar -xzf quickstart.tar.gz
+
+Files are arranged inside three directories ``Filters``, ``SEDs`` and ``ReddeningCurves`` below ``$HOME/Phosphoros/AuxiliaryData``
+with possible ``group_name`` sub-directories. These ``groupe_name`` directories are optional and they can de added to help user
+organizing their files.  for internal organisation. These files can also be manage with shell commands
+such as ``mkdir``, ``mv``, ``cp`` or ``rm`.
+
+GUI: Configuration : Aux. Data Management
+-----------------------------------------
+
+The Phosphoros GUI can also be used to import and organized auxiliary data files. Start the GUI with ``Phosphoros GUI`` `
+and click on ``Configuration`` and ``Aux. Data` tabs.
+
+
+
+
 
 .. _catalog-column-mapping:
     
 Mapping the catalog columns
 ===========================
 
-Explain again the concept of the catalog type.
+In order to compute modelled photometry values, Phosphoros needs filter transmission curves which correspond to the filters
+used to obtained the observed photometric values. In general, the names of the observed photometric bands, typically
+reflected in the catalog column names may not match the names of the filter transmission files. Consequently, the mapping of
+these names must be specified. The easiest is to use teh GUI although an ASCII file can also be used providing it is located
+at the right place in the Phosphoros directory structure.
 
-GUI how-to
-----------
+GUI
+---
 
 CLI how-to
 ----------
@@ -229,8 +255,12 @@ filter_mapping.txt explanation
 Defining the model parameter space
 ==================================
 
-Explain the concept of the parameter space. Specify the axes. Not mention yet
-the sparse parameter space.
+In template fitting algorithm, photometric redshifts are derived by finding the best match between the observations and a number of
+precomputed model photometric values. One of the main configuration is therefore the specification of the to-be-considered
+parameter space, which comprises a number of axes, such as redshift, SED and reddening law. For each of these axes, a
+number of values or a range and a step have to be provided. The first step of Phosphoros is then to compute model photometric values
+for each cell of this space. This calculation do not depend on the observations. It can therefore be achieved before hand, once for
+all sources of the catalog.
 
 GUI how-to
 ----------
