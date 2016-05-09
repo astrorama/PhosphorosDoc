@@ -28,6 +28,9 @@ should include the catalog-type concept. Here we should not explain every single
 one of the directories, but focus more on the concept and mention the most used
 ones. We should also mention the PHOSPHOROS_ROOT environment variable.
 
+
+.. _catalog-type:
+
 Catalog type
 ------------
 
@@ -151,19 +154,57 @@ action::
 
 .. _setup-input-data:
     
-Setting up the input data
-=========================
+Setting up input data
+=====================
 
 ..  First explain what the input data are. At this level we should limit it to the
     catalogs, filters, SEDs and reddening curves. We should not describe the formats
     of the files, but have links to the format reference section.
 
-The main Phosphoros input data is a **catalog** file. A catalog include photometric
-measurements obtained through a set of different filters as columns, with their
-corresponding errors and either in flux or magnitude.
+Catalogs
+--------
 
-Import using the GUI
---------------------
+The main Phosphoros input data is a **catalog** file. A catalog is a table including
+as columns photometric measurements obtained through a number of different filters,
+with their corresponding errors, either in flux or magnitude. Rows refer to different sources
+and one column named `ÌD`` must be present. The catalog format is either ASCII or FITS
+as described in this section (TBD). Fluxes must be provided in |mu|\ Jy unit.
+
+Input catalog files can be examined using TOPCAT (http://www.star.bris.ac.uk/~mbt/topcat/) for example.
+They must be placed in the $PHOSPHOROS_ROOT directory ($HOME/Phosphoros by default) before starting any
+analyses, using shell commands (mv or cp). Files must be organized into sub-directories according to
+their different type (see above catalog type concept :ref:`section. <catalog-type>`).
+
+For example, considering a set of catalogs from the ``COSMOS`` and the ``Euclid Challenge 2`` types, the
+corresponding files must be located into
+
+    > $HOME/Phosphoros/Catalogs/COSMOS/...
+
+and
+
+    > $HOME/Phosphoros/Catalogs/COSMOS/...
+
+respectively.
+
+Auxiliary Data
+--------------
+
+All other input files are referred to as ``Auxiliary`` data. They comprise the following types.
+
+**Filter transmission curves**: characterise the full transmission in the range [0, 1], including the
+    telescope optic, the filter itself and the detector efficiency.
+
+**Spectral Energy Distribution (SED)**: in erg/s/cm\ :sup:`2`/|AA| which are to be integrated through the
+    filters to compute the modelled photometric values.
+
+**Reddening Curve**: providing the :math:`k_{(\lambda)}` values required to compute the ``internal``
+    absorption caused by the interstellar matter in the galaxy.
+
+The input files corresponding to these three types of data must be formatted as ASCII tables, with |AA| wavelengths
+in the first column and specific values in the second one.
+
+GUI:
+----
 
 Import manually
 ---------------
