@@ -23,6 +23,11 @@ This is at theoretical level. Diagrams should be used, files or directories not.
 Some important concepts
 =======================
 
+.. Explain the logic behind the organization of the Phosphoros directories. This
+should include the catalog-type concept. Here we should not explain every single
+one of the directories, but focus more on the concept and mention the most used
+ones. We should also mention the PHOSPHOROS_ROOT environment variable.
+
 Catalog type
 ------------
 
@@ -30,15 +35,15 @@ Modern surveys typically make their catalog data available trough a number of
 files, either because of the big size and/or because there are different samples (with 
 or without spectroscopic redshift for example). Assuming that these files are
 standard in a given survey, with the same column names in particular, the concept 
-of **catalog type** is introduced. We consider that all catalog data files having
+of ``catalog type`` is introduced. We consider that all catalog data files having
 identical column names, with photometric band names referring to the same filter
-belong to the same **catalog type**.
+belong to the same ``catalog type``.
 
 One of the required configuration task is the mapping of the catalog photometry column names to the
-files providing the filter transmission curves. Using this concept, this mapping can
-be defined only once for all files of the same type **catalog type**.
+files providing the filter transmission curves. This mapping can
+be defined only once for all files of the same type ``catalog type``.
 
-The **catalog type** concept is also exploited to define the directory structure naming convention
+The ``catalog type`` concept is also exploited to define the directory structure naming convention
 used to organize Phosphoros files and described in the next section.
 
 .. _directory-organization:
@@ -53,17 +58,17 @@ input data and where to write output files without necessarily relying on additi
 Below the root directory ($HOME/Phosphoros by default), there are five main directories.
 
 **Catalogs**:
-    input catalogs files located into sub-directories according to their **catalog types** (e.g. Cosmos
+    input catalogs files located into sub-directories according to their ``catalog types`` (e.g. Cosmos
     catalog files would be located into "$HOME/Phosphoros/Catalogs/Cosmos/"
 
 **AuxiliaryData**:
     auxiliary data includes (1) filter transmission curves, (2) Spectral Energy Distribution (SED) templates, (3) reddening curve files, etc.
 
 **IntermediateProducts**
-    intermediate products organized per **catalog type** which can be reused for different runs
+    intermediate products organized per ``catalog type`` which can be reused for different runs
 
 **Results**
-    resulting data products also organized per **catalog type**
+    resulting data products also organized per ``catalog type``
 
 **config**
     configuration files
@@ -81,23 +86,17 @@ ones. We should also mention the PHOSPHOROS_ROOT environment variable.*
 Phosphoros "internal" data
 --------------------------
 
-Much of the data manipulated by Phosphoros can be reused in many different analyses. The directory structure described in previous section
+Much of the data manipulated by Phosphoros can be reused in different analyses. The directory structure described in previous section
 is designed to hold the input, intermediate and output data files of an arbitrary number of analyses. It can be seen as an kind of underlying "internal data base". It is
 however not making use of any real databases (such as mysql) as it just relies on the file system organisation.
 
 When catalog files are put at the appropriate location (according to their catalog types), intermediate data products final results are sorted in such a way as to co-exist
-with equivalent files obtained from other catalogs analyses. The idea is to **save** the results of as many analysis as wanted side by side with as logical an organisation as possible.
+with equivalent files obtained from other catalogs analyses. The idea is to ``save`` the results of as many analyses as wanted side by side in as logical an organisation as possible.
 There are also however option to overwrite or delete any Phosphoros outputs.
 
-The standard procedure is to **import** auxiliary data files, such as filter transmission or SEDs, into this kind of underlying
-data base. As it relies on the file system, any operation performs with the GUI such as **importing**, **moving** of **deleting** files as a simple shell command line
+The standard procedure is to ``import`` auxiliary data files, such as filter transmission or SEDs, into this kind of underlying
+data base. As it relies on the file system, any operation performs with the GUI such as ``importing``, ``moving`` of ``deleting`` files as a simple shell command line
 equivalent (cp, mv or rm).
-
-
-Explain the logic behind the organization of the Phosphoros directories. This
-should include the catalog-type concept. Here we should not explain every single
-one of the directories, but focus more on the concept and mention the most used
-ones. We should also mention the PHOSPHOROS_ROOT environment variable.
 
 Executing Phosphoros
 ====================
@@ -124,7 +123,7 @@ where
 
 **action**: is a keyword which referrers to a specific Phosphoros executable |br|
 **action_parameters**: referrers to the parameters of the action (executable) |br|
-r
+
 Let's take this following example::
 
  > Phosphoros compute_model_grid --output-model-grid="filename.fits"
@@ -155,9 +154,13 @@ action::
 Setting up the input data
 =========================
 
-First explain what the input data are. At this level we should limit it to the
-catalogs, filters, SEDs and reddening curves. We should not describe the formats
-of the files, but have links to the format reference section.
+..  First explain what the input data are. At this level we should limit it to the
+    catalogs, filters, SEDs and reddening curves. We should not describe the formats
+    of the files, but have links to the format reference section.
+
+The main Phosphoros input data is a **catalog** file. A catalog include photometric
+measurements obtained through a set of different filters as columns, with their
+corresponding errors and either in flux or magnitude.
 
 Import using the GUI
 --------------------
