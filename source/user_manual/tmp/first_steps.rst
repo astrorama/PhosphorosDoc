@@ -324,9 +324,8 @@ Note:
  The orange color (on the image) means that we have not produced any model grid yet 
  for our selection yet. The color will turn in black immediately after your models 
  have been created.
- Each type you see this orange color for any sub-panel it means either you it is not
- yet defined.
- 
+ Each time you see this orange color at any sub-panel it means either you forget
+ to set something or the setting is not applied yet.
 CLI
 ---
 
