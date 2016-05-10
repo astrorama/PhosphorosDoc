@@ -321,13 +321,17 @@ To produce your models you should apply the following steps:
  $PHOSPHOROS_ROOT/config/Untitled.conf
 
 Note:
- The orange color (on the image) means that we have not produced any model grid yet 
+ The orange color (on the image) means that we have not produced any model grid
  for our selection yet. The color will turn in black immediately after your models 
  have been created.
  Each time you see this orange color at any sub-panel it means either you forget
  to set something or the setting is not applied yet.
+ 
 CLI
 ---
+
+To produce the photometry models using the commmand line interface do the following::
+
 
 Show the command. Mention the default configuration file name. Explain where the
 files are created (and the reasoning behind the default naming).
