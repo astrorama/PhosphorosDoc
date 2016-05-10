@@ -52,13 +52,19 @@ CentOS7
    #. Install Phosphoros:
          | > sudo yum install Phosphoros-devel
 
-Fedora 22
+Fedora 23
 
-   #. Download http://degauden.isdc.unige.ch/euclid/repo/fedora/22/x86_64/EuclidRepo-0.1-1.noarch.rpm
+   #. Download http://degauden.isdc.unige.ch/euclid/repo/fedora/23/x86_64/EuclidRepo-0.1-1.noarch.rpm
    #. Execute: 
-         | > sudo yum localinstall EuclidRepo-0.1-1.noarch
-   #. Install Phosphoros:
-         | > sudo yum install Phosphoros-devel
+         | > sudo dnf install EuclidRepo-0.1-1.noarch
+         | > sudo dnf install gcc-c++
+         | > sudo dnf install EuclidEnv
+
+   #. If you are using the Fedora 23 default shell (can be checked with a ``ps`` command), change the shell preference. In a shell window, navigate through the top level menu with:
+        | -> ``Edit`` -> ``references`` -> ``Profiles`` -> ``Edit`` -> ``Command`` and select ``Run command as a login shell``
+
+   #. Start a new shell and install Phosphoros with:
+         | > sudo dnf install Phosphoros-devel
 
 For other Linux distributions, you have to install the software from the sources as described in the next section.
 
