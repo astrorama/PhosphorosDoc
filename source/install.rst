@@ -68,6 +68,18 @@ Fedora 23
 
 For other Linux distributions, you have to install the software from the sources as described in the next section.
 
+Phosphoros alias
+
+When installing via the RPMs, you will have to run Phosphoros using the `ERun`
+command. For your convenience, you can create an alias to the Phosphoros command
+by adding the following line in your .bashrc file::
+    
+    alias Phosphoros="ERun Phosphoros 0.5 Phosphoros"
+
+where you have to replace the version with the one you just installed. Note that
+you will have to update the alias every time you update to a new version of
+Phosphoros.
+
 .. _Source_Installation_section:
 
 Installation from sources
@@ -84,6 +96,18 @@ Please be aware than the last 3 steps of this procedure (i.e., download, configu
 - Phosphoros-0.5
 
 (replacing "Elements-4.0" by the above names in the procedure)
+
+Phosphoros alias
+
+When installing from the source, you will have to run Phosphoros using the `run`
+script. For your convenience, you can create an alias to the Phosphoros command
+by adding the following line in your .bashrc file::
+    
+    alias Phoss="/path/to/your/build/dir/run Phosphoros"
+
+where you have to replace the directory with the build directory of your
+Phosphoros project. Note that you will have to update the alias every time you
+compile a new version of Phosphoros.
 
 Python packages
 ===============
