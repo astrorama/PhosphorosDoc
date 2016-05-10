@@ -33,6 +33,8 @@ CLI
 Volume Prior
 ============
 
+.. _luminosity-prior:
+
 Luminosity Prior
 ================
 Luminosity Prior Configuration
@@ -106,11 +108,17 @@ In the CLI add the configuration *luminosity-prior=YES*
 Generic Priors
 ==============
 
+Even though Phosphoros provides some default priors functionality, it also
+allows for custom, pre-computed, user-defined priors. At the moment, only priors
+which can be pre-computed 
+
 Axes Priors
 -----------
 
-Generic Prior
--------------
+.. _multi_dim_generic_prior:
+
+Multi-dimensional Prior
+-----------------------
 
 .. _posterior-investigation:
     
@@ -123,8 +131,12 @@ Photometric Zero Point Corrections
 Emission Lines
 ==============
 
+.. _investigate-model-grids:
+
 Investigate model grids
 =======================
+
+.. _explore_aux_cli:
 
 Explore Aux Data from CLI
 =========================
