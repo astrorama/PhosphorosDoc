@@ -62,7 +62,7 @@ Below the root directory ($HOME/Phosphoros by default), there are five main dire
 
 **Catalogs**:
     input catalogs files located into sub-directories according to their ``catalog types`` (e.g. Cosmos
-    catalog files would be located into "$HOME/Phosphoros/Catalogs/Cosmos/"
+    catalog files would be located into "$HOME/Phosphoros/Catalogs/Cosmos/")
 
 **AuxiliaryData**:
     auxiliary data includes (1) filter transmission curves, (2) Spectral Energy Distribution (SED) templates, (3) reddening curve files, etc.
@@ -81,10 +81,10 @@ The location of the top-level directory can simply be specified by setting the P
 
 In case of particular needs, the location of the above five directories can be changed using options which are described in the following advanced :ref:`section. <directory_howto_section>`
 
-*Explain the logic behind the organization of the Phosphoros directories. This
-should include the catalog-type concept. Here we should not explain every single
-one of the directories, but focus more on the concept and mention the most used
-ones. We should also mention the PHOSPHOROS_ROOT environment variable.*
+.. Explain the logic behind the organization of the Phosphoros directories. This
+    should include the catalog-type concept. Here we should not explain every single
+    one of the directories, but focus more on the concept and mention the most used
+    ones. We should also mention the PHOSPHOROS_ROOT environment variable.*
 
 Phosphoros "internal" data
 --------------------------
@@ -93,9 +93,9 @@ Much of the data manipulated by Phosphoros can be reused in different analyses. 
 is designed to hold the input, intermediate and output data files of an arbitrary number of analyses. It can be seen as an kind of underlying "internal data base". It is
 however not making use of any real databases (such as mysql) as it just relies on the file system organisation.
 
-When catalog files are put at the appropriate location (according to their catalog types), intermediate data products final results are sorted in such a way as to co-exist
-with equivalent files obtained from other catalogs analyses. The idea is to ``save`` the results of as many analyses as wanted side by side in as logical an organisation as possible.
-There are also however option to overwrite or delete any Phosphoros outputs.
+When catalog files are put at the appropriate location (according to their catalog types), intermediate data products and final results are sorted in such a way as to co-exist
+with equivalent files obtained from other analyses. The idea is to ``save`` the results of as many analyses as wanted side by side in as logical an organisation as possible.
+There are also however options to overwrite or delete any Phosphoros outputs.
 
 The standard procedure is to ``import`` auxiliary data files, such as filter transmission or SEDs, into this kind of underlying
 data base. As it relies on the file system, any operation performs with the GUI such as ``importing``, ``moving`` of ``deleting`` files as a simple shell command line
@@ -208,17 +208,18 @@ CLI: Managing Auxiliary Data
 
 In order to make auxiliary data available to data analysis, they first have to be imported inside the Phosphoros directory structure.
 
-The most convenient way to do this is to download a tar file containing already a large set of Filters, SEDs and Reddening curve
-from this location (TBD). This file must then be expanded at the correct location.::
+The most convenient way to do this is to download a tar file containing already sets of Filters, SEDs and Reddening curves and to expand it at the correct location. i.e.::
 
     > cd ~
     > cd Phosphoros (or cd $PHOSPHOROS_ROOT)
-    > wget http://www.isdc.unige.ch/phosphoros/data/other/quickstart.tar.gz (TBReplaced with correct file)
-    > tar -xzf quickstart.tar.gz
+    > wget http://www.isdc.unige.ch/phosphoros/data/auxiliary/Challenge2AuxiliaryData.tar.gz
+    > tar -xzf Challenge2AuxiliaryData.tar.gz
 
-Files are arranged inside three directories ``Filters``, ``SEDs`` and ``ReddeningCurves`` below ``$HOME/Phosphoros/AuxiliaryData``
-with possible ``group_name`` sub-directories. These ``groupe_name`` directories are optional and they can de added to help user
-organizing their files.  for internal organisation. These files can also be manage with shell commands
+Files are arranged inside three directories ``Filters``, ``SEDs`` and ``ReddeningCurves`` below ``$HOME/Phosphoros/AuxiliaryData``.
+Optional ``group_name`` sub-directories can be added to organize auxiliary files in the most logical way. Users can complete or re-arranged
+these sub-directories to match their preferred organization scheme.
+
+Any auxiliary files following the supported formats (REFERENCE NEEDED) can also be added and arrange using shell commands
 such as ``mkdir``, ``mv``, ``cp`` or ``rm`.
 
 GUI: Configuration : Aux. Data Management
@@ -227,9 +228,8 @@ GUI: Configuration : Aux. Data Management
 The Phosphoros GUI can also be used to import and organized auxiliary data files. Start the GUI with ``Phosphoros GUI`` `
 and click on ``Configuration`` and ``Aux. Data` tabs.
 
-
-
-
+.. figure:: /_static/quickstart/ComputeRedshifts.png
+    :align: center
 
 .. _catalog-column-mapping:
     

@@ -42,7 +42,7 @@ Phosphoros MacPorts installation:
 Linux
 =====
 
-We support CentOS7 and Fedora 22 with RPM packages.
+We support CentOS7 and Fedora 22 installations with RPM packages.
 
 CentOS7
 
@@ -60,25 +60,31 @@ Fedora 23
          | > sudo dnf install gcc-c++
          | > sudo dnf install EuclidEnv
 
-   #. If you are using the Fedora 23 default shell (can be checked with a ``ps`` command), change the shell preference. In a shell window, navigate through the top level menu with:
-        | -> ``Edit`` -> ``references`` -> ``Profiles`` -> ``Edit`` -> ``Command`` and select ``Run command as a login shell``
+   #. Reboot your computer
 
-   #. Start a new shell and install Phosphoros with:
-         | > sudo dnf install Phosphoros-devel
+   #. Install Phosphoros with:
+        | > sudo dnf install Phosphoros-devel
+
+   #. Create an alias by adding the following line in your .bashrc file:
+        | alias Phosphoros="ERun Phosphoros 0.5 Phosphoros"
+
+   #. Test your installation by launching the GUI with:
+        | > Phosphoros GUI
+
+Please note that you will have to update the alias every time you update to a new version of
+Phosphoros.
 
 For other Linux distributions, you have to install the software from the sources as described in the next section.
 
 Phosphoros alias
 
-When installing via the RPMs, you will have to run Phosphoros using the `ERun`
-command. For your convenience, you can create an alias to the Phosphoros command
-by adding the following line in your .bashrc file::
+.. When installing via the RPMs, you will have to run Phosphoros using the `ERun`
+   command. For your convenience, you can create an alias to the Phosphoros command by adding the following line in your .bashrc file::
     
     alias Phosphoros="ERun Phosphoros 0.5 Phosphoros"
 
-where you have to replace the version with the one you just installed. Note that
-you will have to update the alias every time you update to a new version of
-Phosphoros.
+    where you have to replace the version with the one you just installed. Note that
+    you will have to update the alias every time you update to a new version of Phosphoros.
 
 .. _Source_Installation_section:
 
