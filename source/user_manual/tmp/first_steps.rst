@@ -292,7 +292,7 @@ This section is for computing all our photometry models based on the
 ``Catalog Type``, the ``Parameter Space`` and the ``Filter Section`` you
 supposed to have already defined in the previous sections. |br|
 
-.. figure:: /_static/quickstart/ModelGridSubPanel1.png
+.. figure:: /_static/first_step/ModelGridSubPanel1.png
     :align: center
 
 On the image above we have four sub-panels. For generating the models we only
@@ -351,14 +351,14 @@ Computing the Redshift
 GUI
 ---
 
-.. figure:: /_static/quickstart/InputOutputSubpanel4.png
+.. figure:: /_static/first_step/InputOutputSubpanel4.png
     :align: center
 
 We focus here on the sub-panel four (red frame).
-This is the last step for computing the photometric redshift. It provides you the 
-best fit catalog with the best fitted models for the catalog containing your sources.|br|
+This is the last step for computing the photometric redshift. It provides you the
+best fit catalog with the best fitted models for the catalog containing your sources. |br|
 
-You need to define the followings:
+To do so, you need to define the followings:
 
 1. **Input Catalog File**
  
@@ -372,24 +372,50 @@ You need to define the followings:
  
 3. **Generate Output PDF Files**
  
- Click the checkboxe for generating the 1D PDF(z) files, one per source 
+ Click the checkbox for generating the 1D PDF(z) files, one per source 
  (See format details **here**).
 
 4. **Generate Likelihood Files**
  
- Click the checkboxe for generating the likelihood FITS files, one per source 
+ Click the checkbox for generating the likelihood FITS files, one per source 
  (See format details **here**).
  
 5. **Generate Posterior Files**
 
- Click the checkboxe for generating the posterios FITS files, one per source 
+ Click the checkbox for generating the posterios FITS files, one per source 
  (See format details **here**).
  
 6. **Output Folder**
  
- The output folder is provided by default and it is where the phosphoros result
- files will be stored. So you have the possibility to locate the outputs files
- somewhere else.
+ The Phosphoros final results are stored there.The output folder is provided 
+ by default and is located to::
+ 
+ $PHOSPHOROS_ROOT/Results/Catalog/"Catalog Type" 
+ 
+ But you can choose another location by clicking on the ``Browse`` button. The
+ ``Catalog Type`` is the one defined at the top left of the image.
+
+Note you do not need to go through all the points above. Select just the ones you
+need. As shown in the above image the ``Run`` button is inactive for our example. It
+means that something is not setup yet and the computing can not be done. In such
+case, just put your mouse pointer on the ``Run`` button and some help will appear
+explaining you what is missing
+
+The bottom right buttons (the blue rectangle on the image):
+
+- **Run**
+
+ You click on this button to start the computation of the redshifts.
+ All your results are written into the ``Output Folder`` you have defined.
+ (see details about output files produced **here**)
+ 
+- **Get Config File**
+
+ Use this button to export your settings into a file.The file is stored into::
+ 
+ $PHOSPHOROS_ROOT/config/"filename.txt" 
+ 
+ (where ``filename.txt`` is the filename of your choice)
 
 CLI
 ---
