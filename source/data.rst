@@ -41,7 +41,7 @@ Catalogs:
   The full MER Callenge catalogs, as provided by WP4-3-09-5101
 
 Second challenge (2015-2016)
-------------------------
+----------------------------
 
 Filter tansmissions: `tar.gz file <http://www.isdc.unige.ch/phosphoros/data/Challenge_2/Filters.tar.gz>`_
 
