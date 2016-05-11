@@ -237,7 +237,7 @@ Function Curves`` auxiliary files.
     :align: center
 
 Second, there are functionalities to ``Import`` new files or to ``Create (Sub)-Group``. Selecting ``Import`` opens a
-new window showing how to import single file or an entire directory contents.
+new window showing how to import a single file or a directory entire content.
 
 .. _catalog-column-mapping:
     
@@ -247,11 +247,29 @@ Mapping the catalog columns
 In order to compute modelled photometry values, Phosphoros needs filter transmission curves which correspond to the filters
 used to obtained the observed photometric values. In general, the names of the observed photometric bands, typically
 reflected in the catalog column names may not match the names of the filter transmission files. Consequently, the mapping of
-these names must be specified. The easiest is to use teh GUI although an ASCII file can also be used providing it is located
+these names must be specified. The easiest is to use the GUI although an ASCII file can also be used providing it is located
 at the right place in the Phosphoros directory structure.
 
-GUI
----
+GUI:  ``Catalog Types``
+-----------------------
+
+To achieve the name mapping
+
+.. figure:: /_static/first_step/CatalogType_New.png
+    :align: center
+
+
+.. figure:: /_static/first_step/CatalogType_SelectCat.png
+    :align: center
+
+
+.. figure:: /_static/first_step/CatalogType_SelectFilters.png
+    :align: center
+
+
+.. figure:: /_static/first_step/CatalogType_ColumnNames.png
+    :align: center
+
 
 CLI how-to
 ----------
