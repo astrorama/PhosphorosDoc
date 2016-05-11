@@ -216,20 +216,28 @@ The most convenient way to do this is to download a tar file containing already 
     > tar -xzf Challenge2AuxiliaryData.tar.gz
 
 Files are arranged inside three directories ``Filters``, ``SEDs`` and ``ReddeningCurves`` below ``$HOME/Phosphoros/AuxiliaryData``.
-Optional ``group_name`` sub-directories can be added to organize auxiliary files in the most logical way. Users can complete or re-arranged
+Optional ``group`` sub-directories can be added to organize auxiliary files in the most logical way. Users can complete or re-arranged
 these sub-directories to match their preferred organization scheme.
 
-Any auxiliary files following the supported formats (REFERENCE NEEDED) can also be added and arrange using shell commands
+Any auxiliary files following the supported formats (REFERENCE NEEDED) can also be added and arranged using shell commands
 such as ``mkdir``, ``mv``, ``cp`` or ``rm`.
 
-GUI: Configuration : Aux. Data Management
------------------------------------------
+GUI: ``Configuration`` : ``Aux. Data Management``
+-------------------------------------------------
 
-The Phosphoros GUI can also be used to import and organized auxiliary data files. Start the GUI with ``Phosphoros GUI`` `
-and click on ``Configuration`` and ``Aux. Data` tabs.
+The Phosphoros GUI can also be used to display and managed auxiliary data files. Start the GUI with ``Phosphoros GUI`` `
+and click on ``Configuration`` and ``Aux. Data` tabs. This is not yet the place for selecting filters or SEDs for a
+particular analysis (for this see :ref:``Parameter Space Definition <parameter-space-definition> below).
 
-.. figure:: /_static/quickstart/ComputeRedshifts.png
+First, the GUI provides a view of all available auxiliary data (if any) as shown on the below screen shot for the case
+of the ``Filter Transmission``. Similar views can be displayed for the ``SEDs``, ``Reddening Curves``and ``Luminosity
+Function Curves`` auxiliary files.
+
+.. figure:: /_static/first_step/AuxDataManagement.png
     :align: center
+
+Second, there are functionalities to ``Import`` new files or to ``Create (Sub)-Group``. Selecting ``Import`` opens a
+new window showing how to import single file or an entire directory contents.
 
 .. _catalog-column-mapping:
     
