@@ -284,11 +284,11 @@ This section is for computing all our photometry models based on the
 ``Catalog Type``, the ``Parameter Space`` and the ``Filter Section`` you
 supposed to have already defined in the previous sections. |br|
 
-.. figure:: /_static/quickstart/ComputeRedshifts.png
+.. figure:: /_static/quickstart/ModelGridSubPanel1.png
     :align: center
 
 On the image above we have four sub-panels. For generating the models we only
-focus on the first one here::
+focus on the first one (red frame)::
 
  1- Model Grid Generation / Selection (in orange)
 
@@ -332,6 +332,7 @@ CLI
 
 To produce the photometry models using the commmand line interface do the following::
 
+Phosphoros compute_model_grid --config-file=$USER/Phosphoros/config/Untitled.conf
 
 Show the command. Mention the default configuration file name. Explain where the
 files are created (and the reasoning behind the default naming).
@@ -342,9 +343,45 @@ Computing the Redshift
 GUI
 ---
 
-Show the steps and explain the different outputs (and link to the format descriptions).
-Explain where the data are created. Have a link back to the directory organization
-strucutre.
+.. figure:: /_static/quickstart/InputOutputSubpanel4.png
+    :align: center
+
+We focus here on the sub-panel four (red frame).
+This is the last step for computing the photometric redshift. It provides you the 
+best fit catalog with the best fitted models for the catalog containing your sources.|br|
+
+You need to define the followings:
+
+1. **Input Catalog File**
+ 
+ Provide a photometry catalog (FITS or ASCII format) containing your sources 
+ (See format details **here**).
+ 
+2. **Generate Output Catalog with Format**
+
+ Select the output format of the Phosphoros best fitted catalog you wish. It is
+ either ASCII or FITS format (See format details **here**).
+ 
+3. **Generate Output PDF Files**
+ 
+ Click the checkboxe for generating the 1D PDF(z) files, one per source 
+ (See format details **here**).
+
+4. **Generate Likelihood Files**
+ 
+ Click the checkboxe for generating the likelihood FITS files, one per source 
+ (See format details **here**).
+ 
+5. **Generate Posterior Files**
+
+ Click the checkboxe for generating the posterios FITS files, one per source 
+ (See format details **here**).
+ 
+6. **Output Folder**
+ 
+ The output folder is provided by default and it is where the phosphoros result
+ files will be stored. So you have the possibility to locate the outputs files
+ somewhere else.
 
 CLI
 ---
