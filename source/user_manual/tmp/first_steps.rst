@@ -118,7 +118,7 @@ Phosphoros uses the ``PHOSPHOROS_ROOT`` environment variable to locate all neces
 the computation (configuration files, catalogs, output files etc..). If this variable is not defined, the ``$HOME/Phosphoros`` directory 
 is considered as the default location.
 
-`Phosphoros`` command can be used to execute all Phosphoros actions, using the following syntax::
+``Phosphoros`` command can be used to execute all Phosphoros actions, using the following syntax::
 
    > Phosphoros <action> <action_parameters>  
 
@@ -384,7 +384,7 @@ CLI
 
 To produce the photometry models using the commmand line interface do the following::
 
-Phosphoros compute_model_grid --config-file=$USER/Phosphoros/config/Untitled.conf
+ > Phosphoros compute_model_grid --config-file=$USER/Phosphoros/config/Untitled.conf
 
 Show the command. Mention the default configuration file name. Explain where the
 files are created (and the reasoning behind the default naming).
