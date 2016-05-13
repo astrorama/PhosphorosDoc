@@ -1,10 +1,9 @@
-.. _file-format:
+
 
 *********************
 File Format Reference
 *********************
 
-.. _dataset_file_format:
 
 Dataset File Format
 ===================
@@ -23,7 +22,6 @@ the first line of the file is a one-word comment, it is going to be used as the
 name of the dataset. If there is no such line in the file, the name of the file
 itself is used as the name of the dataset (without the extension).
 
-.. _photometry_grid_format:
 
 Photometry Grid Format
 ======================
@@ -31,9 +29,8 @@ Photometry Grid Format
 Because of size limitations, the photometry grid file is stored in an internal
 Phosphoros format. Access from the C++ language can be done by using the
 Phosphoros *PhzDataModel* module. Access outside C++ can be performed with the
-Phosphoros action :ref:`display_templates <display_template_options>`.
+Phosphoros action --ref--`display_templates <display_template_options>`.
 
-.. _catalog_format:
 
 Catalog Format
 ==============
@@ -49,9 +46,8 @@ will try to auto-detect the type). They must contain the following columns:
 Phosphoros provides flexible description of the catalog columns via |CLI|
 parameters, either by their names or by their indices, so it does not require
 specific order or naming of the catalog columns. For a detailed description of
-these parameters see :ref:`here <config-section-DZP-training>`.
+these parameters see --ref--`here <config-section-DZP-training>`.
 
-.. _phot-corr-format:
 
 Photometric Zero Point Corrections Format
 =========================================
@@ -61,7 +57,6 @@ fully qualified name (including the group information) and the second one is
 the photometric correction value. Note that the corrections are Flux corrections
 and not magnitude.
 
-.. _best-fit-catalog-format:
 
 Best Fit Catalog Format
 =======================
@@ -76,7 +71,6 @@ the following columns:
 - Z : The redshift
 - Scale : The scale factor |alpha|, the model has been scaled with
 
-.. _pdf-fits-format:
 
 PDF\ :sub:`(Z)` Format
 ======================
@@ -88,7 +82,6 @@ the ID of the corresponding source and it can be used for searching the PDFs.
 Alternativelly, the order of the HDUs matches the order of the sources in the
 input catalog (starting from the first extension HDU).
 
-.. _likelihood-fits-format:
 
 :math:`\mathcal{L}_{(SED, RedCurve, E_{(B-V)}, Z)}` Format
 ==========================================================
@@ -105,4 +98,4 @@ the extension *fits*. It contains the following HDUs:
 
 Note that Phosphoros provides a tool for visualising files of this type. This
 tool is the ``display_likelihood`` action. More details about how to use this
-action can be found :ref:`here <display-ikelihood-options>`.
+action can be found --ref--`here <display-ikelihood-options>`.

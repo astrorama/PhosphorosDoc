@@ -1,4 +1,4 @@
-.. _first-steps:
+
 
 ***************************
 First Steps with Phosphoros
@@ -58,7 +58,7 @@ Directory description
 Executing Phosphoros
 ====================
 
-Instructions for installing Phosphoros can be found :ref:`here <phosphoros-install>`.
+Instructions for installing Phosphoros can be found --ref--`here <phosphoros-install>`.
 
 The Phosphoros software provides two different execution modes, the |CLI| which
 allows execution from the command line, and the |GUI| which provides a graphical
@@ -74,7 +74,7 @@ be used to execute all Phosphoros actions, using the following syntax::
    
 The most important actions is the ``build_templates`` and the ``fit_templates``,
 which perform the two mandatory steps of the Phosphoros software (as described
-bellow). The full list of the available actions can be found :ref:`here <cli-actions-list>`.
+bellow). The full list of the available actions can be found --ref--`here <cli-actions-list>`.
 
 Each action reads its input from a configuration file, which can be specified
 with the action parameter ``--config-file=<path_to_file>``. Any of the options
@@ -82,7 +82,7 @@ in the configuration file can be overriden from the command line using
 ``--<option_name>=<option_value>``.
 
 The full |CLI| reference, with a complete list of the action parameters, can be
-found :ref:`here <cli>`, or by executing::
+found --ref--`here <cli>`, or by executing::
 
    Phosphoros help
 
@@ -95,7 +95,7 @@ action::
 
    Phosphoros GUI
 
-The full |GUI| reference can be found :ref:`here <gui>`.
+The full |GUI| reference can be found --ref--`here <gui>`.
 
 Workflow Overview
 =================
@@ -121,7 +121,7 @@ to be performed only once for each set of template parameters. Its output can
 then be reused when executing the *Fit Templates* step.
 
 The command line action is the ``build_templates``, and the full description of
-its parameters can be found :ref:`here <build_template_options>`.
+its parameters can be found --ref--`here <build_template_options>`.
 
 Input description
 -----------------
@@ -131,7 +131,7 @@ the parameter space of the templates for which the fitting will be performed and
 the filters for which the photometry of the templates will be calculated.
 
 The *SEDs*, *Reddening Curves* and *Filters* are given to the software as files
-containing tables (see :ref:`here <dataset_file_format>` for the file format
+containing tables (see --ref--`here <dataset_file_format>` for the file format
 description). These files can be grouped in folders, which make the configuration
 of the software easier. The most important |CLI| parameters related with these
 inputs are the:
@@ -173,12 +173,12 @@ The *Build Templates Library* step produces a single output file, which contains
 the photometries of all the template parameter space. The |CLI| parameter for
 selecting the output file is the
 :option:`output-photometry-grid <PhosphorosBuildTemplates --output-photometry-grid>`
-(see :ref:`here <photometry_grid_format>` for the file format description).
+(see --ref--`here <photometry_grid_format>` for the file format description).
 
 Note that this file follows an internal Phosphoros binary format, so it cannot
 be used by other software. Phosphoros provides the action ``display_templates``,
 which can be used for exploring this file. More details about how to use this
-action can be found :ref:`here <display_template_options>`.
+action can be found --ref--`here <display_template_options>`.
 
 
 Photometric Zero Point Correction Step
@@ -187,7 +187,7 @@ Photometric Zero Point Correction Step
 The *Photometric Zero Point Correction* is an optional step, which can be used
 for deriving the filter zero-point corrections based on a training catalog. The
 related |CLI| action is the ``derive_zero_points``, and the full description of
-its parameters can be found :ref:`here <derive_zero_points_options>`.
+its parameters can be found --ref--`here <derive_zero_points_options>`.
 
 Input description
 -----------------
@@ -200,8 +200,8 @@ and :option:`input-catalog-file <PhosphorosDeriveZeroPoints --input-catalog-file
 
 Phosphoros input catalog format is controlled via configuration options, which
 define the format of the catalog and the mapping of its columns. The full
-description of these options can be found :ref:`here <config-section-DZP-training>`.
-A full description of the possible catalog formats can be found :ref:`here <catalog_format>`.
+description of these options can be found --ref--`here <config-section-DZP-training>`.
+A full description of the possible catalog formats can be found --ref--`here <catalog_format>`.
 
 Algorithm description
 ---------------------
@@ -222,7 +222,7 @@ The zero-point corrections output file (defined with the
 :option:`output-phot-corr-file <PhosphorosDeriveZeroPoints --output-phot-corr-file>`
 |CLI| parameter) is a table containing the zero-point correction values for each
 filter. Note that these values are **Flux** and not magnitude corrections. The
-detailed description of the file format can be found :ref:`here <phot-corr-format>`.
+detailed description of the file format can be found --ref--`here <phot-corr-format>`.
 
 
 Fit Templates Step
@@ -230,7 +230,7 @@ Fit Templates Step
 
 The last step of using Phosphoros is the ``fit_templates`` action for estimating
 the photometric redshift of the sources of a photometric catalog. The full
-description of this actions |CLI| parameters can be found :ref:`here <fit-templates-options>`.
+description of this actions |CLI| parameters can be found --ref--`here <fit-templates-options>`.
 
 Input description
 -----------------
@@ -245,8 +245,8 @@ and the :option:`input-catalog-file <PhosphorosFitTemplates --input-catalog-file
 
 Phosphoros input catalog format is controlled via configuration options, which
 define the format of the catalog and the mapping of its columns. The full
-description of these options can be found :ref:`here <config-section-FT-input>`.
-A full description of the possible catalog formats can be found :ref:`here <catalog_format>`.
+description of these options can be found --ref--`here <config-section-FT-input>`.
+A full description of the possible catalog formats can be found --ref--`here <catalog_format>`.
 
 Algorithm description
 ---------------------
@@ -267,22 +267,22 @@ The first output is a catalog (enabled with the parameter
 :option:`output-catalog-file <PhosphorosFitTemplates --output-catalog-file>`),
 which contains the best fitted model of each source (selected as the cell with
 highest value of the likelihood grid). The format description of this file can
-be found :ref:`here <best-fit-catalog-format>`.
+be found --ref--`here <best-fit-catalog-format>`.
 
 The second output is a FITS file which contains the PDF\ :sub:`(Z)` for all the
 catalog sources (enabled with the parameter
 :option:`output-pdf-file <PhosphorosFitTemplates --output-pdf-file>`). The format
-description of this file can be found :ref:`here <pdf-fits-format>`.
+description of this file can be found --ref--`here <pdf-fits-format>`.
 
 The last output is the multidimensional likelihood
 :math:`\mathcal{L}_{(SED, RedCurve, E_{(B-V)}, Z)}` for all the catalog sources.
 These are saved as separate files in a directory set with the parameter
 :option:`output-likelihood-dir <PhosphorosFitTemplates --output-likelihood-dir>`.
-The format description of these files can be found :ref:`here <likelihood-fits-format>`.
+The format description of these files can be found --ref--`here <likelihood-fits-format>`.
 *Note that the size of this output is quite big and it should be enabled only for
 specific runs with small catalogs as input, otherwise it can easily fill your
 hard drive.*
 
 Due to the cmplexity of the likelihood output, Phosphoros provides a tool for
 visualising it. This tool is the ``display_likelihood`` action. More details
-about how to use this action can be found :ref:`here <display-ikelihood-options>`.
+about how to use this action can be found --ref--`here <display-ikelihood-options>`.

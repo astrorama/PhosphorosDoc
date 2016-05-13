@@ -1,4 +1,3 @@
-.. _cli:
 
 ***************
 |CLI| Reference
@@ -20,7 +19,6 @@ Usage::
 	
    Phosphoros <action> <action_options>
 
-.. _cli-actions-list:
 
 Actions List
 ------------
@@ -102,7 +100,6 @@ The following options are common to all the Phosphoros actions:
    configuration file is used. Running the command ``Phosphoros <action> --help`` will show where
    is this default file.
 
-.. _build_template_options:
 
 Build Templates options
 =======================
@@ -112,18 +109,17 @@ Build Templates options
 
 **The configuration options are separated in the following sections:**
 
-- :ref:`config-section-BT-output`: Contains the parameters related with the output of the program
+- --ref--`config-section-BT-output`: Contains the parameters related with the output of the program
 
-- :ref:`config-section-BT-model`: Contains the parameters of the templates to calculate the photometry for
+- --ref--`config-section-BT-model`: Contains the parameters of the templates to calculate the photometry for
  
-- :ref:`config-section-BT-photometry`: Contains the parameters related with the photometry to be calculated
+- --ref--`config-section-BT-photometry`: Contains the parameters related with the photometry to be calculated
 
-- :ref:`config-section-BT-algo`: Contains options for controlling the algorithm used for the photometry calculation
+- --ref--`config-section-BT-algo`: Contains options for controlling the algorithm used for the photometry calculation
 
-- :ref:`config-section-BT-data`: Contains options related with data retrieval
+- --ref--`config-section-BT-data`: Contains options related with data retrieval
 
 
-.. _config-section-BT-output:
 
 Output Parameters section
 -------------------------
@@ -135,7 +131,6 @@ Contains options related with the output of the program.
    
    The file to export in binary format the grid containing the calculated templates photometries.
    
-.. _config-section-BT-model:
 
 Model Parameter Space section
 -----------------------------
@@ -197,7 +192,6 @@ when calculating the photometry.
 
    User the given redshift value. Can appear more than once cumulatively.
 
-.. _config-section-BT-photometry:
 
 Photometry section
 ------------------
@@ -220,7 +214,6 @@ Contains options for configuring the photometry calculated for each model.
 
    Exclude the given Filter. Can appear more than once cumulatively.
 
-.. _config-section-BT-algo:
 
 Algorithm Configuration section
 -------------------------------
@@ -250,7 +243,6 @@ Data Management section
    The directory containing the Filter datasets, organized in folders 
    
 
-.. _derive_zero_points_options:
    
 Derive Zero Points Options
 ==========================
@@ -259,15 +251,14 @@ Derive Zero Points Options
    
 **The configuration options are separated in the following sections:**
 
-- :ref:`config-section-DZP-output`: Contains the parameters related with the output of the program
+- --ref--`config-section-DZP-output`: Contains the parameters related with the output of the program
 
-- :ref:`config-section-DZP-training`: Contains the parameters related with the training catalog
+- --ref--`config-section-DZP-training`: Contains the parameters related with the training catalog
 
-- :ref:`config-section-DZP-photometry`: Contains options related with the templates photometries (simulated models)
+- --ref--`config-section-DZP-photometry`: Contains options related with the templates photometries (simulated models)
 
-- :ref:`config-section-DZP-algo`: Contains options for controlling the algorithm used for the photometric correction calculation
+- --ref--`config-section-DZP-algo`: Contains options for controlling the algorithm used for the photometric correction calculation
  
-.. _config-section-DZP-output:
 
 Output Parameters section
 -------------------------
@@ -279,7 +270,6 @@ Contains options related with the output of the program.
    The file to export the calculated photometric correction in ASCII format
 
 
-.. _config-section-DZP-training:
 
 Training catalog section
 -------------------------
@@ -338,7 +328,6 @@ Note: the spec-z-err-column-name and spec-z-err-column-index are mutually exclus
 If both are missing, the error is set to zero.
 
 
-.. _config-section-DZP-photometry:
 
 Model Photometries section
 --------------------------
@@ -351,7 +340,6 @@ Contains options related with the photometries of the teplates (simulated models
    the :option:`Phosphoros -build_templates` action. Note that the given grid must contain
    photometries for the same filters with the input catalog.
 
-.. _config-section-DZP-algo:
 
 Algorithm Configuration section
 -------------------------------
@@ -377,7 +365,6 @@ Contains options for configuring the algorithm for calculating the photometric c
    WEIGHTED_MEDIAN, MEAN, WEIGHTED_MEAN. The weighted versions use as weight
    the observed flux devided with its error.
    
-.. _fit-templates-options:
 
 Fit Templates Options
 =====================
@@ -386,17 +373,16 @@ Fit Templates Options
 
 The configuration options are separated in the following sections:
 
-- :ref:`config-section-FT-output`: Contains the parameters related with the output of the program
+- --ref--`config-section-FT-output`: Contains the parameters related with the output of the program
 
-- :ref:`config-section-FT-input`: Contains the parameters related with the input catalog
+- --ref--`config-section-FT-input`: Contains the parameters related with the input catalog
 
-- :ref:`config-section-FT-model`: Contains options related with the photometries of the simulated models
+- --ref--`config-section-FT-model`: Contains options related with the photometries of the simulated models
 
-- :ref:`config-section-FT-correction`: Contains options related with the photometric zero-point correction
+- --ref--`config-section-FT-correction`: Contains options related with the photometric zero-point correction
 
-- :ref:`config-section-FT-algo`: Contains options for controlling the algorithm used for the PHZ calculation
+- --ref--`config-section-FT-algo`: Contains options for controlling the algorithm used for the PHZ calculation
 
-.. _config-section-FT-output:
 
 Output Parameters section
 -------------------------
@@ -419,7 +405,6 @@ Contains options related with the output of the program.
    likelihood grids can be relatively big files. Creating them for a detailed
    parameter space or for many sources might require a lot of disk space.
 
-.. _config-section-FT-input:
 
 Input catalog section
 ---------------------
@@ -470,7 +455,6 @@ Contains options related with the photometries of the simulated models.
    the :option:`Phosphoros -build_templates` action. Note that the given grid must contain
    photometries for the same filters with the input catalog.   
  
-.. _config-section-FT-correction:
     
 Photometric Correction section
 ------------------------------
@@ -483,7 +467,6 @@ Contains options related with the photometric zero-point correction.
    with the CalculatePhotometricCorrection executable. If missing, all corrections
    are assumed to be 1.
 
-.. _config-section-FT-algo:
 
 Algorithm Configuration section
 -------------------------------
@@ -633,7 +616,6 @@ Photo-z Vs Spetro-z Options
 
    Disables the plot window
  
-.. _display-ikelihood-options:
  
 Display Likelihood Options
 ==========================

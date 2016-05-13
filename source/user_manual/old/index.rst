@@ -1,4 +1,3 @@
-.. _user-manual:
 
 ***********
 User Manual
@@ -10,9 +9,7 @@ User Manual
    :numbered:
    
    intro
-   quickstart
-   first_steps/index
-   advanced/index
-   gui_reference
-   cli_reference
-   format_reference
+   tutorial
+   cli
+   gui
+   format
