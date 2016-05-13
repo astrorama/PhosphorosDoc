@@ -94,6 +94,7 @@ Schechter parametrization (in magnitude, if expressed in flux replace m0 by l0):
 - luminosity-function-schechter-alpha-<function id>=<alpha>
 - luminosity-function-schechter-phi0-<function id>=<phi>
 - luminosity-function-schechter-m0-<function id>=<m>
+
 Alternativelly one can specify the curve:
  
 - luminosity-function-curve-<function id>=<luminosity funtion curve qualified name>
@@ -128,8 +129,9 @@ Posterior Investigation
 Photometric Zero Point Corrections
 ==================================
 
-Emission Lines
-==============
+.. _emission_lines:
+    
+.. include:: advanced/emission_lines.rst
 
 .. _investigate-model-grids:
 

@@ -109,6 +109,8 @@ The Phosphoros software provides two different execution modes:
  * the |CLI| which allows execution from the command line, and 
  * the |GUI| which provides a graphical interface for interactive execution.
 
+.. _cli-execution-mode:
+
 Using |CLI| Execution Mode
 --------------------------
 
@@ -185,6 +187,8 @@ and
     > $HOME/Phosphoros/Catalogs/Challenge2/...
 
 respectively.
+
+.. _aux-data:
 
 Auxiliary Data
 --------------

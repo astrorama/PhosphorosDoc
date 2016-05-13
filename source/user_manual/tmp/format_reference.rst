@@ -89,7 +89,7 @@ string, representing the name of the SED or Reddening Curve accordingly. The
 second column is a double precission decimal number, representing the prior
 weight to multiply the likelihood with.
 
-:warning:
+.. warning::
     
     The names of the first column have to be the same names as Phosphoros sees
     the datasets, which might be different than the file names. You can use the
@@ -110,7 +110,7 @@ Multi-dimensional Generic Priors
 The multi-dimensional generic priors are FITS files with the following HDUs, in
 this specific order:
 
-:tip:
+.. tip::
     
     Do not try to create files of this complex format from the scratch!
     Phosphoros provides the tool `create_flat_grid_prior` (`CFGP`) which will
@@ -207,6 +207,48 @@ Sparse Grids HDUs
 
 To create priors for sparse grids, the set of prior HDU together with the axes
 HDUS can be repeated as many times, as regions in the sparse grid.
+
+.. _emission-line-tables:
+
+Emission Line tables
+--------------------
+
+The emission lines table is an ASCII table with the following columns:
+
+- **Line name** : The name of the emission line
+- **Wavelength** : The central wavelength of the line
+- **Relative Flux 1** : The flux of the line, relative to the H\ |beta| flux
+- **Relative Flux 2** : The flux of the line, relative to the H\ |beta| flux
+- ...
+
+The table can have any number of relative flux columns, each one containing the
+relative fluxes for different metalicity values.
+
+.. tip::
+    
+    If you also want to add the H\ |beta| line, you need to add a row, with all
+    relative fluxes set to 1.
+
+All values of the table (except of the line names) are parsed as double
+precission decimal numbers. Scientific notation (i.e. 0.1234e-56) is allowed.
+Note that Phosphoros accesses this table only by index, so the names of the
+columns in the file are ignored.
+    
+.. _metal-to-phot-table:
+
+Metalicity to Ionized Photons table
+-----------------------------------
+
+The Metalicity to Ionized Photons table is an ASCII table with the following
+columns:
+    
+- **Z/Z0** : The metalicity Z (in solar units)
+- **log(Qh/L1500)** : The logarithm of the number of ionized photons normalized
+  by the luminosity at 1500 |AA|
+
+All values of the table are parsed as double precission decimal numbers.
+Scientific notation (i.e. 0.1234e-56) is allowed. Note that Phosphoros accesses
+this table only by index, so the names of the columns in the file are ignored.
 
 Output files
 ============
