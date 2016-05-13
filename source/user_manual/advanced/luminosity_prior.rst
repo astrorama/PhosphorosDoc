@@ -2,6 +2,10 @@
 
 Luminosity Prior
 ================
+In the following, *luminosity prior* refere to a prior applied to the model determination which value is dependent of the absolute magnitude or luminosity of each model. The absolute magnitude and luminosity are computed from the flux of the model for a selected filter at 10[pc] scaled with the source scale factor for this model and then corrected with the luminosity distance for the model's redshift.
+
+We use the term *luminosity function* for a function giving the density as a function of the luminosity. Up to a global normalization the luminosity function is a probability density and its value can be used into the luminosity prior.
+
 Luminosity Prior Configuration
 ------------------------------
 In order to apply a luminosity prior to the analysis one first have to define it. One must choose to work in **magnitude** or **flux**, specify for which **filter** the luminosity is computed (note that this filter is not necessary one of the source catalog) whether the luminosity has to be corrected for intrinsic reddening and provide a **luminosity function**. 
