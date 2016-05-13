@@ -120,6 +120,20 @@ and :code:`--metallic-lines` can be used. They both get as parameter the file
 containing the related table. Note that relative paths are relative to the
 currenct working directory.
 
+Customizing the ionized photons table
+-------------------------------------
+
+As explained earlier, Phosphoros uses a table for converting the metalicity to
+the number of ionized phottons, normalized by the luminosity at 1500 |AA|.
+Phosphoros already contains a default table, which is stored in the file
+:code:`<Phosphoros_install_dir>/auxdir/EmissionLines/ionized-photons.txt`. This
+default table is computed from the Starburst99 dataset, assuming Salpeter IMF.
+
+To use a customized table instead, the command line option :code:`--ionized-photons`
+can be used. It gets as parameter the file containing the table.
+
+.. _chosing-metallicity:
+
 Chosing the metallicity
 -----------------------
 
@@ -141,13 +155,73 @@ must give the following command::
     At the moment, Phosphoros does not support computation of metallicities
     which are not in consecutive columns in the emission line tables
 
-Hydrogen linesfactors
----------------------
+Hydrogen lines factors
+----------------------
 
 Experience has shown that just adding the emission lines with the method
-described earlier, does improves the PHZ results, but it does still does not
-give the optimal results. This is due to the rough approximation of the H\ |beta|
+described earlier, does improves the PHZ results, but still does not give the
+optimal results. This is due to the rough approximation of the H\ |beta|
 intensity and the fact that in reality the emission line intensities vary from
 object to object.
 
-The above problem can be fixed by 
+Phosphoros results can be improved, if instead of using a single SED template
+with emission lines, use multiple versions of it, with different factors
+(meaning how strong they are) to the emission lines. To facilitate the
+generation of these templates, the script which adds the emission lines allows
+to give a list of factors, via the `--hydrogen-factors` parameter. For example,
+to use the factors 0.5, 1 and 1.5, the following command can be used::
+    
+    Phosphoros AEL --sed-dir CosmosSB --hydrogen-factors 0.5 1 1.5
+
+.. tip::
+    
+    You should not use the multiplier 0. This would mean not adding emission
+    lines at all, resulting to the original template!
+
+The default (which is used if the parameter is ommitted), is to use the
+multipliers 0.5 and 1. These values, combined with the original templates
+(without the emission lines), seem to provide reasonable results.
+
+.. warning::
+    
+    Using too many hydrogen line factors will result in a big number of SED
+    templates, which means the computation of Phosphoros will take longer.
+    Experience has shown that the improvement in the PHZ predictions with more
+    than 3-4 factors is not significant enough to justify the computational
+    cost.
+
+Metallic lines factors
+----------------------
+
+For similar reasons with the previous section, experience has shown that using
+multiple relative scalings between the hydrogen and metallic emission lines can
+improve the results (this is the reason why Phosphoros separates the emission
+lines in two files, one for the hydrogen lines and one for the metallic ones).
+Note that these factors are not overriding the ones from the metallic lines
+table, but they have a cumulative effect.
+
+The parameter which controls the relative scaling of the metallic lines is the
+`--metallic-factors` and it also gets a list of factors, like the
+`--hydrogen-factors` does. The default values are 0.3, 1 and 2.
+
+.. warning::
+    
+    Similarly with the hydrogen line factors, using a big number of metallic
+    line factors can make the execution of Phosphoros very slow. Again, using
+    more than 3-4 factors does not improve the PHZ predictions enough to
+    justify the computational cost.
+
+.. tip::
+
+    Note that using the metallic lines factors is similar with simulating the
+    metallicity. For this reason, when you use this option, most problably you
+    should use a single metallicity (see :ref:`chosing-metallicity`).
+    
+Emission lines shape
+--------------------
+
+Phosphoros can add the emission lines either as dirac functions or as gaussians,
+computing their FWHM with the equation provided at the beginning of this page.
+This is controlled with the :code:`--velocity` parameter. If the parameter is
+absent, the lines are added as dirac functions.
+    
