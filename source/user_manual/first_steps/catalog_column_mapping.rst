@@ -57,4 +57,9 @@ When names have been entered for all filter, this process must terminated by cli
 CLI: Editing or creating a ``filter_mapping.txt`` file
 ------------------------------------------------------
 
-The result of the mapping is saved into an ASCII file located at ...
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+
+..
+    The result of the mapping is saved into an ASCII file located at ...

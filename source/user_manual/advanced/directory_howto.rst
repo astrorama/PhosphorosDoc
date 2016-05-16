@@ -3,8 +3,13 @@
 How to modify the default directory structure
 =============================================
 
-GUI
----
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+   
+..
+    GUI
+    ---
 
-CLI
----
+    CLI
+    ---

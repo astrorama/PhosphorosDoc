@@ -13,6 +13,4 @@ User Manual
    quickstart
    first_steps/index
    advanced/index
-   gui_reference
-   cli_reference
    format_reference

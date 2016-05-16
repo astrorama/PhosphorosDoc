@@ -12,10 +12,20 @@ all sources of the catalog.
 GUI how-to
 ----------
 
-Show an example with multiple ranges and values
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+
+..
+    Show an example with multiple ranges and values
 
 CLI how-to
 ----------
 
-Explain the related configuration options, which map to the same example shown
-at the GUI
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+   
+..
+    Explain the related configuration options, which map to the same example
+    shown at the GUI

@@ -58,5 +58,6 @@ To produce the photometry models using the commmand line interface do the follow
 
  > Phosphoros compute_model_grid --config-file=$USER/Phosphoros/config/Untitled.conf
 
-Show the command. Mention the default configuration file name. Explain where the
-files are created (and the reasoning behind the default naming).
+..
+    Show the command. Mention the default configuration file name. Explain where
+    the files are created (and the reasoning behind the default naming).

@@ -73,5 +73,10 @@ The bottom right buttons (the blue rectangle on the image):
 CLI
 ---
 
-Show the command. Mention the default configuration file name. Show the same steps
-as for the GUI.
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+
+..
+    Show the command. Mention the default configuration file name. Show the same
+    steps as for the GUI.

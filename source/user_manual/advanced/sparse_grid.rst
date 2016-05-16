@@ -3,10 +3,15 @@
 Sparse Grid
 ===========
 
-Explanation of what it is
+.. image:: /_static/construction.png
+   :align: center
+   :scale: 50 %
+   
+..
+    Explanation of what it is
 
-GUI
----
+    GUI
+    ---
 
-CLI
----
+    CLI
+    ---
