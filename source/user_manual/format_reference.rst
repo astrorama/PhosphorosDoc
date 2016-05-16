@@ -77,6 +77,8 @@ format of the file for the two different types (magnitude and flux) is the same.
 The separation of the files is done in Phosphoros, as explained in the
 :ref:`luminosity-prior` section.
 
+.. _axes-priors:
+
 Axes Priors
 -----------
 
@@ -103,6 +105,8 @@ E\ :sub:`(B-V)` and Redshift Axes Priors
 The E\ :sub:`(B-V)` and Redshift Axes Priors are dataset files, where the first
 column contains the E\ :sub:`(B-V)` or Redshift value accordingly, and the
 second column contains the prior weight to multiply the likelihood with.
+
+.. _grid-prior-format:
 
 Multi-dimensional Generic Priors
 --------------------------------

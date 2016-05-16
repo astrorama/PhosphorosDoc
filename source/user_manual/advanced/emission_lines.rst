@@ -15,6 +15,13 @@ for performing his analysis.
     templates, which do not already contain the emission lines. If you use it on
     templates already containing the emission lines (like empirical templates),
     your will double their effect.
+    
+.. tip::
+    
+    When using emission lines, you might end up use multiple variations of some
+    of your SED templates (with different versions of emission lines on them).
+    You should compensate for this effect, by adding a custom axis prior for the
+    SED axis, as explained in the :ref:`generic-priors` section.
 
 Emission lines addition method
 ------------------------------
