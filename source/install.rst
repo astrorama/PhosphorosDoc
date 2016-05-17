@@ -48,7 +48,7 @@ CentOS7
 
    #. Download http://degauden.isdc.unige.ch/euclid/repo/centos/7/x86_64/EuclidRepo-0.1-1.noarch.rpm
    #. Execute: 
-         | > sudo yum localinstall EuclidRepo-0.1-1.noarch
+         | > sudo yum localinstall EuclidRepo-0.1-1.noarch.rpm
    #. Install Phosphoros:
          | > sudo yum install Phosphoros-devel
 
@@ -56,7 +56,7 @@ Fedora 23
 
    #. Download http://degauden.isdc.unige.ch/euclid/repo/fedora/23/x86_64/EuclidRepo-0.1-1.noarch.rpm
    #. Execute: 
-         | > sudo dnf install EuclidRepo-0.1-1.noarch
+         | > sudo dnf install EuclidRepo-0.1-1.noarch.rpm
          | > sudo dnf install gcc-c++
          | > sudo dnf install EuclidEnv
 
