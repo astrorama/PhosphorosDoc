@@ -54,10 +54,30 @@ Note:
 CLI
 ---
 
-To produce the photometry models using the commmand line interface do the following::
+To produce the photometry models using the |CLI| interface proceed as follows::
 
- > Phosphoros compute_model_grid --config-file=$USER/Phosphoros/config/Untitled.conf
+ > Phosphoros compute_model_grid --output-model-grid="model_grid.fits"
 
-..
-    Show the command. Mention the default configuration file name. Explain where
-    the files are created (and the reasoning behind the default naming).
+Phosphoros will produce the model grid based on parameters stored in the
+default configuration file named ``PhosphorosComputeModelGrid.conf`` and store
+the result in the ``model_grid.fits`` file here given by the user.
+The configuration file is located at the default installation location::
+
+ <EUCLID_BASE>/<PROJECT_NAME>/<VERSION>/InstallArea/<BINARY_TAG>/conf/PhzExecutables/PhosphorosComputeModelGrid.conf
+
+But you can give a different configuration file as follows::
+
+> Phosphoros compute_model_grid --output-model-grid="model_grid.fits" --config-file="user_conf_file.conf"
+
+In this example, Phosphoros will not use the default configuration file but
+instead the one defined by the user and from the ``$HOME/Phosphoros`` location, if
+no path is specify by the user. See also the default directory organization 
+here: :ref:`directory-organization`.
+
+There are a lof of more options you can play with, see the help for more
+information::
+
+ > Phosphoros compute_model_grid --help
+
+Show the command. Mention the default configuration file name. Explain where the
+files are created (and the reasoning behind the default naming).
