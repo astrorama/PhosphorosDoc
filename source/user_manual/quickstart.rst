@@ -55,7 +55,7 @@ Template fitting in two words
 =============================
 
 Phosphoros is a tool for estimating the photometric redshift using the template
-fitting method. Template fitting consists by two steps. During the first step,
+fitting method. Template fitting consists of two steps. During the first step,
 which has to be performed only once, we define a set of models, for which we
 compute their photometries. You can imagine the models as a multi-dimensional
 parameter space, with axes the SED template, the reddening and the redshift.
@@ -118,8 +118,8 @@ Examining the parameter space
 
 As explained earlier, during the first step of the template fitting, Phosphoros
 is going to build the photometries for all the models which will be used for
-the :math:`\chi^2` computation. A full explenation of how to define this
-parameter space is our of the scope of this quickstart tutorial and it will be
+the :math:`\chi^2` computation. A full explanation of how to define this
+parameter space is out of the scope of this quickstart tutorial and it will be
 explained in detail later (:ref:`parameter-space-definition`). For the moment,
 to get an idea how this parameter looks like, you can select the `Parameter Spaces`
 panel of Phosphoros, highlight the `Quickstart Parameter Space` and click the
@@ -129,8 +129,8 @@ panel of Phosphoros, highlight the `Quickstart Parameter Space` and click the
     :align: center
     
 This will open a window showing the axes of the parameter space. There you can
-see that as templates are used the Cosmos templates, for the extinction is
-used the calzetti reddening law with E\ :sub:`(B-V)` in the range 0 to 2 and the
+see that the Cosmos templates are used as templates, the calzetti reddening law
+is used for the extinction with E\ :sub:`(B-V)` in the range 0 to 2 and the
 redshift is computed for the range 0 to 6, with 0.1 steps.
 
 Building the models
@@ -149,7 +149,7 @@ perform with Phosphoros. The titles of these sub-panels are color-coded, so if
 you have to take some action in one of them, its tile will be presented in orange
 letters. For example, at the moment we have not perform yet the first step of
 the model fitting (computing the photometries of our models), so the sub-panel
-`1. Model Grid Generation / Selection` is orange (because we cannnot compute
+`1. Model Grid Generation / Selection` is orange (because we can not compute
 photometric redshifts for our catalog without performing this step first).
 
 To build the models you just have to click on the `1. Model Grid Generation / Selection`
@@ -181,7 +181,7 @@ ASCII or FITS table which contains the same column names.
 On the right side of the panel, you can select the types of outputs you want.
 The output catalog contains only the predicted redshift value, the output PDF
 file contains the 1D redshift PDFs for each source and the likelihood and posterior
-files contain the full multi-dimentional probabilities or each source. For this
+files contain the full multi-dimentional probabilities of each source. For this
 tutorial you should select to generate the output catalog in FITS format and
 the PDF files.
 
@@ -196,7 +196,7 @@ done based on some rules for helping you to organize your outputs (and avoid
 overriding them). You can find more details about this organization :ref:`here <directory-organization>`.
 Note that you can change the output folder to any directory you like.
 
-To compute the photometric redshifts for your catalog you just have to press the
+To compute the photometric redshifts for your catalog you just have to the
 `Run` button at the bottom right corner of Phosphoros and you are done! This is
 going to create two files in your output directory, the `phz_cat.fits` containing
 your catalog output, and the `pdf.fits` containing the 1D PDFs.
@@ -236,9 +236,9 @@ histogram.
 .. figure:: /_static/quickstart/Histogram.png
     :align: center
     
-These plots are standard matplotlib plots, so all the default functionality (like
-zomming, etc) is available. If you select a point, you will see at the top left
-corner the ID of the source it represents. If you double click a point, its PDF
+These plots are standard matplotlib plots, so some default functionalities (like
+zooming, etc) are available. If you select a point, you will see at the top left
+corner the ID of the source it represents. If you double-click on a point, its PDF
 will open in a new window.
 
 .. figure:: /_static/quickstart/PDF.png
@@ -248,7 +248,7 @@ will open in a new window.
     
     If you use topcat, you can launch it in advance and add the option `-samp`
     at the `Phosphoros PSC`. This will automatically load the related tables
-    at topcat and it will allow for cross-selection of the sources between the
+    into topcat and it will allow for cross-selection of the sources between the
     two softwares.
 
 Summary
