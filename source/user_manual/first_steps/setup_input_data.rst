@@ -11,7 +11,7 @@ Catalogs
 The main Phosphoros input data is a **catalog** file. A catalog is a table including
 as columns photometric measurements obtained through a number of different filters,
 with their corresponding errors, either in flux or magnitude. Rows refer to different sources
-and one column named `ÌD`` must be present. The catalog format is either ASCII or FITS
+and one column named ``ID`` must be present. The catalog format is either ASCII or FITS
 as described in this section (TBD). Fluxes must be provided in |mu|\ Jy unit.
 
 Input catalog files can be examined using TOPCAT (http://www.star.bris.ac.uk/~mbt/topcat/) for example.
@@ -20,11 +20,11 @@ analyses, using shell commands (mv or cp). Files must be organized into sub-dire
 their different type (see above catalog type concept :ref:`section. <catalog-type>`).
 
 For example, considering a set of catalogs from the ``COSMOS`` and the ``Euclid Challenge 2`` types, the
-corresponding files must be located into
+corresponding files must be located into::
 
     > $HOME/Phosphoros/Catalogs/COSMOS/...
 
-and
+and::
 
     > $HOME/Phosphoros/Catalogs/Challenge2/...
 
@@ -35,7 +35,7 @@ respectively.
 Auxiliary Data
 --------------
 
-All input files which are not catalogs are referred to as ``Auxiliary`` data. They comprise the following types.
+All input files which are not catalogs are referred to as ``Auxiliary`` data. They comprise the following types:
 
 **Filter transmission curves**: characterise the full transmission in the range [0, 1], including the
     telescope optic, the filter itself and the detector efficiency.
@@ -66,21 +66,21 @@ Optional ``group`` sub-directories can be added to organize auxiliary files in t
 these sub-directories to match their preferred organization scheme.
 
 Any auxiliary files following the supported formats (REFERENCE NEEDED) can also be added and arranged using shell commands
-such as ``mkdir``, ``mv``, ``cp`` or ``rm`.
+such as ``mkdir``, ``mv``, ``cp`` or ``rm``.
 
 GUI: ``Configuration`` : ``Aux. Data Management``
 -------------------------------------------------
 
-The Phosphoros GUI can also be used to display and managed auxiliary data files. Start the GUI with ``Phosphoros GUI`` `
-and click on ``Configuration`` and ``Aux. Data` tabs. This is not yet the place for selecting filters or SEDs for a
-particular analysis (for this see :ref:``Parameter Space Definition <parameter-space-definition> below).
+The Phosphoros GUI can also be used to display and managed auxiliary data files. Start the GUI with ``Phosphoros GUI``
+and click on ``Configuration`` and ``Aux. Data`` tabs. This is not yet the place for selecting filters or SEDs for a
+particular analysis (for this see :ref:`Parameter Space Definition <parameter-space-definition>` below).
 
-First, the GUI provides a view of all available auxiliary data (if any) as shown on the below screen shot for the case
-of the ``Filter Transmission``. Similar views can be displayed for the ``SEDs``, ``Reddening Curves``and ``Luminosity
+First, the GUI provides a view of all available auxiliary data (if any) as shown on the screenshot below for the case
+of the ``Filter Transmission``. Similar views can be displayed for the ``SEDs``, ``Reddening Curves`` and ``Luminosity
 Function Curves`` auxiliary files.
 
 .. figure:: /_static/first_step/AuxDataManagement.png
     :align: center
 
 Second, there are functionalities to ``Import`` new files or to ``Create (Sub)-Group``. Selecting ``Import`` opens a
-new window showing how to import a single file or a directory entire content.
+new window showing how to import a single file or a entire directory content.
