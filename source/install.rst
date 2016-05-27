@@ -107,7 +107,7 @@ When installing from the source, you will have to run Phosphoros using the `run`
 script. For your convenience, you can create an alias to the Phosphoros command
 by adding the following line in your .bashrc file::
     
-    alias Phoss="/path/to/your/build/dir/run Phosphoros"
+    alias Phosphoros="/path/to/your/build/dir/run Phosphoros"
 
 where you have to replace the directory with the build directory of your
 Phosphoros project. Note that you will have to update the alias every time you

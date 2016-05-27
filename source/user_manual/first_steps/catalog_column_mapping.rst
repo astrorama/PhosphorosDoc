@@ -53,29 +53,40 @@ cells now features a drop down menu (after clicking on the cells) which can be u
     :align: center
 
 When names have been entered for all filter, this process must terminated by clicking on the ``Save`` middle-frame button.
+Please note that you can always add or remove filters after a first mapping has been completed, by going back to the ``Select Filters`` option.
 
 CLI: Editing or creating a ``filter_mapping.txt`` file
 ------------------------------------------------------
 
-You can create and edit an ASCCI file for doing the filter mapping. The file must be named ``filter_mapping.txt``
-and must be located at the following directory::
+With the very last step of previous section, i.e. clicking on the ``Save`` middle-frame button of the Catalog Type definition,
+an ASCII file named ``filter_mapping.txt`` is created in the following directory::
 
-  $PHOSPHOROS_ROOT/IntermediateProducts/"Catalog_Type"/filter_mapping.txt
+  $HOME/Phosphoros/IntermediateProducts/"Catalog_Type"/filter_mapping.txt
 
 
-where
-  the ``Catalog_Type`` directory corresponds to your catalog type name you did 
-  define in the ``Catalog Types`` section above.
+where ``Catalog_Type`` directory corresponds to your catalog type name (i.e., ``Challenge2`` in our example).
 
-The content of the ``filter_mapping.txt`` file looks like the foloowing (as an example)::
+You can always edit this file to make corrections. Alternatively, you can create such a file with your favorite editor
+(rather than using the GUI). When launched, the GUI will automatically load any ``filter_mapping.txt`` file located in
+the appropriate directory, providing it respect the proper formatting.
 
-  Quickstart/H FLUX_H FLUXERR_H
-  Quickstart/J FLUX_J FLUXERR_J
-  Quickstart/Y FLUX_Y FLUXERR_Y
-  Quickstart/g FLUX_G FLUXERR_G
+In our example, the filter mapping looks like::
 
-As you see the content consists of 3 columns:
+    DECAM/g FLUX_G FLUXERR_G
+    DECAM/i FLUX_I FLUXERR_I
+    DECAM/r FLUX_R FLUXERR_R
+    DECAM/z FLUX_Z FLUXERR_Z
+    EUCLID_DC1/vis FLUX_VIS FLUXERR_VIS
+    vista/H FLUX_H FLUXERR_H
+    vista/J FLUX_J FLUXERR_J
+    vista/Y FLUX_Y FLUXERR_Y
 
- - **Colum 1**: The filter qualified name(e.g. directory name / filter name)|br|
- - **Colum 2**: The flux column name corresponding to your filter |br|
- - **Colum 3**: The fulx error column name corresponding to your filter |br|
+
+It includes 3 columns:
+
+ - **Column 1**: The qualified name of the file containing the filter transmission curve (e.g. directory name / filter name)|br|
+ - **Column 2**: The Catalog flux column name corresponding to your filter |br|
+ - **Column 3**: The Catalog flux error column name corresponding to your filter |br|
+
+Please note that when you modify any of the GUI files using another editor, you always have to restart the GUI for the
+changes to be taken into account.
