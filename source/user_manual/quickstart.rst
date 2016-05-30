@@ -201,6 +201,8 @@ To compute the photometric redshifts for your catalog you just have to the
 going to create two files in your output directory, the `phz_cat.fits` containing
 your catalog output, and the `pdf.fits` containing the 1D PDFs.
 
+.. _quickstart_visualize_results:
+
 Visualizing the results
 =======================
 

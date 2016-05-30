@@ -254,6 +254,8 @@ All values of the table are parsed as double precission decimal numbers.
 Scientific notation (i.e. 0.1234e-56) is allowed. Note that Phosphoros accesses
 this table only by index, so the names of the columns in the file are ignored.
 
+.. _output_files_format:
+
 Output files
 ============
 
