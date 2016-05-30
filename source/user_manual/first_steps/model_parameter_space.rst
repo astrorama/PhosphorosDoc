@@ -46,3 +46,6 @@ CLI how-to
 ..
     Explain the related configuration options, which map to the same example
     shown at the GUI
+
+﻿
+..   config/GUI/ParameterSpace/Chalenge2_Parameter_Space_1.xml

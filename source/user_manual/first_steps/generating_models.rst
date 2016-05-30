@@ -1,37 +1,39 @@
-Generating the models
-=====================
+Generating the model grid
+=========================
 
-GUI
----
+GUI: Compute Redshift: 1. Model Grid Generation / Selection
+-----------------------------------------------------------
 
-This section is for computing all our photometry models based on the
-``Catalog Type``, the ``Parameter Space`` and the ``Filter Section`` you
-supposed to have already defined in the previous sections. |br|
+This section described how to produce a grid of model photometry values for a given
+``Catalog Type`` and ``Parameter Space`` (specified as indicated in previous sections. |br|
 
 .. figure:: /_static/first_step/ModelGridSubPanel1.png
     :align: center
 
-On the image above we have four sub-panels. For generating the models we only
+The "Compute Redshifts" window is organized into four possible successive steps. The first one is concerned with the
+photometry model grid generation.
 focus on the first one (red frame)::
 
  1- Model Grid Generation / Selection (in orange)
 
-To produce your models you should apply the following steps:
+To produce your models you should provide the following information:
 
 1. **IGM absorption type** |br|
 
- Select one of the IGM absorption type (Madau, Meiksin, Inoue or Off ) to be applied. 
+ Select one of the IGM absorption types (Madau, Meiksin, Inoue or Off ) to be applied.
+
+ (Reference TO Be Added)
 
 2. **Model Grid File** |br|
 
- Give a filename for storing your models. By default, a filename is automatically
- generated. Your ``Catalog Type``, ``Paramter Space`` and the ``IGM absorption Type`` names
- are used for building the filename as in our example ``Grid_Quickstart Parameter Space_MADAU``.
- The file will be stored into the following directory::
- 
- $PHOSPHOROS_ROOT/IntermediateProducts/"Catalog Type"/ModelGrids
+ Give a filename for storing your model grid. By default, a filename is automatically
+ generated concatenating the ``Catalog Type``, ``Paramter Space`` and ``IGM absorption Type`` names.
 
- In our example ``Catalog Type`` will be replaced by ``Quickstart``
+ The generated file ``Grid_Chalenge2_Parameter_Space_1_MADAU.dat`` is stored in the following directory::
+ 
+ $HOME/Phosphoros/IntermediateProducts/"Catalog Type"/ModelGrids
+
+ In our example ``Catalog Type`` is replaced by ``Challenge2``
 
 3. **(Re) Generate the Grid**
 
@@ -39,45 +41,29 @@ To produce your models you should apply the following steps:
  
 4. Get Config File (optional)
 
- If you click on this button, a file (with "Untitled.conf" as default filename) 
- containing your setup for computing your grid will be stored into the directory::
- 
- $PHOSPHOROS_ROOT/config/Untitled.conf
+ If you click on this button, the corresponding configuration file, which can be used to compute the grid from the command line.
+ You can provide a filename (e.g. ``PhosphorosComputeModelGrid.conf``) which will be located in
+
+ $HOME/Phosphoros/config/PhosphorosComputeModelGrid.conf
 
 Note:
  The orange color (on the image) means that we have not produced any model grid
  for our selection yet. The color will turn in black immediately after your models 
- have been created.
- Each time you see this orange color at any sub-panel it means either you forget
+ have been created. Each time you see this orange color at any sub-panel it means either you forget
  to set something or the setting is not applied yet.
  
-CLI
----
+CLI: Phosphoros compute_model_grid
+----------------------------------
 
-To produce the photometry models using the |CLI| interface proceed as follows::
-
- > Phosphoros compute_model_grid --output-model-grid="model_grid.fits"
-
-Phosphoros will produce the model grid based on parameters stored in the
-default configuration file named ``PhosphorosComputeModelGrid.conf`` and store
-the result in the ``model_grid.fits`` file here given by the user.
-The configuration file is located at the default installation location::
-
- <EUCLID_BASE>/<PROJECT_NAME>/<VERSION>/InstallArea/<BINARY_TAG>/conf/PhzExecutables/PhosphorosComputeModelGrid.conf
-
-But you can give a different configuration file as follows::
-
-> Phosphoros compute_model_grid --output-model-grid="model_grid.fits" --config-file="user_conf_file.conf"
-
-In this example, Phosphoros will not use the default configuration file but
-instead the one defined by the user and from the ``$HOME/Phosphoros`` location, if
-no path is specify by the user. See also the default directory organization 
-here: :ref:`directory-organization`.
-
-There are a lof of more options you can play with, see the help for more
-information::
+The photometry model grid can also be generated using the ``compute_model_grid`` action (which call the﻿
+PhosphorosComputeModelGrid C++ executable). The list of command line options can be displayed with a::
 
  > Phosphoros compute_model_grid --help
 
-Show the command. Mention the default configuration file name. Explain where the
-files are created (and the reasoning behind the default naming).
+but the easiest is probably to provide them through a configuration file (see :ref:`here <config-file-usage>` for best
+configuration file usage).
+﻿
+CLI: Phosphoros compute_model_grid configuration details
+--------------------------------------------------------
+
+TB Added later
