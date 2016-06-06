@@ -17,8 +17,8 @@ Any Phosphoros processing can be started with the ``Phosphoros`` main command. T
 
 where
 
-**action**: is a keyword which referrers to a specific Phosphoros executable |br|
-**action_parameters**: referrers to the options related to the action (executable) |br|
+**action**: is a keyword which refers to a specific Phosphoros executable |br|
+**action_parameters**: refers to the options related to the action (executable) |br|
 
 The Phosphoros command (without parameters or with ``- -help``) shows the available actions::
 
