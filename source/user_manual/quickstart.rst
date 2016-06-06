@@ -109,7 +109,7 @@ already done for you in the quickstart data. You can see it by selecting
 .. figure:: /_static/quickstart/FilterMapping.png
     :align: center
 
-Later in this User Manual, you will learn more about how to organize you catalogs 
+Later in this User Manual, you will learn more about how to organize your catalogs 
 (:ref:`directory-organization`) and how to map the columns to the filters
 (:ref:`catalog-column-mapping`).
 
