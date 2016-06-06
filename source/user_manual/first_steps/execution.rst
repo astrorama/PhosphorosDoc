@@ -56,12 +56,19 @@ Phosphoros first looked into the::
  > $HOME/Phosphoros/conf
 
 directory and it will use configuration files from that location **if** they have the exact expected names.
-When phosphoros cannot found the appropriate file there, it will pick up the system configuration files located in::
+
+When phosphoros cannot found the configuration file there, it will pick up the system configuration files located in::
 
  <EUCLID_BASE>/<PROJECT_NAME>/<VERSION>/InstallArea/<BINARY_TAG>/conf/PhzExecutables/*.conf
 
-These files are read only though, and this is why the default ``$HOME/Phosphoros/conf/`` location is proposed for users
+These files are read only though, and this is why the default read/write ``$HOME/Phosphoros/conf/`` location is proposed for users
 configuration.
+
+An alternative configuration file can also be provided with the generic ''config-file`` option::
+
+﻿ - - config-file=<PATH>/<FILENAME>
+
+Please note that the ``.conf`` extension is a naming convention which is not mandatory (i.e., the software will accept any other specified extension).
 
 Users can either copy the system configuration file before modifying them, but the most convenient approach is to use
 the GUI to output configuration files. The GUI can be conveniently use to enter all options in an interactive mode. When
@@ -69,4 +76,4 @@ this is completed, there is GUI ``Get Config. File`` option which allows to save
 at the ``$HOME/Phosphoros/conf``location. Beware to give the correct file name in this case. Configuration files produced
 with the GUI can also be more conveniently copy, paste and edited for small changes.
 
-Any command line options will take precedence over the equivalent option provided in configuration files.
+Any command line options takes precedence over the equivalent option provided through a configuration file.
