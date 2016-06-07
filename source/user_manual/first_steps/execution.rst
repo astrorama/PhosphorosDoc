@@ -57,7 +57,7 @@ Phosphoros first looked into the::
 
 directory and it will use configuration files from that location **if** they have the exact expected names.
 
-When phosphoros cannot found the configuration file there, it will pick up the system configuration files located in::
+When Phosphoros cannot find the appropriate file there, it will pick up the system configuration files located at::
 
  <EUCLID_BASE>/<PROJECT_NAME>/<VERSION>/InstallArea/<BINARY_TAG>/conf/PhzExecutables/*.conf
 
