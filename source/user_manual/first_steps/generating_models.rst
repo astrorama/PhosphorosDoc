@@ -55,12 +55,12 @@ Note:
 CLI: Phosphoros compute_model_grid
 ----------------------------------
 
-The photometry model grid can also be generated using the ``compute_model_grid`` action (which call the﻿
-PhosphorosComputeModelGrid C++ executable). The list of command line options can be displayed with a::
+The photometry model grid can also be generated using the ``compute_model_grid`` action (which calls the﻿
+PhosphorosComputeModelGrid C++ executable). The list of command line options can be displayed as follows::
 
  > Phosphoros compute_model_grid --help
 
-but the easiest is probably to provide them through a configuration file (see :ref:`here <config-file-usage>` for best
+but the easiest is probably to provide them through a configuration file (see :ref:`here <config-file-usage>` for the best
 configuration file usage).
 ﻿
 CLI: Phosphoros compute_model_grid configuration details
