@@ -11,6 +11,6 @@ User Manual
    
    intro
    quickstart
-   first_steps/index
+   basic_steps/index
    advanced/index
    format_reference

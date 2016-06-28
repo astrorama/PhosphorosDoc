@@ -4,22 +4,20 @@
 Introduction
 ************
 
-Phosphoros is an implementation of a photometric redshift template fitting
-method. For each model of a large set, computed from red-shifted and absorbed
-Spectral Energy Distributions (SEDs), is derived a probability from the
-comparison of the computed to the observed photometric values. It can produce
-Probability Density Function (PDF) in different dimensions, the most common and
-useful one being the 1-D PDF providing probabilities as a function of redshift,
-but it can also output the most likely photometric redshift.
 
-The user manual is organized in a way to quickly use Phosphoros and next go deeper
-and deeper of how to use Phosphoros.It finishes with a description of the file
-formats manipulated by Phosphoros.
- 
-The user manual consists of the following sections:
+Phosphoros is a Python script packaging a number of C++ executables which implement a
+photometric redshift template fitting algorithm. In short, a large grid of photometric
+models is first computed by integrating red-shifted and absorbed Spectral Energy
+Distributions (SEDs) through the filter transmission curves. In the second step,
+the likelihood of each model is derived by measuring its distance (though a Chi2 value for example)
+to the observed photometric values. Probability Density Functions (PDFs) providing probabilities
+as a function of redshift is the typical output, but PDFs in any of the other considered
+parameters can also be produced.
 
-- :ref:`Quickstart tutorial <quickstart>`: 15 minutes quickstart tutorial
-- :ref:`First Steps <user-manual-first-steps>`: First steps with Phosphoros
-- :ref:`Advanced Features <user-manual-advanced>`: Advanced features with Phosphoros
-- :ref:`File Format Reference <format-reference-section>`: File format reference needed for Phosphoros
+This user manual contains the following sections:
+
+- :ref:`Quickstart tutorial <quickstart>`
+- :ref:`First Steps <user-manual-basic-steps>`
+- :ref:`Advanced Features <user-manual-advanced>`
+- :ref:`File Format Reference <format-reference-section>`
 

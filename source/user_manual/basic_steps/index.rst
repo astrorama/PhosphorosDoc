@@ -1,14 +1,25 @@
-.. _user-manual-first-steps:
+.. _user-manual-basic-steps:
 
-***************************
-First Steps with Phosphoros
-***************************
+***********
+Basic steps
+***********
 
-.. include:: template_fitting_intro.rst
+.. toctree::
 
-.. include:: workflow.rst
+    overview
+    important_concepts
+    execution
+    setup_input_data
+    catalog_column_mapping
+    model_parameter_space
+    generating_models
+    computing_redshift
+    examining_results
 
-.. include:: important_consepts.rst
+
+.. include:: overview.rst
+
+.. include:: important_concepts.rst
 
 .. include:: execution.rst
 

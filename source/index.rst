@@ -16,14 +16,11 @@ Phosphoros Project Main Page
 
 This is the Phosphoros |version| main page, last updated |today|
 
-Phosphoros is a Python script packaging a number of C++ executables which implement a
-photometric redshift template fitting algorithm. In short, a large grid of photometric
-models is first computed by integrating red-shifted and absorbed Spectral Energy
-Distributions (SEDs) through the filter transmission curves. In the second step,
-the likelihood of each model is derived by measuring its distance (though a Chi2 value for example)
-to the observed photometric values. Probability Density Functions (PDFs) providing probabilities
-as a function of redshift is the typical output, but PDFs in any of the other considered
-parameters can also be produced.
+Phosphoros is a photometric redshift determination tool based on a template fitting method. Taking as input a catalog
+containing a number of photometric measurements, models of the filter transmission and of the Spectral Energy
+Distribution (SEDs), it allows to produce estimations of the source redshifts. The nominal outputs are Probability
+Density Functions (PDFs) providing probabilities as a function of redshift, but it can also produce best redshift
+values and PDFs as a function of other parameters.
 
 *************************
 :ref:`phosphoros-install`

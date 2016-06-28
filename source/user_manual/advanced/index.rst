@@ -1,8 +1,8 @@
 .. _user-manual-advanced:
 
-****************************
-Advanced Phosphoros Features
-****************************
+*****************
+Advanced Features
+*****************
 
 .. toctree::
     

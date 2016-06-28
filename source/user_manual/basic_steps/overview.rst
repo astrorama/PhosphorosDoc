@@ -1,7 +1,7 @@
 
 
 
-Phosphoros Workflow
+Phosphoros overview
 ===================
 
 .. image:: /_static/construction.png

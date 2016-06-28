@@ -102,6 +102,7 @@ Please be aware than the last 3 steps of this procedure (i.e., download, configu
 (replacing "Elements-4.0" by the above names in the procedure)
 
 Phosphoros alias
+----------------
 
 When installing from the source, you will have to run Phosphoros using the `run`
 script. For your convenience, you can create an alias to the Phosphoros command

@@ -45,7 +45,7 @@ Phosphoros uses the ``$HOME/Phosphoros`` directory as the default root directory
 be specified by setting the environment variable ``PHOSPHOROS_ROOT`` to an alternative directory.
 
 
-.._config-file-usage
+.. _config-file-usage:
 
 Configuration files
 -------------------
