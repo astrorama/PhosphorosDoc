@@ -17,7 +17,7 @@ parameters can also be produced.
 This user manual contains the following sections:
 
 - :ref:`Quickstart tutorial <quickstart>`
-- :ref:`First Steps <user-manual-basic-steps>`
+- :ref:`Basic Steps <user-manual-basic-steps>`
 - :ref:`Advanced Features <user-manual-advanced>`
 - :ref:`File Format Reference <format-reference-section>`
 
