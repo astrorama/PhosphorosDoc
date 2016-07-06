@@ -104,8 +104,8 @@ installation options on the following page
 http://euclid.roe.ac.uk/projects/elements/wiki/InstallFromSource.
 
 
-Installing External Dependencies
---------------------------------
+1. Installing External Dependencies
+-----------------------------------
 
 Please use the appropriate installer (mac ports, yum or apt-get for Mac OSX, Linux Red-Hat or Debian families, respectively)
 to install the following dependencies:
@@ -133,8 +133,8 @@ to install the following dependencies:
 The names provided above may not correspond to the distribution-specific package names. Please check your system for
 the exact naming.
 
-EuclidEnv
----------
+2. EuclidEnv
+------------
 
 This EnclidEnv package provides 2 main scripts ELogin and ERun which setup, respectively, the build and the runtime
 environments of any Elements-based project such as Phosphoros. The installation of EuclidEnv is currently required, but
@@ -147,8 +147,8 @@ it will not be necessary in future versions anymore::
     mkdir -p $HOME/<applications>/<phosphoros>/env
     python setup.py install --prefix=$HOME/<applications>/<phosphoros>/env
 
-User configuration
-------------------
+3. User configuration
+---------------------
 
 Edit your configuration (.bashrc or equivalent for other shell) and defined::
 
@@ -159,8 +159,8 @@ EUCLID_BASE defines the location where all Phosphoros related software will be i
 
     mkdir -p $EUCLID_BASE
 
-Elements 4.0
-------------
+4. Elements 4.0
+---------------
 
 Sources are first built in a temporary location and then install in $EUCLID_BASE::
 
@@ -175,8 +175,8 @@ Sources are first built in a temporary location and then install in $EUCLID_BASE
     make
     make install
 
-Alexandria 2.5, PhosphorosCore-0.5 and Phosphoros-0.5
------------------------------------------------------
+5. Alexandria 2.5, PhosphorosCore-0.5 and Phosphoros-0.5
+--------------------------------------------------------
 
 Please repeat the above Elements-related instruction for::
 
@@ -186,8 +186,8 @@ Please repeat the above Elements-related instruction for::
 
 (replacing "Elements-4.0" by the above names in the procedure)
 
-Running Phosphoros
-------------------
+6. Running Phosphoros
+---------------------
 
 For your convenience, the best is to create an alias to the Phosphoros command
 by adding the following line in your .bashrc file::

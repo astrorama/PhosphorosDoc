@@ -4,18 +4,8 @@
 Basic steps
 ***********
 
-.. toctree::
-
-    overview
-    important_concepts
-    execution
-    setup_input_data
-    catalog_column_mapping
-    model_parameter_space
-    generating_models
-    computing_redshift
-    examining_results
-
+.. contents:: Table of Contents
+    :local:
 
 .. include:: overview.rst
 
@@ -42,4 +32,3 @@ Basic steps
 
 .. _examining-results:
 .. include:: examining_results.rst
-
