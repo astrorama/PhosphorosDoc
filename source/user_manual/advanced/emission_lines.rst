@@ -232,3 +232,9 @@ computing their FWHM with the equation provided at the beginning of this page.
 This is controlled with the :code:`--velocity` parameter. If the parameter is
 absent, the lines are added as dirac functions.
     
+Generating only the emission lines
+----------------------------------
+
+Some times it is useful to generate a file containing only the emission lines
+generated, without the original SED template. This can be dome by using the
+parameter ``--no-sed``.
