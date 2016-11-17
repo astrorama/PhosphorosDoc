@@ -10,42 +10,42 @@ GUI: ``Compute Redshifts``
 We focus here on the sub-panel four. This is the last step for computing the photometric redshifts. It provides you the
 best fit catalog with the best fitted models for the catalog containing your sources. |br|
 
-To do so, you need to define the followings:
+To do so, you need to define the following:
 
 1. **Input Catalog File**
  
  Provide a photometry catalog (FITS or ASCII format) containing your sources 
  (See format details :ref:`here <format-reference-section>`).
  
-2. **Generate Output Catalog with Format**
+2. **Output catalog**
 
- Select the output format of the Phosphoros best fitted catalog you wish. It is
+ Select the output format of the Phosphoros catalog you wish. It is
  either ASCII or FITS format (See format details :ref:`here <format-reference-section>`).
+ Also select if the best fitted model columns will be included or not in the
+ catalog.
  
-3. **Generate Output PDF Files**
+3. **1D PDF**
  
- Click the checkbox for generating the 1D PDF(z) files, one per source 
+ Select the parameter space axes for which the marginalized 1D PDF will be
+ produced. They can be generated as columns of the output catalog (containing
+ vector data) or as individual FITS files, one per axis.
  (See format details :ref:`here <format-reference-section>`).
 
-4. **Generate Likelihood Files**
+4. **Multi-Dimensional Output**
  
- Click the checkbox for generating the likelihood FITS files, one per source 
+ Enable the generation of the likelihood or posterior FITS files, one per source 
  (See format details :ref:`here <format-reference-section>`).
  
-5. **Generate Posterior Files**
-
- Click the checkbox for generating the posterios FITS files, one per source 
- (See format details :ref:`here <format-reference-section>`).
- 
-6. **Output Folder**
+5. **Output Folder**
  
  The Phosphoros final results are stored there. The output folder is provided
  by default and is located to::
  
- $PHOSPHOROS_ROOT/Results/Catalog/"Catalog Type" 
+ $PHOSPHOROS_ROOT/Results/Catalog/"Catalog Type" /"Catalog File Name"
  
  But you can choose another location by clicking on the ``Browse`` button. The
- ``Catalog Type`` is the one defined at the top left of the image.
+ ``Catalog Type`` is the one defined at the top left of the image. The ``Catalog
+ File Name`` is the name of catalof file without the extension.
 
 Note you do not need to go through all the points above. Select just the ones you
 need. As shown in the above image the ``Run`` button is inactive for our example. It
@@ -67,7 +67,7 @@ The bottom right buttons (the blue rectangle on the image):
  
 $PHOSPHOROS_ROOT/config/PhosphorosComputeRedshift.conf
 
-This configuration file then be used fot command line execution of the PhosphorosComputeRedshift C++ executable.
+This configuration file then be used for command line execution of the PhosphorosComputeRedshift C++ executable.
 
 CLI: ``PhosphorosComputeRedshift.conf``
 ---------------------------------------

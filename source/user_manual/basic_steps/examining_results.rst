@@ -3,7 +3,7 @@ Examining the results
 
 Even though the files produced by Phosphoros are following standardized formats
 (see :ref:`output_files_format`) and can be handled by any compliant software,
-Phosphoros does provides some tools to facilitate this process. This section
+Phosphoros does provide some tools to facilitate this process. This section
 explains how to use these tools. Note that at the moment, these tools are only
 available via the |CLI|.
 
@@ -24,33 +24,47 @@ the available options you can run::
     Phosphoros PSC --help
 
 By default, this tool will show a plot of the Phosphoros predicted redshift over
-a reference redshift (most of the time the spectroscopic redshift) and a second
-plot with the distribution of the (PhotoZ-SpecZ)/(1+SpecZ), which also contains
-some statistics. You can see an example of these windows at the
-:ref:`quickstart<quickstart_visualize_results>` section. Note that all the
-plots are standard matplotlib plots, so all the default functionality (like
-zooming, etc) is available.
+a reference redshift (most of the time the spectroscopic redshift), a plot with
+the distribution of the (PhotoZ-SpecZ)/(1+SpecZ), which also contains some
+statistics, and plots for any 1D PDF outputs. You can see an example of these
+windows at the :ref:`quickstart<quickstart_visualize_results>` section. Note
+that all the plots are standard matplotlib plots, so all the default
+functionality (like zooming, etc) is available.
 
 .. warning::
 
     You can only use this tool to visualize results for which you have a
     reference redshift.
 
-Selecting the catalogs
-----------------------
+Specifying the Phosphoros results to plot
+-----------------------------------------
+
+The PSC tool gets the directory containing the Phosphoros results by using the
+``--phosphoros-output-dir`` (or ``-pod``) parameter. The tool itself will
+automatically detect all the available results in the directory (like 1D PDFs)
+and it will handle all the possible output formats. Note that the default PHZ
+column name (``Z``) will plot the redshift of the best fitted model. If you want
+to see the peak of the 1D-PDF, you should pass the parameter ``-p 1DPDF-Peak-Z``.
+
+.. warning::
+
+    If you have leftover results from a previous execution (for example 1D PDFs
+    in separate files), the tool will not recognize that they are belonging to
+    a different run. In this case you should clean the directory before you run
+    your analysis.
+
+Specifying the reference redshift
+---------------------------------
 
 Phosphoros does not copy in the output catalog the reference redshift. That
-means that, most of the time, you will need to specify two catalog files, one
-with your analysis outputs and one which contains the reference redshift. These
-files can be given by using the ``--files`` (or ``-f``) parameter, followed by
-the names of the files, separated by space.
+means that you will need to specify the catalog file which contains the reference redshift.
+This is done by using the following options:
 
-By default, Phosphoros is going to match the catalog files based on a column
-named ``ID``. If the ID column of your catalog files is different, you can use
-the ``--id`` (of ``-i``) parameter to specify its name. This parameter gets as
-arguments a list of the ID column names for the files given by the ``-f``
-parameter, separated by space. Alternatively, you can give a single name, which
-will be used for all files.
+* ``--specz-catalog`` (or ``-scat``) : The catalog file (in FITS or ASCII format)
+* ``--specz-cat-id`` (of ``-sid``) : The name of the column that contains the IDs
+  (default: ``ID``)
+* ``--specz-column`` (of ``-scol``) : The name of the column that contains the
+  reference redshift (default: ``ZSPEC``)
 
 .. warning::
 
@@ -58,28 +72,14 @@ will be used for all files.
     catalog rows. Only rows with matching IDs in all files are going to be
     plotted by the tool.
 
-The default columns used by Phosphoros for the photometric redshift and the
-reference redshift are the ``Z`` and ``ZSPEC`` accordingly. You can modify these
-names by using the ``--phz`` (or ``-p``) and ``--specz`` (or ``-s``) options to
-much the ones in your catalogs.
-
-.. tip::
-
-    The default PHZ column name (``Z``) will plot the redshift of the best
-    fitted model. If you want to see the peak of the 1D-PDF, you should pass the
-    parameter ``-p 1DPDF-Peak-Z``
-
 Interacting with the plot
 -------------------------
 
 The SpecZ-PhotoZ plot is interactive, meaning that all the plotted sources can
-be clicked. Single clicking a source will highlight it and its ID will be
-presented at the top left of the window. Double clicking the it will also print
-at the terminal the values of all the columns for all the input files.
-
-If during your analysis you have selected to generate also the 1D PDF file, you
-can pass it to the visualization tool with the parameter ``-pdf``. In this case,
-when you double click a source, its 1D PDF plot will open in a new window.
+be clicked. Single clicking a source will highlight it, its ID will be presented
+at the top left of the window and the 1D PDF plots will be updated. Double
+clicking will perform all the above and it will also print at the terminal the
+values of all the columns for all the input files.
 
 Connecting with TOPCAT
 ----------------------
@@ -111,7 +111,7 @@ Usage in scripts
 The default behavior of the Phosphoros PSC tool renders it unusable in scripts,
 because it shows the windows with the plots and it does not terminate until the
 windows are closed. If you want to use the tool in a script, you can give the
-parameter ``--display`` (or ``-d``), which will instruct the tool to only print
+parameter ``--no-display`` (or ``-nd``), which will instruct the tool to only print
 the statistics on the screen and terminate directly (without opening any extra
 windows). This way you can run the tool from your script and parse the stdout
 stream to retrieve the statistics.

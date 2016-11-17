@@ -20,7 +20,7 @@ where
 **action**: is a keyword which refers to a specific Phosphoros executable |br|
 **action_parameters**: refers to the options related to the action (executable) |br|
 
-The Phosphoros command (without parameters or with ``- -help``) shows the available actions::
+The Phosphoros command (without parameters or with ``--help``) shows the available actions::
 
    > Phosphoros
 
@@ -66,7 +66,7 @@ configuration.
 
 An alternative configuration file can also be provided with the generic ''config-file`` option::
 
-﻿ - - config-file=<PATH>/<FILENAME>
+﻿ --config-file=<PATH>/<FILENAME>
 
 Please note that the ``.conf`` extension is a naming convention which is not mandatory (i.e., the software will accept any other specified extension).
 
