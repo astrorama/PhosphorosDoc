@@ -25,7 +25,7 @@ following commands will get the file and uncomress it::
     cd ~
     mkdir -p Phosphoros
     cd Phosphoros
-    wget http://www.isdc.unige.ch/phosphoros/data/other/quickstart.tar.gz
+    wget http://www.isdc.unige.ch/euclid/phosphoros/data/other/quickstart.tar.gz
     tar -xzf quickstart.tar.gz
     
 .. tip:: 
@@ -113,6 +113,12 @@ Later in this User Manual, you will learn more about how to organize your catalo
 (:ref:`directory-organization`) and how to map the columns to the filters
 (:ref:`catalog-column-mapping`).
 
+For the moment, you should first click the `Edit` button, then click the
+`Select File and Import Columns` and select your catalog file. This step needs
+to be done because your home directory is different than the one in the path
+stored in the quickstart data. When you finish you have to click the `Save`
+button to persist your modification.
+
 Examining the parameter space
 =============================
 
@@ -174,16 +180,20 @@ redshifts using Phosphoros! To do that select the `4. Input/Output Files` in the
 .. figure:: /_static/quickstart/InputOutputFiles.png
     :align: center
 
-Here you can setup the input and the output parameters. Note that the catalog.txt
-file included with the quickstart data is already selected, but you can select any
-ASCII or FITS table which contains the same column names.
+Here you can setup the input and the output parameters. Note that the
+catalog.txt file included with the quickstart data is already selected as the
+input catalog, but you can select any ASCII or FITS table which contains the
+same column names.
 
-On the right side of the panel, you can select the types of outputs you want.
-The output catalog contains only the predicted redshift value, the output PDF
-file contains the 1D redshift PDFs for each source and the likelihood and posterior
-files contain the full multi-dimentional probabilities of each source. For this
-tutorial you should select to generate the output catalog in FITS format and
-the PDF files.
+As you can notice, Phosphoros has already set the output folder for you. This is
+done based on some rules for helping you to organize your outputs (and avoid
+overriding them). You can find more details about this organization :ref:`here <directory-organization>`.
+Note that you can change the output folder to any directory you like.
+
+On the rest of the panel, you can select the types of outputs you want to be
+produced  in the output directory (best fitted model, 1D PDFs, multi-dimensional
+posterior, etc). For this tutorial you should select to generate the output
+catalog in FITS format and to generate the 1D PDF for the Redshift.
 
 .. tip::
     
@@ -191,15 +201,8 @@ the PDF files.
     creation of very big files. These outputs are intended for investigating
     specific cases, as it is explained later in the User Manual (:ref:`posterior-investigation`).
 
-As you can notice, Phosphoros has already set the output folder for you. This is
-done based on some rules for helping you to organize your outputs (and avoid
-overriding them). You can find more details about this organization :ref:`here <directory-organization>`.
-Note that you can change the output folder to any directory you like.
-
-To compute the photometric redshifts for your catalog you just have to the
-`Run` button at the bottom right corner of Phosphoros and you are done! This is
-going to create two files in your output directory, the `phz_cat.fits` containing
-your catalog output, and the `pdf.fits` containing the 1D PDFs.
+To compute the photometric redshifts for your catalog you just have to press the
+`Run` button at the bottom right corner of Phosphoros and you are done!
 
 .. _quickstart_visualize_results:
 
@@ -221,7 +224,7 @@ catalog does contain the spectroscopic redshift) is the SPECZ-PHZ plot. Using
 this plot you can see how well Phosphoros performed with predicting the results.
 To see this plot for your results you will have to execute the command::
     
-    Phosphoros PSC -f Catalogs/Quickstart/catalog.txt Results/Quickstart/catalog/phz_cat.fits -pdf Results/Quickstart/catalog/pdf.fits
+    Phosphoros PSC -scat Catalogs/Quickstart/catalog.txt -pod Results/Quickstart/catalog
     
 .. tip::
     
@@ -229,8 +232,8 @@ To see this plot for your results you will have to execute the command::
         
         Phosphoros PSC --help
         
-This will open two windows, one with the SPECZ-PHZ plot and one with the distribution
-histogram.
+This will open three windows, the SPECZ-PHZ plot, the distribution histogram and
+the redshift 1D PDF.
 
 .. figure:: /_static/quickstart/SPECZ-PHZ.png
     :align: center
@@ -240,8 +243,9 @@ histogram.
     
 These plots are standard matplotlib plots, so some default functionalities (like
 zooming, etc) are available. If you select a point, you will see at the top left
-corner the ID of the source it represents. If you double-click on a point, its PDF
-will open in a new window.
+corner the ID of the source it represents and its redshift 1D PDF will be plotted.
+If you double click a point, all its column information will be printed at the
+terminal.
 
 .. figure:: /_static/quickstart/PDF.png
     :align: center
