@@ -277,15 +277,23 @@ the photometric correction value. Note that the corrections are Flux corrections
 and not magnitude, meaning that the Flux of each filter will be multiplied with
 the provided value.
 
-PDF\ :sub:`(Z)`
----------------
+Marginalized 1D PDFs
+--------------------
 
-This is a FITS file which contains the PDF\ :sub:`(Z)` for all sources. Each
-PDF\ :sub:`(Z)` is a binary table HDU with two columns, the first of which
-represents the redshift and the second the probability. The name of each HDU is
-the ID of the corresponding source and it can be used for searching the PDFs.
-Alternativelly, the order of the HDUs matches the order of the sources in the
-input catalog (starting from the first extension HDU).
+The marginalized 1D PDFs can be either generated as part of the output catalog
+or as individual files.
+
+If they are generated as a catalog column in ASCII format, they are a list of
+comma separated values. If they are generated in FITS format, they are vector
+columns. In both cases, the related axis bins are given as part of the comments
+of the file.
+
+If the 1D PDFs are generated as individual files, they are FITS files containing
+binary table HDUs with two columns, the first of which represents the redshift
+and the second the probability. The name of each HDU is the ID of the
+corresponding source and it can be used for searching the PDFs. Alternativelly,
+the order of the HDUs matches the order of the sources in the input catalog
+(starting from the first extension HDU).
 
 Multi-dimensional Likelihood and Posterior
 ------------------------------------------
