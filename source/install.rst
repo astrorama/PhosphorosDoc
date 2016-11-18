@@ -33,7 +33,7 @@ Phosphoros MacPorts installation:
 #. Synchronized the port DataBase with:
       | > sudo port sync 
 #. Install the software: 
-      | > sudo port install Phosphoros-0.5
+      | > sudo port install Phosphoros-0.6
 #. Test your installation by launching the GUI with:  
       | > Phosphoros GUI
 
@@ -42,7 +42,7 @@ Phosphoros MacPorts installation:
 Linux
 =====
 
-We support CentOS7 and Fedora 22 installations with RPM packages.
+We support CentOS7 and Fedora 23 installations with RPM packages.
 
 CentOS7
 
@@ -66,7 +66,7 @@ Fedora 23
         | > sudo dnf install Phosphoros-devel
 
    #. Create an alias by adding the following line in your .bashrc file:
-        | alias Phosphoros="ERun Phosphoros 0.5 Phosphoros"
+        | alias Phosphoros="ERun Phosphoros 0.6 Phosphoros"
 
    #. Test your installation by launching the GUI with:
         | > Phosphoros GUI
@@ -175,14 +175,14 @@ Sources are first built in a temporary location and then install in $EUCLID_BASE
     make
     make install
 
-5. Alexandria 2.5, PhosphorosCore-0.5 and Phosphoros-0.5
+5. Alexandria 2.6, PhosphorosCore-0.6 and Phosphoros-0.6
 --------------------------------------------------------
 
 Please repeat the above Elements-related instruction for::
 
-    Alexandria-2.5
-    PhosphorosCore-0.5
-    Phosphoros-0.5
+    Alexandria-2.6
+    PhosphorosCore-0.6
+    Phosphoros-0.6
 
 (replacing "Elements-4.0" by the above names in the procedure)
 
@@ -192,7 +192,7 @@ Please repeat the above Elements-related instruction for::
 For your convenience, the best is to create an alias to the Phosphoros command
 by adding the following line in your .bashrc file::
     
-    alias Phosphoros=". ELogin.sh; E-Run --no-user Phosphoros 0.5 Phosphoros"
+    alias Phosphoros=". ELogin.sh; E-Run --no-user Phosphoros 0.6 Phosphoros"
 
 You can then type::
 
