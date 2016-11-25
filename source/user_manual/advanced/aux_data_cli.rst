@@ -1,6 +1,6 @@
 .. _explore_aux_cli:
 
-Explore Aux Data from CLI
+Explore Aux Data from CLI **(under construction)**
 =========================
 
 .. image:: /_static/construction.png

@@ -1,6 +1,6 @@
 .. _directory_howto_section:
 
-How to modify the default directory structure
+How to modify the default directory structure **(under construction)**
 =============================================
 
 .. image:: /_static/construction.png

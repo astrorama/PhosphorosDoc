@@ -1,6 +1,6 @@
 .. axis_collapse:
 
-Axis Collapse options
+Axis Collapse options **(under construction)**
 =====================
 
 .. image:: /_static/construction.png

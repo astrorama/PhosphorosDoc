@@ -1,6 +1,6 @@
 .. _sparse-grid:
 
-Sparse Grid
+Sparse Grid **(under construction)**
 ===========
 
 .. image:: /_static/construction.png

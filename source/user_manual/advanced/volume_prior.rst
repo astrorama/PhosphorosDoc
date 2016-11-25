@@ -1,7 +1,7 @@
 .. _volume-prior:
 
 
-Volume Prior
+Volume Prior **(under construction)**
 ============
 
 .. image:: /_static/construction.png
