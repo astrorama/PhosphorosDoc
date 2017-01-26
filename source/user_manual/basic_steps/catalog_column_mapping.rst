@@ -40,7 +40,13 @@ was just inserted.
 .. figure:: /_static/first_step/CatalogType_SelectCat.png
     :align: center
 
-The column name providing source ID can be entered through the ``Source ID Column``. Then, press ``Select Filters``.
+The column name providing source ID can be entered through the ``Source ID Column``. 
+
+If the catalog has some sources with missing photometry (sources which where not observed in all catalog's bands), you have to check the corresponding control and provide the value of the flag. By doing so you instruct the program to skeep photometry having the flag value in the flux column. 
+
+If the catalog contains some objects whith upper limit (sources which where observed but not detected in some band, for which the provided photometry is the upper limit of the flux and not the nominal flux), you have to check the corresponding control and ensure that the catalog follow the upper limit convention. The program will considere as an upper limit a photometry which corresponding error has a negative value.
+ 
+Then, press ``Select Filters``.
 
 .. figure:: /_static/first_step/CatalogType_SelectFilters.png
     :align: center
