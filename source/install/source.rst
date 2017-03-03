@@ -1,93 +1,8 @@
-.. _phosphoros-install:
+.. _source-installation:
 
-*************************
-Download and Installation
-*************************
-
-Instructions on how to download and install the the Phosphoros software suite are provided for
-
-- :ref:`MacOSX_section`
-
-- :ref:`Linux_section`
-
-- :ref:`Source_Installation_section`
-
-.. _MacOSX_section:
-
-Mac OSX
-=======
-
-Phosphoros installation  with the MacPorts tool. MacPorts installation
-instructions can be found on this
-`link <https://www.macports.org/install.php>`_.  If you do not want to use
-MacPorts, please try the source code installation instructions provided
-below.
-
-Phosphoros MacPorts installation:
-
-#. Update the source location by adding the following line:  
-      | "http://degauden.isdc.unige.ch/euclid/repo/macports/ports.tar.gz" 
-      | into  the 
-      | "/opt/local/etc/macports/sources.conf" 
-      | configuration file
-#. Synchronized the port DataBase with:
-      | > sudo port sync 
-#. Install the software: 
-      | > sudo port install Phosphoros-0.6
-#. Test your installation by launching the GUI with:  
-      | > Phosphoros GUI
-
-.. _Linux_section:
-
-Linux
-=====
-
-We support CentOS7 and Fedora 23 installations with RPM packages.
-
-CentOS7
-
-   #. Download http://degauden.isdc.unige.ch/euclid/repo/centos/7/x86_64/EuclidRepo-0.1-1.noarch.rpm
-   #. Execute: 
-         | > sudo yum localinstall EuclidRepo-0.1-1.noarch.rpm
-   #. Install Phosphoros:
-         | > sudo yum install Phosphoros-devel
-
-Fedora 23
-
-   #. Download http://degauden.isdc.unige.ch/euclid/repo/fedora/23/x86_64/EuclidRepo-0.1-1.noarch.rpm
-   #. Execute: 
-         | > sudo dnf install EuclidRepo-0.1-1.noarch.rpm
-         | > sudo dnf install gcc-c++
-         | > sudo dnf install EuclidEnv
-
-   #. Reboot your computer
-
-   #. Install Phosphoros with:
-        | > sudo dnf install Phosphoros-devel
-
-   #. Create an alias by adding the following line in your .bashrc file:
-        | alias Phosphoros="ERun Phosphoros 0.6 Phosphoros"
-
-   #. Test your installation by launching the GUI with:
-        | > Phosphoros GUI
-
-Please note that you will have to update the alias every time you update to a new version of
-Phosphoros.
-
-For other Linux distributions, you have to install the software from the sources as described in the next section.
-
-.. When installing via the RPMs, you will have to run Phosphoros using the `ERun`
-   command. For your convenience, you can create an alias to the Phosphoros command by adding the following line in your .bashrc file::
-    
-    alias Phosphoros="ERun Phosphoros 0.5 Phosphoros"
-
-    where you have to replace the version with the one you just installed. Note that
-    you will have to update the alias every time you update to a new version of Phosphoros.
-
-.. _Source_Installation_section:
-
-Installation from sources
-=========================
+************************
+Installation from source
+************************
 
 Phosphoros installation involve installing a number of tools/packages in a given order.
 
@@ -203,13 +118,3 @@ to get command line option help and test that your installation is OK, and::
     Phosphoros GUI
 
 to invoke Phosphoros GUI
-
-Python packages
-===============
-
-To run some of the investigation tool, you will need the following Python packages
-
-- NumPy
-- Astropy
-- Mathplotlib
-

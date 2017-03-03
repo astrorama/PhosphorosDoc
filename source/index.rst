@@ -8,7 +8,7 @@ Phosphoros Project Main Page
 .. toctree::
    :hidden:
 
-   install
+   install/index
    user_manual/index
    developer_manual/index
    changes

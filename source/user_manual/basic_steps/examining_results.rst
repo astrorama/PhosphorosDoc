@@ -81,6 +81,8 @@ at the top left of the window and the 1D PDF plots will be updated. Double
 clicking will perform all the above and it will also print at the terminal the
 values of all the columns for all the input files.
 
+.. _connecting-with-topcat:
+
 Connecting with TOPCAT
 ----------------------
 
