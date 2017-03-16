@@ -109,6 +109,28 @@ to both the system and the docker daemon. After that, your user will be able to
 use the Phosphoros container.
 
 
+.. _docker_extra_mac:
+
+Extra docker instructions for Mac OS users
+==========================================
+
+Docker for Mac by default limits the directories accessible to the containers to
+a small list (`/Users`, `/Volumes`, `/tmp` and `/private`). This list can be
+extended, so you can access any directory you want from the Phosphoros docker
+(to see more details about how to mount the directories refert the
+:ref:`docker_mount_extra_dirs` section). To extend the list of accessible
+directories just do the following:
+
+#. Click the small docker icon at your menu bar (top right)
+#. Select `Preferences...` from the menu
+#. Select the tab `File Sharing`
+#. Click the `+` button and add your directory
+#. Click the `Apply & Restart` button
+
+For more information about the File Sharing and the rest of the Mac preferences
+see the official documentation `here <https://docs.docker.com/docker-for-mac/#preferences>`_.
+
+
 Installing DockerPhosphoros
 ===========================
 
@@ -125,6 +147,11 @@ path (like ``./DockPhos.py``).
 
 .. tip:: You can copy the files anywhere you like as long as they are in the
          same directory
+
+.. warning:: If you use Mac and you copy the files outside your home directory
+             (for example in a directory under /Applications) you must make this
+             directory accessible to docker, as described at the
+             :ref:`docker_extra_mac` section
 
 The only dependency of the DockerPhosphoros tool is that you must have python
 installed in your system. The tool is compatible with both Python2 and Python3
@@ -226,6 +253,8 @@ you can stop stop the Phosphoros container to release your resources by running:
 
 Advanced options
 ================
+
+.. _docker_mount_extra_dirs:
 
 Mounting extra directories
 --------------------------
