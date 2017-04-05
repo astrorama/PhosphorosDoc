@@ -114,6 +114,16 @@ use the Phosphoros container.
 Extra docker instructions for Mac OS users
 ==========================================
 
+X Window System
+---------------
+
+Phosphoros container is going to redirect the X windows to your machine. To be
+able to handle this redirection you need to install an X Window System, if you
+don't already have one. You can do this by installing `XQuartz <https://www.xquartz.org/>`_.
+
+Directory permissions
+---------------------
+
 Docker for Mac by default limits the directories accessible to the containers to
 a small list (`/Users`, `/Volumes`, `/tmp` and `/private`). This list can be
 extended, so you can access any directory you want from the Phosphoros docker
