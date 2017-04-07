@@ -135,7 +135,7 @@ parameter space must match exactly the parameter space of the models photometry
 grid you use as input when you run Phosphoros to compute the photometric
 redshifts. As constructing these prior FITS files from sratch can be quite
 complicated, Phosphoros provides a tool (action ``create_flat_grid_prior`` or
-``CGFP`` for short), which gets as input a model grid and constructs a prior
+``CFGP`` for short), which gets as input a model grid and constructs a prior
 FITS file with all the cells set to 1.
 
 For example, if you have used the default naming for the model grid of the
