@@ -87,7 +87,7 @@ pygments_style = 'sphinx'
 #modindex_common_prefix = []
 
 # Include the list of substitutions
-rst_prolog = file('substitutions.txt').read()
+rst_prolog = open('substitutions.txt').read()
 
 
 # -- Options for HTML output ---------------------------------------------------
