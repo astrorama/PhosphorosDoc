@@ -7,11 +7,10 @@ Installation from source
 Phosphoros installation involve installing a number of tools/packages in a given order.
 
 #. External dependencies
-#. EuclidEnv (temporary)
 #. Elements (building and packaging framework)
 #. Alexandria (SDC-CH generic C++ library)
 #. PhosphorosCore (main package)
-#. Phosphoros (Qt4-based GUI)
+#. Phosphoros (Qt5-based GUI)
 
 Here we explain how to achieve a single-user installation of Phosphoros in a custom, local repository
 (for example $HOME/<applications>/<phosphoros>). If you want to carry out another type of installation, please review
@@ -42,56 +41,33 @@ to install the following dependencies:
 +-----------------+------------+---------------------------------------------------------+
 | CCFITS          | 2.5 and up |                                                         |
 +-----------------+------------+---------------------------------------------------------+
-| Qt              | 4.x        |                                                         |
+| Qt              | 5.x        |                                                         |
 +-----------------+------------+---------------------------------------------------------+
 
 The names provided above may not correspond to the distribution-specific package names. Please check your system for
 the exact naming.
 
-2. EuclidEnv
-------------
-
-This EnclidEnv package provides 2 main scripts ELogin and ERun which setup, respectively, the build and the runtime
-environments of any Elements-based project such as Phosphoros. The installation of EuclidEnv is currently required, but
-it will not be necessary in future versions anymore::
-
-    cd $HOME/tmp/ (or any other temporary directory)
-    wget http://degauden.isdc.unige.ch/euclid/repo/sources/EuclidEnv-....tar.gz (check version number)
-    tar xzf EuclidEnv-....tar.gz
-    cd EuclidEnv...
-    mkdir -p $HOME/<applications>/<phosphoros>/env
-    python setup.py install --prefix=$HOME/<applications>/<phosphoros>/env
-
-3. User configuration
+2. User configuration
 ---------------------
 
 Edit your configuration (.bashrc or equivalent for other shell) and defined::
 
-    export PATH=$HOME/<applications>/<phosphoros>/env:${PATH}
-    export EUCLID_BASE=$HOME/<applications>/<phosphoros>/base
+    export CMAKE_PROJECT_PATH=$HOME/<applications>
+    export CMAKE_PREFIX_PATH=$CMAKE_PROJECT_PATH/Elements/5.8/cmake
 
-EUCLID_BASE defines the location where all Phosphoros related software will be installed. Make sure this directory exist::
-
-    mkdir -p $EUCLID_BASE
-
-4. Elements 4.0
+3. Elements 5.8
 ---------------
 
-Sources are first built in a temporary location and then install in $EUCLID_BASE::
-
-    cd $HOME/tmp/ (or any other temporary directory)
-    wget http://degauden.isdc.unige.ch/euclid/repo/sources/Elements-4.0.tar.gz
-    tar xzf Elements-4.0.tar.gz
-    cd Elements-4.0
-    . ELogin.sh (setup the build environment)
-    mkdir build
-    cd build
-    cmake -DCMAKE_TOOLCHAIN_FILE=$CMAKE_PREFIX_PATH/ElementsToolChain.cmake  ../
-    make
+    cd $CMAKE_PROJECT_PATH
+    mkdir -p Elements/5.8
+    wget https://github.com/astrorama/Elements/archive/5.8.tar.gz
+    tar xzf 5.8.tar.gz --strip-components 1 -C Elements/5.8
+    cd Elements/5.8
+    make -j
     make install
 
-5. Alexandria 2.6, PhosphorosCore-0.6 and Phosphoros-0.6
---------------------------------------------------------
+4. Alexandria 2.15, PhosphorosCore-0.6 and Phosphoros-0.6
+---------------------------------------------------------
 
 Please repeat the above Elements-related instruction for::
 
@@ -101,12 +77,12 @@ Please repeat the above Elements-related instruction for::
 
 (replacing "Elements-4.0" by the above names in the procedure)
 
-6. Running Phosphoros
+5. Running Phosphoros
 ---------------------
 
 For your convenience, the best is to create an alias to the Phosphoros command
 by adding the following line in your .bashrc file::
-    
+
     alias Phosphoros=". ELogin.sh; E-Run --no-user Phosphoros 0.6 Phosphoros"
 
 You can then type::
