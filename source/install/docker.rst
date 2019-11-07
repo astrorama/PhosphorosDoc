@@ -195,6 +195,9 @@ directory.
          next time you start the container everything will be available locally
          and it will start much faster.
 
+.. tip:: When using Docker toolbox, you may want to override the temporary
+         directory used (--temp_dir), as the default one may not work correctly.
+
 Using a different Phosphoros root directory
 -------------------------------------------
 
