@@ -1,156 +1,159 @@
 .. _format-reference-section:
 
-*********************
+*************************
 File format reference
-*********************
+*************************
 
-This section describes the format of all files Phosphoros needs to know about.
-It is devided to two sub-sections, one describing the format of the input files
-(files provided by the user) and the output files (files produced by Phosphoros
-itself).
+This chapter describes the format of all files Phosphoros needs to
+know about. It is divided into three sections, describing the format
+of input files (files provided by users) and of output files (files
+produced by Phosphoros itself).
 
 Input files
 ===========
 
+.. _format-catalogs:
+
 Catalogs
 --------
 
-The Phosphoros input catalogs can be either ASCII or FITS tables (Phosphoros
-will try to auto-detect the type). They must contain the following columns:
+Input catalogs can be either ASCII or FITS tables (Phosphoros
+will auto-detect the type). They must contain the following columns:
 
 - **ID** : The ID of the source
-- **Filter Fluxes** : One column for each filter, containing the Flux in |mu|\ Jy
-- **Filter Errors** : One column for each filter, containing the Flux error
+- **Filter Fluxes** : One column for each filter, containing the Flux
+  in :math:`\mu`\ Jy
+- **Filter Errors** : One column for each filter, containing the Flux
+  error in :math:`\mu`\ Jy
 - **SpecZ** : The spectroscopic redshift (only for training catalogs)
 
-Phosphoros provides flexible description of the catalog columns, so it does not
-require specific order or naming of the catalog columns. For a detailed
-description of how to define the catalog columns see :ref:`catalog-column-mapping`.
+Phosphoros does not require any specific order or naming of the
+catalog columns. In ASCII tables, the first line, starting with #,
+should specify the column names.
 
-Phosphoros internally uses 64 bit integers for the IDs and double precision
-floats for all the other columns. If the input catalogs contain columns of
-different type, which can be casted to the internally used type, Phosphoros will
-perform this cast. This means you do not have to maually make the convertions.
+Phosphoros internally uses 64 bit integers for the IDs and double
+precision floats for all the other columns. If the input catalogs
+contain columns of different type, Phosphoros will automatically
+perform the convertion.
 
-Dataset files
--------------
+..
+  which can be casted to the
+  internally used type, Phosphoros will perform this cast. This means
+  you do not have to manually make the convertions.
 
-Many of the following input files are specific cases of the more generic file
-format of a dataset. The dataset files are ASCII, space separated tables, with
-two columns. The meaning of the columns changes depending on the type of the
-file (as explained in the following sections). Both columns will be parsed by
-Phosphoros as double precission decimal numbers. Scientific notation (i.e.
-0.1234e-56) is allowed.
+.. _auxiliary_format:
+  
+Auxiliary Data
+------------------------
 
-A dataset file can contain any number of comments, starting with the symbol
-**#**. If the first line of the file is a one-word comment, it is going to be
-used as the name of the dataset, in place of the filename.
+..
+  Many of the following input files are specific cases of the more
+  generic file format of a dataset. The dataset files are ASCII, space
+  separated tables, with two columns. The meaning of the columns
+  changes depending on the type of the file (as explained in the
+  following sections). Both columns will be parsed by Phosphoros as
+  double precission decimal numbers. Scientific notation (i.e.
+  0.1234e-56) is allowed.
 
-Filter Transmissions
---------------------
+Auxiliary data are ASCII space-separated tables, with two columns. The
+meaning of columns changes depending on the data type. Unless
+particular cases, both columns will be parsed by Phosphoros as double
+precision decimal numbers. Scientific notation (i.e.  0.1234e-56) is
+allowed.
+  
+A dataset file can contain any number of comments, starting with the
+symbol **#**. If the first line of the file is a one-word comment,
+Phosphoros will use it as the name of the dataset, in place of the
+filename.
 
-The filter transmissions are dataset files, where the first column contains the
-wavelength values expressed in |AA| and the second column the transmissoin value
-in the range [0,1].
+Here below a list of typical auxiliary data and their format.
 
-SED Templates
--------------
+- **Filter Transmission Curves**: the first column contains the
+  wavelength values expressed in |AAm| and the second column the
+  transmission value in the range [0,1].
 
-The SED templates are dataset files, where the first column contains the
-wavelength values expressed in |AA| and the second column the Flux density,
-expressed in erg/s/cm\ :sup:`2`/|AA|.
+- **SED Templates**: the first column contains the wavelength values
+  expressed in |AAm| and the second column the flux expressed
+  in erg/s/cm\ :sup:`2`/|AAm|.
 
-Reddening Curves
-----------------
+- **Reddening Curves**: the first column contains the wavelength
+  values expressed in |AAm| and the second column the values of the
+  reddening curve :math:`k(\lambda)`.
 
-The Reddening Curves are dataset files, where the first column contains the
-wavelength values expressed in |AA| and the second column the values of the
-:math:`k_{(\lambda)}`, which will used for applying the extinction.
+- **Luminosity Function Curves**: the first column contains the
+  luminosity values in [erg/s/Hz] or the AB magnitude values and the
+  second column the values of the galaxies number density (typically, but not necessarily, in
+  [:math:`{\rm Mpc}^{-3}\,({\rm erg/s/Hz})^{-1}`] or [:math:`{\rm
+  Mpc}^{-3}`]). Note that the format of the file is the
+  same regardless of using magnitude or luminosity.
 
-Luminosity Function Curves
---------------------------
-
-The Luminosity Function Curves are dataset files where the first column contains
-the Luminosity values, either expressed in AB magnitude or in flux (erg/s/Hz),
-and the second column the values of the density (1/Mpc\ :sup:`3`). Note that the
-format of the file for the two different types (magnitude and flux) is the same.
-The separation of the files is done in Phosphoros, as explained in the
-:ref:`luminosity-prior` section.
+..  in [:math:`{\rm Mpc}^{-3}({\rm erg/s/Hz})^{-1}`] or Mpc\ :sup:`-3`, respectively
+  
+..  The separation of the files is done in Phosphoros, as explained in
+    the :ref:`luminosity-prior` section.
 
 .. _axes-priors:
 
 Axes Priors
------------
+^^^^^^^^^^^^^^^^^^
 
-SED and Reddening Curve Axes Priors
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Axis priors have different format according to whether the model
+parameter is a numerical or categorical variable.
 
-The SED and Reddening Curve Axes Prior files are ASCII, space separated tables,
-with two columns (note that these files are not datasets). The first column is a
-string, representing the name of the SED or Reddening Curve accordingly. The
-second column is a double precission decimal number, representing the prior
-weight to multiply the likelihood with.
+- **SED and Reddening Curve Axes Priors**: here the first column is a
+  string, representing the name of the SED template or the Reddening
+  Curve accordingly. The second column is a double precision decimal
+  number, representing the prior weight to multiply the likelihood
+  with.
 
-.. warning::
-    
-    The names of the first column have to be the same names as Phosphoros sees
-    the datasets, which might be different than the file names. You can use the
-    Phosphoros actions `display_seds` (`DS`) and `display_reddening_curves`
-    (`DRC`) to retrieve these names, as explained in the :ref:`explore_aux_cli`
-    section.
+  .. note::
 
-E\ :sub:`(B-V)` and Redshift Axes Priors
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    The first column must contain the qualified name of the file as
+    seen by Phosphoros (including, i.e., group information). For
+    example, for a SED template in the directory::
 
-The E\ :sub:`(B-V)` and Redshift Axes Priors are dataset files, where the first
-column contains the E\ :sub:`(B-V)` or Redshift value accordingly, and the
-second column contains the prior weight to multiply the likelihood with.
+      > $PHOSPHOROS_ROOT/AuxiliaryData/SEDs/CosmosEll
+
+    the first column should be ``CosmosEll/<sed name>``.
+    Phosphoros actions ``display_seds`` (``DS``) and
+    ``display_reddening_curves`` (``DRC``) can retrieve these names,
+    as explained in the :ref:`explore_aux_cli` section.
+
+  
+- **E(B-V) and Redshift Axes Priors**: the first column contains
+  E\ :sub:`(B-V)` or redshift values accordingly, and the second
+  column contains the prior weight to multiply the likelihood with.
 
 .. _grid-prior-format:
 
-Multi-dimensional Generic Priors
---------------------------------
+Multi-dimensional Priors
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The multi-dimensional generic priors are FITS files with the following HDUs, in
-this specific order:
+Multi-dimensional generic priors are FITS files with the following
+Header Data Units (HDUs), in this specific order:
 
-.. tip::
-    
-    Do not try to create files of this complex format from the scratch!
-    Phosphoros provides the tool `create_flat_grid_prior` (`CFGP`) which will
-    generate a flat prior FITS file, based on the parameter space of a model
-    photometry grid file (for more info see :ref:`multi_dim_generic_prior`)
-    
-Primary HDU
-^^^^^^^^^^^
+**1. Primary HDU**: The primary HDU is intentionally left empty. If it
+contains any data, they are ignored by Phosphoros.
 
-The primary HDU is intentionally left empty. If it contains any data, they
-are ignored by Phosphoros.
-
-Prior HDU
-^^^^^^^^^
-
-The prior HDU is an image extension, containing a 4 dimensional array, which
-keeps the prior weights for each cell of the parameter space. It must have the
-following characteristics:
+**2. Prior HDU**: The prior HDU is an image extension, containing a 4
+dimensional array, which keeps the prior weights for each cell of the
+parameter space. It must have the following characteristics:
 
 * **extension name** : it can be any string, which is used for identifying the
-  region when using sparse grids (more about this bellow) 
+  parameter space region in sparse grids (see bellow) 
 * **array type** : double precision floating point (BITPIX=-64)
-* **first axis** : represents the redshift
-* **second axis** : represents the E\ :sub:`(B-V)`
-* **third axis** : represents the reddening curve
-* **fourth axis** : represents the SED
+* **first axis** : represents redshift
+* **second axis** : represents E\ :sub:`(B-V)`
+* **third axis** : represents reddening curve
+* **fourth axis** : represents SED
 
-Redshift HDU
-^^^^^^^^^^^^
+**3. Redshift HDU**: the redshift HDU is a binary table extension, which
+keeps the values of the redshift axis knots. It must have the
+following characteristics:
 
-The redshift HDU is a binary table extension, which keeps the values of the
-redshift axis knots. It must have the following characteristics:
-
-* **extension name** : *Z_region*, where region is the name of the related prior
-  HDU
-* **length** : The same as the first axis for the related prior HDU
+* **extension name** : ``Z_region``, where ``region`` is the name of
+  the related prior HDU
+* **length** : The same as the first axis in the related prior HDU
 * **first column** :
     * Name : Index
     * Type : 32-bit integer (TFORM=J)
@@ -158,15 +161,13 @@ redshift axis knots. It must have the following characteristics:
     * Name : Value
     * Type : double precision floating point (TFORM=D)
 
-E\ :sub:`(B-V)` HDU
-^^^^^^^^^^^^^^^^^^^
+**4. E(B-V) HDU**: the E\ :sub:`(B-V)` HDU is a binary table
+extension, which keeps the values of the E\ :sub:`(B-V)` axis
+knots. It must have the following characteristics:
 
-The E\ :sub:`(B-V)` HDU is a binary table extension, which keeps the values of
-the E\ :sub:`(B-V)` axis knots. It must have the following characteristics:
-
-* **extension name** : *E(B-V)_region*, where region is the name of the related
-  prior HDU
-* **length** : The same as the second axis for the related prior HDU
+* **extension name** : ``E(B-V)_region``, where ``region`` is the name
+  of the related prior HDU
+* **length** : The same as the second axis in the related prior HDU
 * **first column** :
     * Name : Index
     * Type : 32-bit integer (TFORM=J)
@@ -174,15 +175,13 @@ the E\ :sub:`(B-V)` axis knots. It must have the following characteristics:
     * Name : Value
     * Type : double precision floating point (TFORM=D)
 
-Reddening Curves HDU
-^^^^^^^^^^^^^^^^^^^^
+**5. Reddening Curve HDU**: the Reddening Curve HDU is a binary table
+extension, which keeps the values of the reddening curve axis
+knots. It must have the following characteristics:
 
-The Reddening Curves HDU is a binary table extension, which keeps the values of
-the Reddening Curves axis knots. It must have the following characteristics:
-
-* **extension name** : *Reddening Curve_region*, where region is the name of the
-  related prior HDU
-* **length** : The same as the third axis for the related prior HDU
+* **extension name** : ``Reddening Curve_region``, where ``region`` is
+  the name of the related prior HDU
+* **length** : The same as the third axis in the related prior HDU
 * **first column** :
     * Name : Index
     * Type : 32-bit integer (TFORM=J)
@@ -190,15 +189,13 @@ the Reddening Curves axis knots. It must have the following characteristics:
     * Name : Value
     * Type : string (TFORM=*A, where * the max length)
 
-SED HDU
-^^^^^^^
+**6. SED HDU**: the Sed HDU is a binary table extension, which keeps the
+values of the SED axis knots. It must have the following
+characteristics:
 
-The Sed HDU is a binary table extension, which keeps the values of the SED axis
-knots. It must have the following characteristics:
-
-- **extension name** : *SED_region*, where region is the name of the related
-  prior HDU
-- **length** : The same as the fourth axis for the related prior HDU
+- **extension name** : ``SED_region``, where ``region`` is the name of
+  the related prior HDU
+- **length** : The same as the fourth axis in the related prior HDU
 - **first column** :
     - Name : Index
     - Type : 32-bit integer (TFORM=J)
@@ -206,108 +203,207 @@ knots. It must have the following characteristics:
     - Name : Value
     - Type : string (TFORM=*A, where * the max length)
     
-Sparse Grids HDUs
-^^^^^^^^^^^^^^^^^
+**7. Sparse Grids HDUs**: to create priors for sparse grids, the set of
+prior HDU and axes HDUs have to be repeated as many times
+as the number of regions in the sparse grid.
 
-To create priors for sparse grids, the set of prior HDU together with the axes
-HDUS can be repeated as many times, as regions in the sparse grid.
-
-.. _emission-line-tables:
-
-Emission Line tables
---------------------
-
-The emission lines table is an ASCII table with the following columns:
-
-- **Line name** : The name of the emission line
-- **Wavelength** : The central wavelength of the line
-- **Relative Flux 1** : The flux of the line, relative to the H\ |beta| flux
-- **Relative Flux 2** : The flux of the line, relative to the H\ |beta| flux
-- ...
-
-The table can have any number of relative flux columns, each one containing the
-relative fluxes for different metalicity values.
 
 .. tip::
     
-    If you also want to add the H\ |beta| line, you need to add a row, with all
-    relative fluxes set to 1.
-
-All values of the table (except of the line names) are parsed as double
-precission decimal numbers. Scientific notation (i.e. 0.1234e-56) is allowed.
-Note that Phosphoros accesses this table only by index, so the names of the
-columns in the file are ignored.
+    Do not try to create files of this complex format from the
+    scratch!  Phosphoros provides the tool ``create_flat_grid_prior``
+    (``CFGP``) that will generate a flat prior FITS file based on
+    the parameter space of a model grid file (for more info see
+    :ref:`multi_dim_generic_prior`).
     
-.. _metal-to-phot-table:
-
-Metalicity to Ionized Photons table
------------------------------------
-
-The Metalicity to Ionized Photons table is an ASCII table with the following
-columns:
-    
-- **Z/Z0** : The metalicity Z (in solar units)
-- **log(Qh/L1500)** : The logarithm of the number of ionized photons normalized
-  by the luminosity at 1500 |AA|
-
-All values of the table are parsed as double precission decimal numbers.
-Scientific notation (i.e. 0.1234e-56) is allowed. Note that Phosphoros accesses
-this table only by index, so the names of the columns in the file are ignored.
 
 .. _output_files_format:
 
-Output files
-============
+Intermediate Products
+=========================
+
+In the standard directory organization of Phosphoros, all intermediate
+products are stored in the directory (or in sub-directories of)::
+
+  > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>
+
 
 Model Photometry Grid
----------------------
+-------------------------------------------
 
-Due to file size, the model photometry grid file is stored in an internal
-Phosphoros format. Access from the C++ language can be done by using the
-Phosphoros *PhzDataModel* module. Access outside C++ can be performed with the
-Phosphoros action `display_model_grid` (`DMG`). For more info see the section
-:ref:`investigate-model-grids`.
+Due to the size, the file containing the grid of modeled photometry is
+stored in an internal Phosphoros format. Access from the C++ language
+can be done by using the Phosphoros ``PhzDataModel`` module. Access
+outside C++ can be performed with the Phosphoros action
+``display_model_grid`` (``DMG``). For more information see the
+:ref:`investigate-model-grids` section.
+
+By default, the file is named as ``Grid_<Catalog Type>_<parameter
+space name>_<IGM prescription>.dat`` (e.g.,
+``Grid_Challenge2_Parameter_Space_MADAU.dat``) and stored in the
+``IntermediateProducts/<Catalog Type>/ModelGrids`` directory.
 
 Photometric Zero Point Corrections
-----------------------------------
+----------------------------------------------
 
-This file is an ASCII table with two columns. The first column is the filter
-fully qualified name (including the group information) and the second one is
-the photometric correction value. Note that the corrections are Flux corrections
-and not magnitude, meaning that the Flux of each filter will be multiplied with
-the provided value.
+This file is an ASCII table with two columns. The first column is the
+qualified name of filters (including the group information) and the
+second one is the photometric correction value.
+
+By default, the file is named as ``<Catalog Type>_<parameter space
+name>_<average method>.txt`` (e.g.,
+``Challenge2_Parameter_Space_WEIGHTED_MEDIAN.txt``) and stored in the
+``IntermediateProducts/<Catalog Type>`` directory.
+
+.. note::
+
+   The corrections are on the source flux and not on the magnitude,
+   meaning that the flux of each filter will be multiplied with the
+   provided value.
+
+
+.. _filter-mapping:   
+   
+Filter Mapping
+-----------------------------------
+
+The ``filter_mapping.txt`` file is an ASCII file used to map filter
+trasmission curve files to catalog column names. It is located in the
+following directory::
+
+  > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/
+
+This file looks like::
+
+    DECAM/g FLUX_G FLUXERR_G
+    DECAM/i FLUX_I FLUXERR_I
+    DECAM/r FLUX_R FLUXERR_R
+    DECAM/z FLUX_Z FLUXERR_Z
+    EUCLID_DC1/vis FLUX_VIS FLUXERR_VIS
+    vista/H FLUX_H FLUXERR_H
+    vista/J FLUX_J FLUXERR_J
+    vista/Y FLUX_Y FLUXERR_Y
+
+and includes 3 columns:
+
+- Column 1: The qualified name of the file containing the filter
+  transmission curve (i.e., the directory name below the
+  ``AuxiliaryData/Filters`` directory plus the filter name) |br|
+- Column 2: The catalog flux column name corresponding to the filter |br|
+- Column 3: The catalog flux error column name corresponding to the filter |br|
+
+The file is automatically generated by the GUI at the ``Catalog
+Setup`` step. Otherwise, users have to create it at the right place.
+
+Other Products
+--------------------------------
+
+Phosphoros generates other two intermediate products when luminosity
+priors and Galactic absorption correction are applied. They contain
+the *luminosity model grid* and the *correction coefficients grid* and
+are located, respectively, at the directories::
+
+  > IntermediateProducts/<Catalog Type>/LuminosityModelGrids/
+  > IntermediateProducts/<Catalog Type>/GalacticCorrectionCoefficientGrids/
+  
+Both files are stored in binary format and are accessible only by the
+Phosphoros C++ executables.
+
+
+Results
+==============
+
+In the standard directory organization, all Phosphoros outputs
+are stored in the directory::
+
+  > $PHOSPHOROS_ROOT/Results/<Catalog Type>/<input catalog name>/
+
+where the name of the input catalog is without the extention.
+
+
+Output Catalogs
+-----------------------
+
+Output catalogs can be stored either in FITS or in ASCII format. The
+default name is ``phz_cat``, with the extension according to the
+format.
+
+In the basic case (i.e., without saving the best model or
+the 1D PDFs), output catalogs contain the following columns
+
+- **ID**: the source ID
+
+- **Z**: the best-estimate of redshift (in this case it coincides with the
+  1DPDF-Peak-Z value)
+
+- **Posterior-Log**: the amplitude of the posterior distribution at
+  the maximum
+
+- **Likelihood-Log**: the amplitude of the likelihood at the maximum
+
+- **1DPDF-Peak-Z**: the redshift at the maximum of the 1D redshift PDF
+
+If ``Best posterior model`` is enabled in the |GUI| (or
+``--create-output-best-model=YES`` in the ``compute_redshift`` action
+in the |CLI|), these columns are added:
+
+- **SED**, **ReddeningCurve**, **E(B-V)** and **Z**: they are the
+  values corresponding to the maximum of the posterior
+  distribution.
+
+- **SED-Index**: this is the index of the best-model SED template
+  inside the group the SED belongs to.
+
+- **Scale**: the normalization factor :math:`\alpha` associated with
+  the best model (see the :ref:`Methodology: Template fitting method
+  <template-fitting>` section)
+
+If ``Best likelihood model`` is enabled (or
+``--create-output-best-likelihood-model=YES``), the columns have the
+same names as those above except that they start with ``LIKELIHOOD-``
+(e.g., ``LIKELIHOOD-SED``).
+
 
 Marginalized 1D PDFs
---------------------
+-------------------------
 
-The marginalized 1D PDFs can be either generated as part of the output catalog
-or as individual files.
+The marginalized 1D PDFs can be either generated as part of output
+catalogs or as an individual file.
 
-If they are generated as a catalog column in ASCII format, they are a list of
-comma separated values. If they are generated in FITS format, they are vector
-columns. In both cases, the related axis bins are given as part of the comments
-of the file.
+If they are generated as a catalog column in ASCII format, they are a
+list of comma separated values. If they are generated in FITS format,
+they are vector columns. In both cases, the axis bins are given as
+part of the comments of the file.
 
-If the 1D PDFs are generated as individual files, they are FITS files containing
-binary table HDUs with two columns, the first of which represents the redshift
-and the second the probability. The name of each HDU is the ID of the
-corresponding source and it can be used for searching the PDFs. Alternativelly,
-the order of the HDUs matches the order of the sources in the input catalog
-(starting from the first extension HDU).
+If the 1D PDFs are generated as an individual file, they are FITS files
+containing binary table HDUs with two columns, the first of which
+represents the axis parameter (e.g., redshift) and the second the
+probability. The name of each HDU is the ID of the corresponding
+source and it can be used for searching the 1D PDFs. Moreover,
+the order of the HDUs matches the order of the sources in the input
+catalog (starting from the first extension HDU).
 
 Multi-dimensional Likelihood and Posterior
 ------------------------------------------
 
-Phosphoros (when any of these outputs is enabled) produces one FITS file for
-each source of the catalog. The name of the file is the ID of the source, with
-the extension *fits*. It contains the following HDUs:
+Phosphoros (when any of these outputs is enabled) produces one FITS
+file for each source of the catalog, containing the multi-dimensional
+likelihood or posterior distribution. The name of the file is the ID
+of the source, with the extension *fits*. It contains the following
+HDUs:
 
-- Primary : A 4-dimensional array containing the likelihood (order of axes:
-  Z, E\ :sub:`(B-V)`, RedCurve, SED)
-- Z : A single column binary table with the values of the Z axis
-- E(B-V) : A single column binary table with the values of the E(B-V) axis
-- Reddening Curve : A single column binary table with the values of the Reddening Curve axis
-- SED : A single column binary table with the values of the SED axis
+- **Primary**: a 4-dimensional array containing the likelihood or
+  posterior distribution (order of axes: Z, E\ :sub:`(B-V)`, RedCurve,
+  SED)
+- **Z**: a single column binary table with the values of the Z axis
+- **E(B-V)**: a single column binary table with the values of the
+  E(B-V) axis
+- **Reddening Curve**: a single column binary table with the values of
+  the Reddening Curve axis
+- **SED**: a single column binary table with the values of the SED axis
 
-Note that Phosphoros provides a tool for visualising files of this type, as
-explained in the :ref:`posterior-investigation` section.
+.. note::
+
+   Phosphoros provides a tool for visualising files of this type, as
+   explained in the :ref:`posterior-investigation` section.
+

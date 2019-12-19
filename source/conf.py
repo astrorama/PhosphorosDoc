@@ -26,6 +26,7 @@ import sys, os
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.mathjax']
+extensions = ['sphinxcontrib.bibtex']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -178,7 +179,6 @@ htmlhelp_basename = 'Phosphorosdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
-
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
@@ -187,7 +187,9 @@ latex_elements = {
 #'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+'preamble': r'''
+\usepackage{amsmath} 
+'''
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -199,7 +201,7 @@ latex_documents = [
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+latex_logo = 'logo.png'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.

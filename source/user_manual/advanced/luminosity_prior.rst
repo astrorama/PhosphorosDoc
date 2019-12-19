@@ -1,75 +1,258 @@
 .. _luminosity-prior:
 
-Luminosity Prior
-================
-In the following, *luminosity prior* refere to a prior applied to the model determination which value is dependent of the absolute magnitude or luminosity of each model. The absolute magnitude and luminosity are computed from the flux of the model for a selected filter at 10[pc] scaled with the source scale factor for this model and then corrected with the luminosity distance for the model's redshift.
+Luminosity Priors
+=================
 
-We use the term *luminosity function* for a function giving the density as a function of the luminosity. Up to a global normalization the luminosity function is a probability density and its value can be used into the luminosity prior.
+Luminosity priors refer to priors that depend on the luminosity or the
+absolute magnitude of sources. Luminosity priors are typically
+provided by **luminosity functions** that are the space density of
+galaxies as a function of the luminosity and, up to a global
+normalization, can be seen as probability density functions (see the
+:ref:`bayesian-priors` section for more details). Luminosity functions
+depend on the wavelength band in which luminosities are measured.
 
-Luminosity Prior Configuration
-------------------------------
-In order to apply a luminosity prior to the analysis one first have to define it. One must choose to work in **magnitude** or **flux**, specify for which **filter** the luminosity is computed (note that this filter is not necessary one of the source catalog) whether the luminosity has to be corrected for intrinsic reddening and provide a **luminosity function**. 
+Luminosity Priors Configuration
+-------------------------------
 
-The luminosity function can be specified with:
+First of all, users have to select whether to use the **AB magnitude**
+or the **luminosity**, specify the filter at which the luminosity
+function is computed, and whether the luminosity has to be corrected
+for intrinsic reddening or not.
 
-- a Schechter parametrization, providing the alpha, phi* and M* or L*,
-- a file storing the sampling of the object's density as a function of the luminosity. The files must contains two columns, the first represent the luminosity (either in magnitude AB or in flux [erg/s 1/Hz]) and the second is the object's density [1/Mpc³]. The provided files are stored in the *<AuxiliaryData>/LuminosityFunctionCurves* directory. 
- 
-Furthermore, the luminosity function is not requiered to be the same for all the SED-redshift parameter space. One can define redshift ranges and SED groups and provide one luminosity function for each couples {redshift range, SED group}. Note that the relative normalization between the different luminosity function is independent of the number of SED in the groups.
+**Luminosity functions** can be provided to Phosphoros through:
 
-In order to run the redshifts computation one need to compute a Luminosity model grid which is a model grid for the filter used to compute the luminosity and with a parameter space restricted to redshift 0. The GUI will automatically compute this grid when launching the redshift computation. On the other hand CLI usage requires that one compute this grid before launching the redshifts computation. 
+- data files, storing luminosity functions. They must contains two
+  columns, the luminosity in [erg/s/Hz] or the AB magnitude, and the
+  luminosity function (typically in [:math:`{\rm Mpc}^{-3}\,({\rm
+  erg/s/Hz})^{-1}`] or [:math:`{\rm Mpc}^{-3}`]). By
+  default, these files are located in the
+  ``AuxiliaryData/LuminosityFunctionCurves/`` directory;
 
-GUI
----
-In order to use luminosity function curves, one should have beforehand added them in the *Configuration/Aux. Data Management/Luminosity Function Curves* page. 
+-  a Schechter parametrization. The Schechter function has the form:
 
-For defining luminosity priors, one navigate to the *Compute redshifts* page, ensure that a catalog type and a parameter space have been selected and that the model grid has been computed, then under *3. Algorithme Options* it is possible to open the dedicated popup by clicking on the button *Configure Luminosity Prior*. The popup gives the possibility of creating new luminosity prior and managing existing ones. 
+    .. math::
 
-By default a newly created prior has a single luminosity function defined for a redshift range(matching the total range span by the parameter space redshifts and a single SED group (containing all the SED of the paramater space). Spliting the SED group and the redshift range is done in popups opened by the *Manage SED Groups* and *Manage Redshift Intervals* buttons. 
+       n(L)=\frac{\phi^*}{L^*}\bigg(\frac{L}{L^*}\bigg)^{\alpha_s}\,e^{-L/L^*}
 
-Once the redshifts ranges and the SED groups are defined one can specify each luminosity function by clicking on the corresponding cell and providing either the Schechter parameters or selecting a luminosity function curve. The GUI provides also the possibility of editing the Schechter parameters for all the luminosity functions in a popup launched by the *Bulk Schechter Edit* button. 
+    .. math::   
+       ~~~~~~{\rm or}~~~~~~
 
-CLI
----
+    .. math::
+       
+       n(M)=0.921\,\phi^*\,x^{\alpha_s+1}\,e^{-x}\,
+
+   with :math:`x=10^{-0.4(M-M^*)}`. Users have to provide the values
+   for the parameters :math:`\alpha_s,~\phi^*` in [:math:`{\rm
+   Mpc}^{-3}`] and :math:`M^*~{\rm or}~L^*` in [erg/s/Hz].
+
+Luminosity functions can vary according to SED templates and redshift
+ranges. Users have the possibility to define different luminosity
+functions for different redshift ranges and SED groups.
+
+..
+  Note that the relative normalization between the different luminosity function is independent
+  of the number of SED in the groups.
+
+.. note::
+
+   The units of luminosity functions are not relevant for Phosphoros as
+   long as they are the same in all redshift/SED template cells.
+  
+.. note::
+
+   The filter which the luminosity function is defined for is not
+   necessarily one of the filters used for the photometric
+   measurements.
+
+..   In that case, a file containing the filter
+     transmission curve has to be found below the
+     ``AuxiliaryData/Filters/`` directory.
+
+
+In order to apply luminosity priors, Phosphoros needs to compute the
+sources luminosity for the filter used to define the luminosity
+function, :math:`L_b`. This is done in two steps. First, a
+**luminosity model grid** is generated by computing the flux in the
+filter, :math:`f^b_m`, for each model of the grid, but with a
+parameter space restricted to redshift :math:`z=0`. In the second
+step, luminosities are computed taking into account the redshift and
+the normalization factor :math:`\alpha` of each model (see the
+:ref:`Template fitting method <template-fitting>` section) by the
+relation :math:`L_b=4\pi\alpha D_L^2f^b_m`, where :math:`D_L` is the
+luminosity distance.
+
+.. note::
+   
+   The GUI will automatically compute the luminosity model grid when
+   the redshift computation is launched. On the other hand, the CLI
+   usage requires to compute this grid before launching the redshifts
+   computation (see below).
+
+
+Luminosity Priors in the GUI
+---------------------------------
+
+Users can check the list of the available luminosity functions in
+``Configuration --> Aux. Data --> Luminosity Function
+Curves``. New luminosity functions can be added using the ``Import
+Folder`` button or simply by the shell command ``cp``.
+
+Luminosity priors are applied by clicking on the ``3. Prior``
+sup-panel in the ``Compute Redshifts`` window and selecting
+``Luminosity Prior``. Users can select previously defined luminosity
+priors from the nearby drop-down list. Otherwise, clicking on the
+``Configure Luminosity Prior`` button, a popup window allows to
+create new luminosity priors or to manage the existing ones.
+
+.. figure:: /_static/advanced_steps/lum_prior1.png
+    :align: center
+    :width: 800px
+    :height: 400px
+..    :scale: 30 %
+
+As seen from the image, some information are required in the middle of
+the panel: the ``Name`` of the prior; the ``Prior Type``, i.e.,
+whether the prior use luminosity or absolute magnitude; ``Select
+Filter`` at which the luminosity function is computed (a popup window
+opens with the available filters in the ``AuxiliaryData/Filters``
+directory). Optionally, luminosity can be also corrected for the
+intrinsic reddening.
+
+By default, a newly created prior has a single luminosity function for
+the total redshift range spanned by the parameter space and for all
+the SED templates. Spliting the SED templates in groups and the
+redshift range into smaller intervals is done in the popup windows
+opened by clicking on the ``Manage SED Groups`` and ``Manage Redshift
+Intervals`` buttons.
+
+New SED groups are created with the ``+`` button at the top-right of
+the ``Luminosity SED Groups`` popup window. Then, choose the name of
+the new group and drag SED templates from the starting group to the
+new one.
+
+Redshift partition requires just to add new redshift values that are
+between the range spanned in the parameter space.
+
+.. figure:: /_static/advanced_steps/lum_prior_sed_z.png
+    :width: 800px
+    :height: 300px
+    :align: center
+..    :scale: 40 %
+
+Once redshift ranges and SED groups are defined, users have to specify
+the luminosity function by clicking on the corresponding cell. A popup
+window opens where users can provide the Schechter parameters
+(clicking ``Schecter``) or selecting a file storing a luminosity
+function (clicking ``Custom curve``). In the latter, top hat
+luminosity curve can be also generated and used in the analysis.
+
+.. image:: /_static/advanced_steps/lum_prior_2pan.png 
+    :width: 800px
+    :height: 400px
+    :align: center
+..    :scale: 40 %
+
+The GUI gives also the possibility to edit the parameters for all the
+Schechter luminosity functions defined in the cells using the ``Bulk
+Schechter Edit`` button.
+
+.. image:: /_static/advanced_steps/lum_prior_schecter.png 
+    :align: center
+    :scale: 50 %
+
+Luminosity Priors in the CLI
+--------------------------------------
+
+As explained above, in the CLI the luminosity model grid has to be
+computed before launching the redshifts computation.
+
 **Luminosity Model Grid** 
 
-The luminosity model grid has to be computed in advance using the command *Phosphoros CLMG* from the Model Grid and the luminosity filter. Typicall call will looks like
-:: 
+The luminosity model grid has to be computed in advance using the
+``compute_luminosity_model_grid`` (or ``CLMG``) action. It requires
+as input the Model Grid file and the filter for which the luminosity
+function is given. Action parameters for a typical call look like::
 
-Phosphoros CLMG --model-grid-file <model grid file name.dat>  --luminosity-filter <filter qualified name> --output-model-grid <luminosity model grid file name.dat> 
+  catalog-type=Challenge2
+  model-grid-file=Grid_Chalenge2_Parameter_Space_MADAU.dat
+  luminosity-filter=EUCLID_DC1/vis
+  output-model-grid=Grid_Chalenge2_Parameter_Space_MADAU.dat
+
+where the file containing model photometries (``model-grid-file``) is
+searched in the ``IntermediateProducts/<Catalog Type>/ModelGrids``
+directory, while the output file (``output-model-grid``) will be
+stored in the ``IntermediateProducts/<Catalog
+Type>/LuminosityModelGrids`` directory. The ``luminosity-filter``
+parameter requires the path (below the ``AuxiliaryData/Filters``
+directory) and the name of the file containing the filter trasmission
+curve which the luminosity function is defined for.
 
 **Redshifts computation configuration**
 
-The configurartion needed to define the luminosity prior are the following:
-Global options:
+Luminosity priors are applied in the ``compute_redshift`` (``CR``)
+executable through a set of command options. Here below an example of
+them.
 
-- luminosity-filter=<Filter qualified name>
-- luminosity-function-corrected-for-extinction= **NO** /YES
-- luminosity-function-expressed-in-magnitude= **YES** /NO
-- luminosity-model-grid-file=<Luminosity grid file>
+Global options::
 
-SED group definition (note that all the SEDs used in the parameter space must be present in one (and only one) group):
+  luminosity-prior=YES
+  luminosity-filter=EUCLID_DC1/vis
+  luminosity-model-grid-file=Grid_Chalenge2_Parameter_Space_MADAU.dat
+  luminosity-function-corrected-for-extinction=NO
+  luminosity-function-expressed-in-magnitude=YES
 
-- luminosity-sed-group-<SED_group_name>=<coma separated SED qualified names>
+Luminosity priors are enabled only if ``luminosity-prior=YES``
+(default is NO). Other parameters specify the *luminosity* filter and
+the luminosity model grid. In the example, no reddening correction is
+applied and magnitude is used (default value is ``YES``; ``NO`` to
+select luminosity).
+  
+Luminosity functions can be different according to SED groups and
+redshift intervals. SED groups are defined as::
 
-Luminosity function (note that the redshift range must span the entire range used in the parameter space):
+  luminosity-sed-group-<SED_group_name>=<coma separated SED qualified names>
 
-- luminosity-function-min-z-<function id>=<z_min>
-- luminosity-function-max-z-<function_id>=<z_max>
-- luminosity-function-sed-group-<function_id>=<SED_group_name>
+for example, to define the group named ``Elliptical``::
 
-Schechter parametrization (in magnitude, if expressed in flux replace m0 by l0):
+  luminosity-sed-group-Elliptical=Cosmos/Ell1_A_0,Cosmos/Ell2_A_0,Cosmos/Ell3_A_0,Cosmos/Ell4_A_0,Cosmos/Ell5_A_0,Cosmos/Ell6_A_0,Cosmos/Ell7_A_0
 
-- luminosity-function-schechter-alpha-<function id>=<alpha>
-- luminosity-function-schechter-phi0-<function id>=<phi>
-- luminosity-function-schechter-m0-<function id>=<m>
+Redshift ranges are defined as::
 
-Alternativelly one can specify the curve:
+  luminosity-function-sed-group-<function_id>=<SED_group_name>
+  luminosity-function-min-z-<function id>=<z_min>
+  luminosity-function-max-z-<function_id>=<z_max>
+
+where ``<function_id>`` is an integer associated to the luminosity
+function of a specific SED group and redshift range. For example, here
+below, the luminosity function **1** is associated to elliptical
+galaxies with redshift between 0 and 2::
+
+  luminosity-function-sed-group-1=Elliptical
+  luminosity-function-min-z-1=0
+  luminosity-function-max-z-1=2
+  luminosity-function-sed-group-2=Elliptical
+  luminosity-function-min-z-2=2
+  luminosity-function-max-z-2=4
+
+.. note::
+
+   All the SEDs used in the parameter space must be present in one --
+   and only one -- group. Moreover, the redshift ranges must span the
+   entire range used in the parameter space.
+  
+The Schechter parametrization, :math:`\alpha_s,~\phi^*` and
+:math:`M^*` is set by::
+
+  luminosity-function-schechter-alpha-<function id>=<alpha>
+  luminosity-function-schechter-phi0-<function id>=<phi>
+  luminosity-function-schechter-m0-<function id>=<m>
+
+For Schechter functions expressed in luminosity, replace ``m0`` by
+``l0``.
+
+Alternativelly one can specify pre-computed curves through::
  
-- luminosity-function-curve-<function id>=<luminosity funtion curve qualified name>
+  luminosity-function-curve-<function id>=<luminosity funtion qualified filename>
 
-Enabling the Luminosity prior
------------------------------
-In the GUI check the *Luminosity Prior* box and select which of the defined prior has to be applied in the nearby dropdown.
-
-In the CLI add the configuration *luminosity-prior=YES*
+that are searched below the
+``AuxialiaryData/LuminosityFunctionCurves`` directory.

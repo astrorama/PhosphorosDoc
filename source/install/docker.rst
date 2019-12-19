@@ -8,8 +8,9 @@ This section contains instructions of how to use the Phosphoros software via
 docker containers. This method allows to run Phosphoros under any operating
 system and is the recommended way of installation.
 
-.. contents:: Table of Contents
-    :local:
+..
+  contents:: Table of Contents
+  :local:
 
 
 Installing docker
@@ -169,7 +170,7 @@ available on Linux systems, and on MacOSX if you have Conda.
 .. warning:: Python 2 EOL is January 1st 2020. The script is still compatible
              with it, but we strongly recommend to use Python 3.
 
-
+.. _using-dockphos:
 
 Using DockerPhosphoros
 ======================
