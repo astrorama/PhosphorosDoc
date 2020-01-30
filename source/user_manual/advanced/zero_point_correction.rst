@@ -7,7 +7,7 @@ Photometric zero-point corrections aim to correct flux measurements by
 band-specific photometric offsets, which can lead to systematic shifts
 in the observed colors, and consequently in the redshift
 estimates. These corrections take into account remaining zero-point
-calibration issues in one or more bands, and also potential mismathces
+calibration issues in one or more bands, and also potential mismatches
 between galaxy colours and the templates used to model them.
 
 In order to derive zero-point corrections, Phosphoros needs a training
@@ -37,19 +37,23 @@ Zero-point corrections can be computed in the sub-panel
 ``4. Photometric Zero-Point Corrections`` of the ``Compute Redshifts``
 window.
 
-Select the ``Enable Photometric Zero-point Corrections`` tab. Users
-compute zero-point corrections by clicking on the ``Compute New
-Corrections`` button. A pop-up window will appear, as shown below.
+Select the ``Enable Photometric Zero-point Corrections`` tab.
+
+Users can compute new zero-point corrections by clicking on the
+``Compute New Corrections`` button. A pop-up window will appear, as
+shown in :numref:`zpc`.
 
 .. figure:: /_static/advanced_steps/zero_point.png
-    :align: center
+    :name: zpc
+    :align: center 
     :width: 800px
     :height: 400px
-..    :scale: 30 %
+	     
+    Computing zero-point correction with the GUI
 
 The top of the window displays the configuration (catalog type,
 parameter space, filters, etc.)  that will be taken into account for
-the zero-point correction. Three further steps are required:
+the zero-point corrections. Three further steps are required:
 
 - ``1. Traning Catalog Selection:`` select the training sample
   through the ``Browse`` tab, along with the column name where the
@@ -67,10 +71,12 @@ the zero-point correction. Three further steps are required:
 
     > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/
   
-Users can select already existing files with zero-point correction
-values through the drop down menu below ``Selecting Exisiting
-Compatible Corrections``, and visualize or modify them through the
-``View / Edit Corrections`` button.
+Otherwise, users can select already existing files with zero-point
+correction values through the drop down menu below ``Selecting
+Exisiting Compatible Corrections``, and visualize or **modify** them
+through the ``View / Edit Corrections`` button.
+
+
   
 Photometric Corrections in the CLI
 ------------------------------------------------
@@ -98,8 +104,10 @@ The recommended output name is ``<Parameter Space>_<Method>`` with the
 ``phot-corr-tolerance`` is :math:`10^{-3}`. Spectroscopic
 errors are optionals and if missing, they are set to zero.
 
-The ``CPC`` action has many more options, most of them present also in
-the ``compute_redshifts`` action. They include parameters for the
-Galactic absorption correction, priors, axes collapsing, etc. We refer
-the reader to the :ref:`Compute redshifts with CLI
-<compute-redshift-cli>` section and the :ref:`user-manual-advanced` chapter for more details.
+.. warning::
+   
+   The ``CPC`` action has many more options, most of them present also
+   in the ``compute_redshifts`` action. These additional options
+   should matches the ones used later for the redshift estimate (by
+   the ``compute_redshift`` action) otherwise the zero-point
+   correction would be meaningless.

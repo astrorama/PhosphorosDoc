@@ -6,8 +6,9 @@ File format reference
 
 This chapter describes the format of all files Phosphoros needs to
 know about. It is divided into three sections, describing the format
-of input files (files provided by users) and of output files (files
-produced by Phosphoros itself).
+of input files (provided by users), of intermediate products (generated
+by Phosphoros itself for internal use) and of output files (containing
+Phosphoros results).
 
 Input files
 ===========
@@ -20,18 +21,28 @@ Catalogs
 Input catalogs can be either ASCII or FITS tables (Phosphoros
 will auto-detect the type). They must contain the following columns:
 
-- **ID** : The ID of the source
-- **Filter Fluxes** : One column for each filter, containing the Flux
+- **ID**: The ID of the source
+- **Filter Fluxes**: One column for each filter, containing the Flux
   in :math:`\mu`\ Jy
-- **Filter Errors** : One column for each filter, containing the Flux
+- **Filter Flux Errors**: One column for each filter, containing the Flux
   error in :math:`\mu`\ Jy
-- **SpecZ** : The spectroscopic redshift (only for training catalogs)
+
+and optionally:
+
+- **SpecZ**: The spectroscopic redshift (mandatory for training
+  catalogs)
+
+- **RA**, **DEC**: right ascension and declination of the source, in
+  degrees
+
+- **GAL_EBV**: Galactic color excess in the source sky position, in
+  magnitude
 
 Phosphoros does not require any specific order or naming of the
 catalog columns. In ASCII tables, the first line, starting with #,
 should specify the column names.
 
-Phosphoros internally uses 64 bit integers for the IDs and double
+Phosphoros internally uses strings for the IDs and double
 precision floats for all the other columns. If the input catalogs
 contain columns of different type, Phosphoros will automatically
 perform the convertion.
@@ -61,10 +72,15 @@ particular cases, both columns will be parsed by Phosphoros as double
 precision decimal numbers. Scientific notation (i.e.  0.1234e-56) is
 allowed.
   
-A dataset file can contain any number of comments, starting with the
-symbol **#**. If the first line of the file is a one-word comment,
-Phosphoros will use it as the name of the dataset, in place of the
-filename.
+A dataset file can contain any number of comments, starting with the  
+symbol **#**. 
+
+The name of an auxiliary dataset (e.g., a SED or a filter) used by
+Phosphoros is by default the ``<folder name>/<file name without
+extension>``. However, If the first line of the file is a one-word
+comment (e.g., ``# TestName``), Phosphoros will use it (e.g.,
+``<folder name>/TestName``) as the name of the dataset, in place of
+the filename.
 
 Here below a list of typical auxiliary data and their format.
 
@@ -81,11 +97,11 @@ Here below a list of typical auxiliary data and their format.
   reddening curve :math:`k(\lambda)`.
 
 - **Luminosity Function Curves**: the first column contains the
-  luminosity values in [erg/s/Hz] or the AB magnitude values and the
-  second column the values of the galaxies number density (typically, but not necessarily, in
-  [:math:`{\rm Mpc}^{-3}\,({\rm erg/s/Hz})^{-1}`] or [:math:`{\rm
-  Mpc}^{-3}`]). Note that the format of the file is the
-  same regardless of using magnitude or luminosity.
+  luminosity values in erg/s/Hz or the AB magnitude values and the
+  second column the values of the galaxies number density (typically,
+  but not necessarily, in :math:`{\rm Mpc}^{-3}\,({\rm
+  erg/s/Hz})^{-1}` or in :math:`{\rm Mpc}^{-3}`). Note that the format
+  of the file is the same regardless of using magnitude or luminosity.
 
 ..  in [:math:`{\rm Mpc}^{-3}({\rm erg/s/Hz})^{-1}`] or Mpc\ :sup:`-3`, respectively
   
@@ -210,14 +226,14 @@ as the number of regions in the sparse grid.
 
 .. tip::
     
-    Do not try to create files of this complex format from the
+    Do not try to create files of this complex format from
     scratch!  Phosphoros provides the tool ``create_flat_grid_prior``
     (``CFGP``) that will generate a flat prior FITS file based on
     the parameter space of a model grid file (for more info see
     :ref:`multi_dim_generic_prior`).
     
 
-.. _output_files_format:
+.. _output_files_format: 
 
 Intermediate Products
 =========================
@@ -232,16 +248,27 @@ Model Photometry Grid
 -------------------------------------------
 
 Due to the size, the file containing the grid of modeled photometry is
-stored in an internal Phosphoros format. Access from the C++ language
-can be done by using the Phosphoros ``PhzDataModel`` module. Access
-outside C++ can be performed with the Phosphoros action
+typically stored in an internal Phosphoros format. Access from the C++
+language can be done by using the Phosphoros ``PhzDataModel``
+module. Access outside C++ can be performed with the Phosphoros action
 ``display_model_grid`` (``DMG``). For more information see the
 :ref:`investigate-model-grids` section.
+
+Users can also store the model grid file in ASCII using the CLI, by
+setting the following option of the ``compute_model_grid`` (``CMG``)
+action as::
+
+  --output-model-grid-format=TEXT
 
 By default, the file is named as ``Grid_<Catalog Type>_<parameter
 space name>_<IGM prescription>.dat`` (e.g.,
 ``Grid_Challenge2_Parameter_Space_MADAU.dat``) and stored in the
-``IntermediateProducts/<Catalog Type>/ModelGrids`` directory.
+``IntermediateProducts/<Catalog Type>/ModelGrids`` directory. A
+different name can however be chosen with the GUI (see
+:ref:`generating-model-grid`) or with the CLI (using the
+``--output-model-grid`` option)
+
+.. _zeropoint-format:
 
 Photometric Zero Point Corrections
 ----------------------------------------------
@@ -299,16 +326,25 @@ Other Products
 --------------------------------
 
 Phosphoros generates other two intermediate products when luminosity
-priors and Galactic absorption correction are applied. They contain
+priors and Galactic absorption correction are applied. They are
 the *luminosity model grid* and the *correction coefficients grid* and
 are located, respectively, at the directories::
 
   > IntermediateProducts/<Catalog Type>/LuminosityModelGrids/
   > IntermediateProducts/<Catalog Type>/GalacticCorrectionCoefficientGrids/
   
-Both files are stored in binary format and are accessible only by the
-Phosphoros C++ executables.
+Both files are stored by default in binary format, accessible only by the
+Phosphoros C++ executables. They can also be stored in ASCII format
+using the CLI, as follows:
 
+- in the ``compute_luminosity_model_grid`` (or ``CLMG``) action, by
+  setting the option ``--output-model-grid-format=TEXT``
+
+- in the ``compute_galactic_correction_coeff_grid`` (or ``CGCCG``)
+  action, by setting the option
+  ``--output-galactic-correction-coefficient-grid-format=TEXT``.
+
+.. _result_files_format: 
 
 Results
 ==============
@@ -386,11 +422,11 @@ catalog (starting from the first extension HDU).
 Multi-dimensional Likelihood and Posterior
 ------------------------------------------
 
-Phosphoros (when any of these outputs is enabled) produces one FITS
-file for each source of the catalog, containing the multi-dimensional
-likelihood or posterior distribution. The name of the file is the ID
-of the source, with the extension *fits*. It contains the following
-HDUs:
+Phosphoros (when any of the multi-dimensional outputs is enabled)
+produces one FITS file for each source of the catalog, containing the
+multi-dimensional likelihood or posterior distribution. The name of
+the file is the ID of the source, with the extension *fits*. It
+contains the following HDUs:
 
 - **Primary**: a 4-dimensional array containing the likelihood or
   posterior distribution (order of axes: Z, E\ :sub:`(B-V)`, RedCurve,

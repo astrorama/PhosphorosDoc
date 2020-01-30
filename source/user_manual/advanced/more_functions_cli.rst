@@ -29,8 +29,13 @@ Users can choose the first file in the list with the option
 ``-s``. For example, setting ``-s Ell3_A_0.sed``, the first SED name
 in the file will be ``Ell3_A_0.sed``.
 
-This action is useful when the PDF of SED templates is examined,
+This action is useful when the SED template PDFs are examined,
 so they can be found in a suitable order.
+
+.. note::
+
+   The ordering can be also inputed manually by creating/editing the
+   ``order.txt`` file
 
 .. _explore_aux_cli:
 
@@ -44,14 +49,18 @@ following actions: ``display_filters`` (or ``DF``), ``display_seds``
 
 For example, the command::
 
-  > Phosphoros DF --group=SC456
+  > Phosphoros DF
 
-shows all the filters within the ``SC456`` directory. If the
-``--group`` option is not provided, all available filters are
-shown. The content of filter files can be displayed by the ``--data``
-action parameter::
+show all the filters available in the database; while::
 
-  > Phosphoros DF --data=<group name>/<filter name>
+  > Phosphoros DF --group=SC456 
+
+shows all the filters within the ``SC456`` group (directory). Finally::
+
+  > Phosphoros DF --data=SC456/g.ascii
+
+show the content of the filter file ``g.ascii``, belonging to the
+``SC456`` group.
 
 The ``display_seds`` and ``display_reddening curves`` actions have the
 same parameters as ``display_filters``.
@@ -65,9 +74,7 @@ Retrieve the SED template of a single model
 The ``compute_model_sed`` (or ``CMS``) action allows users to compute,
 given a SED template, the modelled SED for a set of parameters
 :math:`\{`\ Z, :math:`E_{(B-V)}`, reddening curve\ :math:`\}`. The
-computed SED will be displayed on the terminal.
-
-An example is::
+computed SED will be displayed on the terminal. For example::
 
   > Phosphoros CMS --sed-name=CosmosSp/S0_A_0 --reddening-curve-name=calzetti --ebv-value=0.2 --z-value=2
 
@@ -90,7 +97,9 @@ IGM absorption can be also included using the
 .. note::
 
    If users want to store the modelled SED, it is enough to add at the
-   end of the above command line: ``>> <SED file name>``.
+   end of the above command line::
+
+     > Phosphoros CMS  <options>  >> <SED file name>
 
 .. _investigate-model-grids:
 
@@ -130,7 +139,7 @@ An example of the output of this action is::
   Total range of Redshift Z: [0, 3]
   Total number of models: 45225
 
-In the example, three sub-space regions have been created. For each given
+In the example, three sub-space regionsare present. For a given
 region, users can display the values of a specific model parameter
 using the ``--region`` action option followed by the parameter name
 (``--sed``, ``--redcurve``, ``--ebv`` and ``--z``). As example, adding
@@ -149,12 +158,14 @@ like::
   4	        0.4
   5	        0.5
   
-The modeled photometry of a specific parameter cell can be shown by
-``--phot=<arg>``, where the argument is the cell values :math:`\{`\
-SED, reddening curve, E(B-V), Z\ :math:`\}`. *(tbc)*
+Modeled photometry of a specific parameter cell can be shown by
+``--phot=<arg>``, where the argument are the 0-based indexes of the
+axis nodes, which are available from the output of this action with the
+``--region`` option (as example, the E(B-V) indices are the first column
+in the box above).
 
-More command line options
-can be found with the help command (``Phosphoros DMG --help``).
+More command line options can be found with the help command
+(``Phosphoros DMG --help``).
 
 
   
@@ -164,11 +175,10 @@ Axis Collapse options
 ----------------------------
 
 Once the likelihood and the posterior distributions of models are
-computed, Phosphoros can derive the one-dimensional probability
-density function (PDF) of model parameters (see the :ref:`Template
-Fitting Method <template-fitting>` section). The common example is the
-redshift PDF. This is done by projecting, e.g., the likelihood
-distribution to the redshift axis.
+computed, Phosphoros can derive the one-dimensional PDF of model
+parameters (see the :ref:`Template Fitting Method <template-fitting>`
+section). The common example is the redshift PDF. This is done by
+projecting, e.g., the likelihood distribution to the redshift axis.
 
 .. of the model parameter for which the PDF is required.
 
@@ -208,7 +218,7 @@ In both cases, the possible arguments are ``BAYESIAN``, ``MAX``,
 Prior effectivenes
 -----------------------
 
-Phosphoros gives the opportunity to choose the ``Effectiveness``
+Phosphoros gives the opportunity to choose the *effectiveness*
 (:math:`e_{ff}`) of a prior. This is a value between 0 and 1 that
 modifies a prior :math:`p` as follows:
 
@@ -232,6 +242,32 @@ following action parameters of the ``compute_redshift`` action::
 
 .. _reference-sample:
 
-Build a reference sample (**under construction**)
+Build a reference sample
 ------------------------------------------------------
+
+Phosphoros includes a tool to build a (*NNPZ*) reference sample that
+provides, for each source of the output catalog, the redshift PDF and
+the SED corresponding to the best-fit model.
+
+The action to build the reference sample is ``build_reference_sample``
+(or ``BRS``). It requires as inputs the qualified name of the output
+catalog and the directory where the reference sample will be located
+(the directory will be created by Phosphoros; if already exist,
+Phosphoros will complain)::
+
+  --phosphoros-catalog=<path>/<output catalog filename>
+  --reference-sample-dir=<path>/<directory name>
+
+More options are::
+  
+  --phosphoros-catalog-format=<arg>
+  --igm-absorption-type=<arg>
+
+They are used to specify the format of the output catalog (``FITS`` or
+``ASCII``; default= ``FITS``) and the type of IGM absorption to apply
+(``OFF``, ``MADAU``, ``MEIKSIN``, ``INOUE``; default= ``OFF``).
+
+This action generate three binary files including, respectively, the
+source ID plus an index to identify sources in the other files; the
+redshift PDFs; the SEDs computed from the best-fit models.
 

@@ -20,7 +20,7 @@ redshift.
 Phosphoros involves two main steps (discussed in detail in the
 :ref:`Methodology <methodology>` section):
 
-**1 Grid of Models** As a first step, it generates a *large* set of
+**1) Grid of Models** As a first step, it generates a *large* set of
 models for which photometry are computed. Models are characterized by
 four parameters: redshift, restframe Spectral Energy Distribution
 (SED) template, intrinsic reddening curve and intrinsic color excess
@@ -47,7 +47,7 @@ following operations (in this order):
 Each model is characterized by a vector of computed photometric
 values, one value for each selected filter.
 
-**2 Redshift Estimate**
+**2) Redshift Estimate**
 
 * The likelihood :math:`\mathcal{L}` of models is determined by
   computing the :math:`\chi^2` between observed and modeled
@@ -83,13 +83,16 @@ grid of models and before the redshift estimate, as:
 
 * Plots comparing reference and estimated redshifts.
 
-The following picture provides a sketch of main Phosphoros steps with
+:numref:`flowphos` provides a sketch of main Phosphoros steps with
 their inputs and outputs, including optional functionalities.
 
 
 .. figure:: /_static/basic_steps/Flowchart_Phosphoros.pdf
+    :name: flowphos
     :align: center
     :scale: 50 %
+	    
+    Flowchart of the Phosphoros algorithm
 
 Phosphoros is usable via two execution modes, i.e. the **Command Line
 Interface** (**CLI**) and the **Graphical User Interface**
@@ -101,7 +104,7 @@ execution of Phosphoros. Users are encouraged to run Phosphoros with
 the GUI.
 
 
-.. bibliography:: references_basic_over.bib
+.. bibliography:: references_basic_over.bib 
 
 .. Here, in the **Basic Steps** chapter, we covers the following topics:
 ..

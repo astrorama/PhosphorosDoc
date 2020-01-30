@@ -13,12 +13,16 @@ In the ``Configuration-->General`` panel of the |GUI|, users can
 choose with the ``Browse`` button a new directory structure for
 Phosphoros, i.e. the directories where to search input catalogs
 and auxiliary data or where to store intermediate products and
-results.
+results (:numref:`changedir`).
 
-    .. image:: /_static/advanced_steps/dir_structure.png
-       :align: center
-       :scale: 50 %
-
+.. figure:: /_static/advanced_steps/dir_structure.png
+   :name: changedir
+   :align: center
+   :scale: 50 %
+	   
+   ``Configuration`` panel of the GUI where to modify the directory
+   structure 
+	   
 
 In the |CLI| mode, if the Phosphoros directory structure has changed,
 users have to specify the location of needed directories every time an

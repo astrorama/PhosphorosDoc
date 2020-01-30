@@ -25,17 +25,15 @@ this you can follow the instructions at the `docker documentation
 provides instructions and downloads for all operating systems (you should get
 the community edition, which is free).
 
+..
+  If you have any of the following OS, you should follow the instructions bellow instead:
 
-.. warning:: If you have any of the following OS, you should follow the
-             instructions bellow instead:
+.. warning:: **Mac OS Sierra 10.12 or earlier**
 
-Mac OS Sierra 10.12 or earlier
-------------------------------
-
-The Mac version of the docker requires a recent kernel, so it can run only under
-High Sierra 10.13 and later. If you have any earlier Mac OS X version you can
-still use docker by installing the `docker toolbox
-<https://docs.docker.com/toolbox/toolbox_install_mac/>`_.
+   The Mac version of the docker requires a recent kernel, so it can run only under
+   High Sierra 10.13 and later. If you have any earlier Mac OS X version you can
+   still use docker by installing the `docker toolbox
+   <https://docs.docker.com/toolbox/toolbox_install_mac/>`_.
 
 Fedora
 ------
@@ -156,18 +154,19 @@ Installing DockerPhosphoros
 ===========================
 
 The DockerPhosphoros is the tool which manages the Phosphoros docker container.
-To install it you will need pip installed on your system, which is normally
-available on Linux systems, and on MacOSX if you have Conda.
-::
+To install it, use the command::
 
     python3 -m pip install --user DockPhos
 
+You will need pip already installed on your system, which is normally
+available on Linux systems, and on MacOSX if you have Conda.
+
 .. warning:: If you use Mac and you copy the files outside your home directory
              (for example in a directory under /Applications) you must make this
-             directory accessible to docker, as described at the
+             directory accessible to docker, as described above at the
              :ref:`docker_extra_mac` section
 
-.. warning:: Python 2 EOL is January 1st 2020. The script is still compatible
+.. warning:: Python 2 End-of-Life (EOL) is January 1st 2020. The script is still compatible
              with it, but we strongly recommend to use Python 3.
 
 .. _using-dockphos:
@@ -175,26 +174,31 @@ available on Linux systems, and on MacOSX if you have Conda.
 Using DockerPhosphoros
 ======================
 
+Before running DockerPhosphoros, you have to create the Phosphoros
+root directory, that is the location of the top-level Phosphoros
+directory. By default, it is expected to be ``$HOME/Phosphoros``. See
+:ref:`directory-organization` for more information. 
+
 Starting the container
 ----------------------
 
-Using DockerPhosphoros is straight forward. First you have to start the
+Using DockerPhosphoros is straightforward. First you have to start the
 Phosphoros docker container (which will continue running in the background):
 ::
 
     DockPhos start
 
 Note that when you start the container, your Phosphoros root directory will be
-mounted to the container (see :ref:`directory-organization` for more information
-of what this directory is). If this directory does not exist (by default is the
+mounted to the container. If this directory does not exist (by default is the
 directory ``Phosphoros`` under your home directory) the container will not start
 and you will get an error message. To fix this you just have to create the
 directory.
 
-.. tip:: The first time you start the Phosphoros docker container, it will be
-         downloaded from the internet. This may take a while, so be patient. The
-         next time you start the container everything will be available locally
-         and it will start much faster.
+.. note:: The first time you start the Phosphoros docker container, it
+            will be downloaded from the internet. This may take a
+            while, so be patient. The next time you start the
+            container everything will be available locally and it will
+            start much faster.
 
 .. tip:: When using Docker toolbox, you may want to override the temporary
          directory used (--temp_dir), as the default one may not work correctly.
@@ -207,7 +211,7 @@ set the environment variable ``PHOSPHOROS_ROOT`` or your can pass the ``-d``
 option to the start command:
 ::
 
-    DockPhos start -d /your/phosphoros/root/dir
+    DockPhos start -d <path>/<root_dir>
 
 If the Phosphoros container was already running it will be restarted and the new
 directory will be mounted. Again, the directory must already exist, otherwise
@@ -245,10 +249,9 @@ re-connect using the ``DockPhos connect`` command.
 Choosing the Phosphoros version
 -------------------------------
 
-By default, when run the start command the latest stable version of Phosphoros
-is used. If you want to use a different version you can
-use the -v option when you start the container:
-::
+By default, when running the start command the latest stable version
+of Phosphoros is used. If you want to use a different version you can
+use the -v option when you start the container: ::
 
     DockPhos start -v <VERSION>
 
@@ -261,9 +264,8 @@ command:
 Stopping the container
 ----------------------
 
-After you finish you work and you exit the container using the ``exit`` command
-you can stop stop the Phosphoros container to release your resources by running:
-::
+After having used the ``exit`` command to exit the container, you can
+stop the Phosphoros container to release your resources by running: ::
 
     DockPhos stop
 
@@ -315,11 +317,11 @@ When you run the ``DockPhos start`` command, docker will download from the
 internet the Phosphoros docker images. The location where these files are stored
 depends on the OS and they are managed by the docker itself. If you want to
 delete all these images to get back your disk space you can run the command:
-..
+::
 
     DockPhos cleanup
 
-.. tip:: The next time you start the docker container the images will be
+.. note:: The next time you start the docker container the images will be
          re-downloaded automatically
 
 Minimizing the disk space usage

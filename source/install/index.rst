@@ -4,7 +4,8 @@
 Download and Installation
 *************************
 
-Instructions on how to download and install the Phosphoros software are provided for:
+..
+  Instructions on how to download and install the Phosphoros software are provided for:
 
 .. toctree::
    :maxdepth: 1

@@ -13,9 +13,9 @@ number of files, either because of the big size and/or because there
 are different samples (e.g., with or without spectroscopic
 redshift). Assuming that these files are standard for a given survey,
 with the same column names in particular, the concept of **catalog
-type** is introduced. We consider that all catalog data files having
-identical column names, with photometric band names referring to
-same filters, belong to the same catalog type.
+type** is introduced. We consider that all catalog files having
+identical column names, with photometric band names referring to same
+filters, belong to the same catalog type.
 
 The catalog type concept is exploited to define the naming convention
 in the Phosphoros directory structure used to organize files (see the
@@ -30,14 +30,19 @@ for all files of the same catalog type.
 Directory Organization
 --------------------------------
 
-All data files are organized into a standardized directory
-structure. This allows to greatly reduce the amount of specifications
-as the code automatically knows where to look for input data or where
-to write output files, without necessarily relying on additional user
-configurations.
+All data files are organized into a standardized directory structure
+(see :numref:`dirstruct`). This allows to greatly reduce the amount of
+specifications as the code automatically knows where to look for input
+data or where to write output files, without necessarily relying on
+additional user configurations.
 
-*(figure of the directory structure?)*
+.. figure:: /_static/basic_steps/Phos_Dir_structure.pdf 
+    :name: dirstruct
+    :align: center
+    :scale: 50 %
 
+    Standard directory structure of Phosphoros
+	    
 In most cases, there is no need to alter the standard directory
 structure, nor even to understand all details. The simplest is to used
 the default configuration (see :ref:`here <directory_howto_section>`
@@ -50,7 +55,7 @@ The root directory is the location of the top-level Phosphoros
 directory. By default, it is ``$HOME/Phosphoros``. This location can
 be simply modified by setting the ``PHOSPHOROS_ROOT`` environment
 variable (see the instructions in the :ref:`using-dockphos`
-section.
+section).
 
 ..    setting the ``PHOSPHOROS_ROOT``
       environment variable or with the start command as::
@@ -68,13 +73,13 @@ Catalogs
 ^^^^^^^^^^^^^^^^
 
 Input catalog files contain multi-band photometric flux measurements,
-with their errors. Rows refer to different sources and one source ID
+with their errors. Rows refer to different sources. One source ID
 column (e.g., ``OBJECT_ID``) must be present. The catalog format is
 either ASCII or FITS as described in :ref:`Catalogs format
 <format-catalogs>` section. Fluxes must be provided in :math:`\mu`\ Jy
 unit.
 
-They are placed into sub-directories according to their ``catalog
+Input catalogs are placed into sub-directories according to their ``catalog
 type``. For example, catalogs belonging to the ``COSMOS`` catalog type
 are found into::
 
@@ -98,19 +103,19 @@ database are:
   full :ref:`transmission curves <filter-curves>` as a function of
   wavelength, including the telescope optic, the filter itself and the
   detector efficiency. Values range between 0 and 1. They are
-  typically found in sub-directories of the ``Filters`` directory as, e.g.::
+  typically found in sub-directories of the ``Filters`` directory::
 
-       > $PHOSPHOROS_ROOT/AuxiliaryData/Filters/Quickstart
+       > $PHOSPHOROS_ROOT/AuxiliaryData/Filters/
 
 * **Spectral Energy Distribution (SED) templates**, which consist in
   restframe :ref:`SED templates <templates>` of galaxies, stars,
-  etc. Based on them, Phosphoros generate a grid of modeled photometry
+  etc. Based on them, Phosphoros generates a grid of modeled photometry
   that are compared with photometric measurements. They are in
   erg/s/cm\ :sup:`2`/|AAm|. They are found in sub-directories of::
 
        > $PHOSPHOROS_ROOT/AuxiliaryData/SEDs/
 
-* **Reddening Curves**, which provide the attenuation curves require
+* **Reddening Curves**, which provide the attenuation curves required
   to compute the :ref:`intrinsic absorption
   <intrinsic-interstellar-dust>` caused by interstellar dust in
   galaxies. They are found into::
@@ -158,6 +163,11 @@ filter mapping, etc. They are organized per catalog type, e.g.::
 
       > $PHOSPHOROS_ROOT/IntermediateProducts/Cosmos/
 
+When using Phosphoros through the |GUI| you will never need to open
+the ``IntermediateProducts`` folder. If you use the |CLI| you may have
+to locate files to be provided to the next computation step.
+
+      
 Results
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -174,39 +184,46 @@ Configuration Files
 
 :ref:`Configuration files <config-file-usage>` include the list of
 command options required to run Phosphoros executables in
-the CLI. They are typically found into::
+the |CLI|. They are typically found into::
 
       > $PHOSPHOROS_ROOT/config/
 
+This folder contains also the GUI internal configuration
+(``$PHOSPHOROS_ROOT/config/GUI/``), which you should not alter by
+hand.
 
 .. Explain the logic behind the organization of the Phosphoros directories. This
     should include the catalog-type concept. Here we should not explain every single
     one of the directories, but focus more on the concept and mention the most used
     ones. We should also mention the PHOSPHOROS_ROOT environment variable.*
 
-Phosphoros "internal" data
+Phosphoros *internal* data
 ---------------------------------------
 
-.. In order to make input and auxiliary data available to data
-   analysis, they first have to be imported inside the Phosphoros directory structure.
-
-In order to make input and auxiliary data available to data analysis,
-users need first to create the Phosphoros directory structure. The
-most convenient way to do this is to download the tar file from *(?)*,
-which contains the default Phosphoros directory structure and sets of
-Filters, SEDs and Reddening curves *(?)*, and to expand it at the
-working location, i.e.::
+..
+  In order to make input and auxiliary data available to data analysis,
+  users need first to create the Phosphoros directory structure.
+  The most convenient way to do this is to download the tar file
+  from *(?)*, which contains the default Phosphoros directory
+  structure and sets of Filters, SEDs and Reddening curves *(?)*, and
+  to expand it at the working location, i.e.::
 
 	  > cd $HOME or cd $PHOSPHOROS_ROOT
 	  > wget http://www.isdc.unige.ch/phosphoros/Challenge2Data.tar.gz *(?)*
           > tar -xzf Challenge2Data.tar.gz
 
+In order to make input and auxiliary data available to data analysis,
+they first have to be imported inside the Phosphoros directory
+structure. When launching phosphoros for the first time, it will
+automaticall create the folder structure under the
+``$PHOSPHOROS_ROOT`` folder.
+
 The standard procedure is to import input catalogs and auxiliary data
-files, such as filter transmission curves or SEDs, into this kind of
-underlying *internal database*. All the operations such as importing,
-moving and deleting files can be done using the shell commands such as
-``cp``, ``mv`` or ``rm`` or the equivalent functionalities in the
-GUI. Users can also create or re-arrange sub-directories in the
+files, such as filter transmission curves or SEDs, into the Phosphoros
+*internal database*. All the operations such as importing, moving and
+deleting files can be done using the shell commands such as ``cp``,
+``mv`` or ``rm`` (the GUI can only import folders, not move nor delete
+them). Users can also create or re-arrange sub-directories in the
 Phosphoros structure to match their preferred organization scheme by
 the ``mkdir`` shell command or by the GUI.
 

@@ -37,7 +37,7 @@ Phosphoros reads axes priors from files located in the directory::
 
   > $PHOSPHOROS_ROOT/AuxiliaryData/AxisPriors/<axis_name>/
 
-where ``axis_name`` is one of the following names, ``sed``,
+where ``axis_name`` is one of the following names: ``sed``,
 ``red-curve``, ``ebv`` or ``z``. The files in these directories are
 expected to be ASCII tables with two columns, the axis value and the
 prior value (for more details see :ref:`Axes Priors Format
@@ -76,11 +76,11 @@ type of axes:
      axis-function-prior-z=<filename>
 
    where the argument is the file containing the prior values (in the
-   directory ``$PHOSPHOROS_ROOT/AuxiliaryData/AxisPriors/ebv
-   (z)``). For example, if you want to use a prior which will
-   penaltize high E\ :sub:`(B-V)` values, you set
+   directory ``$PHOSPHOROS_ROOT/AuxiliaryData/AxisPriors/ebv``
+   or ``z``). For example, if you want to use a prior which will
+   penalize high E\ :sub:`(B-V)` values, you set
    ``axis-function-prior-ebv=ebv_prior`` and create a file
-   ``ebv_prior.txt`` with content::
+   ``ebv_prior.txt`` like::
     
     0.0 	0.988813044611
     0.2 	0.998750780925
@@ -105,7 +105,7 @@ type of axes:
    Phosphoros cannot use the same approach as for numerical
    parameters. The priors of these two axes are provided again as
    tables, but now the first column is a string, and it must
-   match exactly the name of the axis knots. The tables must contain
+   match exactly the name of the axis knots. Tables must contain
    entries for all the knots of your axis (extra entries are instead
    allowed).
 
@@ -119,7 +119,7 @@ type of axes:
    for reddening have been used, users might want to apply a prior to
    balance this fact. In this case, they can create a
    ``redcurve_prior.txt`` file in the directory
-   ``$Phosphoros_Root/AuxiliaryData/AxisPriors/red-curve``, like::
+   ``$Phosphoros_Root/AuxiliaryData/AxisPriors/red-curve`` like::
     
     SB_calzetti         1.
     SB_calzetti_bump1   1.

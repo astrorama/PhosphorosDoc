@@ -18,7 +18,7 @@ installation options on the following page
 http://euclid.roe.ac.uk/projects/elements/wiki/InstallFromSource.
 
 
-1. Installing External Dependencies
+Installing External Dependencies
 -----------------------------------
 
 Please use the appropriate installer (mac ports, yum or apt-get for Mac OSX, Linux Red-Hat or Debian families, respectively)
@@ -47,7 +47,7 @@ to install the following dependencies:
 The names provided above may not correspond to the distribution-specific package names. Please check your system for
 the exact naming.
 
-2. User configuration
+User configuration
 ---------------------
 
 Edit your configuration (.bashrc or equivalent for other shell) and defined::
@@ -55,9 +55,11 @@ Edit your configuration (.bashrc or equivalent for other shell) and defined::
     export CMAKE_PROJECT_PATH=$HOME/<applications>
     export CMAKE_PREFIX_PATH=$CMAKE_PROJECT_PATH/Elements/5.8/cmake
 
-3. Elements 5.8
+Elements 5.8
 ---------------
 
+Run the following commands::
+  
     cd $CMAKE_PROJECT_PATH
     mkdir -p Elements/5.8
     wget https://github.com/astrorama/Elements/archive/5.8.tar.gz
@@ -66,7 +68,7 @@ Edit your configuration (.bashrc or equivalent for other shell) and defined::
     make -j
     make install
 
-4. Alexandria 2.15, PhosphorosCore-0.6 and Phosphoros-0.6
+Alexandria 2.6, PhosphorosCore-0.6 and Phosphoros-0.6
 ---------------------------------------------------------
 
 Please repeat the above Elements-related instruction for::
@@ -75,9 +77,9 @@ Please repeat the above Elements-related instruction for::
     PhosphorosCore-0.6
     Phosphoros-0.6
 
-(replacing "Elements-4.0" by the above names in the procedure)
+(replacing "Elements-5.8" by the above names in the procedure)
 
-5. Running Phosphoros
+Running Phosphoros
 ---------------------
 
 For your convenience, the best is to create an alias to the Phosphoros command
@@ -93,4 +95,4 @@ to get command line option help and test that your installation is OK, and::
 
     Phosphoros GUI
 
-to invoke Phosphoros GUI
+to invoke Phosphoros GUI.

@@ -252,3 +252,8 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# --- New ----
+# numbering Figures and Tables
+numfig = True
+numfig_format = {'figure': 'Fig. %s', 'table': 'Table %s'}

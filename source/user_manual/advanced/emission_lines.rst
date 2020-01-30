@@ -19,23 +19,34 @@ Adding emission lines in the GUI
 --------------------------------------------
 
 The GUI allows users to add emission lines to SED templates. In
-``Configuration-->AuxiliaryData-->SEDs`` sub-panel, users can select
-the template directories which they want to add emission lines to
-(selection of individual files is not possible), and click on the
-``Add emission lines to SEDs`` button. The new templates including
-emission lines will have to be then selected in the procedure to
-create or modify the parameter space (see the :ref:`Parameter Space
-<parameter-space-definition>` section).
+``Configuration-->AuxiliaryData-->SEDs`` sub-panel (see
+:numref:`emlines`), users can click on the ``Add emission lines to
+SEDs`` button corresponding to the template directory which they want
+to add emission lines to (selection of individual files is not
+possible). A pop-up window opens, asking the scheme to use:
 
-  .. figure:: /_static/basic_steps/AuxDataManagement.png
-     :align: center
-     :scale: 70 %
+- the *Phosphoros* scheme, as explained in the :ref:`Methodology
+  <emission-line-method>` section;
+
+- a *Le Phare-like* scheme (see next section, or [#f1em]_).
+  
+The new templates, including emission lines, will have to be
+selected in the procedure to create or modify the parameter space
+(see the :ref:`Parameter Space <parameter-space-definition>` section).
+
+.. figure:: /_static/basic_steps/AuxDataManagement.png
+   :name: emlines
+   :align: center
+   :scale: 70 %
+	   
+   ``Configuration`` panel of the GUI where to add emission lines
 	   
 This operation is non-destructive, meaning that it will not modify the
 original SED template files, neither add anything to the given
 directory. Instead, it will store the generated templates in a new
-directory, named the same as the original with the postfix
-``_el``. This directory must not exist otherwise the ``Add emission
+directory, named the same as the original with the postfix ``_el``
+(for the *Phosphoros* scheme) or ``_lpel`` (for the *Le Phare-like*
+scheme). This directory must not exist otherwise the ``Add emission
 lines to SEDs`` button will be not available. The names of the
 generated files are the same of the original SED files, with the same
 format (see the :ref:`File format reference
@@ -53,7 +64,7 @@ option provides the list of command line options.
    emission lines have to be added to. 
 
 To simplify its usage, the action gets as input a directory with SED
-templates and it adds emission lines to all of them (selection of
+templates and adds emission lines to all of them (selection of
 individual files is not possible). Phosphoros will store the generated
 templates in a new directory, named the same as the original with the
 postfix ``_el``. The directory must not exist otherwise the script
@@ -85,13 +96,70 @@ ratios (see the :ref:`emission-line-method` section) that is located in::
 To use a customized table instead, the command line option
 ``--emission-lines`` allows users to specify a different table.
 
-The numerical factor that relates the [OII] line and the UV continuum
-luminosities can be modified by the command line options
-``--oii-factor`` or ``--oii-factor-range``, providing a new value or a
-range of values for the luminosity factor, respectively. The
-wavelength interval to integrate the UV continuum can also be changed
-by ``--uv-range`` that provides the beginning of the UV range. *(and the end?)*
+With the CLI, users can also change the relation between the flux of
+the [OII] line and of the UV continuum. In Phosphoros, for a given
+template (:math:`f_{temp}`), the [OII] line flux is computed as:
 
+.. math::
+    
+      f_{[OII]} = \frac{c_{oii}}{\Delta\lambda}
+      \int_{\lambda_0}^{\lambda_1}
+      f_{temp}(\lambda)\frac{cd\lambda}{\lambda^2},
+
+where the value of :math:`c_{oii}` is set by the
+``--oii-factor`` option (default: ``1.0e13``); :math:`\Delta\lambda`
+is the difference between the two wavelengths (in |AAm|) given by the
+``--oii-factor-range`` option (default: ``1500,2800``);
+:math:`\lambda_0` and :math:`\lambda_1` are the UV continuum
+wavelength range set by the ``--uv-range`` (default:
+``1500,2800``). For example, setting::
+
+  --oii-factor 1.0e13
+  --oii-factor-range 2100,2500
+  --uv-range 2100,2500
+
+the UV continuum flux will be computed in a smaller range of
+wavelengths than by default.
+  
+.. note::
+
+   Typically, the two action options ``--oii-factor-range`` and
+   ``--uv-range`` have to coincide.
+   
+.. note::
+
+   Emission lines with the *Le Phare-like* scheme can be generated
+   with the CLI using the following configuration file::
+
+     sed-dir <SEDs directory name>
+     suffix _lpel
+     oii-factor 1.0e13
+     uv-range 2100,2500
+     oii-factor-range 2100,2500
+     emission-lines Phosphoros/AuxiliaryData/emission_lines_lephare.txt
+
+   where the ``emission_lines_lephare.txt`` table should contain the
+   emission line flux ratios used by the Le Phare code:
+
+   +--------------------+------------------------------+-------------+
+   | Emission Line      | |lambda| [ |AAm| ]           | Line/[OII]  |
+   +====================+==============================+=============+
+   | :math:`H\alpha`    | 6562.80                      | 1.77        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\beta`     | 4861.32                      | 0.61        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\gamma`    | 4340.46                      | 0.17        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\delta`    | 4101.73                      | 0.10        |
+   +--------------------+------------------------------+-------------+
+   | OII                | 3727.00                      | 1.00        |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 4958.91                      | 0.13        |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 5006.84                      | 0.36        |
+   +--------------------+------------------------------+-------------+
+
+   
 Phosphoros can add the emission lines either as a Dirac or a Gaussian
 function. In the latter case, the FWHM is computed by
 :math:`\lambda_{line}*\Delta v`, where the velocity dispersion
@@ -100,4 +168,9 @@ parameter is absent, lines are added as dirac functions.
     
 Some times it is useful to generate a file containing only the
 emission lines, without the original SED template. This can be done by
-using the parameter ``--no-sed``.
+the option ``--no-sed``.
+
+
+.. rubric :: Footnotes
+
+.. [#f1em] see ``http://www.cfht.hawaii.edu/~arnouts/LEPHARE/lephare.html``

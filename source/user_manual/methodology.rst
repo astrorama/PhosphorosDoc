@@ -18,7 +18,7 @@ execute Phosphoros in the |GUI| and in the |CLI|.
 .. _templates:
 
 Templates
-==================
+=========
 
 Phosphoros requires a library of restframe spectral energy
 distribution (SED) templates as input. Templates can be empirical
@@ -26,22 +26,23 @@ distribution (SED) templates as input. Templates can be empirical
 synthetic (from stellar population models), or a mix of both. The
 library can also comprise SEDs of galaxies with a potential
 contribution of active galactic nuclei (AGN) as well as star
-templates. It is left up to the user to create a less or more complex
+templates. It is left up to users to create a less or more complex
 template library.
 
 Phosphoros provides the COSMOS template library (see Ilbert et
-al. 2009 :cite:`Ilb09`): it includes seven templates for elliptical
-galaxies and twelve for spiral galaxies (from S0 to Sdm) from the
-Polletta et al. (2007 :cite:`Pol07`) library, and twelve for young blue
-star-forming galaxies generated with the Bruzual\&Charlot (2003,
+al. 2009 :cite:`Ilb09`; and :numref:`msed`): it includes seven
+templates for elliptical galaxies (from E1 to E7) and twelve for
+spiral galaxies (from S0 to Sdm) from the Polletta et al. (2007
+:cite:`Pol07`) library; twelve for young blue star-forming galaxies
+(from SB0 to SB11), generated with the Bruzual\&Charlot (2003,
 :cite:`BC03`) stellar population synthesis models (starburst ages from
 0.03 to 3 Gyr), for a total of 31 templates.
 
 .. figure:: /_static/first_step/Ilbert09_SED.png
-    :align: center
-    :width: 400px
-    :height: 400px
-..    :scale: 50 %
+    :name: msed 
+    :align: center 
+    :width: 350px
+    :height: 350px
 
     Examples of SED templates from the COSMOS library (figure from
     Ilbert et al. 2009). The flux scale is arbritary. Red (green)
@@ -83,28 +84,30 @@ template by integrating its SED between 1500\ |AAm| and 2800\ |AAm|.
 
 The strength of the other emission lines are then obtained from their
 expected flux ratios in relation to the [OII] line flux. The list of
-the emission lines considered in Phosphoros is given in the Table
-below, along with the flux ratios. These are determined in the
-Phosphoros paper using emission line flux measurements from a
+the emission lines considered in Phosphoros is given in
+:numref:`temline`, along with the flux ratios. These are determined in
+the Phosphoros paper using emission line flux measurements from a
 low-redshift sample of SDSS-III/BOSS sources (see the paper for more
 details).
 
-
-+--------------------+------------------------------+-------------+
-| Emission Line      | |lambda| [ |AAm| ]           | Line/[OII]  |
-+====================+==============================+=============+
-| :math:`H\alpha`    | 6562.80                      | 1.35        |
-+--------------------+------------------------------+-------------+
-| :math:`H\beta`     | 4861.32                      | 0.40        |
-+--------------------+------------------------------+-------------+
-| :math:`H\gamma`    | 4340.46                      | 0.17        |
-+--------------------+------------------------------+-------------+
-| :math:`H\delta`    | 4101.73                      | 0.10        |
-+--------------------+------------------------------+-------------+
-| OIII               | 4958.91                      | 0.12        |
-+--------------------+------------------------------+-------------+
-| OIII               | 5006.84                      | 0.33        |
-+--------------------+------------------------------+-------------+
+.. table:: Emission line flux ratios
+   :name: temline
+	  
+   +--------------------+------------------------------+-------------+
+   | Emission Line      | |lambda| [ |AAm| ]           | Line/[OII]  |
+   +====================+==============================+=============+
+   | :math:`H\alpha`    | 6562.80                      | 1.35        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\beta`     | 4861.32                      | 0.40        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\gamma`    | 4340.46                      | 0.17        |
+   +--------------------+------------------------------+-------------+
+   | :math:`H\delta`    | 4101.73                      | 0.10        |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 4958.91                      | 0.12        |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 5006.84                      | 0.33        |
+   +--------------------+------------------------------+-------------+
 
 
 The emission lines can be added using either a Dirac delta function or
@@ -135,11 +138,12 @@ absorption, the source flux at a wavelength |lambda| is attenuated by
    f_{after}(\lambda)=f_{before}(\lambda)\times 10^{-0.4k(\lambda)E_{B-V}}\,,
 
 where :math:`k(\lambda)` is the attenuation curve (or **reddening
-curve**) that defines the dependence of absorption with wavelength,
-and :math:`E_{B-V}` is the **color excess** whose value controls the
-overall amount of absorption. Both the reddening curve and the color
-excess are parameters in the grid of models (see :ref:`Basic Steps:
-Generating the model grid <user-manual-basic-steps>`).
+curve**; see :numref:`mredd`) that defines the dependence of
+absorption with wavelength, and :math:`E_{B-V}` is the **color
+excess** whose value controls the overall amount of absorption. Both
+the reddening curve and the color excess are parameters in the grid of
+models (see :ref:`Basic Steps: Generating the model grid
+<user-manual-basic-steps>`).
 
 Color excess :math:`E_{B-V}` values are specified by the user.
 
@@ -147,15 +151,15 @@ Commonly adopted reddening curves are provided as auxiliary data in
 Phosphoros: the Calzetti et al. (2000 :cite:`Cal00`) dust law for
 starburst galaxies; the Fitzpatrick (1986 :cite:`Fit86`) law for the
 Large Magellanic Cloud; the Prevot et al. (1984 :cite:`Pre84`) law for
-the Small Magellanic Cloud. The user can however add and adopt
-different attenuation prescriptions. *(tbc)*
+the Small Magellanic Cloud. Users can however add and adopt
+different attenuation prescriptions.
 
 
 .. figure:: /_static/first_step/Cao18_extintion.png
-    :width: 600px
-    :height: 400px
+    :name: mredd
+    :width: 500px
+    :height: 350px
     :align: center
-..    :scale: 70 %
 
     Examples of reddening curves (figure from Cao et al. 2018
     :cite:`Cao18`).
@@ -172,7 +176,7 @@ different attenuation prescriptions. *(tbc)*
 
 .. _redshifting-templates:
 
-Redshifting of the rest-frame templates
+Redshifting of the restframe templates
 ============================================
 
 Restframe SED templates are redshifted following the grid of
@@ -219,7 +223,8 @@ increases with distance. The IGM attenuation is computed for each
 redshift of the grid of models.
 
 Three different prescriptions are currently implemented
-in Phosphoros in order to compute the effective optical depth.
+in Phosphoros in order to compute the effective optical depth (see
+:numref:`migm`).
 
 #. Madau 1995 :cite:`Mad95`: the most commonly adopted prescription in
    template-fitting codes for photometric redshifts. It assumes a
@@ -250,19 +255,19 @@ in Phosphoros in order to compute the effective optical depth.
    corresponding to that minimum.
 
 .. figure:: /_static/first_step/IGM.png
+    :name: migm
     :width: 400px
-    :height: 400px
+    :height: 300px
     :align: center
-..    :scale: 30 %
 
     The :math:`\exp(-\tau_{eff})` curves at :math:`z=3.5` for the
     three IGM absorption prescriptions implemented in Phosphoros.
 
 The user can choose one of these prescriptions, but not modify them or
 add a new one. In Phosphoros there is also the option to not apply any
-IGM absorption correction. This can reduce the execution time when
-sources are expected to be at low-to-intermediate redshifts and the
-IGM absorption is not relevant.
+IGM absorption correction. This can reduce the time to compute the
+grid of models when sources are expected to be at low-to-intermediate
+redshifts and the IGM absorption is not relevant.
 
 .. note::
 
@@ -307,17 +312,16 @@ where :math:`T_i` is the filter trasmission curve and
 :math:`f_m(\lambda)` is the observer-frame modeled SED.
 
 Phosphoros supplies some typical transmission curves for filters in
-nearIR/optical/UV bands as auxiliary data. For instance, the figure
-below shows the filter trasmission curves used in the *Euclid* Data
-Challenge 3. Users can select the transmission curves to be used or
-add new ones.
-
+nearIR/optical/UV bands as auxiliary data. For instance,
+:numref:`mfilter` shows the filter trasmission curves used in the
+*Euclid* Data Challenge 3. Users can select the transmission curves to
+be used or add new ones.
 
 .. figure:: /_static/first_step/filter_curves_DC3.png
+    :name: mfilter
     :width: 600px
-    :height: 400px
+    :height: 350px
     :align: center
-..    :scale: 60 %
 
     Filter trasmission curves at different bands from the *Euclid*
     Data Challenge 3.
@@ -383,16 +387,16 @@ between the *observed* flux with and without Galactic absorption:
 Galactic absorption, when associated with a filter, depends therefore
 on the source SED.
 
-In the context of template-fitting codes, computing *reddening* SEDs
-by Eq. :eq:`ga2` would be too time-demanding in large catalogues.
-In order to include the SED dependence in the Galactic absorption
+In the context of template-fitting codes, computing *reddened* SEDs by
+Eq. :eq:`ga2` would be too time-demanding in large catalogues.  In
+order to include the SED dependence in the Galactic absorption
 correction, Phosphoros follows the prescription provided by Galametz
-et al. in their Appendix A. They show that the total extinction
-:math:`A_{{\scriptscriptstyle SED},i}` for a given filter can be
-robustly approximated as a linear function of the color excess
-:math:`E^{\scriptscriptstyle MW}_{B-V}` when
+et al. 2017 :cite:`Gal17` in their Appendix A. They show that the
+total extinction :math:`A_{{\scriptscriptstyle SED},i}` for a given
+filter can be robustly approximated as a linear function of the color
+excess :math:`E^{\scriptscriptstyle MW}_{B-V}` when
 :math:`E^{\scriptscriptstyle MW}_{B-V}\le0.3` (i.e., for the typically
-values in the sky areas covered by *Euclid*):
+values in the sky areas far from the Galactic Plane):
 
 .. math::
    :label: ga4
@@ -412,10 +416,6 @@ SED},i}`. Practically, Phosphoros will generate a grid of coefficients
 setting :math:`a_{{\scriptscriptstyle SED},i}=A_{{\scriptscriptstyle
 SED},i}(0.3)/0.3`.
 
-We have verified that the above Galactic absorption correction used in
-Phosphoros does not introduce any significant bias in photometric
-redshift estimates.
-
 
 .. note::
 
@@ -426,7 +426,7 @@ redshift estimates.
    adopted pivot wavelength :math:`\lambda_{pivot}` of the filter
    [#f2meth]_.
 
-   However, as discussed by Galametz et al. 2017 :cite:`Gal17`,
+   However, as discussed by Galametz et al. 2017,
    neglecting the SED dependence can significantly affect photometric
    redshifts estimates. Using a mock flux catalog of sources, they
    show that photometric redshifts can be biased by a factor
@@ -434,6 +434,11 @@ redshift estimates.
    :math:`k_{pivot}` approximation is applied. Although small, this is
    relevant for *Euclid* that requires unbiased photometric redshifts
    at the level of :math:`<2\times10^{-3}(1+z)` :cite:`Lau11`.
+
+   We have verified that the Galactic absorption correction used in
+   Phosphoros does not introduce any significant bias in photometric
+   redshift estimates.
+
 
 The Galactic absorption correction requires the knowledge of the Milky
 Way absorption law, :math:`k_{\scriptscriptstyle MW}(\lambda)`, and of
@@ -446,7 +451,7 @@ Phosphoros allows two options to provide color excess values:
 
 * the user can input the :math:`E^{\scriptscriptstyle MW}_{B-V}` value
   associated at each source as one of the columns of the photometric
-  catalogue;
+  catalog;
 
 * Phosphoros can fetch :math:`E^{\scriptscriptstyle MW}_{B-V}`
   directly from the reddening map provided by *Planck*
@@ -485,7 +490,7 @@ As first step, Phosphoros builds a grid of modeled photometry: this
 consists of one photometric value for each selected filter, spanning
 over all possible model parameters. The parameters are: redshift
 :math:`z`, restframe SED template, color excess :math:`E_{B-V}` and
-reddening curve :math:`k(\lambda)` related to intrinsic dust
+reddening curve :math:`k(\lambda)`, both related to intrinsic dust
 absorption.
 
 The next step is to compute, for each catalog source, the likelihood
@@ -582,8 +587,7 @@ galaxies), we will talk about galaxy types :math:`T` instead of SED
 templates. Hereafter, a model is just reduced to :math:`m=\{z,\,T\}`.
 
 The main output of Phosphoros is the **redshfit probability density
-function**, :math:`PDF(z)`, for a source with given observed
-photometry. In absence of priors, this is simply
+function**, :math:`PDF(z)`. In absence of priors, this is simply
 :math:`PDF(z)\equiv\mathcal{L}(\mathbf{F}|z)`; with priors, the
 :math:`PDF(z)` is the posterior distribution for :math:`z`,
 :math:`PDF(z)\equiv p(z|\mathbf{F},\mathcal{P})`. This is obtained by
@@ -639,11 +643,11 @@ parameters (see the :ref:`generic-priors` section).
 Redshift distribution
 -------------------------------------
 
-Prior information are often given in terms of the redshift
+Prior information are often given in terms of redshift
 distribution for galaxies with apparent magnitude :math:`m_0`,
 :math:`p(z|m_0)` (see, e.g., Benitez et al. 2000 :cite:`Ben00`). The
 prior can include information such as the existence of upper or lower
-limits on the galaxy redshifts, or discriminate values of redshifts
+limits on galaxy redshifts, or discriminate values of redshifts
 that are considered less or more probable with respect to other ones.
 
 Because galaxies belonging to different morphological/spectral types
@@ -670,6 +674,26 @@ as:
 
 See the :ref:`redshift-prior` section for an explanation on how to use
 redshift priors in Phosphoros.
+
+   
+Volume correction
+---------------------------
+      
+Phosphoros implements also the so called *volume correction*. This
+prior information takes into account the fact that a survey covers
+larger volumes of the Universe at higher redshift than at lower
+redshift, and consequently gives higher probability to find a galaxy
+at higher redshift. The prior distribution depends only on redshift
+and is defined as:
+
+.. math::
+   
+   p(z|\mathcal{P})\propto \frac{dV_c}{dz} = 4\pi D_c^2\frac{dD_c}{dz}\,,
+
+where :math:`D_c~(V_c)` is the comoving distance (volume) at redshift
+:math:`z`.
+      
+See the :ref:`volume-prior` section for its use in Phosphoros.
 
 
 Luminosity functions
@@ -698,11 +722,15 @@ types, the redshift :math:`PDF` with luminosity priors becomes:
 
 where :math:`\phi_{z,T}` is the luminosity function of :math:`T`--type galaxies at
 redshift :math:`z`. In the above equation, we have assumed
-:math:`\phi_{z,T}(L_{b,m})=p(z,T|\mathcal{P})` and 
+:math:`\phi_{z,T}(L_{b,m})=p(z,T|\mathcal{P})` and a
 uniform prior for :math:`p(T|\mathcal{P})`.
 
 We refer users to the :ref:`luminosity-prior` section for an detailed
 explanation on how to use luminosity priors in Phosphoros.
+
+.. note::
+
+   In Phosphoros, volume correction is automatically added to luminosity priors.
 
 .. note
 
@@ -710,25 +738,6 @@ explanation on how to use luminosity priors in Phosphoros.
    to be necessarily one of the observational bands of the input
    catalog.
 
-   
-Volume correction
----------------------------
-      
-Phosphoros implements also the so called *volume correction*. This
-prior information takes into account the fact that a survey covers
-larger volumes of the Universe at higher redshift than at lower
-redshift, and consequently gives higher probability to find a galaxy
-at higher redshift. The prior distribution depends only on redshift
-and is defined as:
-
-.. math::
-   
-   p(z|\mathcal{P})\propto \frac{dV_c}{dz} = 4\pi D_c^2\frac{dD_c}{dz}\,,
-
-where :math:`D_c~(V_c)` is the comoving distance (volume) at redshift
-:math:`z`.
-
-See the :ref:`volume-prior` section for the use in Phosphoros.
 
 .. rubric :: Footnotes
 

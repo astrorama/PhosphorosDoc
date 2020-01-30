@@ -59,25 +59,34 @@ For :math:`m_0(I)>20`, we assume that:
 .. math::
 
    z_{mt}(m_0)=z_{0t}+k_{mt}(m_0-20).
+   
+.. warning::
 
+   The exponential cutoff at high redshifts in the redshift
+   distribution prior is maybe too strong and it will be updated with a
+   power-law cutoff in the future Phosphoros versions.
+   
 In total, there are 13 free parameters
 :math:`\{\alpha_t,\,z_{0t},\,k_{mt},\,f_t,\,k_t\}`, while the
 :math:`C_t` values are determined by imposing the redshift
-distribution :math:`p(z|T,m_0)` to be normalized to 1 *(or are they provided by users? tbc)*. The values of
-free paramters used in Phosphoros are reported in the Table below
-(they are updated with respect to the ones provided by Benitez 2000
-and Ilbert et al. 2006). Users can change them in the CLI mode.
+distribution :math:`p(z|T,m_0)` to be normalized to 1 *(or are they
+provided by users? tbc)*. The values of free parameters used in
+Phosphoros are reported in :numref:`tzprior` (they are updated with
+respect to the ones provided by Benitez 2000 and Ilbert et
+al. 2006). Users can change them in the CLI mode.
 
+.. table:: Parameters of the redshift distribution prior
+   :name: tzprior
 
-+---------------+---+------------------+----------------+----------------+-------------+-------------+
-| Spectral Type | t | :math:`\alpha_t` | :math:`z_{0t}` | :math:`k_{mt}` | :math:`f_t` | :math:`k_t` |
-+===============+===+==================+================+================+=============+=============+
-| E/S0          | 1 | 2.46             | 0.431          | 0.091          | 0.30        | 0.4         |
-+---------------+---+------------------+----------------+----------------+-------------+-------------+
-| Sbc, Scd      | 2 | 1.81             | 0.390          | 0.100          | 0.35        | 0.3         |
-+---------------+---+------------------+----------------+----------------+-------------+-------------+
-| Irr           | 3 | 2.00             | 0.300          | 0.150          |             |             |
-+---------------+---+------------------+----------------+----------------+-------------+-------------+
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+
+   | Spectral Type | t | :math:`\alpha_t` | :math:`z_{0t}` | :math:`k_{mt}` | :math:`f_t` | :math:`k_t` |
+   +===============+===+==================+================+================+=============+=============+
+   | E/S0          | 1 | 2.46             | 0.431          | 0.091          | 0.30        | 0.4         |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+
+   | Sbc, Scd      | 2 | 1.81             | 0.390          | 0.100          | 0.35        | 0.3         |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+
+   | Irr           | 3 | 2.00             | 0.300          | 0.150          |             |             |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+
    
 The spectral type fractions at :math:`m_0=20` are therefore
 30% E/SO, 35% spirals, and 25% irregulars.
@@ -88,21 +97,23 @@ Redshift Priors in the GUI
 
 Redshift distribution priors are enabled in the GUI checking ``N(z)
 Prior`` in the ``3. Prior`` sub-panel of the ``Compute Redshifts``
-window. Clicking on the ``Configure N(z) Prior`` a popup window opens
-where users have to select the *B* and *I* filters from the
-database. These filters are needed to compute the *B-I* color of
-modeled templates and so their type.
+window (see :numref:`zprior`). Clicking on the ``Configure N(z)
+Prior`` a popup window opens where users have to select the *B* and
+*I* filters from the database. These filters are needed to compute the
+*B-I* color of modeled templates and so their type.
 
 .. figure:: /_static/advanced_steps/z_distr_prior.png
+    :name: zprior 
     :align: center
     :width: 800px
     :height: 400px
-..    :scale: 50 %
 
+    Introducing redshift priors with the GUI
 
 .. note::
 
-   The above free parameters cannot be modified in the GUI.
+   The value of the free parameters for the redshift distribution
+   priors (see the previous Table) cannot be modified in the GUI.
 
 .. warning::
 
@@ -126,8 +137,8 @@ the *B* and *I* filters are required through the options::
 The *I* filter is used to compute the apparent magnitude of galaxies
 and must be part of the selected photometric filters.
 
-The value of the above free parameters can be changed by users with
-the option::
+The value of the free parameters of the redshift distribution priors
+(see :numref:`tzprior`) can be changed by users with the option::
 
   Nz-prior_<p>_T<i>=<value>
 
@@ -140,6 +151,8 @@ while ``i`` refers to the galaxy type (:math:`t=1,2,3`, apart from
 
 modifies the spiral galaxies parameter :math:`z_{02}` to 0.5.
 
+An effectiveness value different from 1 can be set with the command
+option ``--Nz-prior-effectiveness`` (see :ref:`effectiveness`).
 
 .. creare un solo file con references e metter i link come sotto!!!
 

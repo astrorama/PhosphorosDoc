@@ -10,8 +10,8 @@ Advanced Features
     emission_lines 
     galactic_absorption_cli
     redshift_prior
-    luminosity_prior
     volume_prior 
+    luminosity_prior
     generic_priors
     posterior_investigation
     zero_point_correction
