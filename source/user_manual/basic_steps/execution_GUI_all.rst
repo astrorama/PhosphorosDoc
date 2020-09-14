@@ -109,7 +109,7 @@ the catalog type). Moreover, the column name providing source ID must
 be entered through ``Source ID Column``: the drop down menu shows all
 the column names in the input catalog.
 
-.. figure:: /_static/Basic_steps/Catalog_Type.png
+.. figure:: /_static/basic_steps/Catalog_Type.png
     :name: bsetup
     :width: 700px
     :align: center
@@ -232,7 +232,7 @@ groups of SED templates: Elliptical, Spiral and Starburst. Click on
 can select ``New`` at the ``Sub-Spaces of the Parameter Space`` level,
 and a new pop-up window opens, similar to that displayed below.
 
-.. figure:: /_static/Basic_steps/Parameter_Space.png
+.. figure:: /_static/basic_steps/Parameter_Space.png
     :name: bpara
     :align: center
     :scale: 50 %
@@ -266,7 +266,7 @@ At the top of the ``Compute Redshifts`` panel, users can select
 previously defined catalog types and parameter spaces to use in
 the following analysis.
 
-.. figure:: /_static/Basic_steps/ModelGrid.png
+.. figure:: /_static/basic_steps/ModelGrid.png
     :name: bmgrid
     :width: 700px
     :align: center
