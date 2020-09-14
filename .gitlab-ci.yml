@@ -6,7 +6,7 @@ build-html:
   tags:
     - Fedora
   before_script:
-    - dnf install -y make python3-sphinx python3-sphinx_rtd_theme
+    - dnf install -y make python3-sphinx python3-sphinx_rtd_theme python3-sphinxcontrib-bibtex
   script:
     - make dirhtml
   artifacts:
