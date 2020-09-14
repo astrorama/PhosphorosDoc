@@ -25,7 +25,7 @@ build-pdf:
         texlive-tabulary texlive-framed texlive-wrapfig texlive-parskip
         texlive-upquote texlive-capt-of texlive-needspace texlive-times
         texlive-makeindex texlive-helvetic texlive-courier texlive-gsftopk
-        texlive-updmap-map texlive-dvips
+        texlive-updmap-map texlive-dvips python3-sphinxcontrib-bibtex
   script:
     - make latexpdf
   artifacts:
