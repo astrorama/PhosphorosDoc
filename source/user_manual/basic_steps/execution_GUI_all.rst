@@ -117,11 +117,7 @@ the catalog type). Moreover, the column name providing source ID must
 be entered through the ``Source ID Column`` drop down menu that
 shows all the column names in the input catalog.
 
-<<<<<<< HEAD
 .. figure:: /_static/Basic_steps/Catalog_Type_v018.png
-=======
-.. figure:: /_static/basic_steps/Catalog_Type.png
->>>>>>> a2dc3cc669d9d5e0ab6583e71eeb02206351cf30
     :name: bsetup
     :width: 700px
     :align: center
