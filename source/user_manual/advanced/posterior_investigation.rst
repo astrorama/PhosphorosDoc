@@ -11,12 +11,11 @@ As a first step, users have to generate FITS files, one per source,
 containing the likelihood and/or the posterior distributions. This is
 enabled by:
 
-- (**GUI**) clicking on the ``Generate Likelihood Files`` and/or ``Generate
-  Posterior Files`` tabs in the ``5. Input/Output`` sub-panel of the
-  ``Compute Redshift`` window;
+- (**GUI**) clicking on the ``Output Posterior`` tab in the
+  ``5. Input/Output`` sub-panel of the ``Compute Redshift`` window;
 
 - (**CLI**) setting the ``--create-output-likelihoods`` and/or
-  ``--create-output-likelihoods`` options of the ``compute_redshift``
+  ``--create-output-posteriors`` options of the ``compute_redshift``
   action as ``YES``.
 
 The action to call the visualization tool is ``plot-posterior`` (or
@@ -24,7 +23,7 @@ The action to call the visualization tool is ``plot-posterior`` (or
 containing the likelihood or the posterior distribution for a specific
 source and the type of plot to show, by the command line::
 
-  > Phosphoros --f <path>/<name file> -p <plot type>
+  > Phosphoros PP --f <path>/<name file> -p <plot type>
 
 The ``<plot type>`` arguments are ``Ebv``, ``Sed``, ``Z``, ``Sed-Z``,
 ``Ebv-Z``, ``Sed-Ebv``, corresponding to 1D/2D plots of

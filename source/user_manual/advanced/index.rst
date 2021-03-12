@@ -9,6 +9,7 @@ Advanced Features
     directory_howto
     emission_lines 
     galactic_absorption_cli
+    sed_weigh
     redshift_prior
     volume_prior 
     luminosity_prior

@@ -66,27 +66,25 @@ For :math:`m_0(I)>20`, we assume that:
    distribution prior is maybe too strong and it will be updated with a
    power-law cutoff in the future Phosphoros versions.
    
-In total, there are 13 free parameters
-:math:`\{\alpha_t,\,z_{0t},\,k_{mt},\,f_t,\,k_t\}`, while the
-:math:`C_t` values are determined by imposing the redshift
-distribution :math:`p(z|T,m_0)` to be normalized to 1 *(or are they
-provided by users? tbc)*. The values of free parameters used in
-Phosphoros are reported in :numref:`tzprior` (they are updated with
-respect to the ones provided by Benitez 2000 and Ilbert et
-al. 2006). Users can change them in the CLI mode.
+In total, there are 16 free parameters
+:math:`\{\alpha_t,\,z_{0t},\,k_{mt},\,f_t,\,k_t\,C_t\}`. The values
+of free parameters used in Phosphoros are reported in
+:numref:`tzprior` (they are updated with respect to the ones provided
+by Benitez 2000 and Ilbert et al. 2006). Users can change them in the
+CLI mode.
 
 .. table:: Parameters of the redshift distribution prior
    :name: tzprior
 
-   +---------------+---+------------------+----------------+----------------+-------------+-------------+
-   | Spectral Type | t | :math:`\alpha_t` | :math:`z_{0t}` | :math:`k_{mt}` | :math:`f_t` | :math:`k_t` |
-   +===============+===+==================+================+================+=============+=============+
-   | E/S0          | 1 | 2.46             | 0.431          | 0.091          | 0.30        | 0.4         |
-   +---------------+---+------------------+----------------+----------------+-------------+-------------+
-   | Sbc, Scd      | 2 | 1.81             | 0.390          | 0.100          | 0.35        | 0.3         |
-   +---------------+---+------------------+----------------+----------------+-------------+-------------+
-   | Irr           | 3 | 2.00             | 0.300          | 0.150          |             |             |
-   +---------------+---+------------------+----------------+----------------+-------------+-------------+
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+-------------+
+   | Spectral Type | t | :math:`\alpha_t` | :math:`z_{0t}` | :math:`k_{mt}` | :math:`f_t` | :math:`k_t` | :math:`C_t` |
+   +===============+===+==================+================+================+=============+=============+=============+
+   | E/S0          | 1 | 2.46             | 0.431          | 0.091          | 0.30        | 0.4         | 0.8869      |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+-------------+
+   | Sbc, Scd      | 2 | 1.81             | 0.390          | 0.100          | 0.35        | 0.3         | 0.8891      |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+-------------+
+   | Irr           | 3 | 2.00             | 0.300          | 0.150          |             |             | 0.8874      |
+   +---------------+---+------------------+----------------+----------------+-------------+-------------+-------------+
    
 The spectral type fractions at :math:`m_0=20` are therefore
 30% E/SO, 35% spirals, and 25% irregulars.
@@ -95,7 +93,7 @@ The spectral type fractions at :math:`m_0=20` are therefore
 Redshift Priors in the GUI 
 ------------------------------------
 
-Redshift distribution priors are enabled in the GUI checking ``N(z)
+Redshift distribution priors are enabled in the GUI by checking ``N(z)
 Prior`` in the ``3. Prior`` sub-panel of the ``Compute Redshifts``
 window (see :numref:`zprior`). Clicking on the ``Configure N(z)
 Prior`` a popup window opens where users have to select the *B* and
@@ -124,7 +122,7 @@ Prior`` a popup window opens where users have to select the *B* and
 Redshift Priors in the CLI 
 ------------------------------------
 
-Redshift distribution priors are enabled in the CLI setting the action
+Redshift distribution priors are enabled in the CLI by setting the action
 parameter ``--Nz-prior=YES`` (the default is ``NO``) of the
 ``compute_redshift`` action.
 
@@ -142,8 +140,9 @@ The value of the free parameters of the redshift distribution priors
 
   Nz-prior_<p>_T<i>=<value>
 
-where ``p = z0`` (:math:`z_{0t}`), ``Km`` (:math:`k_{mt}`), ``alpha``
-(:math:`\alpha_t`), ``K`` (:math:`K_{t}`) and ``f`` (:math:`f_t`),
+where ``<p>`` can be ``z0`` (i.e. :math:`z_{0t}` in the above
+equation), ``Km`` (:math:`k_{mt}`), ``alpha`` (:math:`\alpha_t`),
+``K`` (:math:`K_{t}`), ``f`` (:math:`f_t`) and ``cst`` (:math:`C_t`),
 while ``i`` refers to the galaxy type (:math:`t=1,2,3`, apart from
 ``f`` and ``K`` where :math:`t=1,2`). For example, the option::
 

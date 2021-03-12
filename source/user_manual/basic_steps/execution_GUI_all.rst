@@ -27,7 +27,7 @@ panels.
 
     Starting window of the Phosphoros GUI
 	    
-Configuration
+GUI: Configuration
 ----------------------------
 
 ``Configuration`` allows users to see, and eventually to change, the
@@ -40,9 +40,12 @@ opened:
   if users keep the standard directory structure. Otherwise, the path
   to new directories can be selected through the ``Browse`` tabs.
 
-  Users can choose the number of unit of execution (or thread) within
-  a process, by clicking on the button ``Override the Maximum Number
-  of Threads``. Otherwise, the maximum number of available threads is
+  Users can choose the number of sources to keep in memory
+  simultaneously: high values will speed up the execution of the
+  template fitting (the default value is 5000). Moreover, it is possible
+  to choose the number of unit of execution (or thread) within a
+  process, by clicking on the button ``Override the Maximum Number of
+  Threads``. Otherwise, the maximum number of available threads is
   automatically selected.
 
 - **Auxiliary Data** The Phosphoros GUI can be used to display
@@ -58,15 +61,14 @@ opened:
   templates by clicking on the ``Add Emission Line to SEDs`` tab
   associated with it. A new directory (named as the original with the
   postfix ``_el``) is generated with SEDs including emission lines,
-  without modifying the original templates. The new directory takes
-  the name of the original one plus Emission lines are added as a
-  delta function to SED templates (see the :ref:`emission-lines`
+  without modifying the original templates. Emission lines are added
+  as a delta function to SED templates (see the :ref:`emission-lines`
   section for more details).
 
-  .. figure:: /_static/basic_steps/AuxDataManagement.png
+  .. figure:: /_static/basic_steps/AuxDataManagement_v018.png
      :name: bconfig
      :align: center
-     :scale: 70 %
+     :scale: 50 %
 	     
      Example of the ``Configuration`` panel of the GUI showing SEDs
      present in the database 
@@ -74,18 +76,24 @@ opened:
   The ``Import Folder`` tab opens a *finder* window and allows users
   to import a directory with its entire content to the location of the
   selected ``Auxiliary Data`` directory.
-	    
+
+  Finally, the ``Reload Last Data Pack`` tab allows users to
+  (re-)download the last available version of the Auxiliary *Data
+  Pack*  from the Phosphoros repository (containing, i.e., SEDs,
+  filters, Reddening curves, etc.). This is useful if users altered
+  the data locally and they want to replace them with the current
+  data pack on the repository.
    
 - **Cosmology** The ``Cosmology`` tab displays the value of the
   cosmological parameters relevant for Phosphoros and allows users to
-  change them. The default value are taken from Planck 2015 results
+  change them. The default values are taken from Planck 2015 results
   :cite:`Planck2015` (including lensing and external data):
   :math:`H_0=67.74` [km/s/Mpc]; :math:`\Omega_M=0.3089`;
   :math:`\Omega_{\Lambda}=0.6911`.
 
 .. _mapping:
 
-Catalog Setup: Mapping filters to column names
+GUI: Catalog Setup: Mapping filters to column names
 --------------------------------------------------
 
 In order to compute modeled photometry, Phosphoros needs the
@@ -106,10 +114,10 @@ will create a new folder.
 The input catalog is selected by ``Select File and Import Columns``
 (Phosphoros automatically selects a reference input file belonging to
 the catalog type). Moreover, the column name providing source ID must
-be entered through ``Source ID Column``: the drop down menu shows all
-the column names in the input catalog.
+be entered through the ``Source ID Column`` drop down menu that
+shows all the column names in the input catalog.
 
-.. figure:: /_static/Basic_steps/Catalog_Type.png
+.. figure:: /_static/Basic_steps/Catalog_Type_v018.png
     :name: bsetup
     :width: 700px
     :align: center
@@ -120,32 +128,73 @@ the column names in the input catalog.
 The mapping operation begins by pressing ``Select Filters``: a window
 opens where the filter trsmission curves in the database can be
 selected. When the filter selection is completed, pressing ``Save``
-closes the window and, as shown below, fills automatically the
+closes the window and, as shown in the figure, fills automatically the
 ``Filter Transmission Curve`` column. Each of the ``Flux Column Name``
 and ``Error Column Name`` cells now features a drop down menu (after
 clicking on the cell) which can be used to specify the appropriate
 Flux and FluxError column names.
 
 If a catalog has some sources with missing photometry (sources that
-were not observed in all catalog bands), users have to check the
-corresponding control (``Missing photometry flagged as:``) and provide
-the value of the flag. By doing so, the program is instructed to skip
-photometry having the flag value in the flux column. The corresponding
-filters are then ignored in the :math:`\chi^2` calculation.
+were not observed in all catalog bands), users have to provide a flag
+value in the ``Missing photometry flagged as`` control. By doing so,
+the program is instructed to skip photometry having the flag value in
+the flux column. The corresponding filters are then ignored in the
+:math:`\chi^2` calculation.
 
 .. note::
 
    Missing photometry flags must be numbers. Symbolic values as NaN,
    NULL or INF are not accepted by Phosphoros.
 
-If the catalog contains sources that are not detected in one or more
+Catalogs may contain sources that are not detected in one or more
 bands (i.e., the provided photometry is an upper limit of the flux and
-not the nominal flux), the ``upper limit`` control has to be
-checked. The user has to ensure that the catalog follows the upper
-limit convention, i.e.  photometry are considered upper limit when
-their error have negative values. Upper limits are taken into account
-in the :math:`\chi^2` calculation, as described in the :ref:`Template
-fitting method <template-fitting>` section.
+not the nominal flux). In this case, users have to ensure that the
+catalog follows the upper limit convention, i.e.  photometry are
+considered upper limits when their errors have negative values. Upper
+limits are taken into account in the :math:`\chi^2` calculation, as
+described in the :ref:`Template fitting method <template-fitting>`
+section. In addition, users can set the ``Upper Limit recompute error
+flag`` to a specific negative value (e.g., ``-99``): when Phosphoros
+finds a flux error that matches the *upper limit* flag, the error will
+be computed as :math:`flux/n`, where :math:`n` is the number in the
+``Upper limit over error ratio`` column of the ``Filter Mapping``
+table. Users can change this number by clicking on the tabs (the
+default value is 3).
+
+Users have also the ability to modify or re-calibrate error values in
+catalogs according to the following formula:
+
+.. math::
+   :label: eq_err_cal
+
+    \sigma^2_k({\rm new}) = \alpha^2_k\,\sigma^2_k +
+    \beta^2_k\,f^2_k + \gamma_k\,f_k
+
+where :math:`f_k` and :math:`\sigma_k` are the original source fluxes
+and errors for the filter :math:`k`, while :math:`\alpha_k`,
+:math:`\beta_k` and :math:`\gamma_k` are coefficients chosen by
+users. Clicking on the ``Error re-calibration`` control, columns
+``Alpha``, ``Beta`` and ``Gamma`` will appear in the ``Filter
+Mapping`` table (see :numref:`bsetup2`). The values in those columns
+will be used in the above formula. By default they are
+:math:`\alpha_k=1`, :math:`\beta_k=0` and :math:`\gamma_k=0` (i.e., no
+change in errors). The values can be changed clicking on the
+corresponding tabs. The value in a tab can be propagated to all
+filters by pressing ``Propagate Error Param`` .
+
+Photometry can be also provided in **AB magnitudes**. To make
+Phosphoros aware of it, it is enough to set ``True`` in the ``From
+MAG`` column of the ``Filter Mapping`` table (the default *0* is then
+converted to *1*). AB magnitudes will be then transformed to fluxes by
+Phosphoros.
+
+.. figure:: /_static/basic_steps/Catalog_Errors_v018.png
+    :name: bsetup2
+    :align: center
+    :scale: 50 %
+   
+    ``Catalog Setup`` panel and the error re-calibration operation in the GUI
+   
 
 Few optional fields are present in the top-right of the ``Catalog
 Setup`` panel: the column names of
@@ -174,21 +223,26 @@ middle-frame button.  Please note that you can always add or remove
 filters after a first mapping has been completed, by going back to the
 ``Select Filters`` option.
 
-After saving, an ASCII file named ``filter_mapping.txt`` is created in
-the following directory::
+After saving, the ASCII files named ``filter_mapping.txt`` and
+``error_adjustment_param.txt`` are created in the following
+directory::
 
-  > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/filter_mapping.txt
+  > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/
 
-where, in the previous example, ``<Catalog Type>=Quickstart``. The
-file is a table with the qualified name of transmission curve files,
-the flux and flux error column names in the input catalog (see
+(in the previous examples, ``<Catalog Type>`` was ``Quickstart`` or
+``Cosmos``). The file ``filter_mapping.txt`` is a table with the
+qualified name of transmission curve files, the flux and flux error
+column names in the input catalog, while
+``error_adjustment_param.txt`` contains the values of the coefficients
+used in Eq. :eq:`eq_err_cal` to re-calibrate flux errors (see
 :ref:`filter-mapping` in the ``File Format Reference`` chapter).
 
-You can always edit this file to make corrections. Alternatively, you
-can create it with your favorite editor (rather than using the
+You can always edit these files to make corrections. Alternatively,
+you can create them with your favorite editor (rather than using the
 GUI). When launched, the GUI will automatically load any
-``filter_mapping.txt`` file located in the appropriate directory,
-providing it respects the proper formatting.
+``filter_mapping.txt`` (and ``error_adjustment_param.txt``) file
+located in the appropriate directory, providing it respects the proper
+formatting.
 
 .. note::
 
@@ -203,7 +257,7 @@ providing it respects the proper formatting.
 
 .. _parameter-space-definition:
 
-Defining the model parameter space
+GUI: Defining the model parameter space
 -------------------------------------------
 
 ..
@@ -217,7 +271,7 @@ SED template, intrinsic color excess :math:`E_{(B-V)}` and intrinsic
 reddening law. For each of them, a grid of *values* has to be provided
 by users. Phosphoros then computes, for each cell of the parameter
 space, a vector of modeled photometry, one value for each filter. This is
-called the **grid of models**. This calculation do not depend
+called the **grid of models**. This calculation does not depend
 on observations and it can be achieved beforehand.
 
 Clicking on ``Parameter Space``, users can check the sets of parameter
@@ -225,36 +279,60 @@ spaces that are already present in the Phosphoros database
 (``Parameter Space`` drop down menu). They can be modified,
 duplicated or deleted; or a new one can be created (see :numref:`bpara`).
 
-Here, we show how to define a new parameter space and its
-specifications. This is done for a parameter space composed of three
-groups of SED templates: Elliptical, Spiral and Starburst. Click on
-``New`` (on the top of the window) and provide a name for it. Then you
-can select ``New`` at the ``Sub-Spaces of the Parameter Space`` level,
-and a new pop-up window opens, similar to that displayed below.
+In the following, we describe how to define a new parameter space and
+its specifications. This is done for a parameter space composed of
+three groups of SED templates: Elliptical, Spiral and Starburst. First
+of all, users have to define the values of the ``E(B-V)`` and
+``Redshift`` parameters in the grid. Clicking on the ``Configure``
+button, users can enter the values as a comma-separated list or as a
+range of values (minimum, maximum value and step) through the ``Add
+Range`` option (see :numref:`bpara`). After saving them, select
+``New`` at the ``Sub-Spaces of the Parameter Space`` level, and a new
+pop-up window opens, similar to that displayed in the left panel of
+:numref:`bpara2`.
 
-.. figure:: /_static/Basic_steps/Parameter_Space.png
-    :name: bpara
+Through this window, you have to provide the name of a sub-space
+(``Elliptical``, for example) and specify the ``SED``, ``Reddening
+Curve``, ``E(B-V)`` and ``Redshift`` parameters. The ``SED`` and
+``Reddening Curve`` panels simply allow to select a sub-set of the
+data available on the system. For the ``E(B-V)`` and ``Redshift``
+parameters, users can only modify the minimum and the maximum value of
+the ranges previously defined in ``Configure``. Saving them, the
+parameter space of the (``Elliptical``) sub-space will be shown in the
+GUI panel (see :numref:`bpara2`).
+
+.. note::
+
+   With the GUI, all sub-spaces have by default the same sampling for
+   the ``E(B-V)`` and ``Redshift`` parameters. Users are only allowed
+   to select out some *values* at the beginning or at the end of the
+   parameter ranges. On the contrary, with the CLI, users can define
+   different samplings for ``E(B-V)`` and ``Redshift`` in different
+   sub-spaces (see
+   :ref:`PhosphorosComputeModelGrid_configuration_section`).
+   
+The operation is terminated clicking on the ``Save`` button (at the
+top-right of the window).  Make sure to complete the full
+specification of the three groups before continuing to the next
+section.
+
+.. figure:: /_static/Basic_steps/Parameter_Space1_v018.png
+    :name: bpara 
     :align: center
     :scale: 50 %
 	    
-    Setting a parameter space in the GUI
-	    
-Through this window, you have to provide a name for the sub-space
-(``Elliptical``, for example) and specify the ``SED``, ``Reddening
-Curve``, ``E(B-V)`` and ``Redshift`` parameters. The ``SED`` and
-``Reddening Curve`` panels simply allows to select a sub-set of the
-possible data available on the system. For the ``E(B-V)`` and
-``Redshift`` parameters, users can enter values, as a comma-separated
-list, or ranges of values (minimum, maximum value and step) through
-the ``Add Range`` option (see the above picture). Make sure to
-complete the full specification of the three groups before continuing
-to the next section.
+    Setting ``E(B-V)`` and Redshift range in the GUI 
 
-The operation is terminated clicking on the ``Save`` button.
+.. figure:: /_static/Basic_steps/Parameter_Space2_v018.png
+    :name: bpara2
+    :align: center
+    :scale: 50 %
+	    
+    Setting a parameter space in the GUI 
 
 .. _generating-model-grid:
 
-Generating the model grid
+GUI: Generating the model grid
 ---------------------------------
 
 Previous sections described how to set up Phosphoros database. In the
@@ -355,7 +433,7 @@ In order to produce a grid of models users have to go through with two steps:
   Clicking on the ``(Re)-Generate the Grid`` button generates the grid
   of models, while on ``Save Config. File`` a configuration file with
   all the command line options needed to generate the grid of models
-  with the |CLI|.
+  with the |CLI| is saved.
 
   If the Milky Way absorption correction has been selected in the
   previous step, the grid of correction coefficients has to be
@@ -380,7 +458,7 @@ In order to produce a grid of models users have to go through with two steps:
 
 .. _computing-redshifts:
     
-Computing Redshifts
+GUI: Computing Redshifts
 -----------------------------
 
 The sub-panel five, ``5. Input/Output Files``, is the last step before
@@ -394,7 +472,7 @@ the outputs to be generated by Phosphoros (:numref:`bredshift`).
    catalog. Previous steps in fact need to know only the catalog type
    which the input catalog belongs to.
 
-.. figure:: /_static/basic_steps/ComputeRedshift.png
+.. figure:: /_static/quickstart/InputOutputFiles_v018.png
     :name: bredshift
     :align: center
     :scale: 40 %
@@ -483,9 +561,12 @@ Users need to fill the following information:
 - (Optional) **Multi-Dimensional Output**
  
   Here, users can enable the generation of FITS files containing the
-  likelihood and/or the posterior distributions, one per source. This
-  action will produce a large volume of data (see the :ref:`File format
-  reference <format-reference-section>` section).
+  full posterior distributions, one per source. This action will
+  produce a large volume of data (see the :ref:`File format reference
+  <format-reference-section>` section). Otherwise, in order to reduce
+  the dimension of output files, users can save only a sampling of
+  posterior distributions by selecting ``Sampling`` and choosing the
+  ``Sample number`` (default 1000).
 
   Multi-dimensional outputs can be investigated using the appropriate
   Phosphoros tool in the |CLI| (see the
@@ -505,9 +586,13 @@ above.
    such case, just hover the mouse pointer on the button and a tool
    tip will apears with a list of the missing steps.
 
-The ``Save Config. File`` exports the settings into a configuration
-file. The file is stored into::
-
+The button ``Save Config. File`` exports the settings into the
+configuration files ``ModelGrid.CMG.conf``, ``SedWeightGrid.CSW.conf``
+and ``TemplateFitting.CR.conf``, located in a directory choosen by the
+user (by default ``$PHOSPHOROS_ROOT/config/``).
+   
+.. The ``Save Config. File`` exports the settings into a configuration
+   file. The file is stored into::
    > $PHOSPHOROS_ROOT/config/PhosphorosComputeRedshift.conf
 
 

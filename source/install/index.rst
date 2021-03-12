@@ -10,5 +10,6 @@ Download and Installation
 .. toctree::
    :maxdepth: 1
 
-   docker
+   conda
    source
+..   docker

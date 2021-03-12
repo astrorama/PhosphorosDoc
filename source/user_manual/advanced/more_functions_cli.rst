@@ -89,15 +89,14 @@ IGM absorption can be also included using the
 ``--igm-absorption-type`` parameter. Allowed arguments are: ``OFF``
 (default), ``MADAU``, ``MEIKSIN``, ``INOUE``.
 
-.. note::
+.. warning::
 
    The filename of SED templates and reddening curves must be given
    **without extension**.
 
-.. note::
+.. tip::
 
-   If users want to store the modelled SED, it is enough to add at the
-   end of the above command line::
+   Users can store a modelled SED in the following way::
 
      > Phosphoros CMS  <options>  >> <SED file name>
 
@@ -139,7 +138,7 @@ An example of the output of this action is::
   Total range of Redshift Z: [0, 3]
   Total number of models: 45225
 
-In the example, three sub-space regionsare present. For a given
+In the example, there are three sub-space regions. For a given
 region, users can display the values of a specific model parameter
 using the ``--region`` action option followed by the parameter name
 (``--sed``, ``--redcurve``, ``--ebv`` and ``--z``). As example, adding
@@ -174,13 +173,11 @@ More command line options can be found with the help command
 Axis Collapse options
 ----------------------------
 
-Once the likelihood and the posterior distributions of models are
-computed, Phosphoros can derive the one-dimensional PDF of model
-parameters (see the :ref:`Template Fitting Method <template-fitting>`
-section). The common example is the redshift PDF. This is done by
-projecting, e.g., the likelihood distribution to the redshift axis.
-
-.. of the model parameter for which the PDF is required.
+Phosphoros derives the one-dimensional PDF of a model parameter (see
+the :ref:`Template Fitting Method <template-fitting>` section) by
+projecting the multi-dimensional likelihoods or posterior
+distributions to the parameter axis. The common example is the
+redshift PDF.
 
 Three possible techniques for the axes projection are implemented in
 Phosphoros:
@@ -188,13 +185,11 @@ Phosphoros:
 * **Marginalization** (``BAYESIAN``): Likelihood or posterior
   distributions are integrated (or summed for categorial
   variables such as SED templates or reddening curves) over
-  the parameters *not of interest*. This is the default option for
-  posterior distributions.
+  the parameters *not of interest*. This is the default option.
 
-* **Maximum likelihood** (``MAX``). The PDF of the parameter of
-  interest is determined taking the maximum likelihood corresponding
-  to each value of that parameter. This is the default option for
-  Likelihood distributions.
+* **Maximum likelihood** (``MAX``). The PDF of the parameter *of
+  interest* is determined by taking the maximum likelihood corresponding
+  to each value of that parameter.
 
 * **Summing** method (``SUM``). Likelihood or posterior distributions
   are added up over the parameters *not of interest*. This method
@@ -209,7 +204,7 @@ parameters of the ``compute_redshift`` action:
 
 - for likelihood distributions, ``--likelihood-axes-collapse-type=<arg>``.
 
-In both cases, the possible arguments are ``BAYESIAN``, ``MAX``,
+In both cases, the possible arguments are ``BAYESIAN`` (default), ``MAX``,
 ``SUM``.
 
 

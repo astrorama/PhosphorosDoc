@@ -20,15 +20,16 @@ Adding emission lines in the GUI
 
 The GUI allows users to add emission lines to SED templates. In
 ``Configuration-->AuxiliaryData-->SEDs`` sub-panel (see
-:numref:`emlines`), users can click on the ``Add emission lines to
-SEDs`` button corresponding to the template directory which they want
-to add emission lines to (selection of individual files is not
-possible). A pop-up window opens, asking the scheme to use:
+:numref:`emlines`), users can click on the ``Add emission lines to SEDs``
+button corresponding to the template directory to which they want to
+add emission lines (selection of individual files is not possible). A
+pop-up window opens, asking the scheme to use:
 
 - the *Phosphoros* scheme, as explained in the :ref:`Methodology
   <emission-line-method>` section;
 
-- a *Le Phare-like* scheme (see next section, or [#f1em]_).
+- a *Le Phare-like* scheme (see next section, or the *Le Phare*
+  website [#f1em]_).
   
 The new templates, including emission lines, will have to be
 selected in the procedure to create or modify the parameter space
@@ -76,7 +77,7 @@ example::
     
    > Phosphoros AEL --sed-dir CosmosSB
 
-The tool can also be used for templates which are in any directory of
+The tool can also be used for templates that are in any directory of
 your file system. In this case, the absolute path of the directory has
 to be provided. Phosphoros can be used therefore as a generic tool for
 adding emission lines to SED templates.
@@ -97,48 +98,38 @@ To use a customized table instead, the command line option
 ``--emission-lines`` allows users to specify a different table.
 
 With the CLI, users can also change the relation between the flux of
-the [OII] line and of the UV continuum. In Phosphoros, for a given
-template (:math:`f_{temp}`), the [OII] line flux is computed as:
+the [:math:`H\alpha` ] line and of the UV continuum. In Phosphoros, for a given
+template, :math:`f_{temp}`, the [:math:`H\alpha` ] line flux is computed as:
 
 .. math::
     
-      f_{[OII]} = \frac{c_{oii}}{\Delta\lambda}
+      f_{[H\alpha]} = c_{H\alpha}\frac{\lambda_0\lambda_1}{\lambda_1-\lambda_0}
       \int_{\lambda_0}^{\lambda_1}
-      f_{temp}(\lambda)\frac{cd\lambda}{\lambda^2},
+      f_{temp}(\lambda)d\lambda,
 
-where the value of :math:`c_{oii}` is set by the
-``--oii-factor`` option (default: ``1.0e13``); :math:`\Delta\lambda`
-is the difference between the two wavelengths (in |AAm|) given by the
-``--oii-factor-range`` option (default: ``1500,2800``);
-:math:`\lambda_0` and :math:`\lambda_1` are the UV continuum
-wavelength range set by the ``--uv-range`` (default:
-``1500,2800``). For example, setting::
-
-  --oii-factor 1.0e13
-  --oii-factor-range 2100,2500
-  --uv-range 2100,2500
-
-the UV continuum flux will be computed in a smaller range of
-wavelengths than by default.
-  
-.. note::
-
-   Typically, the two action options ``--oii-factor-range`` and
-   ``--uv-range`` have to coincide.
+where the value of :math:`c_{H\alpha}` is set by the
+``--reference-factor`` option (default: ``5.91e-6``); the two
+wavelengths :math:`\lambda_0` and :math:`\lambda_1` (in |AAm|) define
+the UV continuum range and are set by the ``--uv-range`` option
+(default: ``1500,2800``).
    
 .. note::
 
-   Emission lines with the *Le Phare-like* scheme can be generated
-   with the CLI using the following configuration file::
+   Phosphoros CLI allows users to generate emission lines following
+   the *Le Phare-like* scheme. In this case, the flux of the [OII]
+   emission line is computed from the UV continuum, and the strength
+   of the other lines is determined from their flux ratio with the
+   [OII] line flux (see the table below). To this purpose, the
+   configuration file should be like::
 
      sed-dir <SEDs directory name>
      suffix _lpel
-     oii-factor 1.0e13
+     reference-factor 1.0e+13
      uv-range 2100,2500
-     oii-factor-range 2100,2500
-     emission-lines Phosphoros/AuxiliaryData/emission_lines_lephare.txt
+     emission-lines emission_lines_lephare.txt
 
-   where the ``emission_lines_lephare.txt`` table should contain the
+   and the ``emission_lines_lephare.txt`` table (below the
+   ``Phosphoros/AuxiliaryData/`` directory) should contain the
    emission line flux ratios used by the Le Phare code:
 
    +--------------------+------------------------------+-------------+
@@ -148,9 +139,9 @@ wavelengths than by default.
    +--------------------+------------------------------+-------------+
    | :math:`H\beta`     | 4861.32                      | 0.61        |
    +--------------------+------------------------------+-------------+
-   | :math:`H\gamma`    | 4340.46                      | 0.17        |
+   | :math:`H\gamma`    | 4340.46                      | 0.0         |
    +--------------------+------------------------------+-------------+
-   | :math:`H\delta`    | 4101.73                      | 0.10        |
+   | :math:`H\delta`    | 4101.73                      | 0.0         |
    +--------------------+------------------------------+-------------+
    | OII                | 3727.00                      | 1.00        |
    +--------------------+------------------------------+-------------+

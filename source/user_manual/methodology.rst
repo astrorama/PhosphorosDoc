@@ -8,7 +8,7 @@ This section aims to describe the main operations developed by the
 Phosphoros algorithm and to provide the methodology background
 required to better understand all the Phosphoros steps. A more
 detailed explanation about the formalism, assumptions and input data
-used in Phosphoros can be found in the "Phosphoros" paper [?}.
+used in Phosphoros can be found in the "Phosphoros" paper [?].
 This section is complementary to the previous
 :ref:`Basic Steps <user-manual-basic-steps>` and :ref:`Advanced
 Features <user-manual-advanced>` sections, which are focused on how to
@@ -63,32 +63,35 @@ The lack of emission lines on synthetic templates is known to have a
 negative effect on the photometric redshift predictions (see, e.g.,
 Ilbert et al. 2009 :cite:`Ilb09`). Phosphoros gives the possibility to
 add modeled emission lines to the input restframe SED templates (see
-the :ref:`emission-lines` section). For a given template, Phosphoros
-first determines the flux of the [OII] emission line (3727\ |AAm| at
-the emitter restframe) from the ultraviolet (UV) luminosity and then
-adopts flux ratios in relation to the [OII] line to derive the fluxes
-of the other emission lines (see Table below).
+the :ref:`emission-lines` section).
 
-Kennicutt (1998) :cite:`Ken98` showed that the UV continuum and the
-luminosity of the [OII] emission line are both a diagnostic of the
-star formation rate (SFR) in galaxies. Using their relations with the
-SFR, the UV continuum is translated to the [OII] line flux through the
-relation (Moustakas et al. 2006 :cite:`Mou06`):
+For a given template, Phosphoros first determines the flux of the
+[:math:`H\alpha` ] emission line (6563\ |AAm| at the emitter
+restframe) from the ultraviolet (UV) continuum flux by integrating the
+SED between 1500\ |AAm| and 2800\ |AAm|. The strength of the other
+emission lines are then obtained from their expected flux ratios in
+relation to the [:math:`H\alpha` ] line flux. The list of the emission lines
+considered in Phosphoros is given in :numref:`temline`, along with the
+flux ratios. These are determined in the Phosphoros paper using
+emission line flux measurements from a low-redshift sample of
+SDSS-III/BOSS sources (see the paper for more details).
 
-.. math::
+.. and then adopts flux ratios in relation to the
+   [:math:`H\alpha` ] line to derive the fluxes of the other emission
+   lines (see Table below).
+
+.. Kennicutt (1998) :cite:`Ken98` showed that the UV continuum and the
+   luminosity of the [OII] emission line are both a diagnostic of the
+   star formation rate (SFR) in galaxies. Using their relations with the
+   SFR, the UV continuum is translated to the [OII] line flux through the
+   relation (Moustakas et al. 2006 :cite:`Mou06`):
+
+.. math
     
     f_{[OII]} = 0.745\times10^{13}\,f_{UV}\,.
 
-By default, Phosphoros estimates the UV continuum flux for a given
-template by integrating its SED between 1500\ |AAm| and 2800\ |AAm|.
-
-The strength of the other emission lines are then obtained from their
-expected flux ratios in relation to the [OII] line flux. The list of
-the emission lines considered in Phosphoros is given in
-:numref:`temline`, along with the flux ratios. These are determined in
-the Phosphoros paper using emission line flux measurements from a
-low-redshift sample of SDSS-III/BOSS sources (see the paper for more
-details).
+.. By default, Phosphoros estimates the UV continuum flux for a given
+   template by integrating its SED between 1500\ |AAm| and 2800\ |AAm|.
 
 .. table:: Emission line flux ratios
    :name: temline
@@ -96,17 +99,21 @@ details).
    +--------------------+------------------------------+-------------+
    | Emission Line      | |lambda| [ |AAm| ]           | Line/[OII]  |
    +====================+==============================+=============+
-   | :math:`H\alpha`    | 6562.80                      | 1.35        |
+   | :math:`H\alpha`    | 6562.80                      | 1.0000      |
    +--------------------+------------------------------+-------------+
-   | :math:`H\beta`     | 4861.32                      | 0.40        |
+   | :math:`H\beta`     | 4861.32                      | 0.2960      |
    +--------------------+------------------------------+-------------+
-   | :math:`H\gamma`    | 4340.46                      | 0.17        |
+   | :math:`H\gamma`    | 4340.46                      | 0.1350      |
    +--------------------+------------------------------+-------------+
-   | :math:`H\delta`    | 4101.73                      | 0.10        |
+   | :math:`H\delta`    | 4101.73                      | 0.0770      |
    +--------------------+------------------------------+-------------+
-   | OIII               | 4958.91                      | 0.12        |
+   | OII                | 3726.10                      | 0.3165      |
    +--------------------+------------------------------+-------------+
-   | OIII               | 5006.84                      | 0.33        |
+   | OII                | 3728.80                      | 0.3165      |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 4958.91                      | 0.0490      |
+   +--------------------+------------------------------+-------------+
+   | OIII               | 5006.84                      | 0.1410      |
    +--------------------+------------------------------+-------------+
 
 
@@ -311,11 +318,26 @@ filter :math:`i` is computed by:
 where :math:`T_i` is the filter trasmission curve and
 :math:`f_m(\lambda)` is the observer-frame modeled SED.
 
-Phosphoros supplies some typical transmission curves for filters in
-nearIR/optical/UV bands as auxiliary data. For instance,
-:numref:`mfilter` shows the filter trasmission curves used in the
-*Euclid* Data Challenge 3. Users can select the transmission curves to
-be used or add new ones.
+For energy-measuring systems, such as bolometers, the observed flux
+through a filter :math:`i` is instead:
+
+.. math::
+   :label: fi2
+
+   f_m^i =
+   \frac{\int f_m(\lambda)
+   T_i(\lambda)d\lambda}{\int
+   T_i(\lambda)\frac{c\,d\lambda}{\lambda^2}}\,.
+
+Phosphoros is able to handle both cases, i.e. photon-counting and
+energy-measuring filters (see the :ref:`auxiliary_format` sub-section
+of the ``File Format Reference`` chapter).
+   
+Phosphoros ``Data Pack`` repository supplies some typical transmission
+curves for filters in nearIR/optical/UV bands as auxiliary data. For
+instance, :numref:`mfilter` shows the filter trasmission curves used
+in the *Euclid* Data Challenge 3. Users can select the transmission
+curves to be used or add new ones.
 
 .. figure:: /_static/first_step/filter_curves_DC3.png
     :name: mfilter
@@ -325,18 +347,6 @@ be used or add new ones.
 
     Filter trasmission curves at different bands from the *Euclid*
     Data Challenge 3.
-
-..
-   If photometers measure the flux of incoming radiation, the previous
-   equation become: 
-
-   .. math::
-
-      f_T^i =
-      \frac{\int_{\lambda}f_T(\lambda)T_i(\lambda)d\lambda}{\int_{\lambda}
-      \frac{c}{\lambda^2}T_i(\lambda)d\lambda}\,, 
-
-   *(is it included in Phosphoros?)*
 
 .. _galactic-absorption:
 
@@ -457,7 +467,7 @@ Phosphoros allows two options to provide color excess values:
   directly from the reddening map provided by *Planck*
   :cite:`Planck14`.
 
-.. note::
+.. warning::
 
    The absorption law :math:`k_{\scriptscriptstyle MW}(\lambda)` used
    in Phosphoros is calibrated by main sequence B5 stars. If Galactic
@@ -471,7 +481,8 @@ Phosphoros allows two options to provide color excess values:
    B5}_{B-V}=E^{\scriptscriptstyle Planck}_{B-V}\times1.018`. On the
    contrary, color excess from the Schlegel et al. :cite:`Sch98`
    Galactic reddening map does not require any band-pass
-   correction. *(tbc)*
+   correction.
+   .. *(tbc?)*
 
 .. in Schlegel+98 paper, they say that they use elliptical galaxies, not B5 stars!!
 
@@ -490,8 +501,8 @@ As first step, Phosphoros builds a grid of modeled photometry: this
 consists of one photometric value for each selected filter, spanning
 over all possible model parameters. The parameters are: redshift
 :math:`z`, restframe SED template, color excess :math:`E_{B-V}` and
-reddening curve :math:`k(\lambda)`, both related to intrinsic dust
-absorption.
+reddening curve :math:`k(\lambda)` (the last two paramteres are
+related to intrinsic dust absorption).
 
 The next step is to compute, for each catalog source, the likelihood
 :math:`\mathcal{L}` that observed photometry are described by a model
@@ -514,7 +525,7 @@ determine the best-fit model and consequently the photometric
 redshift of a source.
 
 In principle, the normalization (or **scale**) factor :math:`\alpha`
-present in the above equation should be an additional model
+in the above equation should be an additional model
 parameter. However, in order to reduce the number of free parameters
 and to be faster, Phosphoros fixes :math:`\alpha` to the value that
 minimize the :math:`\chi^2`. This can be derived analytically by:

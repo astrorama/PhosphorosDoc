@@ -54,8 +54,10 @@ Phosphoros Root Directory
 The root directory is the location of the top-level Phosphoros
 directory. By default, it is ``$HOME/Phosphoros``. This location can
 be simply modified by setting the ``PHOSPHOROS_ROOT`` environment
-variable (see the instructions in the :ref:`using-dockphos`
-section).
+variable to a different directory.
+
+.. ref:`using-dockphos`
+
 
 ..    setting the ``PHOSPHOROS_ROOT``
       environment variable or with the start command as::
@@ -77,7 +79,7 @@ with their errors. Rows refer to different sources. One source ID
 column (e.g., ``OBJECT_ID``) must be present. The catalog format is
 either ASCII or FITS as described in :ref:`Catalogs format
 <format-catalogs>` section. Fluxes must be provided in :math:`\mu`\ Jy
-unit.
+unit (AB magnitudes are also accepted).
 
 Input catalogs are placed into sub-directories according to their ``catalog
 type``. For example, catalogs belonging to the ``COSMOS`` catalog type
@@ -106,6 +108,12 @@ database are:
   typically found in sub-directories of the ``Filters`` directory::
 
        > $PHOSPHOROS_ROOT/AuxiliaryData/Filters/
+
+  Filter transmission curves can refer either to photon-counting or
+  energy-measuring systems. By default, Phosphoros assumes
+  photon-counting systems (see the :ref:`Auxiliary Data
+  Format <auxiliary_format>` section to know how to handle
+  energy-measuring systems).
 
 * **Spectral Energy Distribution (SED) templates**, which consist in
   restframe :ref:`SED templates <templates>` of galaxies, stars,
@@ -159,7 +167,8 @@ Intermediate products are all the relevant files produced by
 Phosphoros before the execution of the ``Redshift Estimate``
 step. They can be reused for different runs. Typical intermediate
 products are the grid of models, the grid of luminosity models, the
-filter mapping, etc. They are organized per catalog type, e.g.::
+filter mapping, etc. They are organized per catalog type, e.g. for the
+``Cosmos`` catalog type::
 
       > $PHOSPHOROS_ROOT/IntermediateProducts/Cosmos/
 

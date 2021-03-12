@@ -7,14 +7,17 @@ compliant software. Nevertheless, Phosphoros provides some tools to
 facilitate the process of analysis and visualization of results. In
 particular:
 
+.. _statistics:
+
 Statistical Analysis
 -------------------------
+     
+Phosphoros can compute the following statistical information on the
+**redshift PDF** of sources in the output catalog (in brackets, we
+report the name used in Phosphoros to identify the redshift point
+estimators; see below):
 
-Phosphoros can compute the following statistical
-information on the **redshift PDF** of sources in the
-output catalog:
-
-- Median
+- Median (``Z-1D-PDF_Statistic-MEDIAN``)
 
 - Confidence interval at 70, 90 and 95%. This is computed 
 
@@ -27,11 +30,17 @@ output catalog:
 - For the first two modes of the distribution, the tool finds the
   best-fitting Gaussian function and computes
   
-  1. the sampled redshift with the highest probability;
+  1. the sampled redshift with the highest probability
+     (``Z-1D-PDF_Statistic-PHZ_MODE_1_SAMP`` or
+     ``Z-1D-PDF_Statistic-PHZ_MODE_2_SAMP``); 
 
-  2. the mean of the fitted distribution;
+  2. the mean of the fitted distribution
+     (``Z-1D-PDF_Statistic-PHZ_MODE_1_MEAN`` or
+     ``Z-1D-PDF_Statistic-PHZ_MODE_2_MEAN``); 
 
-  3. the redshift at the peak of the fitted distribution;
+  3. the redshift at the peak of the fitted distribution
+     (``Z-1D-PDF_Statistic-PHZ_MODE_1_FIT`` or
+     ``Z-1D-PDF_Statistic-PHZ_MODE_2_FIT``); 
 
   4. the area below the fitted distribution.
 
@@ -111,21 +120,15 @@ Visualization
 Phosphoros provides tools for the visualization of results. In
 particular, the following plots can be produced:
 
-.. figure:: /_static/basic_steps/SPECZ-PHZ.png
-   :name: bvis1
-   :align: center
-   :scale: 60 %
-
-   *(left)* Photometric vs Reference redshifts and their relative
-   difference; *(right-top)* distribution of the relative
-   difference; *(right-bottom)* the redshift PDF of the selected
-   source in the *left* plot.
-
 - A plot comparing photometric redshifts (:math:`photoZ`) estimated by
   Phosphoros with reference redshifts (:math:`specZ`; typically
-  spectroscopic redshifts) provided by users. Below it, a plot with
+  spectroscopic redshifts) provided by users. Below that, a plot with
   their relative difference, :math:`(photoZ-specZ)/(1+specZ)`, as a
-  function of :math:`specZ` is also shown (left plot in :numref:`bvis1`).
+  function of :math:`specZ` is also shown (left plot in
+  :numref:`bvis1`). Users can choose among different point estimators
+  of the photometric redshift :math:`photoZ` (like the redshift of the
+  best-fit model, the peak of the redshift PDF, and the statical
+  estimators described above in the :ref:`statistics` sub-section).
 
 - The histogram of the relative difference
   :math:`(photoZ-specZ)/(1+specZ)`. Some basic statistics are computed
@@ -134,9 +137,20 @@ particular, the following plots can be produced:
 - The :math:`photoZ\,{\rm vs}\,specZ` plot is interactive, and allows
   users to examine the redshift PDF of sources in the plot. By a
   single click on a source, its ID will be presented at the top left
-  of the window and the 1D PDF will be plotted in a separated
-  window (right-bottom plot in :numref:`bvis1`).
+  of the window and the 1D PDF for redshift and :math:`E(B-V)` will be
+  plotted in a separated windows (right-bottom plot in
+  :numref:`bvis1`).
   
+
+.. figure:: /_static/quickstart/SPECZ-PHZ_v018.png
+   :name: bvis1
+   :align: center
+   :scale: 60 %
+
+   *(left)* Photometric vs Reference redshifts and their relative
+   difference; *(right-top)* distribution of the relative difference;
+   *(right-bottom)* the redshift and :math:`E(B-V)` PDF of the
+   selected source in the *left* plot.
 
 .. figure:: /_static/basic_steps/stacked_PHZ.png
    :name: bvis2
@@ -216,6 +230,14 @@ also useful (see, e.g., :cite:`Her00`; :cite:`Dis18`):
     the scope of the *Basic Steps* chapter. We refer the reader to the
     :ref:`posterior-investigation` section.
 
+	 
+.. figure:: /_static/basic_steps/Post_proc_plot.png
+   :name: bvis4
+   :align: center
+   :scale: 70 %
+	   
+   ``Post Processing`` window of the GUI for the visualization of results
+
     
 Visualization with the GUI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -225,22 +247,25 @@ Phosphoros tools for the visualization of results. Clicking on
 ``Plots`` opens a window with the required action parameters (see
 :numref:`bvis4`).
 
-Both the best-fit redshift or the redshift at the 1D PDF peak can be
-used for comparison with the reference redshift (see the ``Redshift
-Column`` drop-down menu).
+By the ``Point Estimate Redshift Column`` drop-down menu, different
+point estimators of the photometric redshift can be selected for the
+comparison with the reference redshift. They are the redshift
+associated with the best-fit model (``Z``), the
+peak of the redshift PDF (``1DPDF-Peak-Z``), and all the statistical
+estimators described in the above :ref:`statistics` sub-section.
 
 In ``Reference Redshift Catalog``, users have to select the file where
-reference redshifts are found, the column names of the source ID and
+reference redshifts are found, the column name of the source ID and
 of the reference redshift. However, if a reference redshift column in
 the input catalog has been provided in the ``Catalog Setup`` panel
 (see the :ref:`Catalog Setup <mapping>` section), Phosphoros will
 automatically fill these fields.
 
 In ``Option`` users can decide which plots to produce. Clicking on
-``Point estimate scatter plot and stat.``, plots in :numref:`bvis1`
-will be displayed. For very large catalogs, there is the option to not
-display any plots. Phosphoros will only print basic statistics for the
-:math:`(photoZ-specZ)/(1+specZ)` distribution.
+``Point estimate scatter plot and stat.``, Phosphoros will display the
+plots shown in :numref:`bvis1`. For very large catalogs, there is the
+option to not display any plots. Phosphoros will only print basic
+statistics for the :math:`(photoZ-specZ)/(1+specZ)` distribution.
 
 Clicking on ``Stacked PDF, PIT and CRPS plots``, users can manually
 select the plots to display (see :numref:`bvis2` and :numref:`bvis3`
@@ -251,13 +276,6 @@ can be choosen using the corresponding drop-down menus.
 
 The ``Compute`` tab at the bottom runs the process and a window per
 plot opens.
-
-.. figure:: /_static/basic_steps/Post_proc_plot.png
-   :name: bvis4
-   :align: center
-   :scale: 70 %
-	   
-   ``Post Processing`` window of the GUI for the visualization of results
 
 Visualization with the CLI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -278,9 +296,11 @@ formats.
 .. note::
 
    By default, the tool plots the redshift of the best-fit model,
-   i.e. column named ``Z`` in the output catalog. If users want to
-   use the redshift corresponding to the peak of the 1D-PDF, they
-   should pass the option ``-pcol=1DPDF-Peak-Z``.
+   i.e. column named ``Z`` in the output catalog. If users want to use
+   a different redshift estimator, they should pass the option
+   ``-pcol=<PHZ column name>``. For example, for the redshift
+   corresponding to the peak of the 1D-PDF, the option is
+   ``-pcol=1DPDF-Peak-Z``.     
 
 .. warning::
 
@@ -341,8 +361,10 @@ this file can be specified by the following options:
   PDF (default: ``Z-1D-PDF``).
   
 * ``--pdz-col-pe=`` the name of the column containing the redshift
-  estimate. This can be the redshift of best-fit model, ``Z``, or the redshift
-  at the peak of the PDF, ``1DPDF-Peak-Z`` (default: ``Z``).
+  estimator. This can be the redshift of best-fit model, ``Z``,  or the redshift
+  at the peak of the PDF, ``1DPDF-Peak-Z``, or one of the redshift
+  estimators discussed in the :ref:`statistics` sub-section (default:
+  ``Z``).
 
 .. warning::
 
@@ -423,9 +445,9 @@ source will be highlighted in the plot.
    instance), all selections will be reflected to all the plot
    windows.
    
-.. note::
+.. note
 
-   If you are using DockerPhosphoros, TOPCAT has to be launched from
+.. If you are using DockerPhosphoros, TOPCAT has to be launched from
    the Docker container.
 
 
