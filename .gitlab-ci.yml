@@ -1,0 +1,35 @@
+stages:
+  - build
+
+build-html:
+  stage: build
+  tags:
+    - Fedora
+  before_script:
+    - dnf install -y make python3-sphinx python3-sphinx_rtd_theme python3-sphinxcontrib-bibtex
+  script:
+    - make dirhtml
+  artifacts:
+    name: dirhtml
+    paths:
+      - build/dirhtml
+    expire_in: 1month
+
+build-pdf:
+  stage: build
+  tags:
+    - Fedora
+  before_script:
+    - dnf install -y make python3-sphinx latexmk texlive-cmap texlive-metafont
+        texlive-ec texlive-fncychap texlive-fancyhdr texlive-titlesec
+        texlive-tabulary texlive-framed texlive-wrapfig texlive-parskip
+        texlive-upquote texlive-capt-of texlive-needspace texlive-times
+        texlive-makeindex texlive-helvetic texlive-courier texlive-gsftopk
+        texlive-updmap-map texlive-dvips python3-sphinxcontrib-bibtex
+  script:
+    - make latexpdf
+  artifacts:
+    name: Phosphoros.pdf
+    paths:
+      - build/latex/Phosphoros.pdf
+    expire_in: 1month

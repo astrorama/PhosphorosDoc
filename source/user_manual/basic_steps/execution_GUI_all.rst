@@ -117,7 +117,11 @@ the catalog type). Moreover, the column name providing source ID must
 be entered through the ``Source ID Column`` drop down menu that
 shows all the column names in the input catalog.
 
+<<<<<<< HEAD
 .. figure:: /_static/Basic_steps/Catalog_Type_v018.png
+=======
+.. figure:: /_static/basic_steps/Catalog_Type.png
+>>>>>>> a2dc3cc669d9d5e0ab6583e71eeb02206351cf30
     :name: bsetup
     :width: 700px
     :align: center
@@ -316,8 +320,13 @@ top-right of the window).  Make sure to complete the full
 specification of the three groups before continuing to the next
 section.
 
+<<<<<<< HEAD
 .. figure:: /_static/Basic_steps/Parameter_Space1_v018.png
     :name: bpara 
+=======
+.. figure:: /_static/basic_steps/Parameter_Space.png
+    :name: bpara
+>>>>>>> a2dc3cc669d9d5e0ab6583e71eeb02206351cf30
     :align: center
     :scale: 50 %
 	    
@@ -344,7 +353,7 @@ At the top of the ``Compute Redshifts`` panel, users can select
 previously defined catalog types and parameter spaces to use in
 the following analysis.
 
-.. figure:: /_static/Basic_steps/ModelGrid.png
+.. figure:: /_static/basic_steps/ModelGrid.png
     :name: bmgrid
     :width: 700px
     :align: center
