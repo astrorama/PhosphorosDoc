@@ -316,13 +316,8 @@ top-right of the window).  Make sure to complete the full
 specification of the three groups before continuing to the next
 section.
 
-<<<<<<< HEAD
 .. figure:: /_static/Basic_steps/Parameter_Space1_v018.png
     :name: bpara 
-=======
-.. figure:: /_static/basic_steps/Parameter_Space.png
-    :name: bpara
->>>>>>> a2dc3cc669d9d5e0ab6583e71eeb02206351cf30
     :align: center
     :scale: 50 %
 	    
