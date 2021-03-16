@@ -7,8 +7,9 @@ Phosphoros User Manual
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
 
-   install/index   
+   install/index
    user_manual/quickstart
    user_manual/basic_steps/index
    user_manual/advanced/index
@@ -17,7 +18,7 @@ Phosphoros User Manual
    data
 
 .. Phosphoros Project Main Page
-   
+
 ..   user_manual/index
 ..   developer_manual/index
 ..   changes
@@ -36,4 +37,3 @@ Phosphoros User Manual
    outputs are Probability Density Functions (PDFs) providing
    probabilities as a function of redshift, but it can also produce
    best redshift values and PDFs as a function of other parameters.
-
