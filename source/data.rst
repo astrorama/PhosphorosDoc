@@ -10,5 +10,5 @@ Quickstart data
 This are the data needed by the :ref:`quickstart tutorial <quickstart>`. For
 instructions of how to use these data refer the tutorial itself.
 
-All quickstart data: `tar.gz file <http://www.isdc.unige.ch/euclid/phosphoros/data/other/quickstart.tar.gz>`_
+All quickstart data: `tar.gz file <https://github.com/astrorama/phosphoros-quickstart/archive/master/quickstart.tar.gz>`_
 

@@ -61,7 +61,7 @@ following commands will get the file and uncompress it::
     > cd ~
     > mkdir -p Phosphoros
     > cd Phosphoros
-    > wget http://www.isdc.unige.ch/euclid/phosphoros/data/other/quickstart.tar.gz
+    > wget https://github.com/astrorama/phosphoros-quickstart/archive/master/quickstart.tar.gz
     > tar -xzf quickstart.tar.gz
     
 .. note::
