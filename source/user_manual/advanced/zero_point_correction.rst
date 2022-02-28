@@ -3,14 +3,15 @@
 Photometric Zero-Point Corrections
 =====================================
 
-Photometric zero-point corrections aim to correct flux measurements by
+Photometric zero-point correction aims to correct flux measurements by
 band-specific photometric offsets, which can lead to systematic shifts
 in the observed colors, and consequently in the redshift
-estimates. These corrections take into account remaining zero-point
+estimates. This correction takes into account remaining zero-point
 calibration issues in one or more bands, and also potential mismatches
-between galaxy colours and the templates used to model them.
+between galaxy colours and the templates used to model them. 
 
-In order to derive zero-point corrections, Phosphoros needs a training
+In order to derive zero-point corrections, Phosphoros follows the
+method implemented in the *Le Phare* code. It needs a training
 sample of the input catalog with (spectroscopic) redshift
 measurements. The process to derive the zero-point corrections is
 iterative. For each source of the training sample, Phosphoros
@@ -43,7 +44,7 @@ Users can compute new zero-point corrections by clicking on the
 ``Compute New Corrections`` button. A pop-up window will appear, as
 shown in :numref:`zpc`.
 
-.. figure:: /_static/advanced_steps/zero_point.png
+.. figure:: /_static/advanced_steps/zero_point_v12.png
     :name: zpc
     :align: center 
     :width: 800px

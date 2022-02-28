@@ -2,7 +2,7 @@ Examining results
 =====================
 
 Output files produced by Phosphoros follow standardized formats (see
-the :ref:`result_files_format` section) and can be handled by any
+the :ref:`Results Format<result_files_format>` section) and can be handled by any
 compliant software. Nevertheless, Phosphoros provides some tools to
 facilitate the process of analysis and visualization of results. In
 particular:
@@ -101,7 +101,7 @@ the statistical information described above.
 Users have to provide the qualified name of the output catalog by the
 ``--input-cat`` action parameter. For example::
 
-  > Phosphoros POP --input-cat=Phosphoros/Results/<Catalog Type>/<Catalog File Name>/phz_cat.fits
+  > Phosphoros POP --input-cat=$PHOSPHOROS_ROOT/Results/<Catalog Type>/<Catalog File Name>/phz_cat.fits
 
 The name and the location of the output file (by default ``out.fits``
 and located in the same directory as the ouput catalog) can be set by
@@ -121,14 +121,16 @@ Phosphoros provides tools for the visualization of results. In
 particular, the following plots can be produced:
 
 - A plot comparing photometric redshifts (:math:`photoZ`) estimated by
-  Phosphoros with reference redshifts (:math:`specZ`; typically
-  spectroscopic redshifts) provided by users. Below that, a plot with
-  their relative difference, :math:`(photoZ-specZ)/(1+specZ)`, as a
-  function of :math:`specZ` is also shown (left plot in
-  :numref:`bvis1`). Users can choose among different point estimators
-  of the photometric redshift :math:`photoZ` (like the redshift of the
-  best-fit model, the peak of the redshift PDF, and the statical
-  estimators described above in the :ref:`statistics` sub-section).
+  Phosphoros with reference redshifts (:math:`specZ`) provided by
+  users. Below that, a plot with their relative difference,
+  :math:`(photoZ-specZ)/(1+specZ)`, as a function of :math:`specZ` is
+  also shown (left plot in :numref:`bvis1`). Users can choose among
+  different point estimators of the photometric redshift
+  :math:`photoZ` (like the redshift of the best-fit model, the peak of
+  the redshift PDF, and the statical estimators described above in the
+  :ref:`statistics` sub-section). Colors in the :math:`photoZ\,{\rm
+  vs}\,specZ` plot are associated to the number density of objects,
+  blue at the lowest density and dark red at the highest density.
 
 - The histogram of the relative difference
   :math:`(photoZ-specZ)/(1+specZ)`. Some basic statistics are computed
@@ -179,8 +181,8 @@ particular, the following plots can be produced:
   (``FIT``) [#f1ex]_ of the stacked PDFs.
 
 - The fractions of the stacked PDFs enclosed in a :math:`0.05(1+z)`
-  interval (``F005``) -- or in a :math:`0.15(1+z)` interval (``F015``)
-  -- around the mean of the stacked PDF per :math:`specZ` bin (where
+  interval (``F005``) or in a :math:`0.15(1+z)` interval (``F015``)
+  around the mean of the stacked PDF per :math:`specZ` bin (where
   :math:`z` is the center of the bin). As for the bias, the mean can
   be replaced with the median, the maximum or the fit of the
   stacked PDF (right-bottom plot in :numref:`bvis2`).
@@ -306,7 +308,7 @@ formats.
 
     If users have leftover results from previous executions (e.g., 1D
     PDFs in separate files), the tool will not recognize that they are
-    belonging to a different run. In this case the directory should be
+    belonging to a different run. Therefore the directory should be
     cleaned before runnning the analysis.
 
 Phosphoros does not copy the reference redshifts in the output
@@ -431,7 +433,7 @@ source will be highlighted in the plot.
     For TOPCAT to broadcast the row selection you have to check the ``Broadcast
     Row`` box:
 
-.. figure:: /_static/first_step/TopcatBroadcastRow.png
+.. figure:: /_static/first_step/TopcatBroadcastRow_v12.png
     :name: btopcat
     :align: center
     :scale: 70 %

@@ -18,9 +18,10 @@ distribution, etc.), and the redshift Probability Density Function
 redshift.
 
 Phosphoros involves two main steps (discussed in detail in the
-:ref:`Methodology <methodology>` section):
+Phosphoros paper :cite:`PP22`; see also the :ref:`Methodology
+<methodology>` chapter for a shorter overview):
 
-**1) Grid of Models** As a first step, it generates a *large* set of
+**Grid of Models)** As a first step, it generates a *large* set of
 models for which photometry are computed. Models are characterized by
 four parameters: redshift, restframe Spectral Energy Distribution
 (SED) template, intrinsic reddening curve and intrinsic color excess
@@ -47,7 +48,8 @@ following operations (in this order):
 Each model is characterized by a vector of computed photometric
 values, one value for each selected filter.
 
-**2) Redshift Estimate**
+**Redshift Estimate)** Phosphoros is now able to estimate the redshift
+of sources in the input catalog.
 
 * The likelihood :math:`\mathcal{L}` of models is determined by
   computing the :math:`\chi^2` between observed and modeled
@@ -55,6 +57,10 @@ values, one value for each selected filter.
 
 * (optional) Priors on input parameters are taken into account and
   the posterior distribution of a model is computed.
+
+* (optional) The SED template normalization (or scale factor), which
+  is usually fixed to its best-likelihood value, can be treated as a
+  free parameter in a fully Bayesian approach.
 
 * The output is a catalog containing the best-fit model for each
   input source and its redshift at the redshift PDF peak. Optionally,
@@ -66,10 +72,12 @@ values, one value for each selected filter.
 Phosphoros includes also:
   
 **Additional functionalities**, to be applied after generating the
-grid of models and before the redshift estimate, as:
+grid of models and before the redshift estimate:
 
 * (optional) Correction for the SED reddening due to Milky Way dust
   absorption.
+
+* (optional) Flux corrections due to variations in filter transmissions.
 
 * (optional) Zero-point correction, accounting for calibration issues
   and mismatches between galaxy colors and templates.

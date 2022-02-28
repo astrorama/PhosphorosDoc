@@ -68,6 +68,7 @@ variable to a different directory.
       <docker-installation>` section for more details.
 
 Below the root directory, there are five main directories:
+
 ``Catalogs``, ``AuxiliaryData``, ``IntermediateProducts``, ``Results``
 and ``Config``.
 
@@ -77,7 +78,7 @@ Catalogs
 Input catalog files contain multi-band photometric flux measurements,
 with their errors. Rows refer to different sources. One source ID
 column (e.g., ``OBJECT_ID``) must be present. The catalog format is
-either ASCII or FITS as described in :ref:`Catalogs format
+either ASCII or FITS as described in the :ref:`Catalog format
 <format-catalogs>` section. Fluxes must be provided in :math:`\mu`\ Jy
 unit (AB magnitudes are also accepted).
 
@@ -98,8 +99,7 @@ Auxiliary Data
 
 All input files that are not catalogs are referred to as **auxiliary
 data**. They include all the required information to build the grid of
-models. Auxiliary data that need to be present in the Phosphoros
-database are:
+models. Auxiliary data needed in the Phosphoros database are:
 
 * **Filter transmission curves**, which characterise the telescope
   full :ref:`transmission curves <filter-curves>` as a function of
@@ -116,12 +116,23 @@ database are:
   energy-measuring systems).
 
 * **Spectral Energy Distribution (SED) templates**, which consist in
-  restframe :ref:`SED templates <templates>` of galaxies, stars,
-  etc. Based on them, Phosphoros generates a grid of modeled photometry
-  that are compared with photometric measurements. They are in
-  erg/s/cm\ :sup:`2`/|AAm|. They are found in sub-directories of::
+  restframe :ref:`SED templates <templates>` of galaxies, stars, QSOs,
+  etc. They are expected in erg/s/cm\ :sup:`2`/|AAm|, and they are
+  found in sub-directories of::
 
        > $PHOSPHOROS_ROOT/AuxiliaryData/SEDs/
+
+  Based on SED templates, Phosphoros generates a grid
+  of modeled photometry that are compared with photometric
+  measurements.
+
+  .. note::
+
+     Before generating the model grid, Phosphoros normalizes all SED
+     templates to the solar luminosity at 10pc distance with respect
+     to a given filter transmission (that users can choose). In
+     this way, Phosphoros can provide physically well defined values
+     of the scale factor in output catalogs.
 
 * **Reddening Curves**, which provide the attenuation curves required
   to compute the :ref:`intrinsic absorption
@@ -143,9 +154,6 @@ directory.
  priors** in the ``AxisPriors`` and ``GenericPriors`` directories,
  respectively.
 
-Information on the auxiliary data format can be found in the
-:ref:`File Format Reference <format-reference-section>` chapter.
-
  ..
     Additional auxiliary data can be also present, such as
     luminosity functions, axes priors and multi-dimensional generic
@@ -158,7 +166,9 @@ Information on the auxiliary data format can be found in the
     detailed information on Auxialiary data format can be found in the
     :ref:`File Format Reference <format-reference-section>` section.
 
-       
+Information on the auxiliary data format can be found in the
+:ref:`File Format Reference <format-reference-section>` chapter.
+
 
 Intermediate Products
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -172,8 +182,8 @@ filter mapping, etc. They are organized per catalog type, e.g. for the
 
       > $PHOSPHOROS_ROOT/IntermediateProducts/Cosmos/
 
-When using Phosphoros through the |GUI| you will never need to open
-the ``IntermediateProducts`` folder. If you use the |CLI| you may have
+When using Phosphoros through the GUI you will never need to open
+the ``IntermediateProducts`` folder. If you use the CLI you may have
 to locate files to be provided to the next computation step.
 
       
@@ -182,7 +192,7 @@ Results
 
 The main product of Phosphoros is an output source catalog that
 includes redshift estimates, best-fit models and, optionally,
-1D PDFs of model paramters (see the :ref:`Compute Redshifts
+1D PDFs of model parameters (see the :ref:`Compute Redshifts
 <computing-redshifts>` section). File format can be ASCII or
 FITS. Output data are organized per catalog type, e.g.::
 
@@ -235,6 +245,17 @@ deleting files can be done using the shell commands such as ``cp``,
 them). Users can also create or re-arrange sub-directories in the
 Phosphoros structure to match their preferred organization scheme by
 the ``mkdir`` shell command or by the GUI.
+
+The Auxiliary Data Pack, including the *quickstart* input
+catalog used in :ref:`Quickstart in 15 minutes <quickstart>` chapter,
+can be dowloaded from the Phosphoros repository through the GUI (see
+:ref:`config`) or the CLI (see :ref:`data-pack`). Files will be
+automatically located in the proper directories. The data pack has
+everything you need to run Phosphoros with the *quickstart*
+catalog. It also contains a set of filter transmissions for the main
+recent UV/optical/IR surveys, the commonly adopted reddening curves
+and a large library of SED templates (a full description of the data
+pack can be found in the :ref:`data-repository` chapter).
 
 Much of the data manipulated by Phosphoros can be reused in different
 analyses. The directory structure described above is designed to keep

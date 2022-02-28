@@ -67,7 +67,7 @@ For :math:`m_0(I)>20`, we assume that:
    power-law cutoff in the future Phosphoros versions.
    
 In total, there are 16 free parameters
-:math:`\{\alpha_t,\,z_{0t},\,k_{mt},\,f_t,\,k_t\,C_t\}`. The values
+:math:`\{\alpha_t,\,z_{0t},\,k_{mt},\,f_t,\,k_t,\,C_t\}`. The values
 of free parameters used in Phosphoros are reported in
 :numref:`tzprior` (they are updated with respect to the ones provided
 by Benitez 2000 and Ilbert et al. 2006). Users can change them in the
@@ -100,7 +100,7 @@ Prior`` a popup window opens where users have to select the *B* and
 *I* filters from the database. These filters are needed to compute the
 *B-I* color of modeled templates and so their type.
 
-.. figure:: /_static/advanced_steps/z_distr_prior.png
+.. figure:: /_static/advanced_steps/z_distr_prior_v12.png
     :name: zprior 
     :align: center
     :width: 800px

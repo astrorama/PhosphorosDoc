@@ -3,6 +3,21 @@
 Additional Functionalities in the CLI
 ==================================================
 
+.. _data-pack:
+
+Download or update the Data Pack
+------------------------------------------------------
+
+The ``update_data_package`` (or ``UDP``) comand line action allows
+users to (re-)download the last available version of the auxiliary
+data pack from the Phosphoros repository (containing, i.e., SEDs,
+filters, Reddening curves, etc.). Files are automatically located in
+the proper directories according to the Phosphoros internal data
+organization (see :ref:`directory-organization`).
+
+This action is also useful if users altered the data locally and they
+want to replace them with the current data pack on the repository.
+
 .. _order-sed:
 
 Order the SED templates
@@ -72,7 +87,7 @@ Retrieve the SED template of a single model
 ----------------------------------------------------------
 
 The ``compute_model_sed`` (or ``CMS``) action allows users to compute,
-given a SED template, the modelled SED for a set of parameters
+given a SED template, the modeled SED for a set of parameters
 :math:`\{`\ Z, :math:`E_{(B-V)}`, reddening curve\ :math:`\}`. The
 computed SED will be displayed on the terminal. For example::
 
@@ -88,6 +103,10 @@ is ``0``.
 IGM absorption can be also included using the
 ``--igm-absorption-type`` parameter. Allowed arguments are: ``OFF``
 (default), ``MADAU``, ``MEIKSIN``, ``INOUE``.
+
+The modeled SED can be normalized to the solar luminosity at 10pc
+distance in a particular filter through the standard normalization
+options, ``--normalization-filter`` and ``--normalization-solar-sed``.
 
 .. warning::
 
@@ -240,7 +259,7 @@ following action parameters of the ``compute_redshift`` action::
 Build a reference sample
 ------------------------------------------------------
 
-Phosphoros includes a tool to build a (*NNPZ*) reference sample that
+Phosphoros includes a tool to build a reference sample that
 provides, for each source of the output catalog, the redshift PDF and
 the SED corresponding to the best-fit model.
 
@@ -255,10 +274,13 @@ Phosphoros will complain)::
 
 More options are::
   
+  --normalization-filter=<path>/<filter>
+  --normalization-solar-sed=solar_spectrum
   --phosphoros-catalog-format=<arg>
   --igm-absorption-type=<arg>
 
-They are used to specify the format of the output catalog (``FITS`` or
+They are used to specify the filter and the solar SED for the template
+normalization, the format of the output catalog (``FITS`` or
 ``ASCII``; default= ``FITS``) and the type of IGM absorption to apply
 (``OFF``, ``MADAU``, ``MEIKSIN``, ``INOUE``; default= ``OFF``).
 

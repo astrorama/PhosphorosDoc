@@ -5,7 +5,7 @@ SED weights
 
 SED template is one of the free parameters used in the model fitting
 by Phosphoros. The SED axis consists in a discrete set of SEDs that
-however map what is actually a continuous multi-dimensional space. For
+map what is actually a continuous multi-dimensional space. For
 each SED, Phosphoros computes a weight that quantifies the information
 brought by the SED with respect to the other SEDs of the library (for
 example, if the library contains two identical SEDs, their weights
@@ -13,16 +13,16 @@ will be reduced by a factor two). Weights are taken into account in
 projected likelihoods.
 
 Let's see how SED weights are computed (a more detailed explaination
-can be found in the Phosphoros Paper ?). Given a set of filters, for
-each SED template we can compute all the colors associated to the
-filters. In this way, any SED is mapped to a set of continuous values.
-A distance between SEDs can be therefore straightforwardly defined in
-the color space. Based on it, the *area of influence* of a SED in the
-color space is defined as the volume of the hypercube with side equal
-to the maximum distance found between two SEDs. The SED weight is then
-defined by the volume uniquely covered by a SED (volumes are
-normalized such that a completely separated SED would have a volume of
-1).
+can be found in the Phosphoros Paper :cite:`PP22`). Given a set of
+filters, for each SED template we can compute all colors associated to
+the filters. In this way, any SED is mapped to a set of continuous
+values.  A distance between SEDs can be therefore straightforwardly
+defined in the colors space. Based on it, the *area of influence* of a
+SED in the colors space is defined as the volume of the hypercube with
+side equal to the maximum distance found between two SEDs. The SED
+weight is then defined by the volume uniquely covered by a SED
+(volumes are normalized such that a completely separated SED would
+have a volume of 1).
 
 
 SED weights with GUI 
@@ -30,8 +30,7 @@ SED weights with GUI
 
 In the ``3. Priors`` sub-panel of the ``Compute Redshifts`` panel,
 users can add or discard SED weights in the redshift computation by
-clicking on the ``Add SED's weights computation`` control (by default,
-they are used).
+clicking on the ``Add SED's weights computation`` control.
 
 
 SED weights with CLI
@@ -50,32 +49,24 @@ see above).
 
 An example of configuration file is::
 
-  > SED-Weight-Output=<output file>
-  > catalog-type=Quickstart
-  > model-grid-file=Grid_QuickStart_MADAU.dat 
+  SED-Weight-Output=<output file>
+  catalog-type=Quickstart
+  model-grid-file=Grid_QuickStart_MADAU.dat 
   
-  > filter-name=Quickstart/H
-  > filter-name=Quickstart/J
-  > filter-name=Quickstart/Y
-  > filter-name=Quickstart/g
-  > filter-name=Quickstart/i
-  > filter-name=Quickstart/r
-  > filter-name=Quickstart/vis
-  > filter-name=Quickstart/z
+  filter-name=Quickstart/H
+  filter-name=Quickstart/J
+  filter-name=Quickstart/Y
+  filter-name=Quickstart/g
+  filter-name=Quickstart/i
+  filter-name=Quickstart/r
+  filter-name=Quickstart/vis
+  filter-name=Quickstart/z
 
 The output file containing the SED weights is located by default in
 ``AuxiliaryData/GenericPriors/SedWeight/``. The location can be
 changed including the relative path with respect to this directory.
 
-.. warning::
-
-   SED weights will be applied in the redshift computation only if the
-   name of the SED-weights output file is provided to the
-   ``compute_redshifts`` action through the option::
-
-     > generic-grid-prior=<sed-weights output file name>
-
-The name of the input model-grid file should be provided by the
+The name of the input model-grid file is provided by the
 ``model-grid-file`` option. If the path is not included, the file is
 expected in the directory ``IntermediateProducts/<catalog
 type>/ModelGrids/``.
@@ -84,7 +75,15 @@ The filters to use for the SED-weight computation can be indicated one
 by one as above. Alternatively, users can select all the filters
 present in a given directory (or group) using the option
 ``filter-group=<directory name>`` (where the directory is expected to
-be under ``AuxiliaryData/Filters/``). Filters can be also excluded
+be below ``AuxiliaryData/Filters/``). Filters can be also excluded
 from a group by ``filter-exclude=<filter name>``.
+
+.. warning::
+
+   SED weights will be applied in the redshift computation only if the
+   name of the SED-weight output file is provided to the
+   ``compute_redshifts`` action through the option::
+
+     generic-grid-prior=<sed-weights output file name>
 
 

@@ -3,9 +3,76 @@
 Emission Lines
 ==============
 
-Phosphoros provides an external tool for adding emission lines to
-existing restframe SED templates. Users can afterwards use these
-SEDs for performing the analysis.
+The lack of emission lines on synthetic templates is known to have a
+negative effect on the photometric redshift predictions (see, e.g.,
+Ilbert et al. 2009 :cite:`Ilb09`). Phosphoros provides an external
+tool for adding modeled emission lines to the existing restframe SED
+templates. Users can afterwards use these SEDs for performing the
+analysis.
+
+For a given template, Phosphoros first determines the flux of the
+[:math:`H\alpha` ] emission line (6563\ |AAm| at the emitter
+restframe) from the ultraviolet (UV) continuum flux by integrating the
+SED between :math:`\lambda_0=1500` and :math:`\lambda_1=2800` |AAm|:
+
+.. math::
+   :label: el1 
+    
+      f_{[H\alpha]} = c_{H\alpha}\frac{\lambda_0\lambda_1}{\lambda_1-\lambda_0}
+      \int_{\lambda_0}^{\lambda_1}
+      f_m(\lambda)d\lambda,
+
+where :math:`c_{H\alpha}=5.91\times10^{-6}`. The strength of the other
+emission lines are then obtained from their expected flux ratios in
+relation to the [:math:`H\alpha` ] line flux. The list of the emission
+lines considered in Phosphoros is given in :numref:`temline`, along
+with the flux ratios. These are determined in the Phosphoros paper
+:cite:`PP22` using emission line flux measurements from a low-redshift
+sample of SDSS-III/BOSS sources (see the paper for more details).
+
+Phosphoros gives also the possibility to add emission lines following
+a *Le Phare-like* scheme (see the *Le Phare* website [#f1em]_). In
+this case, the strength of emission lines is determined from their
+flux ratio with the [OII] emission line doublet flux (see
+:numref:`temline`), which is computed from the UV continuum.
+
+.. table:: Emission line flux ratios
+   :name: temline
+	  
+   +--------------------+------------------------------+--------------------------+------------+
+   |                    |                              | Phosphoros               |  Le Phare  |
+   +--------------------+------------------------------+--------------------------+------------+
+   | Emission Line      | |lambda| [ |AAm| ]           | Line/[:math:`H\alpha` ]  | Line/[OII] |
+   +====================+==============================+==========================+============+
+   | :math:`H\alpha`    | 6562.80                      | 1.0000                   | 1.77       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | :math:`H\beta`     | 4861.32                      | 0.2960                   | 0.61       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | :math:`H\gamma`    | 4340.46                      | 0.1350                   | 0.00       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | :math:`H\delta`    | 4101.73                      | 0.0770                   | 0.00       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | OII                | 3726.10                      | 0.3165                   | 0.50       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | OII                | 3728.80                      | 0.3165                   | 0.50       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | OIII               | 4958.91                      | 0.0490                   | 0.13       |
+   +--------------------+------------------------------+--------------------------+------------+
+   | OIII               | 5006.84                      | 0.1410                   | 0.36       |
+   +--------------------+------------------------------+--------------------------+------------+
+
+
+Emission lines can be added using either a Dirac delta function or
+a Gaussian profile. In the latter case, the FWHM of each line is
+computed using the equation:
+
+.. math::
+   :label: el2
+    
+    FWHM = \lambda_{line} * \Delta v\,.
+
+where :math:`\Delta v` is the stellar velocity dispersion, expressed
+in speed of light unit.
 
 .. warning::
     
@@ -18,32 +85,26 @@ SEDs for performing the analysis.
 Adding emission lines in the GUI
 --------------------------------------------
 
-The GUI allows users to add emission lines to SED templates. In
-``Configuration-->AuxiliaryData-->SEDs`` sub-panel (see
-:numref:`emlines`), users can click on the ``Add emission lines to SEDs``
-button corresponding to the template directory to which they want to
-add emission lines (selection of individual files is not possible). A
-pop-up window opens, asking the scheme to use:
-
-- the *Phosphoros* scheme, as explained in the :ref:`Methodology
-  <emission-line-method>` section;
-
-- a *Le Phare-like* scheme (see next section, or the *Le Phare*
-  website [#f1em]_).
+In the ``Configuration-->AuxiliaryData-->SEDs`` sub-panel (see
+:numref:`emlines`) users can click on the ``Add emission lines to
+SEDs`` button corresponding to the template directory to which they
+want to add emission lines (selection of individual files is not
+possible). A pop-up window opens, asking the scheme to use: the
+*Phosphoros* scheme or a *Le Phare-like* scheme.
   
-The new templates, including emission lines, will have to be
+Then, the new templates, including emission lines, can be
 selected in the procedure to create or modify the parameter space
 (see the :ref:`Parameter Space <parameter-space-definition>` section).
 
-.. figure:: /_static/basic_steps/AuxDataManagement.png
-   :name: emlines
-   :align: center
-   :scale: 70 %
+.. figure:: /_static/basic_steps/AddEmLines_v12.png
+    :name: emlines
+    :align: center
+    :scale: 40 %
 	   
-   ``Configuration`` panel of the GUI where to add emission lines
+    ``Configuration`` panel of the GUI where to add emission lines
 	   
 This operation is non-destructive, meaning that it will not modify the
-original SED template files, neither add anything to the given
+original SED template files, neither add anything to the input
 directory. Instead, it will store the generated templates in a new
 directory, named the same as the original with the postfix ``_el``
 (for the *Phosphoros* scheme) or ``_lpel`` (for the *Le Phare-like*
@@ -53,6 +114,10 @@ generated files are the same of the original SED files, with the same
 format (see the :ref:`File format reference
 <format-reference-section>` section).
 
+.. note::
+
+    With the GUI, emission lines can be added only as a Dirac delta
+    function.
 
 Adding emission lines in the CLI
 --------------------------------------------
@@ -68,8 +133,8 @@ To simplify its usage, the action gets as input a directory with SED
 templates and adds emission lines to all of them (selection of
 individual files is not possible). Phosphoros will store the generated
 templates in a new directory, named the same as the original with the
-postfix ``_el``. The directory must not exist otherwise the script
-will complain.
+postfix ``_el`` (by default the *Phosphoros* scheme is used). The
+directory must not exist otherwise the script will complain.
 
 The input directory can be set by ``--sed-dir``. Using the Phosphoros
 standard structure, it is enough to give the directory name as, for
@@ -90,72 +155,39 @@ adding emission lines to SED templates.
     give their absolute path.
 
 Phosphoros already contains a default table for the emission line flux
-ratios (see the :ref:`emission-line-method` section) that is located in::
+ratios that is located in::
 
   > /path_to_PhosphorosCore_installation_directory/auxdir/EmissionLines/emission_lines.txt
   
 To use a customized table instead, the command line option
 ``--emission-lines`` allows users to specify a different table.
 
-With the CLI, users can also change the relation between the flux of
-the [:math:`H\alpha` ] line and of the UV continuum. In Phosphoros, for a given
-template, :math:`f_{temp}`, the [:math:`H\alpha` ] line flux is computed as:
+Other functionalities with the CLI include:
 
-.. math::
-    
-      f_{[H\alpha]} = c_{H\alpha}\frac{\lambda_0\lambda_1}{\lambda_1-\lambda_0}
-      \int_{\lambda_0}^{\lambda_1}
-      f_{temp}(\lambda)d\lambda,
-
-where the value of :math:`c_{H\alpha}` is set by the
-``--reference-factor`` option (default: ``5.91e-6``); the two
-wavelengths :math:`\lambda_0` and :math:`\lambda_1` (in |AAm|) define
-the UV continuum range and are set by the ``--uv-range`` option
-(default: ``1500,2800``).
+* changing the relation between the flux of the [:math:`H\alpha` ]
+  line and of the UV continuum, given in Eq. :eq:`el1`. The value of
+  :math:`c_{H\alpha}` is set by the ``--reference-factor`` option
+  (default: ``5.91e-6``); while the two wavelengths :math:`\lambda_0`
+  and :math:`\lambda_1` (in |AAm|) are set by the ``--uv-range``
+  option (default: ``1500,2800``).
    
-.. note::
+* adding emission lines following the *Le Phare-like* scheme. To
+  this purpose, the configuration file should be like::
 
-   Phosphoros CLI allows users to generate emission lines following
-   the *Le Phare-like* scheme. In this case, the flux of the [OII]
-   emission line is computed from the UV continuum, and the strength
-   of the other lines is determined from their flux ratio with the
-   [OII] line flux (see the table below). To this purpose, the
-   configuration file should be like::
+    sed-dir=<SEDs directory name>
+    suffix=_lpel
+    reference-factor=1.0e+13
+    uv-range=2100,2500
+    emission-lines=emission_lines_lephare.txt
 
-     sed-dir <SEDs directory name>
-     suffix _lpel
-     reference-factor 1.0e+13
-     uv-range 2100,2500
-     emission-lines emission_lines_lephare.txt
+  where the ``emission_lines_lephare.txt`` table (below the
+  ``Phosphoros/AuxiliaryData/`` directory) should contain the
+  emission line flux ratios reported in :numref:`temline`.
 
-   and the ``emission_lines_lephare.txt`` table (below the
-   ``Phosphoros/AuxiliaryData/`` directory) should contain the
-   emission line flux ratios used by the Le Phare code:
-
-   +--------------------+------------------------------+-------------+
-   | Emission Line      | |lambda| [ |AAm| ]           | Line/[OII]  |
-   +====================+==============================+=============+
-   | :math:`H\alpha`    | 6562.80                      | 1.77        |
-   +--------------------+------------------------------+-------------+
-   | :math:`H\beta`     | 4861.32                      | 0.61        |
-   +--------------------+------------------------------+-------------+
-   | :math:`H\gamma`    | 4340.46                      | 0.0         |
-   +--------------------+------------------------------+-------------+
-   | :math:`H\delta`    | 4101.73                      | 0.0         |
-   +--------------------+------------------------------+-------------+
-   | OII                | 3727.00                      | 1.00        |
-   +--------------------+------------------------------+-------------+
-   | OIII               | 4958.91                      | 0.13        |
-   +--------------------+------------------------------+-------------+
-   | OIII               | 5006.84                      | 0.36        |
-   +--------------------+------------------------------+-------------+
-
-   
-Phosphoros can add the emission lines either as a Dirac or a Gaussian
-function. In the latter case, the FWHM is computed by
-:math:`\lambda_{line}*\Delta v`, where the velocity dispersion
-:math:`\Delta v` is controlled by the ``--velocity`` parameter. If the
-parameter is absent, lines are added as dirac functions.
+* adding the emission lines as a Gaussian function. The FWHM is
+  computed by Eq. :eq:`el2`, where the velocity dispersion
+  :math:`\Delta v` is controlled by the ``--velocity`` parameter. If
+  the parameter is absent, lines are added as dirac functions.
     
 Some times it is useful to generate a file containing only the
 emission lines, without the original SED template. This can be done by
@@ -165,3 +197,6 @@ the option ``--no-sed``.
 .. rubric :: Footnotes
 
 .. [#f1em] see ``http://www.cfht.hawaii.edu/~arnouts/LEPHARE/lephare.html``
+
+	   
+.. bibliography:: references.bib

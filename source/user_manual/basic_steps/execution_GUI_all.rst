@@ -1,7 +1,7 @@
 .. _executing-gui-mode:
 
 The Graphical User Interface (GUI) execution mode
-=======================================================
+===============================================================
 
 Launching the GUI
 ----------------------------
@@ -13,12 +13,12 @@ GUI can be launched by the command line::
 
    > Phosphoros GUI
 
-Once the GUI starts, a window opens (see :numref:`bmain`). At the top of this, a
-navigation menu is visible with the main steps of Phosphoros:
-``Configuration``, ``Catalog Types``, ``Parameter Space``, ``Compute
-Redshifts`` and ``Postprocessing``. The menu is visible at all times,
-and it allows you to navigate through the different Phosphoros
-panels.
+Once the GUI starts, a window opens (see :numref:`bmain`). At the top
+of this, a navigation menu is visible with the main steps of
+Phosphoros: ``Configuration``, ``Catalog Types``, ``Parameter Space``,
+``Compute Redshifts`` and ``Post Processing``. The menu is visible at
+all times, and it allows you to navigate through the different
+Phosphoros panels.
 
 .. figure:: /_static/quickstart/MainWindow.png
     :name: bmain
@@ -26,9 +26,11 @@ panels.
     :scale: 40%	
 
     Starting window of the Phosphoros GUI
-	    
+
+.. _config:
+    
 GUI: Configuration
-----------------------------
+--------------------------------
 
 ``Configuration`` allows users to see, and eventually to change, the
 default directory configuration, and to check the available auxiliary
@@ -48,45 +50,57 @@ opened:
   Threads``. Otherwise, the maximum number of available threads is
   automatically selected.
 
+  Finally, through ``Log Level`` drop down menu users can
+  select logs information to be printed in the terminal when the
+  Phosphoros GUI is running.
+
 - **Auxiliary Data** The Phosphoros GUI can be used to display
   auxiliary data files. This is not yet the place for selecting
   filters or SEDs (this is done in :ref:`Parameter Space Definition
   <parameter-space-definition>`), but it provides a view of all
-  available auxiliary data (if any). As an example, the screenshot of
-  :numref:`bconfig` shows a possible case for the ``SEDs``. Similarly
-  auxiliary files in ``Filter Transmissions``, ``Reddening Curves``
-  and ``Luminosity Function Curves`` can be displayed.
+  available auxiliary data (if any).
+
+  The ``Reload Last Data Pack`` tab allows users to (re-)download the
+  last available version of the auxiliary data pack from the
+  Phosphoros repository (containing, i.e., SEDs, filters, Reddening
+  curves, etc.). This is useful if users altered the data locally and
+  they want to replace them with the current data pack on the
+  repository. Close to it, there is the tab to download the Planck
+  dust reddening map. This is needed for the Galactic absorption
+  correction if color excess is not provided in the source catalog.
+   
+  As an example, the screenshot of :numref:`bconfig` shows a possible
+  case for the ``SEDs``. Similarly auxiliary files in ``Filter
+  Transmissions``, ``Reddening Curves`` and ``Luminosity Function
+  Curves`` can be displayed.
 
   In the ``SEDs`` panel, emission lines can be added to a group of SED
   templates by clicking on the ``Add Emission Line to SEDs`` tab
   associated with it. A new directory (named as the original with the
   postfix ``_el``) is generated with SEDs including emission lines,
-  without modifying the original templates. Emission lines are added
-  as a delta function to SED templates (see the :ref:`emission-lines`
-  section for more details).
+  without modifying the original templates (see the
+  :ref:`emission-lines` section for more details).
 
-  .. figure:: /_static/basic_steps/AuxDataManagement_v018.png
+  .. figure:: /_static/basic_steps/AuxDataManagement_v12.png
      :name: bconfig
      :align: center
      :scale: 50 %
 	     
      Example of the ``Configuration`` panel of the GUI showing SEDs
      present in the database 
-	     
+
   The ``Import Folder`` tab opens a *finder* window and allows users
   to import a directory with its entire content to the location of the
   selected ``Auxiliary Data`` directory.
 
-  Finally, the ``Reload Last Data Pack`` tab allows users to
-  (re-)download the last available version of the Auxiliary *Data
-  Pack*  from the Phosphoros repository (containing, i.e., SEDs,
-  filters, Reddening curves, etc.). This is useful if users altered
-  the data locally and they want to replace them with the current
-  data pack on the repository.
-   
+  Here, users can also select the reference solar SED used to
+  normalize SED templates (see :ref:`SED Template
+  Normalization<scale-factor>`), and create new SEDs by interpolating
+  the existing ones (see :ref:`sed-interpo`).
+
 - **Cosmology** The ``Cosmology`` tab displays the value of the
   cosmological parameters relevant for Phosphoros and allows users to
-  change them. The default values are taken from Planck 2015 results
+  change them. The default values are taken from *Planck* 2015 results
   :cite:`Planck2015` (including lensing and external data):
   :math:`H_0=67.74` [km/s/Mpc]; :math:`\Omega_M=0.3089`;
   :math:`\Omega_{\Lambda}=0.6911`.
@@ -94,12 +108,12 @@ opened:
 .. _mapping:
 
 GUI: Catalog Setup: Mapping filters to column names
---------------------------------------------------
+-----------------------------------------------------------------
 
 In order to compute modeled photometry, Phosphoros needs the
 transmission curve of filters used for the observed photometry. The
 name of transmission curve files has to be connected with the
-corresponding photometric band of input catalogs.
+corresponding photometric bands of input catalogs.
 
 The GUI provides an easy way for **mapping** trasmission curves to
 catalog column names. The mapping operation is mandatory and is
@@ -184,8 +198,8 @@ filters by pressing ``Propagate Error Param`` .
 
 Photometry can be also provided in **AB magnitudes**. To make
 Phosphoros aware of it, it is enough to set ``True`` in the ``From
-MAG`` column of the ``Filter Mapping`` table (the default *0* is then
-converted to *1*). AB magnitudes will be then transformed to fluxes by
+MAG`` column of the ``Filter Mapping`` table (the default is
+``False``). AB magnitudes will be then transformed to fluxes by
 Phosphoros.
 
 .. figure:: /_static/basic_steps/Catalog_Errors_v018.png
@@ -197,15 +211,17 @@ Phosphoros.
    
 
 Few optional fields are present in the top-right of the ``Catalog
-Setup`` panel: the column names of
+Setup`` panel: the column name of
 
 * source coordinates (the right ascension ``RA (Deg)`` and declination
   ``DEC (Deg)``);
 
 * the Milky Way extinction along source line of sight (``MilkyWay
-  E(B-V)``).
+  E(B-V)``);
 
-These information are only required if the Milky Way absorption
+* the reference redshift (``Reference Z``).
+
+The two first points are only required if the Milky Way absorption
 correction is applied (see :ref:`Galactic Absorption
 <galactic-absorption-cli>` section). In particular, sources
 coordinates are needed if the *Planck* Galactic dust reddening map is
@@ -213,10 +229,9 @@ used for the correction. Otherwise, if the Milky Way extintion is
 provided in the input catalog, users have to fill just the ``MilkyWay
 E(B-V)`` tab.
 
-Moreover, when present in the input catalog, the column name
-containing reference redshifts (e.g., spectroscopic redshifts) can be
-also inserted in the ``Reference Z`` tab. This is useful for the
-``Post Processing`` analysis.
+When present in the input catalog, the reference redshift (e.g.,
+spectroscopic redshift) is useful for the ``Post Processing``
+analysis.
 
 The mapping process is terminated by clicking on the ``Save``
 middle-frame button.  Please note that you can always add or remove
@@ -230,12 +245,13 @@ directory::
   > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/
 
 (in the previous examples, ``<Catalog Type>`` was ``Quickstart`` or
-``Cosmos``). The file ``filter_mapping.txt`` is a table with the
-qualified name of transmission curve files, the flux and flux error
-column names in the input catalog, while
-``error_adjustment_param.txt`` contains the values of the coefficients
-used in Eq. :eq:`eq_err_cal` to re-calibrate flux errors (see
-:ref:`filter-mapping` in the ``File Format Reference`` chapter).
+``Cosmos``). They contain all the information present in the ``Filter
+Mapping`` table: in ``filter_mapping.txt`` you can find the qualified
+name of transmission curve files, the flux and flux error column names
+in the input catalog, etc.; while in ``error_adjustment_param.txt``
+the values of the coefficients used in Eq. :eq:`eq_err_cal` to
+re-calibrate flux errors (see :ref:`filter-mapping` in the *File
+Format Reference* chapter).
 
 You can always edit these files to make corrections. Alternatively,
 you can create them with your favorite editor (rather than using the
@@ -344,7 +360,7 @@ At the top of the ``Compute Redshifts`` panel, users can select
 previously defined catalog types and parameter spaces to use in
 the following analysis.
 
-.. figure:: /_static/basic_steps/ModelGrid.png
+.. figure:: /_static/basic_steps/ModelGrid_v12.png
     :name: bmgrid
     :width: 700px
     :align: center
@@ -352,18 +368,19 @@ the following analysis.
    
     How to generate a grid of models in the GUI
    
-The panel is organized into five successive sub-panels (see
+The panel is organized into six successive sub-panels (see
 :numref:`bmgrid`). The first two concern the model grid generation
-(``1. Extrinsic Absorption`` and ``2. Grids Generation``). Sub-panels
-3 and 4 (``3. Prior``, ``4. Photometric Zero-Point Corrections``) are
-optional functionalities and are described in the :ref:`Advanced
-Features <user-manual-advanced>` section. Finally, the fifth sub-panel
-(``5. Input/Output``) sets up the input and output files.
+(``1. Luminosity Filter and Extrinsic Absorption`` and ``2. Grids
+Generation``). Sub-panels 3--5 (``3. Prior``, ``4. Photometric
+Zero-Point Corrections`` and ``5. Algorithm``) are optional
+functionalities and are described in the :ref:`Advanced Features
+<user-manual-advanced>` section. Finally, the sixth sub-panel
+(``6. Input/Output``) sets up the input and output files.
 
 .. note::
    
     Sub-panels title can be black, orange or red. The orange/red color
-    in one of the five steps means that some actions are required
+    in one of the six steps means that some actions are required
     before Phosphoros could run to compute redshifts. For example, if
     ``2. Grids Generation`` is orange, no model grids have been
     produced for the selected specification yet. After the grid
@@ -380,27 +397,32 @@ Features <user-manual-advanced>` section. Finally, the fifth sub-panel
 
 In order to produce a grid of models users have to go through with two steps:
 
-- **Extrinsic Absorption**
+- **Luminosity Filter and Extrinsic Absorption**
 
-  Here, corrections for intergalactic medium (IGM) and Milky Way
-  absorption can be included in the analysis. These are optional
-  functionalities.
+  In the first sub-panel, users can select the reference filter used
+  for the SED normalization (a default one is proposed by Phosphoros).
+  
+  In addition, here, corrections for intergalactic medium (IGM) and
+  Milky Way absorption can be included in the analysis. These are
+  optional functionalities.
 
   Users can select one of the following prescriptions for the IGM
   absorption correction -- ``Madau``, ``Meiksin`` or ``Inoue`` (see
   the :ref:`Intergalactic medium absorption <igm-absorption>`
   explanation) -- or ``OFF``, if no correction will be applied.
 
-  There are two options for Milky Way absorption correction (see the
-  :ref:`Galactic absorption <galactic-absorption>` section). Galactic
-  color excess :math:`E(B-V)` values can be read from the input
-  catalog (select ``Use Galactic E(B-V) Column``). In this case, users
-  must have provided the corresponding column name in the ``Catalog
-  Setup`` panel. The second option (``Look-up Galactic E(B-V) in
-  Planck Dust Map``) fetches color excess from the *Planck* reddening
-  map. The column name of source coordinates must have been provided
-  in the ``Catalog Setup`` panel. If the required information are not
-  given, the previous options are not available to users.
+  There are two options for Milky Way absorption correction (see also
+  the :ref:`Galactic absorption <galactic-absorption>` section). The
+  first option (``Look-up Galactic E(B-V) in Planck Dust Map``)
+  fetches the Galactic color excess :math:`E(B-V)` from the *Planck*
+  dust reddening map. The column name of source coordinates must have
+  been provided in the ``Catalog Setup`` panel, and the *Planck* map
+  be previously dowloaded in the ``Configuration --> Aux.Data``
+  panel. Otherwise, Galactic color excess values can be read from the
+  input catalog (select ``Use Galactic E(B-V) Column``). In this case,
+  users must have provided the corresponding column name in the
+  ``Catalog Setup`` panel. If the required information is not given,
+  the previous options are not available to users.
 
   .. warning::
 
@@ -413,7 +435,7 @@ In order to produce a grid of models users have to go through with two steps:
   .. note::
 
     The IGM absorption correction is applied to SED templates before
-    computing modeled photometry. On the contrary, for Milky Way
+    computing modeled photometry. On the contrary, for the Milky Way
     absorption, correction coefficients are applied directly to
     modeled photometry, i.e. after computing the grid of models (see
     the :ref:`Galactic absorption <galactic-absorption>` section).
@@ -446,6 +468,11 @@ In order to produce a grid of models users have to go through with two steps:
   before, click on ``Save Config. File`` to store the configuration
   file.
 
+  Finally, users can generate the ``Filter Variation Correction Grid
+  File``. This step is activated if the ``Filter Shift`` button is
+  selected in the ``Catalog Setup`` panel (see :ref:`filter-var` in
+  the *Advanced Features* chapter).
+  
 ..
    Phosphoros requires as input the Fitzpatrick's Milky Way absorption
    law [Fit99]_ that is looked for in::
@@ -461,7 +488,7 @@ In order to produce a grid of models users have to go through with two steps:
 GUI: Computing Redshifts
 -----------------------------
 
-The sub-panel five, ``5. Input/Output Files``, is the last step before
+The sub-panel six, ``6. Input/Output``, is the last step before
 estimating the best-fit model and the photometric redshift for input
 sources. Here, users have to specify the input catalog to analyze and
 the outputs to be generated by Phosphoros (:numref:`bredshift`).
@@ -472,7 +499,7 @@ the outputs to be generated by Phosphoros (:numref:`bredshift`).
    catalog. Previous steps in fact need to know only the catalog type
    which the input catalog belongs to.
 
-.. figure:: /_static/quickstart/InputOutputFiles_v018.png
+.. figure:: /_static/quickstart/InputOutputFiles_v12.png
     :name: bredshift
     :align: center
     :scale: 40 %
@@ -489,10 +516,14 @@ Users need to fill the following information:
   ``Browse`` tab, as long as they belong to the Catalog Type defined
   above.
 
+  Users can decide to run Phosphoros on a reduced number of input
+  sources, by skipping the first or last *N* objects (through the
+  ``Skip the first`` or ``Process only`` buttons).
+
   On the right side, ``Filter Selection`` allows users to disable some
   of the previously selected filters. This is useful if users want to
   performed particular analyses with a reduce set of photometric bands.
-
+  
   Checking on ``Fix Redshift from input catalog``, Phosphoros can also
   run with fixed redshifts, i.e. on a catalog where redshift is
   known for all sources, for example from spectroscopy. This can be
@@ -501,8 +532,8 @@ Users need to fill the following information:
   column containing the reference redshifts has to be selected from
   the ``Input catalog fixed redshift column`` drop-down menu.
 
-  |br|
- 
+
+  
 - **Output catalog**
 
   Phosphoros results are stored in an output file named ``phz_cat``
@@ -522,7 +553,7 @@ Users need to fill the following information:
   columns to be copied. The number in the ``Copy Columns`` tab will be
   updated.
 
-  In addition, users can include in the output catalog the best-fit
+  Users can include in the output catalog the best-fit
   model parameters from the likelihood or posterior distribution or
   from both, selecting ``Best likelihood model`` and/or ``Best
   posterior model``.
@@ -536,10 +567,10 @@ Users need to fill the following information:
     likelihood and/or posterior distribution,
   * the amplitude of the likelihood and/or posterior distribution at the
     maximum,
-  * the normalization factor :math:`\alpha`,
+  * the normalized scale factor :math:`\alpha`,
   * the redshift value at the peak of the redshift PDF.
  
-  |br|
+
  
 - (Optional) **1D PDF**
 
@@ -556,22 +587,30 @@ Users need to fill the following information:
   marginalizing with respect to the other model parameters (see
   :ref:`axis-collapse` for more details).
 
-  |br|
+
  
 - (Optional) **Multi-Dimensional Output**
  
   Here, users can enable the generation of FITS files containing the
-  full posterior distributions, one per source. This action will
+  full posterior distribution, one per source. This action will
   produce a large volume of data (see the :ref:`File format reference
   <format-reference-section>` section). Otherwise, in order to reduce
   the dimension of output files, users can save only a sampling of
   posterior distributions by selecting ``Sampling`` and choosing the
-  ``Sample number`` (default 1000).
+  ``Sample number`` (default 1000). In this case, Phosphoros stores
+  only the values of the model parameters, and their density in the
+  parameter space reflects the posterior distribution (e.g., the 1D
+  PDF of a model parameter can be simply obtained from the histogram
+  of its values).
 
   Multi-dimensional outputs can be investigated using the appropriate
-  Phosphoros tool in the |CLI| (see the
-  :ref:`posterior-investigation`).
+  Phosphoros tool in the CLI (see the :ref:`posterior-investigation`).
        
+  .. note::
+
+     The full posterior distribution is computed after the
+     marginalization of scale factor (if it is not fixed to its
+     best-likelihood value).
 
 After setting ``Input/Ouput``, users are ready to start the
 computation of photometric redshifts, clicking on the ``Run``

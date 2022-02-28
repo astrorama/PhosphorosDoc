@@ -6,8 +6,8 @@ Galactic absorption correction in the CLI
 The Milky Way absorption correction is implemented in the CLI through
 two or three steps, depending on whether Galactic color excess is
 already included in the input catalog or has to be read from a
-reddenning map (see the :ref:`galactic-absorption` section for a
-description of the method employed for the correction).
+reddenning map (see the :ref:`galactic-absorption` section of the
+*Methodology* chapter for more details).
 
 First, a grid of correction coefficients is generated. These are the
 linear coefficients :math:`a_{{\scriptscriptstyle SED},i}` of

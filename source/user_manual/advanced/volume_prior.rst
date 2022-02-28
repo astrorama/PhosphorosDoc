@@ -9,8 +9,8 @@ likelihood of sources being at higher redshifts and disfavours
 low-redshift solutions where the volume sampled is very
 small. Phosphoros assumes a volume prior proportional to the
 redshift-dependent differential comoving volume,
-i.e. :math:`p(z)\propto dV_C(z)/dz` (see also the :ref:`Template
-Fitting Method <template-fitting>` section).
+i.e. :math:`p(z)\propto dV_C(z)/dz` (see :ref:`Methodology: Priors
+<bayesian-priors>`, or the Phosphoros paper for more details).
 
 **In the GUI mode**
 

@@ -1,4 +1,4 @@
-.. _data:
+.. _data-repository:
 
 **********************************************
 Data Repository (**under construction**)

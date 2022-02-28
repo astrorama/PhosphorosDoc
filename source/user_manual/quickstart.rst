@@ -11,10 +11,10 @@ computing photometric redshifts, without explaining in detail each step. At the
 end of the quickstart you will have an idea how it feels like to use Phosphoros.
 
 This quickstart assumes that you have a functional version of
-Phosphoros already installed (if you do not, before you continue, you
-should install Phosphoros by following the instructions :ref:`here
-<phosphoros-install>`) and you are ready to launch the Phosphoros
-Graphical User Interface (GUI).
+Phosphoros already installed (**version 1.2**; if you do not, before
+you continue, you should install Phosphoros by following the
+instructions :ref:`here <phosphoros-install>`) and you are ready to
+launch the Phosphoros Graphical User Interface (GUI).
 
 .. and that, if you use docker, the container is running and you are
    in a terminal connected to it
@@ -50,28 +50,6 @@ The following sections will navigate you through the quickstart data,
 settings, and a basic data analysis, in order to get an idea on how
 each step is performed with the Phosphoros GUI.
 
-Getting the quickstart data
-===========================
-
-All the data required to run the quickstart are provided as a single tar.gz
-file, which can be found in the :ref:`data` page. You just have to uncompress
-the file in a directory called ``Phosphoros`` under your home directory. The
-following commands will get the file and uncompress it::
-    
-    > cd ~
-    > mkdir -p Phosphoros
-    > cd Phosphoros
-    > wget http://www.isdc.unige.ch/euclid/phosphoros/data/other/quickstart.tar.gz
-    > tar -xzf quickstart.tar.gz
-    
-.. note::
-   
-    Phosphoros uses the ``~/Phosphoros`` directory as the default root directory.
-    If you want to use a different directory, you can set the environment variable
-    ``PHOSPHOROS_ROOT`` to the directory you want.
-
-..    In this case, you will have to uncompress the quickstart data in this directory.
-    
 Executing Phosphoros
 ====================
 
@@ -93,6 +71,46 @@ At the top part of the main window, you can see the navigation menu. This menu
 is visible at all times, and it allows you to navigate through the different
 Phosphoros panels.
 
+Getting the quickstart data
+===========================
+
+All the data required to run the *quickstart* can be downloaded from
+the Phosphoros repository through the GUI. They include auxiliary data
+(filter transmission, SED templates, etc.) and the *quickstart* source
+catalog. Select ``Configuration -> Aux. Data`` in the GUI
+(:numref:`filter`) and click on the ``Reload Last Data Pack`` button. 
+All the *quickstart* data will be located in the proper directories
+according to the Phosphoros internal data organization (see
+:ref:`directory-organization`).
+    
+.. note::
+   
+    Phosphoros uses the ``~/Phosphoros`` directory as the default root
+    directory. If you want to use a different directory, you can set
+    the environment variable ``PHOSPHOROS_ROOT`` to the directory you
+    want.
+
+Filter transmissions
+--------------------------
+
+Phosphoros needs the transmission curve of filters to compute modeled
+photometry. You can see the available filter transmission curves by
+selecting ``Filter Transmissions`` in the the GUI (:numref:`filter`).
+
+.. figure:: /_static/quickstart/FilterTransmissions_v12.png
+    :name: filter
+    :align: center
+    :scale: 50%
+
+    ``Configuration`` panel of the GUI showing available filter
+    trasmission curves in the database
+	    
+Transmission curves are found as files in the directory
+``AuxiliaryData/Filters/Quickstart``. Later on this User Manual
+(:ref:`concepts_setup`) you will learn how to add your own filter
+transmission curves. 
+
+    
 Examining the input catalog
 ===========================
 
@@ -104,26 +122,6 @@ photometry for 8 filters, including errors, and a column with
 spectroscopic redshifts, which can be used for estimating the accuracy
 of predicted photometric redshifts.
 
-Filter transmissions
---------------------
-
-Phosphoros needs the transmission curve of filters to compute modeled
-photometry. You can see the available filter transmission curves by
-selecting ``Configuration -> Aux. Data -> Filter Transmissions`` in
-the GUI (:numref:`filter`).
-
-.. figure:: /_static/quickstart/FilterTransmissions_v018.png
-    :name: filter
-    :align: center
-    :scale: 50%
-
-    ``Configuration`` panel of the GUI showing available filter
-    trasmission curves in the database
-	    
-Transmission curves are found as files in the directory
-``AuxiliaryData/Filters/Quickstart``. Later on this User Manual
-(:ref:`concepts_setup`) you will learn how to add your own filter
-transmission curves.
 
 Mapping filters to photometry
 ----------------------------------
@@ -137,18 +135,19 @@ You can see it by selecting ``Catalog Setup`` at the navigation
 menu. You should first select ``Quickstart`` from the ``Catalog``
 drop-down menu, then click the ``Select File and Import Columns``
 button and select your catalog file.
+
 .. This step needs to be done
    because your home directory is different from the one in the path
    stored in the quickstart data.
    
-If you want to plot your results, it is
-useful to insert the column name containing reference redshifts (here,
-``ZSPEC``) in the ``Reference Z`` tab.
+If you want to plot your results, it is useful to insert the column
+name containing reference redshifts (here, ``ZSPEC``) in the
+``Reference Z`` tab.
 
 When you finish you have to click the ``Save`` button to persist your
 modification.
 
-.. figure:: /_static/quickstart/FilterMapping_v018.png
+.. figure:: /_static/quickstart/FilterMapping_v12.png
     :name: mapp
     :align: center
     :scale: 50%	    
@@ -182,11 +181,10 @@ space (see :numref:`paraspace`).
     
 
 Click the ``Edit`` button to open the window showing the axes of the
-parameter space. There you can see
-that the `Cosmos` templates are used as SED templates, the *calzetti*
-reddening law is used for the extinction with E\ :sub:`(B-V)` in the
-range 0 to 2 and the redshift is computed for the range 0 to 6, with
-0.1 steps.
+parameter space. There you can see that the `Cosmos` templates are
+used as SED templates, the *calzetti* reddening law is used for the
+extinction with E\ :sub:`(B-V)` in the range 0 to 2 and 0.1 steps, and
+the redshift is computed for the range 0 to 6, with 0.1 steps.
 
 .. note::
 
@@ -198,11 +196,11 @@ Building the grid of models
 ==============================
 
 So far you had a look of the setup included in the quickstart
-compressed file. Now you are going to use Phosphoros for running the
+data pack. Now you are going to use Phosphoros for running the
 two steps of the template fitting. The execution of them is done in
 the ``Compute Redshifts`` panel of Phosphoros.
 
-.. figure:: /_static/quickstart/ComputeRedshifts_v018.png
+.. figure:: /_static/quickstart/ComputeRedshifts_v12.png
     :name: compz
     :align: center
     :scale: 50%	    
@@ -210,11 +208,11 @@ the ``Compute Redshifts`` panel of Phosphoros.
     ``Grid Generation`` sub-panel inside the ``Compute Redshift``
     panel of the GUI 
 	    
-This panel contains five collapsable sub-panels, one for each operation you can
+This panel contains six collapsable sub-panels, one for each operation you can
 perform with Phosphoros. The titles of these sub-panels are color-coded, so if
 you have to take some action in one of them, its title will be presented in orange
-letters. For example, at the moment we have not perform yet the first step of
-the model fitting (computing modeled photometry), so the sub-panel
+letters. For example, at the moment we have not performed yet the first step of
+the model fitting (i.e., computing modeled photometry), so the sub-panel
 ``2. Grids Generation`` is orange (see :numref:`compz`).
 
 To build the grid of models you just have to click on the ``2. Grids
@@ -242,10 +240,10 @@ Compute photometric redshifts
 
 Now that you have built your models you are ready to compute your
 first photometric redshifts using Phosphoros! To do that select the
-``5. Input/Output Files`` in the ``Compute Redshifts`` panel
+``6. Input/Output`` in the ``Compute Redshifts`` panel
 (:numref:`inout`). 
 
-.. figure:: /_static/quickstart/InputOutputFiles_v018.png
+.. figure:: /_static/quickstart/InputOutputFiles_v12.png
     :name: inout
     :align: center
     :scale: 50%
@@ -266,7 +264,7 @@ In the rest of the panel, you can select additional outputs to be
 produced in the output catalog and directory (best-fit model, 1D PDFs,
 multi-dimensional distributions, etc). For this tutorial you should
 select as ``Output Format`` FITS and to generate the 1D PDF (of the
-Likelihood or the Posterior distribution) for ``Redshift``.
+Likelihood or of the Posterior distribution) for ``Redshift``.
 
 .. tip::
     
@@ -294,7 +292,7 @@ performed in predicting redshifts.
 
 To see the plot for your results you have to select the ``Post
 Processing`` panel, and click on the ``Plots`` button. A pop-up window
-opens (:numref:`vis1`) where you have to provide the path for a
+opens (:numref:`vis1`) where you have to provide the path for the
 catalog with the reference redshifts (e.g., the input catalog if it
 contains them), the column name of the source ID and of the reference
 redshifts. However, if the ``Reference Z`` column has been declared in
@@ -318,7 +316,7 @@ lowest density and dark red at the highest density.
 
 If you select a point in the photoZ-specZ plot, you will see at the
 top left corner the ID of the source, and its redshift and
-E\:sub:`(B-V)` 1D PDF will be plotted in the corresponding
+E\ :sub:`(B-V)` 1D PDF will be plotted in the corresponding
 plots.
 
 .. If you double click a point, all its column
