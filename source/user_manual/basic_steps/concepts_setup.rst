@@ -227,9 +227,9 @@ Phosphoros *internal* data
   structure and sets of Filters, SEDs and Reddening curves *(?)*, and
   to expand it at the working location, i.e.::
 
-	  > cd $HOME or cd $PHOSPHOROS_ROOT
-	  > wget http://www.isdc.unige.ch/phosphoros/Challenge2Data.tar.gz *(?)*
-          > tar -xzf Challenge2Data.tar.gz
+      > cd $HOME or cd $PHOSPHOROS_ROOT
+      > wget https://github.com/astrorama/phosphoros-quickstart/archive/master/quickstart.tar.gz
+      > tar -xzf Challenge2Data.tar.gz
 
 In order to make input and auxiliary data available to data analysis,
 they first have to be imported inside the Phosphoros directory

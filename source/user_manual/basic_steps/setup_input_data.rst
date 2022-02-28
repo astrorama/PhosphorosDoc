@@ -58,8 +58,8 @@ The most convenient way to do this is to download a tar file containing already 
 
     > cd ~
     > cd Phosphoros (or cd $PHOSPHOROS_ROOT)
-    > wget http://www.isdc.unige.ch/phosphoros/data/auxiliary/Challenge2AuxiliaryData.tar.gz
-    > tar -xzf Challenge2AuxiliaryData.tar.gz
+    > wget https://github.com/astrorama/phosphoros-quickstart/archive/master/quickstart.tar.gz 
+    > tar -xzf quickstart.tar.gz
 
 Files are arranged inside three directories ``Filters``, ``SEDs`` and ``ReddeningCurves`` below ``$HOME/Phosphoros/AuxiliaryData``.
 Optional ``group`` sub-directories can be added to organize auxiliary files in the most logical way. Users can complete or re-arranged
