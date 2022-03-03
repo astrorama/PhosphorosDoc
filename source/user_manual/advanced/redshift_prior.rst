@@ -3,23 +3,21 @@
 Redshift Distribution Priors
 =======================================
 
-Redshift distribution describe the probability that a galaxy of
-apparent magnitude :math:`m_0` is at redshift *z* and belongs to a
-type :math:`T`, :math:`p(z,T|m_0)`. It follows that
+Phosphoros implements the :math:`\mathcal{P}(z,T|m_0)` prior, i.e.
+the probability that a galaxy of apparent magnitude :math:`m_0` is at
+redshift *z* and belongs to the type :math:`T` (see :ref:`Methodology:
+Redshift Priors<redshift-dist>`). It follows that
 
 .. math::
 
-   p(z,T|m_0)=p(T|m_0)p(z|T,m_0)\,,
+   \mathcal{P}(z,T|m_0)=p(T|m_0)p(z|T,m_0)\,,
 
 where :math:`p(T|m_0)` is the galaxy type fraction as a function of
 magnitude and :math:`p(z|T,m_0)` is the redshift distribution for
-galaxies of magnitude :math:`m_0` (see also the :ref:`bayesian-priors`
-section).
+galaxies of magnitude :math:`m_0`.
 
-Phosphoros implements these priors following the procedure
-developed by Benitez 2000 :cite:`Ben00` and implemented in the *Le
-Phare* code :cite:`Ilb06`.
-
+Phosphoros follows the procedure developed in Benitez 2000
+:cite:`Ben00` and implemented in the *Le Phare* code :cite:`Ilb06`.
 Three different galaxy types are considered according to the
 :math:`B-I` color: **early types** (E/S0) if :math:`B-I>1.285`,
 **irregulars** if :math:`B-I<0.945` and **spirals** (Sbc, Scd)
@@ -110,8 +108,8 @@ Prior`` a popup window opens where users have to select the *B* and
 
 .. note::
 
-   The value of the free parameters for the redshift distribution
-   priors (see the previous Table) cannot be modified in the GUI.
+   The values of the parameters of the redshift distribution priors
+   (:numref:`tzprior`) cannot be modified in the GUI.
 
 .. warning::
 
@@ -135,8 +133,8 @@ the *B* and *I* filters are required through the options::
 The *I* filter is used to compute the apparent magnitude of galaxies
 and must be part of the selected photometric filters.
 
-The value of the free parameters of the redshift distribution priors
-(see :numref:`tzprior`) can be changed by users with the option::
+The values of the parameters of the redshift distribution priors
+(:numref:`tzprior`) can be changed by users with the option::
 
   Nz-prior_<p>_T<i>=<value>
 

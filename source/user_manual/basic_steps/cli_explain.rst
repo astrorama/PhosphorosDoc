@@ -202,7 +202,7 @@ Let's see an example of configuration file for the ``CMG`` action::
     z-range-Star Burst Galaxies=0.000000 6.000000 0.050000
 
 In the first part of the list we find generic specifications such as the
-phosphoros root directory, the name of the catalog type, the name of
+Phosphoros root directory, the name of the catalog type, the name of
 filter files, the name of the filter file and of the solar SED file used for
 template normalization, etc.
 
@@ -280,6 +280,8 @@ Here below, an example of configuration file::
 
    phosphoros-root=/home/phosphoros/Phosphoros 
    catalog-type=Challenge2
+   normalization-filter=DECAM/r 
+   normalization-solar-sed=solar_spectrum 
    
    cosmology-hubble-constant=67.74
    cosmology-omega-lambda=0.6911
@@ -288,36 +290,42 @@ Here below, an example of configuration file::
    input-catalog-file=Challenge2TrainingSmallCatalog.fits
    missing-photometry-flag=-99 
    enable-upper-limit=NO
-
    model-grid-file=Grid_Chalenge2_Parameter_Space_1_MADAU.dat
-   
-   normalization-filter=DECAM/r 
-   normalization-solar-sed=solar_spectrum 
-   
+      
    phz-output-dir=/home/phosphoros/Phosphoros/Results/Challenge2/Challenge2TrainingSmallCatalog
    source-id-column-name=OBJECT_ID  
    output-catalog-format=FITS
-   output-pdf-normalized=YES 
-   output-pdf-format=VECTOR-COLUMN
    create-output-best-likelihood-model=NO
    create-output-best-model=YES
-   axes-collapse-type=BAYESIAN
-   likelihood-axes-collapse-type=MAX
 
-
-The configuration file requires three main information:
+Along with generic specifications (such as the Phosphoros root
+directory, the name of the catalog type, etc.), the configuration file
+requires three main information:
 
 #. the cosmological parameter values, needed to transform
    luminosities to fluxes and viceversa;
 
 #. the name of the input catalog (with specifications for missing
-   data and upper limits) and of the model grid file (if they are not
-   in the standard directories, see :ref:`directory_howto_section`);
+   data and upper limits) and of the model grid file;
 
 #. the directory where the output catalog will be located, plus some
    specifications about what outputs are computed and stored, and
    their format. The name of the output catalog is by default
-   ``phz_cat``, with the extension according to the selected format.
+   ``phz_cat``, with the extension according to the selected
+   format.
+
+..   (if they are not in the standard directories, see :ref:`directory_howto_section`);  
+
+In the above example, only the parameters of the best posterior model
+are stored in the output file. If users want to save the posterior 1D
+PDF of redshift, for example, it is enough to add the option
+``create-output-pdf=Z``. Finally, in order to store the
+multi-dimensional posterior distribution, the ``full-PDF-samplig``
+option must be present in the configuration file:
+``full-PDF-samplig=YES`` for the sampling of the distribution,
+``NO`` for the full grid
+(see :ref:`GUI: Compute Redshift<computing-redshifts>` and :ref:`File
+Format: Outputs<result_files_format>`).
 
 The configuration file for the ``compute_redshift`` action can be much
 more complex than the one shown here when advanced functionalities of

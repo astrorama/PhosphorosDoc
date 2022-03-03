@@ -21,13 +21,13 @@ while :math:`L` is the luminosity in the filter used for the SED
 template normalization.
 
 In the redshift computation, Phosphoros determines the best-fit value
-of physical parameters using the above relation for the best-fit SED
-template. In addition, the PDF of physical parameters can be easily
-recovered from the multi-dimensional posterior distribution, if it is
-computed with the ``Sampling`` option (see
-:ref:`computing-redshifts`). In fact, for each model sampled in the
-multi-dimensional PDF Phosphoros provides the corresponding luminosity
-and value of any physical parameter (see :ref:`Results
+of physical parameters applying the above relation to the source
+best-fit template. In addition, the 1D (or multi-dimensional) PDF of
+physical parameters can be easily recovered from the multi-dimensional
+posterior distribution, if it is computed with the ``Sampling`` option
+(see :ref:`computing-redshifts`). In this case, in fact, along with
+the parameters of the sampled models, Phosphoros stores the related
+luminosity and physical parameters (see :ref:`Results
 Format<result_files_format>`).
 
    
@@ -35,7 +35,7 @@ Physical Parameters in the GUI
 ------------------------------------------------
 
 First of all, for any physical parameter, users must provide the *A*
-and *B* values (in Eq.  :eq:`pp1`) for each SED template of the
+and *B* values (Eq.  :eq:`pp1`) for each SED template of the
 parameter space. This can be done in the ``Configuration-->Auxiliary
 Data-->SEDs`` sub-panel by clicking on each SED template (see
 :numref:`phpa`): a window opens showing the physical parameters that
@@ -122,13 +122,11 @@ for the ``BPPC`` action is::
   sed-group=CosmosSp 
   sed-group=CosmosSB
 
-Here Phosphoros reads two physical parameters (*mass* and *age*)
-from the SED template files located in the directories given by the
-``sed-group`` options. More options for the SED template
-specification can be found in the ``BPPC`` help (or see the
-:ref:`Compute Model
-Grid<PhosphorosComputeModelGrid_configuration_section>`
-sub-section). The output FITS table will be located in the ``<Catalog
+Here Phosphoros reads two physical parameters (*mass* and *age*) from
+the SED template files located in the directories given by the
+``sed-group`` options. More options for the template specification can
+be found in the ``BPPC`` help (similarly to the ``compute_redshift``
+action). The output FITS table will be located in the ``<Catalog
 Type>`` intermediate products directory.
 
 ..

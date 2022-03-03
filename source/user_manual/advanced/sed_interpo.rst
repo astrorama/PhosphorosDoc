@@ -73,13 +73,15 @@ An example of configuration file is::
 With the above configuration file, Phosphoros creates three new SEDs:
 two by interpolating the ``Ell1_A_0.sed`` and ``Ell2_A_0.sed`` SEDs,
 and one by interpolating the ``Ell2_A_0.sed`` and ``Ell3_A_0.sed``
-SEDs. In the example, output files are stored in the directory
-``<dir-name>`` below ``AuxiliaryData/SEDs/CosmosEll`` (the location of
-the output directory is relative to the directory provided by
-``--sed-dir``), named as shown in the previous sub-section.
-  
-By default, if physical parameters are found in SED file headers,
-common physical parameters are interpolated too. Set
-``--interpolate-pp=False`` to avoid it.
+SEDs. Output files are stored in the directory ``<dir-name>`` below
+``AuxiliaryData/SEDs/CosmosEll`` (the location of the output directory
+is relative to the directory provided by ``--sed-dir``), and named as
+shown in the previous sub-section.
+
+.. note::
+
+   If physical parameters are found in SED file headers, common
+   physical parameters are interpolated too. Set
+   ``--interpolate-pp=False`` to avoid it.
 
 

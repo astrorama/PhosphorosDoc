@@ -157,11 +157,11 @@ An example of the output of this action is::
   Total range of Redshift Z: [0, 3]
   Total number of models: 45225
 
-In the example, there are three sub-space regions. For a given
-region, users can display the values of a specific model parameter
-using the ``--region`` action option followed by the parameter name
-(``--sed``, ``--redcurve``, ``--ebv`` and ``--z``). As example, adding
-``--region=Spiral --ebv`` in the command line, you find something
+In the example, there are three sub-space regions. For a given region,
+users can display the values of a specific model parameter using the
+``--region`` action option followed by the parameter name (``--sed``,
+``--redcurve``, ``--ebv`` or ``--z``). As example, adding
+``--region="Spiral" --ebv`` in the command line, you find something
 like::
 
   Info for parameter space region "Spiral"
@@ -177,23 +177,43 @@ like::
   5	        0.5
   
 Modeled photometry of a specific parameter cell can be shown by
-``--phot=<arg>``, where the argument are the 0-based indexes of the
-axis nodes, which are available from the output of this action with the
-``--region`` option (as example, the E(B-V) indices are the first column
-in the box above).
+``--phot=<arg>``, where the arguments are the 0-based indexes of the
+axis nodes, which are available from the output of this action with
+the ``--region`` option (in the box above, the E(B-V) indices are the
+first column). As example, adding ``--region="Star
+Burst" --phot=5,0,4,10`` you get the photometry in the corresponding
+parameter cell, as shown below::
+
+  Info for parameter space region "Star Burst"
+  ----------------------------------------
+
+  Cell (5,0,4,10) axis information:
+  SED      CosmosSB/SB3_A_0
+  REDCURVE SB_calzetti
+  EBV      0.4
+  Z        1
+
+  Cell (5,0,4,10) Photometry:
+  Quickstart/g	1.42545e-11
+  Quickstart/H	5.60482e-10
+  Quickstart/i	7.28291e-11
+  Quickstart/J	3.43554e-10
+  Quickstart/r	2.84818e-11
+  Quickstart/vis	5.08239e-11
+  Quickstart/Y	2.0981e-10
+  Quickstart/z	1.37999e-10
+
 
 More command line options can be found with the help command
 (``Phosphoros DMG --help``).
 
 
-  
 .. _axis-collapse:
 
 Axis Collapse options
 ----------------------------
 
-Phosphoros derives the one-dimensional PDF of a model parameter (see
-the :ref:`Template Fitting Method <template-fitting>` section) by
+Phosphoros derives the one-dimensional PDF of a model parameter by
 projecting the multi-dimensional likelihoods or posterior
 distributions to the parameter axis. The common example is the
 redshift PDF.
@@ -247,7 +267,7 @@ prior was zero, it becomes :math:`p=p_{max}*(1-e_{ff})`.
 
 The prior effectiveness can be applied to redshift distribution
 priors, luminosity priors and volume prior, respectively, using the
-following action parameters of the ``compute_redshift`` action::
+following options of the ``compute_redshift`` action::
 
   Nz-prior-effectiveness=<value>
   luminosity-prior-effectiveness=<value>

@@ -153,7 +153,7 @@ parameter is a numerical or categorical variable.
     the first column should be ``CosmosEll/<sed name>``.
     Phosphoros actions ``display_seds`` (``DS``) and
     ``display_reddening_curves`` (``DRC``) can retrieve these names,
-    as explained in the :ref:`explore_aux_cli` section.
+    as explained in :ref:`Explore Auxiliary Data<explore_aux_cli>`.
 
   
 - **E(B-V) and Redshift Axes Priors**: the first column contains
@@ -343,7 +343,7 @@ and includes 6 columns:
 - Column 5: ``0`` if photometry are provided in fluxes,
   ``1`` in AB magnitude |br|
 - Column 6: The name of the catalog column containing the filter
-  variation (if ``NONE``, filter variation correction is not applied)
+  shift (if ``NONE``, filter variation correction is not applied)
   |br|
 
 The ``error_adjustment_param.txt`` file is found in the
@@ -450,9 +450,9 @@ same names as those above except that they start with ``LIKELIHOOD-``
 
 .. note::
 
-   If enabled, output catalogs also contain the value of physical
-   parameters as estimated from the best-fit model, one column for
-   each physical parameter.
+   If enabled, output catalogs also contain the physical parameter
+   values as estimated from the best-fit model, one column for each
+   physical parameter.
 
 
 Marginalized 1D PDFs
@@ -478,7 +478,7 @@ Multi-dimensional Posterior Distribution
 -----------------------------------------------
 
 Multi-dimensional posterior outputs depend on the choice of users to
-save the full grid or a sampling of the distribution. All the
+save the full grid or a sampling of the posterior distribution. All the
 multi-dimensional outputs are stored in the directory::
 
   > $PHOSPHOROS_ROOT/Results/<Catalog Type>/<input catalog name>/posteriors/
@@ -511,20 +511,28 @@ contains the following HDUs:
 Phosphoros saves only a sampling of the model parameters. Multiple
 FITS files are produced, each with the results of at the most ten
 thousand sources (this number can be modified using the CLI). The name
-of output files is ``Sample_File_posterior_*.fits``, where ``*`` is a
-number starting from 1. The output files have the following columns:
+of output files is ``Sample_File_posterior_<n>.fits``, where ``<n>`` is
+the file index. The output files have the following columns:
 **OBJECT_ID**, **GRID_REGION_INDEX** [#f1]_, **SED_INDEX**,
 **REDSHIFT**, **RED_CURVE_INDEX** and **EB_V**.  In addition,
 Phosphoros creates a FITS file (``Index_File_posterior.fits``)
-containing the object IDs and the file names where outputs are stored.
+containing the object IDs and the file names where the corresponding
+outputs are stored.
 
 .. note::
 
-   If enabled, the FITS files contain additional columns with the
-   value of physical parameters and the model luminosity at 10pc (in
-   the filter used for the SED normalization).
+   If enabled, the ``Sample_File_posterior_<n>.fits`` files contain
+   additional columns with the value of physical parameters and of the
+   model luminosity at 10pc (in the filter used for the SED
+   normalization).
   
 
 .. rubric :: Footnotes
 
-.. [#f1] To be explained...
+.. [#f1] **GRID_REGION_INDEX** is the 0-based index of sub-spaces in
+	  the parameter space (e.g., ``Elliptical``, ``Spiral``,
+	  etc.). The index follows the order in which the sub-spaces
+	  have been defined in the GUI or in the CLI. This information
+	  is useful, for example, to display the photometry of
+	  best-fit models through the ``display_model_grid`` action
+	  (see :ref:`investigate-model-grids`).

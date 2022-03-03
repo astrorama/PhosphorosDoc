@@ -415,7 +415,6 @@ SED},i}(0.3)/0.3`.
    :math:`k_{pivot}` is the value of the Galactic absorption law at an
    adopted pivot wavelength :math:`\lambda_{pivot}` of the filter
    [#f2meth]_.
-
    However, as discussed by Galametz et al. 2017,
    neglecting the SED dependence can significantly affect photometric
    redshifts estimates. Using a mock flux catalog of sources, they
@@ -424,7 +423,6 @@ SED},i}(0.3)/0.3`.
    :math:`k_{pivot}` approximation is applied. Although small, this is
    relevant for *Euclid* that requires unbiased photometric redshifts
    at the level of :math:`<2\times10^{-3}(1+z)` :cite:`Lau11`.
-
    We have verified that the Galactic absorption correction used in
    Phosphoros does not introduce any significant bias in photometric
    redshift estimates.
@@ -648,6 +646,7 @@ to introduce their own pre-computed priors on one or multiple model
 parameters (see :ref:`Advanced features: Ganeric
 Prios<generic-priors>` ).
 
+.. _redshift-dist:
 
 Redshift distribution
 -------------------------------------

@@ -15,9 +15,10 @@ in which luminosities are measured.
 Luminosity Priors Configuration
 -------------------------------
 
-First of all, users have to select whether to use the **AB magnitude**
-or the **luminosity**, and specify the filter in which the luminosity
-function is computed.
+..
+   First of all, users have to select whether to use the **AB
+   magnitude** or the **luminosity**, and specify the filter in which
+   the luminosity function is computed.
 
 ..
    and whether the luminosity has to be corrected for intrinsic reddening or not.
@@ -63,9 +64,9 @@ functions for different redshift ranges and SED groups.
   
 .. note::
 
-   The filter which the luminosity function is defined for is not
-   necessarily one of the filters used for the photometric
-   measurements.
+   The filter which the luminosity function is defined for is the same
+   one used for the SED normalization. This is not necessarily one of
+   the filters used for the photometric measurements.
 
 ..
    In order to apply luminosity priors, Phosphoros needs to compute
@@ -110,7 +111,7 @@ to create new luminosity priors or to manage the existing ones (see
 In the middle of the window, users have to provide the ``Name`` of the
 prior and to select the ``Prior Type``, i.e., whether the prior use
 luminosity or absolute magnitude. The ``Filter`` for which the
-luminosity function is computed is the same as defined in the
+luminosity function is computed is the same one defined in the
 ``1. Luminosity Filter and Extrinsic Absorption`` sub-panel.
 
 .. figure:: /_static/advanced_steps/lum_prior1_v12.png

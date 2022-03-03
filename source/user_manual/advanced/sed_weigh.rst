@@ -5,12 +5,13 @@ SED weights
 
 SED template is one of the free parameters used in the model fitting
 by Phosphoros. The SED axis consists in a discrete set of SEDs that
-map what is actually a continuous multi-dimensional space. For
-each SED, Phosphoros computes a weight that quantifies the information
-brought by the SED with respect to the other SEDs of the library (for
-example, if the library contains two identical SEDs, their weights
-will be reduced by a factor two). Weights are taken into account in
-projected likelihoods.
+map what is actually a continuous multi-dimensional space (e.g., the
+colors space). For each SED, Phosphoros computes a weight that
+quantifies the information brought by the SED with respect to the
+other SEDs of the library (for example, if the library contains two
+identical SEDs, their weights will be reduced by a factor
+two). Weights are then taken into account in projecting
+likelihood/posterior distributions.
 
 Let's see how SED weights are computed (a more detailed explaination
 can be found in the Phosphoros Paper :cite:`PP22`). Given a set of

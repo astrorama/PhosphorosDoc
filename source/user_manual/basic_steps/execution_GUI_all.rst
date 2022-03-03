@@ -43,16 +43,27 @@ opened:
   to new directories can be selected through the ``Browse`` tabs.
 
   Users can choose the number of sources to keep in memory
-  simultaneously: high values will speed up the execution of the
-  template fitting (the default value is 5000). Moreover, it is possible
-  to choose the number of unit of execution (or thread) within a
-  process, by clicking on the button ``Override the Maximum Number of
-  Threads``. Otherwise, the maximum number of available threads is
-  automatically selected.
+  simultaneously (the default value is 5000): high values will speed
+  up the execution of the template fitting, at the expense of
+  increasing the memory usage. Users can also fix a cap in the memory
+  usage by clicking on the ``Template Fitting: Cap the memory usage``
+  button and selecting the maximum value (see
+  :numref:`conf_gen`). This is a further way to limit the number of
+  sources in memory. Moreover, it is possible to choose the number of
+  unit of execution (or thread) within a process, by clicking on the
+  ``Override the Maximum Number of Threads`` button. Otherwise, the
+  maximum number of available threads is automatically selected.
 
   Finally, through ``Log Level`` drop down menu users can
   select logs information to be printed in the terminal when the
   Phosphoros GUI is running.
+
+  .. figure:: /_static/basic_steps/General_v12.png
+     :name: conf_gen
+     :align: center
+     :scale: 40 %
+	     
+     The ``Configuration: General`` panel of the GUI
 
 - **Auxiliary Data** The Phosphoros GUI can be used to display
   auxiliary data files. This is not yet the place for selecting
@@ -399,30 +410,29 @@ In order to produce a grid of models users have to go through with two steps:
 
 - **Luminosity Filter and Extrinsic Absorption**
 
-  In the first sub-panel, users can select the reference filter used
-  for the SED normalization (a default one is proposed by Phosphoros).
-  
-  In addition, here, corrections for intergalactic medium (IGM) and
-  Milky Way absorption can be included in the analysis. These are
-  optional functionalities.
+  In the first sub-panel, users can select:
 
-  Users can select one of the following prescriptions for the IGM
-  absorption correction -- ``Madau``, ``Meiksin`` or ``Inoue`` (see
-  the :ref:`Intergalactic medium absorption <igm-absorption>`
-  explanation) -- or ``OFF``, if no correction will be applied.
+  1) the reference filter used for the SED normalization (a default
+  one is proposed by Phosphoros);
 
-  There are two options for Milky Way absorption correction (see also
-  the :ref:`Galactic absorption <galactic-absorption>` section). The
-  first option (``Look-up Galactic E(B-V) in Planck Dust Map``)
-  fetches the Galactic color excess :math:`E(B-V)` from the *Planck*
-  dust reddening map. The column name of source coordinates must have
-  been provided in the ``Catalog Setup`` panel, and the *Planck* map
-  be previously dowloaded in the ``Configuration --> Aux.Data``
-  panel. Otherwise, Galactic color excess values can be read from the
-  input catalog (select ``Use Galactic E(B-V) Column``). In this case,
-  users must have provided the corresponding column name in the
-  ``Catalog Setup`` panel. If the required information is not given,
-  the previous options are not available to users.
+  2) the prescriptions for the intergalactic medium (IGM) absorption
+  correction -- ``Madau``, ``Meiksin``, ``Inoue`` -- or ``OFF``, if no
+  correction is applied (see the :ref:`Intergalactic medium absorption
+  <igm-absorption>` explanation).
+
+  3) if the Milky Way absorption correction is applied or not. There
+  are two options for the correction (see also the :ref:`Galactic
+  absorption <galactic-absorption>` section). The first one (``Look-up
+  Galactic E(B-V) in Planck Dust Map``) fetches the Galactic color
+  excess :math:`E(B-V)` from the *Planck* dust reddening map. The
+  column name of source coordinates must have been provided in the
+  ``Catalog Setup`` panel, and the *Planck* map be previously
+  dowloaded in the ``Configuration --> Aux.Data`` panel. Otherwise,
+  Galactic color excess values can be read from the input catalog
+  (``Use Galactic E(B-V) Column``). In this case, users must have
+  provided the corresponding column name in the ``Catalog Setup``
+  panel. If the required information is not given, the previous
+  options are not available to users.
 
   .. warning::
 
@@ -430,7 +440,7 @@ In order to produce a grid of models users have to go through with two steps:
      Phosphoros assumes that those values have been derived using
      mean sequence B5 stars. If not, they should be scaled by the
      band-pass correction (see the :ref:`galactic-absorption`
-     section). This operation can be only done in the |CLI| mode.
+     section). This operation can be only done in the CLI mode.
      
   .. note::
 
@@ -447,7 +457,7 @@ In order to produce a grid of models users have to go through with two steps:
   filename for storing the output. By default, a filename is
   automatically generated concatenating ``Grid`` with the parameter
   space name and the selected IGM prescription (e.g.,
-  ``Grid_Test_Parameter_Space_MADAU``). The output file is stored in
+  ``Grid_<parameter space name>_MADAU``). The output file is stored in
   the following directory::
  
     > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/ModelGrids/
@@ -455,7 +465,7 @@ In order to produce a grid of models users have to go through with two steps:
   Clicking on the ``(Re)-Generate the Grid`` button generates the grid
   of models, while on ``Save Config. File`` a configuration file with
   all the command line options needed to generate the grid of models
-  with the |CLI| is saved.
+  with the CLI is saved.
 
   If the Milky Way absorption correction has been selected in the
   previous step, the grid of correction coefficients has to be
@@ -468,10 +478,15 @@ In order to produce a grid of models users have to go through with two steps:
   before, click on ``Save Config. File`` to store the configuration
   file.
 
-  Finally, users can generate the ``Filter Variation Correction Grid
-  File``. This step is activated if the ``Filter Shift`` button is
-  selected in the ``Catalog Setup`` panel (see :ref:`filter-var` in
-  the *Advanced Features* chapter).
+  Finally, if the ``Filter Shift`` button has been activated in the
+  ``Catalog Setup`` panel (see :ref:`Advanced Features: Filter
+  variation<filter-var>`), the grid of filter variation correction
+  coefficients has to be generated with the ``Filter Variation
+  Correction Grid File`` button. The file is stored in::
+
+    > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/FilterVariationCoefficientGrids/
+    
+  with the default name that is the model grid name plus ``_FS_Param``.
   
 ..
    Phosphoros requires as input the Fitzpatrick's Milky Way absorption
@@ -582,34 +597,35 @@ Users need to fill the following information:
   parameter (see :ref:`File format reference
   <format-reference-section>` section).
 
-  In the GUI, 1D PDFs from a likelihood are generated using a *Maximum
+  In the GUI, 1D PDFs from a likelihood are generated by a *Maximum
   Likelihood* method, while 1D PDFs from a posterior distribution by
-  marginalizing with respect to the other model parameters (see
+  *Marginalization* of the other model parameters (see
   :ref:`axis-collapse` for more details).
 
 
  
 - (Optional) **Multi-Dimensional Output**
  
-  Here, users can enable the generation of FITS files containing the
-  full posterior distribution, one per source. This action will
-  produce a large volume of data (see the :ref:`File format reference
-  <format-reference-section>` section). Otherwise, in order to reduce
+  Users can enable the generation of FITS files containing the
+  full posterior distribution, one per source (the ``Full grid``
+  option in the ``Multi-Dimensional Output`` menu). This action will
+  produce a large volume of data (see :ref:`File format: Outputs
+  <result_files_format>`). Otherwise, in order to reduce
   the dimension of output files, users can save only a sampling of
   posterior distributions by selecting ``Sampling`` and choosing the
   ``Sample number`` (default 1000). In this case, Phosphoros stores
-  only the values of the model parameters, and their density in the
-  parameter space reflects the posterior distribution (e.g., the 1D
+  the parameter values for the sampled models, whose density in the
+  parameter space gives the posterior probability (e.g., the 1D
   PDF of a model parameter can be simply obtained from the histogram
   of its values).
 
   Multi-dimensional outputs can be investigated using the appropriate
-  Phosphoros tool in the CLI (see the :ref:`posterior-investigation`).
+  Phosphoros tool in the CLI (see :ref:`posterior-investigation`).
        
   .. note::
 
      The full posterior distribution is computed after the
-     marginalization of scale factor (if it is not fixed to its
+     marginalization of the scale factor (if it is not fixed to its
      best-likelihood value).
 
 After setting ``Input/Ouput``, users are ready to start the

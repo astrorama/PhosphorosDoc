@@ -11,9 +11,9 @@ and multi-dimensional generic priors.
 
 .. note::
     
-    Currently, generic priors can only be used via the |CLI|. The
-    |GUI| support will be implemented in a future release of
-    Phosphoros.
+    Currently, generic priors can only be used via the CLI.
+
+.. The |GUI| support will be implemented in a future release of Phosphoros.
     
 .. warning::
     

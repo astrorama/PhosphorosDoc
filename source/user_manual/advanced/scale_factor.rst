@@ -1,6 +1,6 @@
 .. _scale-factor:
 
-SED Template Normalization
+Scale Factor
 =====================================
 
 Template fitting methods usually fix the normalization of SED
@@ -36,7 +36,7 @@ values for the scale factor distributed around its best-likelihood
 value. The number of sampled points and the sampling range (defined in
 terms of the scale factor uncertainty) are chosen by users.
 
-SED Normalization in the GUI
+Scale Factor in the GUI
 ------------------------------------------------
 
 In order to sample the scale factor and to marginalize it in the
@@ -65,7 +65,7 @@ redshift PDF computation, three steps are required:
     SED normalization sampling with the GUI
 
   
-SED Normalization in the CLI
+Scale Factor in the CLI
 ------------------------------------------------
 
 The SED normalization sampling and marginalization is performed by the
@@ -79,8 +79,7 @@ Users can choose the sampling number points and range by::
   scale-factor-marginalization-range-size=<n_sigma> (default=5)
   scale-factor-marginalization-sample-number=<n_points> (default=101)
 
-where the sample range is :math:`\alpha_{best}\pm` ``<n_sigma>``
-:math:`\times\sigma_{\alpha}`.
+where the sample range is :math:`\alpha_{best}\pm{\rm <n\_sigma>}\times\sigma_{\alpha}`.
 
 Finally, the filter for the SED normalization and the solar SED
 template can be specified through::

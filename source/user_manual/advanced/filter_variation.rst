@@ -8,11 +8,12 @@ observed at different positions on the detector. The variation of filter
 transmissions affects photometric measurements and, consequently, it
 can also have an effect on the estimation of photometric redshifts.
 
-Phosphoros can take into account filter variations corresponding to a
-translation along the wavelength of filter transmission curves. The
-information needed by Phosphoros is the amplitude of the shift,
-defined as the difference between the actual and the nominal filter
-central wavelength,
+Phosphoros is able to take into account the filter variation in the
+redshift computation by applying a correction in modeled fluxes. It
+assumes that the filter variation corresponds to a translation along
+the wavelength of filter transmission curves. The amplitude of the
+shift is defined as the difference between the actual and the nominal
+filter central wavelength,
 :math:`\Delta\lambda=\lambda_c^{actual}-\lambda_c^{nominal}`, where
 the actual one is the measured central wavelength of the filter
 trasmission associated with a specific detected source. This
@@ -25,7 +26,7 @@ correction due to filter variation that must be applied to modeled
 fluxes. In particular, a *filter variation correction grid* is
 generated through the following steps:
 
-- users define the set of values of :math:`\Delta\lambda` for which flux
+- users define a set of values of :math:`\Delta\lambda` for which flux
   corrections are computed (e.g., *N* points between -100 to 100
   |AAm|);
 
@@ -33,20 +34,20 @@ generated through the following steps:
   each (selected) photometric band;
 
 - for each model and band the computed flux corrections are fitted as a
-  function of the filter variation;
+  function of the filter shift;
 
 - the coefficients of the fit are saved in the *filter variation correction grid*.
 
-Therefore, through the *filter variation correction grid*, Phosphoros is
-able to compute in a fast way the filter variation flux corrections
-for each source of the input catalog.
+Consequently, through the *filter variation correction grid*,
+Phosphoros is able to compute in a fast way the filter variation flux
+corrections for each source of the input catalog.
 
 
 Filter Variation Correction in the GUI
 -------------------------------------------------------
 
 In the GUI, users have firstly to map filters to the catalog
-columns that contain the filter variation. Go to the ``Catalog Setup``
+columns that contain the filter shift. Go to the ``Catalog Setup``
 panel and click on the ``Filter Shift`` control (see the left panel of
 :numref:`filt_var`): a new column will appear in the ``Filter
 Mapping`` table where users can insert the name of the filter shift
@@ -59,13 +60,13 @@ right panel of :numref:`filt_var`), and stored in the directory::
 
   > $PHOSPHOROS_ROOT/IntermediateProducts/<Catalog Type>/FilterVariationCoefficientGrids
 
-Users can select the range of the filter variation (in |AAm|) and the
+Users can select the range of the filter shift (in |AAm|) and the
 number of sampling points. Clicking on ``Save Config. File``, users
 can save the corresponding configuration file.
 
 At this point, in the redshift computation, the flux correction due to
-filter variation will be taken into account in all the photometric
-bands for which the filter variation column has been provided.
+filter variation will be applied in all the photometric bands for
+which the filter shift column has been provided.
 
 .. figure:: /_static/advanced_steps/filter_var.png
     :name: filt_var
@@ -97,7 +98,7 @@ grid name and the format can be choosen through::
 
 More options can be found with the ``--help`` parameter, including
 model normalization options, Galactic extiction option,
-etc. (as for the ``compute_model_grid`` action).
+etc. (similarly to the ``compute_model_grid`` action).
 
 Before running Phosphoros, users should ensure that the
 ``filter_mapping.txt`` file contains the filter variation column name
