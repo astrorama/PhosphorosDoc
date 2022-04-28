@@ -253,7 +253,17 @@ texinfo_documents = [
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
 
-# --- New ----
 # numbering Figures and Tables
 numfig = True
 numfig_format = {'figure': 'Fig. %s', 'table': 'Table %s'}
+
+# References
+bibtex_bibfiles = [
+    "./user_manual/advanced/references_advanced_galabs.bib",
+    "./user_manual/advanced/references_advanced.bib",
+    "./user_manual/references.bib",
+    "./user_manual/basic_steps/references_basic_gui.bib",
+    "./user_manual/basic_steps/references_basic_res.bib",
+    "./user_manual/basic_steps/references_basic_over.bib"
+]
+

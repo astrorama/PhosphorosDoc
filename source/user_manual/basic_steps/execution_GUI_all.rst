@@ -142,7 +142,7 @@ the catalog type). Moreover, the column name providing source ID must
 be entered through the ``Source ID Column`` drop down menu that
 shows all the column names in the input catalog.
 
-.. figure:: /_static/Basic_steps/Catalog_Type_v018.png
+.. figure:: /_static/basic_steps/Catalog_type_v018.png
     :name: bsetup
     :width: 700px
     :align: center
@@ -343,14 +343,14 @@ top-right of the window).  Make sure to complete the full
 specification of the three groups before continuing to the next
 section.
 
-.. figure:: /_static/Basic_steps/Parameter_Space1_v018.png
+.. figure:: /_static/basic_steps/Parameter_Space1_v018.png
     :name: bpara 
     :align: center
     :scale: 50 %
 	    
     Setting ``E(B-V)`` and Redshift range in the GUI 
 
-.. figure:: /_static/Basic_steps/Parameter_Space2_v018.png
+.. figure:: /_static/basic_steps/Parameter_Space2_v018.png
     :name: bpara2
     :align: center
     :scale: 50 %
