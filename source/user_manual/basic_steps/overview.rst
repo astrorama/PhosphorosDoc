@@ -21,16 +21,15 @@ Phosphoros involves two main steps (discussed in detail in the
 Phosphoros paper :cite:`PP22`; see also the :ref:`Methodology
 <methodology>` chapter for a shorter overview):
 
-**Grid of Models)** As a first step, it generates a *large* set of
+**(Grid of Models)** As a first step, Phosphoros generates a *large* set of
 models for which photometry are computed. Models are characterized by
 four parameters: redshift, restframe Spectral Energy Distribution
 (SED) template, intrinsic reddening curve and intrinsic color excess
 :math:`E_{(B-V)}` value. The grid of models is created through the
 following operations (in this order):
 
-* Building a library of restframe SED templates.
-
-* (optional) Adding emission lines to templates.
+* Building a library of restframe SED templates (with the option to
+  add emission lines to templates).
 
 * Correcting restframe SED templates for the effect of intrinsic dust
   attenuation.
@@ -48,7 +47,7 @@ following operations (in this order):
 Each model is characterized by a vector of computed photometric
 values, one value for each selected filter.
 
-**Redshift Estimate)** Phosphoros is now able to estimate the redshift
+**(Redshift Estimate)** Phosphoros is now able to estimate the redshift
 of sources in the input catalog.
 
 * The likelihood :math:`\mathcal{L}` of models is determined by
@@ -95,7 +94,7 @@ grid of models and before the redshift estimate:
 their inputs and outputs, including optional functionalities.
 
 
-.. figure:: /_static/basic_steps/Flowchart_Phosphoros.pdf
+.. figure:: /_static/basic_steps/Flowchart_Phosphoros_v12.pdf
     :name: flowphos
     :align: center
     :scale: 50 %

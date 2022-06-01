@@ -68,7 +68,7 @@ Edit your configuration (.bashrc or equivalent for other shell) and define:
 .. code:: bash
 
     export CMAKE_PROJECT_PATH=$HOME/<applications>
-    export CMAKE_PREFIX_PATH=$CMAKE_PROJECT_PATH/Elements/5.10/cmake
+    export CMAKE_PREFIX_PATH=$CMAKE_PROJECT_PATH/Elements/6.0.1/cmake
     export CMAKEFLAGS=""
 
 Note that ``<applications>`` is just a placeholder that can be replaced with
@@ -80,18 +80,18 @@ the most convenient location. It must exist before running the next steps.
 It can be used, for instance, to disable building the documentation of the
 API (see previous section).
 
-Elements 5.10
--------------
+Elements 6.0.1
+----------------
 
 Run the following commands:
 
 .. code:: bash
 
     cd $CMAKE_PROJECT_PATH
-    mkdir -p Elements/5.10
-    wget https://github.com/astrorama/Elements/archive/5.10/Elements-5.10.tar.gz
-    tar xzf Elements-5.10.tar.gz --strip-components 1 -C Elements/5.10
-    cd Elements/5.10
+    mkdir -p Elements/6.0.1
+    wget https://github.com/astrorama/Elements/archive/6.0.1/Elements-6.0.1.tar.gz
+    tar xzf Elements-6.0.1.tar.gz --strip-components 1 -C Elements/6.0.1
+    cd Elements/6.0.1
     make -j
     make install
 
@@ -101,21 +101,21 @@ Run the following commands:
   of  CPUs: for instance ``make -j4`` to use only 4.
 
 
-Alexandria 2.17, PhosphorosCore 0.17 and Phosphoros 0.17
---------------------------------------------------------
+Alexandria 2.24.0, PhosphorosCore 1.2.0 and Phosphoros 1.2.0
+----------------------------------------------------------
 
 Please repeat the above Elements-related instruction for:
 
 .. code:: bash
 
-    # Alexandria-2.17
-    wget https://github.com/astrorama/Alexandria/archive/2.17/Alexandria-2.17.tar.gz
-    # PhosphorosCore-0.17
-    wget --header "PRIVATE-TOKEN: <your-access-token>" "https://gitlab.euclid-sgs.uk/api/v4/projects/PF-PHZ%2FPhosphorosCore/repository/archive?sha=0.17" -O PhosphorosCore-0.17.tar.gz
-    # Phosphoros-0.17
-    wget --header "PRIVATE-TOKEN: <your-access-token>" "https://gitlab.euclid-sgs.uk/api/v4/projects/SDC-CH%2FPhosphoros/repository/archive?sha=0.17" -O Phosphoros-0.17.tar.gz
+    # Alexandria-2.24.0
+    wget https://github.com/astrorama/Alexandria/archive/2.24.0/Alexandria-2.24.0.tar.gz
+    # PhosphorosCore-1.2.0
+    wget --header "PRIVATE-TOKEN: <your-access-token>" https://github.com/astrorama/PhosphorosCore/archive/1.2.0/PhosphorosCore-1.2.0.tar.gz
+    # Phosphoros-1.2.0
+    wget --header "PRIVATE-TOKEN: <your-access-token>" https://github.com/astrorama/Phosphoros/archive/1.2.0/Phosphoros-1.2.0.tar.gz
 
-(replacing "Elements-5.10" by the above names in the procedure)
+(replacing "Elements-6.0.1" by the above names in the procedure)
 
 .. _Gitlab Access Token: https://gitlab.euclid-sgs.uk/-/profile/personal_access_tokens
 
@@ -131,7 +131,7 @@ by adding the following line in your .bashrc file:
 
 .. code:: bash
 
-    alias Phosphoros="python $CMAKE_PROJECT_PATH/Elements/5.10/InstallArea/<binary-tag>/cmake/scripts/env.py --xml /innerhome/fake/Applications/Phosphoros/0.17/InstallArea/<binary-tag>/PhosphorosEnvironment.xml Phosphoros"
+    alias Phosphoros="python $CMAKE_PROJECT_PATH/Elements/6.0.1/InstallArea/<binary-tag>/cmake/scripts/env.py --xml /innerhome/fake/Applications/Phosphoros/1.2.0/InstallArea/<binary-tag>/PhosphorosEnvironment.xml Phosphoros"
 
 You can then type:
 
@@ -160,4 +160,4 @@ to invoke Phosphoros GUI.
 
   .. code:: bash
 
-    alias Phosphoros=". ELogin.sh; E-Run --no-user Phosphoros 0.17 Phosphoros"
+    alias Phosphoros=". ELogin.sh; E-Run --no-user Phosphoros 1.2.0 Phosphoros"

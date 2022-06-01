@@ -3,7 +3,7 @@
 Additional Functionalities in the CLI
 ==================================================
 
-.. _data-pack:
+.. _cli-data-pack:
 
 Download or update the Data Pack
 ------------------------------------------------------
@@ -91,22 +91,25 @@ given a SED template, the modeled SED for a set of parameters
 :math:`\{`\ Z, :math:`E_{(B-V)}`, reddening curve\ :math:`\}`. The
 computed SED will be displayed on the terminal. For example::
 
-  > Phosphoros CMS --sed-name=CosmosSp/S0_A_0 --reddening-curve-name=calzetti --ebv-value=0.2 --z-value=2
+  > Phosphoros
+  CMS --sed-name=CosmosSp/S0_A_0 --normalization-filter=DECAM/r
+  --normalization-solar-sed=solar_spectrum 
+  --reddening-curve-name=calzetti --ebv-value=0.2 --z-value=2
 
 The ``--sed-name`` option specifies the SED template to be considered
-and is the only mandatory parameter. It is searched below the
-``AuxiliaryData/SEDs`` directory. Reddening curves are searched in the
-``AuxiliaryData/ReddeningCurves`` directory (the default is
-``calzetti``). The default value for ``--ebv-value`` and ``--z-value``
-is ``0``.
+and it is searched below the ``AuxiliaryData/SEDs`` directory. The SED
+is normalized through the standard normalization options,
+``--normalization-filter`` and ``--normalization-solar-sed`` (see,
+e.g., :ref:`scale-factor`). All these options are mandatory. The SED
+parameters are specified through the optional options
+``reddening-curve-name`` (the file is searched in the
+``AuxiliaryData/ReddeningCurves`` directory), ``--ebv-value`` and
+``--z-value``. If not provided, the default values will be taken,
+i.e. ``calzetti``, ``0`` and ``0``, respectively.
 
 IGM absorption can be also included using the
 ``--igm-absorption-type`` parameter. Allowed arguments are: ``OFF``
 (default), ``MADAU``, ``MEIKSIN``, ``INOUE``.
-
-The modeled SED can be normalized to the solar luminosity at 10pc
-distance in a particular filter through the standard normalization
-options, ``--normalization-filter`` and ``--normalization-solar-sed``.
 
 .. warning::
 
@@ -246,11 +249,17 @@ parameters of the ``compute_redshift`` action:
 In both cases, the possible arguments are ``BAYESIAN`` (default), ``MAX``,
 ``SUM``.
 
+.. note::
+
+   The Axis Collapse options are only available with the CLI. In the
+   GUI, axes projection is performed with the ``Marginalization``
+   method for posterior distributions and with the ``Maximum
+   likelihood`` method for likelihood distributions.
 
 .. _effectiveness:
 
-Prior effectivenes
------------------------
+Prior effectiveness
+------------------------
 
 Phosphoros gives the opportunity to choose the *effectiveness*
 (:math:`e_{ff}`) of a prior. This is a value between 0 and 1 that
@@ -273,15 +282,20 @@ following options of the ``compute_redshift`` action::
   luminosity-prior-effectiveness=<value>
   volume-prior-effectiveness=<value>
    
+.. note::
+
+   The Prior effectiveness option is only available with the CLI. With
+   the GUI, it is always 1.
 
 .. _reference-sample:
 
 Build a reference sample
 ------------------------------------------------------
 
-Phosphoros includes a tool to build a reference sample that
+Phosphoros includes an action to build a reference sample that
 provides, for each source of the output catalog, the redshift PDF and
-the SED corresponding to the best-fit model.
+the SED corresponding to the best-fit model. This action has been
+specifically created for the usage of another tool named *NNPZ*.
 
 The action to build the reference sample is ``build_reference_sample``
 (or ``BRS``). It requires as inputs the qualified name of the output

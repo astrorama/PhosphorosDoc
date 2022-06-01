@@ -41,8 +41,10 @@ An example of the configuration file is::
 
 The list of action parameters includes the catalog type, the filename
 of the grid of models, the type of IGM absorption, and the qualified
-filename of the Milky Way reddening curve (it is searched below the
-``AuxiliaryData/Filters/`` directory).
+filename of the Milky Way reddening curve (that is searched below the
+``AuxiliaryData/Filters/`` directory). The grid of correction
+coefficients is stored in the ``IntermediateProducts/<Catalog
+Type>/GalacticCorrectionCoefficientGrids/`` directory.
 
 The Phosphoros CLI gives the possibility to use a generic reddening
 maps (in HEALPIX [#fga_adv]_ format) through the

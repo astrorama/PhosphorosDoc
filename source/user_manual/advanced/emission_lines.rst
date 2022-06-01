@@ -11,7 +11,7 @@ templates. Users can afterwards use these SEDs for performing the
 analysis.
 
 For a given template, Phosphoros first determines the flux of the
-[:math:`H\alpha` ] emission line (6563\ |AAm| at the emitter
+[:math:`H\alpha` ] emission line (6562\ |AAm| at the emitter
 restframe) from the ultraviolet (UV) continuum flux by integrating the
 SED between :math:`\lambda_0=1500` and :math:`\lambda_1=2800` |AAm|:
 
@@ -44,21 +44,21 @@ flux ratio with the [OII] emission line doublet flux (see
    +--------------------+------------------------------+--------------------------+------------+
    | Emission Line      | |lambda| [ |AAm| ]           | Line/[:math:`H\alpha` ]  | Line/[OII] |
    +====================+==============================+==========================+============+
-   | :math:`H\alpha`    | 6562.80                      | 1.0000                   | 1.77       |
+   | :math:`H\alpha`    | 6562.10                      | 1.0000                   | 1.77       |
    +--------------------+------------------------------+--------------------------+------------+
-   | :math:`H\beta`     | 4861.32                      | 0.2960                   | 0.61       |
+   | :math:`H\delta`    | 4101.20                      | 0.0773                   | 0.00       |
    +--------------------+------------------------------+--------------------------+------------+
-   | :math:`H\gamma`    | 4340.46                      | 0.1350                   | 0.00       |
+   | :math:`H\gamma`    | 4340.10                      | 0.1397                   | 0.00       |
    +--------------------+------------------------------+--------------------------+------------+
-   | :math:`H\delta`    | 4101.73                      | 0.0770                   | 0.00       |
+   | :math:`H\beta`     | 4860.70                      | 0.3101                   | 0.61       |
    +--------------------+------------------------------+--------------------------+------------+
-   | OII                | 3726.10                      | 0.3165                   | 0.50       |
+   | OII                | 3726.10                      | 0.5075                   | 0.50       |
    +--------------------+------------------------------+--------------------------+------------+
-   | OII                | 3728.80                      | 0.3165                   | 0.50       |
+   | OII                | 3728.80                      | 0.5075                   | 0.50       |
    +--------------------+------------------------------+--------------------------+------------+
-   | OIII               | 4958.91                      | 0.0490                   | 0.13       |
+   | OIII               | 4958.10                      | 0.1445                   | 0.13       |
    +--------------------+------------------------------+--------------------------+------------+
-   | OIII               | 5006.84                      | 0.1410                   | 0.36       |
+   | OIII               | 5006.80                      | 0.4335                   | 0.36       |
    +--------------------+------------------------------+--------------------------+------------+
 
 
@@ -180,8 +180,8 @@ Other functionalities with the CLI include:
     uv-range=2100,2500
     emission-lines=emission_lines_lephare.txt
 
-  where the ``emission_lines_lephare.txt`` table (below the
-  ``Phosphoros/AuxiliaryData/`` directory) should contain the
+  where the ``emission_lines_lephare.txt`` table (located in the same
+  directory as the other emission lines table) should contain the
   emission line flux ratios reported in :numref:`temline`.
 
 * adding the emission lines as a Gaussian function. The FWHM is

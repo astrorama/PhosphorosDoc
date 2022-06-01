@@ -9,13 +9,13 @@ directories containing input/output data below the Phosphoros root
 directory (see the :ref:`Basic Steps: Directory Organization
 <directory-organization>`).
 
-In the ``Configuration-->General`` panel of the |GUI|, users can
+In the ``Configuration-->General`` panel of the GUI, users can
 choose with the ``Browse`` button a new directory structure for
 Phosphoros, i.e. the directories where to search input catalogs
 and auxiliary data or where to store intermediate products and
 results (:numref:`changedir`).
 
-.. figure:: /_static/advanced_steps/dir_structure.png
+.. figure:: /_static/basic_steps/General_v12.png
    :name: changedir
    :align: center
    :scale: 50 %
@@ -24,7 +24,7 @@ results (:numref:`changedir`).
    structure 
 	   
 
-In the |CLI| mode, if the Phosphoros directory structure has changed,
+In the CLI mode, if the Phosphoros directory structure has changed,
 users have to specify the location of needed directories every time an
 action is run. The best option, again, is to use configuration files
 generated with the GUI. Otherwise, for each action to run, ``Directory

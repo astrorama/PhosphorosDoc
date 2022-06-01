@@ -85,7 +85,7 @@ CLI mode.
    +---------------+---+------------------+----------------+----------------+-------------+-------------+-------------+
    
 The spectral type fractions at :math:`m_0=20` are therefore
-30% E/SO, 35% spirals, and 25% irregulars.
+30% E/SO, 35% spirals, and 35% irregulars.
 
 
 Redshift Priors in the GUI 

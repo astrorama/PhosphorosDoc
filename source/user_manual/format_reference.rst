@@ -22,8 +22,10 @@ Input catalogs can be either ASCII or FITS tables (Phosphoros
 will auto-detect the type). They must contain the following columns:
 
 - **ID**: The ID of the source
+  
 - **Filter Fluxes**: One column for each filter, containing the Flux
   in :math:`\mu`\ Jy
+  
 - **Filter Flux Errors**: One column for each filter, containing the Flux
   error in :math:`\mu`\ Jy
 
@@ -32,11 +34,14 @@ and optionally:
 - **SpecZ**: The spectroscopic redshift (mandatory for training
   catalogs)
 
-- **RA**, **DEC**: right ascension and declination of the source, in
+- **RA**, **DEC**: Right ascension and declination of the source, in
   degrees
 
 - **GAL_EBV**: Galactic color excess in the source sky position, in
   magnitude
+
+- **Filter Shifts**: One column for each filter, containing the filter
+  shift in |AAm|
 
 Phosphoros does not require any specific order or naming of the
 catalog columns. In ASCII tables, the first line, starting with #,
@@ -111,6 +116,17 @@ Here below a list of typical auxiliary data and their format.
 - **SED Templates**: the first column contains the wavelength values
   expressed in |AAm| and the second column the flux expressed
   in erg/s/cm\ :sup:`2`/|AAm|.
+
+  .. note::
+
+     In their header, SED templates can also contain physical
+     parameter information. As example::
+
+       # PARAMETER : mass=0.1*L+1.3[solar mass]
+       901.57              0.0000164030  
+       903.65              0.0000163025  
+       905.73              0.0000162024  
+
 
 - **Reddening Curves**: the first column contains the wavelength
   values expressed in |AAm| and the second column the values of the
@@ -322,6 +338,7 @@ following directory::
 
 This file looks like::
 
+    # Filter, Flux Column, Error Column, Upper Limit/error ratio, Convert from MAG, Filter Shift Column
     DECAM/g FLUX_G FLUXERR_G 3 0 NONE
     DECAM/i FLUX_I FLUXERR_I 3 0 NONE
     DECAM/r FLUX_R FLUXERR_R 3 0 NONE
@@ -333,18 +350,21 @@ This file looks like::
 
 and includes 6 columns:
 
-- Column 1: The qualified name of the file containing the filter
-  transmission curve (i.e., the directory name below the
-  ``AuxiliaryData/Filters`` directory plus the filter name) |br|
-- Column 2: The catalog flux column name corresponding to the filter |br|
-- Column 3: The catalog flux error column name corresponding to the filter |br|
-- Column 4: The number used to recompute flux errors if ``Upper Limit
-  recompute error flag`` is equal to ``-99`` (see :ref:`mapping`) |br|
-- Column 5: ``0`` if photometry are provided in fluxes,
-  ``1`` in AB magnitude |br|
-- Column 6: The name of the catalog column containing the filter
-  shift (if ``NONE``, filter variation correction is not applied)
-  |br|
+- Column 1, ``Filter``: The qualified name of the file containing the
+  filter transmission curve (i.e., the directory name below the
+  ``AuxiliaryData/Filters`` directory plus the filter name)
+- Column 2, ``Flux Column``: The catalog flux column name
+  corresponding to the filter
+- Column 3, ``Error Column``: The catalog flux error column name
+  corresponding to the filter
+- Column 4, ``Upper Limit/error ratio``: The number used to recompute
+  flux errors if ``Upper Limit recompute error flag`` is equal to,
+  e.g., ``-99`` (see :ref:`GUI: Mapping filters to column names<mapping>`)
+- Column 5, ``Convert from MAG``: ``0`` if photometry are provided in
+  fluxes, ``1`` in AB magnitude
+- Column 6, ``Filter Shift Column``: The name of the catalog column
+  containing the filter shift (if ``NONE``, filter variation
+  correction is not applied to the filter)
 
 The ``error_adjustment_param.txt`` file is found in the
 same directory and looks like::

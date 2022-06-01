@@ -59,12 +59,14 @@ We suggest ``.conf`` as extension in configuration files, although it
 is not mandatory (the software will accept any other specified
 extension).
 
-Users can copy the system configuration files and modify them, but the
-most convenient approach is to use the GUI to output configuration
-files. The GUI can be conveniently used to enter all options in an
-interactive mode and to save them in configuration
-files. Configuration files produced with the GUI can also be copied,
-pasted and edited for small changes.
+.. tip::
+
+   Users can copy the system configuration files and modify them, but
+   the most convenient approach is to **use the GUI to output
+   configuration files**. The GUI can be conveniently used to enter all
+   options in an interactive mode and to save them in configuration
+   files. Configuration files produced with the GUI can also be
+   copied, pasted and edited for small changes.
 
 .. note::
    
@@ -108,8 +110,11 @@ located in the following directory::
 
 This file contains the filename of filter transmission curves, and the
 corresponding column names of flux and flux error inside the input
-catalog (see :ref:`Filter Mapping Format<filter-mapping>` for more
-details). It is needed by the ``compute_redshift`` action (see below).
+catalog. It also includes additional information such as the
+flux-error ratio, the flux/Mag index and the name of filter shift
+columns (see :ref:`GUI: Mapping filters to column names<mapping>` and
+:ref:`Filter Mapping Format<filter-mapping>` for more details). The
+file is read by the ``compute_redshift`` action (see below).
 
 In the same directory, there is also the
 ``error_adjustment_param.txt`` file that contains the coefficients of
@@ -151,8 +156,9 @@ Let's see an example of configuration file for the ``CMG`` action::
 
     phosphoros-root=/home/phosphoros/Phosphoros
     thread-no=6
-
-    catalog-type=Challenge2
+    cosmology-hubble-constant=67.74
+    cosmology-omega-lambda=0.6911
+    cosmology-omega-m=0.3089
 
     filter-name=DECAM/g
     filter-name=DECAM/i
@@ -165,46 +171,46 @@ Let's see an example of configuration file for the ``CMG`` action::
 
     normalization-filter=DECAM/r 
     normalization-solar-sed=solar_spectrum 
+    catalog-type=Challenge2 
 
     igm-absorption-type=MADAU
 
-    output-model-grid=Grid_Chalenge2_Parameter_Space_1_MADAU.dat
-
     sed-group-Elliptical Galaxies=CosmosEll
     sed-name-Elliptical Galaxies=CosmosSp/S0_A_0
-
     sed-group-Spiral Galaxies=CosmosSp
     sed-exclude-Spiral Galaxies=CosmosSp/S0_A_0
-
     sed-group-Star Burst Galaxies=CosmosSB
 
     reddening-curve-name-Elliptical Galaxies=calzetti
-
     reddening-curve-name-Spiral Galaxies=SMC_prevot
-
     reddening-curve-name-Star Burst Galaxies=SB_calzetti
 
     ebv-value-Elliptical Galaxies=0.000000 
     ebv-value-Elliptical Galaxies=0.100000 
-
     ebv-range-Spiral Galaxies=0.000000 0.050000 0.010000
     ebv-range-Spiral Galaxies=0.050000 0.300000 0.050000
     ebv-range-Spiral Galaxies=0.300000 1.000000 0.100000
-
     ebv-range-Star Burst Galaxies=0.000000 0.050000 0.010000
     ebv-range-Star Burst Galaxies=0.050000 0.300000 0.050000
     ebv-range-Star Burst Galaxies=0.300000 1.000000 0.100000
 
     z-range-Elliptical Galaxies=0.000000 6.000000 0.050000
-
     z-range-Spiral Galaxies=0.000000 6.000000 0.050000
-
     z-range-Star Burst Galaxies=0.000000 6.000000 0.050000
 
-In the first part of the list we find generic specifications such as the
-Phosphoros root directory, the name of the catalog type, the name of
-filter files, the name of the filter file and of the solar SED file used for
-template normalization, etc.
+In the first part of the list we find generic specifications such as:
+the Phosphoros root directory; the number of threads to use; the name
+of filter files; the values of cosmological parameters. They are
+optional and, if not specified, default values are used. The following
+parameters are instead mandatory and must be specified by users: the
+name of the catalog type (``catalog-type``); the name of the filter
+file (``normalization-filter``) and of the solar SED file
+(``normalization-solar-sed``) used for template normalization (see
+:ref:`SED normalization<scale-factor>`).
+
+The prescription for the IGM absorption correction is selected through
+the ``igm-absorption-type`` option. If the option is not present (or
+``=OFF``), no correction is applied.
 
 The parameter space specification starts with the SED template
 specification. The syntax ``sed-group-Elliptical Galaxies=CosmoEll``
@@ -229,8 +235,9 @@ templates, with the prefix ``reddening-curve-``.
 
    By default, the model grid output is a binary file. However, it can
    be written in ASCII by setting the option
-   ``--output-model-grid-format=TEXT`` (see
-   :ref:`output_files_format`).
+   ``output-model-grid-format=TEXT`` (see
+   :ref:`output_files_format`). The name of the output can be choosen
+   by ``output-model-grid=<name>``.
    
 As shown in the example, the :math:`E_{(B-V)}` and redshift
 specifications for each SED group are entered using the following
@@ -278,54 +285,69 @@ button in the ``Compute Redshift`` panel (see the
 
 Here below, an example of configuration file::
 
-   phosphoros-root=/home/phosphoros/Phosphoros 
-   catalog-type=Challenge2
+   phosphoros-root=/home/phosphoros/Phosphoros
+   thread-no=6
+   
    normalization-filter=DECAM/r 
-   normalization-solar-sed=solar_spectrum 
+   normalization-solar-sed=solar_spectrum
    
    cosmology-hubble-constant=67.74
    cosmology-omega-lambda=0.6911
    cosmology-omega-m=0.3089
    
+   catalog-type=Challenge2 
    input-catalog-file=Challenge2TrainingSmallCatalog.fits
+   source-id-column-name=OBJECT_ID  
    missing-photometry-flag=-99 
-   enable-upper-limit=NO
+   enable-upper-limit=YES
+   upper-limit-use-threshod-flag=-99
    model-grid-file=Grid_Chalenge2_Parameter_Space_1_MADAU.dat
       
    phz-output-dir=/home/phosphoros/Phosphoros/Results/Challenge2/Challenge2TrainingSmallCatalog
-   source-id-column-name=OBJECT_ID  
    output-catalog-format=FITS
+   copy-columns=<list of input catalog columns>
    create-output-best-likelihood-model=NO
    create-output-best-model=YES
 
 Along with generic specifications (such as the Phosphoros root
-directory, the name of the catalog type, etc.), the configuration file
-requires three main information:
+directory, cosmological parameters, etc.), the configuration file
+requires information on the input/output catalogs:
 
-#. the cosmological parameter values, needed to transform
+.. #. the cosmological parameter values, needed to transform
    luminosities to fluxes and viceversa;
 
-#. the name of the input catalog (with specifications for missing
-   data and upper limits) and of the model grid file;
+#. **Input:** the name of the catalog type and of input catalog (with
+   specifications for the source ID column, for missing data and upper
+   limits), and the name of the model grid file. In addition, input
+   catalog options give the possibility:
 
-#. the directory where the output catalog will be located, plus some
-   specifications about what outputs are computed and stored, and
-   their format. The name of the output catalog is by default
-   ``phz_cat``, with the extension according to the selected
+   - to process only a chunk of the input catalog by excluding the
+     first *n* sources (``input-skip-head=<n>``) and by stopping
+     after *n* sources (``input-process-max=<n>``);
+
+   - to fix the redshift of sources by providing the column of the input
+     catalog containing the redshift (``fixed-redshift-column=<column
+     name>``);
+
+   - to exclude filters (``exclude-filter=<list of filters>``).
+
+#. **Ouput:** the directory where the output catalog will be located,
+   plus some specifications about what outputs are computed and
+   stored, and their format. The name of the output catalog is by
+   default ``phz_cat``, with the extension according to the selected
    format.
 
-..   (if they are not in the standard directories, see :ref:`directory_howto_section`);  
-
-In the above example, only the parameters of the best posterior model
-are stored in the output file. If users want to save the posterior 1D
-PDF of redshift, for example, it is enough to add the option
-``create-output-pdf=Z``. Finally, in order to store the
-multi-dimensional posterior distribution, the ``full-PDF-samplig``
-option must be present in the configuration file:
-``full-PDF-samplig=YES`` for the sampling of the distribution,
-``NO`` for the full grid
-(see :ref:`GUI: Compute Redshift<computing-redshifts>` and :ref:`File
-Format: Outputs<result_files_format>`).
+   In the above example, only the parameters of the best posterior
+   model are stored in the output file. If users want to save the
+   posterior 1D PDF of redshift, for example, it is enough to add the
+   option ``create-output-pdf=Z`` (``EBV, REDDENING-CURVE`` or ``SED``
+   for the other parameters). Finally, in order to store the
+   multi-dimensional posterior distribution, the ``full-PDF-samplig``
+   option must be present in the configuration file:
+   ``full-PDF-samplig=YES`` for the sampling of the distribution,
+   ``NO`` for the full grid (see :ref:`GUI: Compute
+   Redshift<computing-redshifts>` and :ref:`File Format:
+   Outputs<result_files_format>`).
 
 The configuration file for the ``compute_redshift`` action can be much
 more complex than the one shown here when advanced functionalities of

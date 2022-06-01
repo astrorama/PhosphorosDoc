@@ -44,7 +44,7 @@ Users can compute new zero-point corrections by clicking on the
 ``Compute New Corrections`` button. A pop-up window will appear, as
 shown in :numref:`zpc`.
 
-.. figure:: /_static/advanced_steps/zero_point_v12.png
+.. figure:: /_static/advanced_steps/zero_point_v13.png
     :name: zpc
     :align: center 
     :width: 800px
@@ -59,6 +59,15 @@ the zero-point corrections. Three further steps are required:
 - ``1. Traning Catalog Selection:`` select the training sample
   through the ``Browse`` tab, along with the column name where the
   spectroscopic redshifts are stored.
+
+  The Milky Way absorption correction will be applied to the training
+  sample following the option selected in the ``1. Luminosity Filter
+  and Extrinsic Absorption`` sub-panel. If the ``Use Galactic E(B-V)
+  Column`` option is selected, the ``E(B-V)`` column must be present
+  in the training sample; if ``Look-up Galactic E(B-V) in Planck Dust
+  Map`` is choosen, the column ``PLANCK_GAL_EBV`` is computed and
+  added to the training sample (or to a new file according to the
+  user's choice).
 
 - ``2. Algorithm:`` define the algorithm parameters (i.e.  the
   ``Number of Iterations`` and the ``Tolerance`` thresold, used to
@@ -85,30 +94,69 @@ Photometric Corrections in the CLI
 Zero-point corrections can be computed using the Phosphoros action
 ``compute_photometric_corrections`` (or ``CPC``).
 
-The main parameters of this action concern the input training catalog
-and the algorithm configuration parameters. An example of them is::
+Action parameters can be passed with a configuration file through the
+``--config-file`` action parameter. If not specified, Phosphoros reads
+by default the following configuration file::
 
-  --input-catalog-file=<file name>
-  --spec-z-column-name=<column name>
-  --spec-z-err-column-name=<column name>
+  /path_to_PhosphorosCore_installation_directory/conf/PhzExecutables/PhosphorosComputePhotometricCorrections.conf
+
+Configuration files for this action can be generated through the
+Phosphoros GUI using the ``Save Config. File`` button present in the
+``4. Photometric Zero-Point Corrections`` sub-panel (see :numref:`zpc`).
   
-  --output-phot-corr-file=<output file name>
-  --phot-corr-iter-no=5
-  --phot-corr-tolerance=0.001
-  --phot-corr-selection-method=MEDIAN
+The main parameters of this action concern the training sample and the
+algorithm configuration parameter. An example of configuration file is
+following::
 
-where the input catalog is searched below ``Catalogs/<Catalog Type>``
-and the output is stored in ``IntermediateProducts/<Catalog Type>``.
-The recommended output name is ``<Parameter Space>_<Method>`` with the
-``.txt`` extension. The default value for the number of iterations
-``phot-corr-iter-no`` is 5, while for the tollerance threshold
-``phot-corr-tolerance`` is :math:`10^{-3}`. Spectroscopic
-errors are optionals and if missing, they are set to zero.
+  catalog-type=<name>
+  input-catalog-file=<file name>
+  output-phot-corr-file=<output file name>
+
+  normalization-filter=COSMOS/B_Subaru 
+  normalization-solar-sed=solar_spectrum 
+
+  source-id-column-name=<column name> # or source-id-column-index=<number>
+  spec-z-column-name=<column name> # or spec-z-column-index=<number>
+  spec-z-err-column-name=<column name> # or spec-z-err-column-index=<number>
+
+  model-grid-file=<file name>
+  galactic-correction-coefficient-grid-file=<file name>
+  dust-column-density-column-name=<column name>
+  
+  phot-corr-iter-no=<value>
+  phot-corr-tolerance=<value>
+  phot-corr-selection-method=<value>
+
+where the training sample (``input-catalog-file``) is searched below
+``Catalogs/<Catalog Type>`` and the photometric correction output file
+(``output-phot-corr-file``) is stored in
+``IntermediateProducts/<Catalog Type>``.  The recommended output name
+is ``<Parameter Space>_<Method>`` with the ``.txt`` extension (by
+default is ``photometric_corrections.txt``). The model grid file must
+be the same used for the redshift computation. It is expected to be
+found in the directory ``IntermediateProducts/<Catalog Type>/ModelGrids/``.
+
+The SED normalization parameters (see :ref:`SED Normalization
+<scale-factor>`), the column names/indices of the source ID and of the
+spectroscopic redshift are required by the action. On the contrary,
+spectroscopic redshift errors are optional and if missing, they are
+set to zero.
+
+In order to include the Milky Way absorption correction, the filename
+of the correction coefficients grid and the column name
+containing the :math:`E_{B-V}^{MW}` color excess must be provided, as
+shown above (see :ref:`galactic-absorption-CLI` for more details).
+
+The default values for the algorithm parameters are: 5 for the number
+of iterations ``phot-corr-iter-no``; :math:`10^{-3}` for the
+tollerance threshold ``phot-corr-tolerance``; ``MEDIAN`` for the
+`averaging` method.
 
 .. warning::
    
    The ``CPC`` action has many more options, most of them present also
-   in the ``compute_redshifts`` action. These additional options
-   should matches the ones used later for the redshift estimate (by
-   the ``compute_redshift`` action) otherwise the zero-point
-   correction would be meaningless.
+   in the ``compute_redshift`` action (see :ref:`compute-redshift-cli`
+   and its advanced functionalities). All these options should match
+   the ones used later for the redshift estimate (by the
+   ``compute_redshift`` action) otherwise the zero-point correction
+   would be meaningless.

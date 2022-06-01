@@ -216,8 +216,10 @@ hand.
     one of the directories, but focus more on the concept and mention the most used
     ones. We should also mention the PHOSPHOROS_ROOT environment variable.*
 
-Phosphoros *internal* data
----------------------------------------
+.. _data-pack:
+    
+Phosphoros *internal database*
+-----------------------------------------
 
 ..
   In order to make input and auxiliary data available to data analysis,
@@ -233,7 +235,7 @@ Phosphoros *internal* data
 
 In order to make input and auxiliary data available to data analysis,
 they first have to be imported inside the Phosphoros directory
-structure. When launching phosphoros for the first time, it will
+structure. When launching Phosphoros for the first time, it will
 automaticall create the folder structure under the
 ``$PHOSPHOROS_ROOT`` folder.
 
@@ -241,21 +243,19 @@ The standard procedure is to import input catalogs and auxiliary data
 files, such as filter transmission curves or SEDs, into the Phosphoros
 *internal database*. All the operations such as importing, moving and
 deleting files can be done using the shell commands such as ``cp``,
-``mv`` or ``rm`` (the GUI can only import folders, not move nor delete
-them). Users can also create or re-arrange sub-directories in the
+``mv`` or ``rm`` (or using the GUI, which can import or delete
+folders). Users can also create or re-arrange sub-directories in the
 Phosphoros structure to match their preferred organization scheme by
 the ``mkdir`` shell command or by the GUI.
 
-The Auxiliary Data Pack, including the *quickstart* input
-catalog used in :ref:`Quickstart in 15 minutes <quickstart>` chapter,
-can be dowloaded from the Phosphoros repository through the GUI (see
-:ref:`config`) or the CLI (see :ref:`data-pack`). Files will be
-automatically located in the proper directories. The data pack has
-everything you need to run Phosphoros with the *quickstart*
-catalog. It also contains a set of filter transmissions for the main
-recent UV/optical/IR surveys, the commonly adopted reddening curves
-and a large library of SED templates (a full description of the data
-pack can be found in the :ref:`data-repository` chapter).
+The Phosphoros Auxiliary Data Pack can be dowloaded from the
+Phosphoros repository through the GUI (see :ref:`config`) or the CLI
+(see :ref:`CLI: Download Data Pack<cli-data-pack>`). Files will be
+automatically located in the proper directories. This data pack
+contains a set of filter transmissions for the main recent
+UV/optical/IR surveys, the commonly adopted reddening curves and a
+large library of SED templates (a full description of the data pack
+can be found in the :ref:`data-repository` chapter).
 
 Much of the data manipulated by Phosphoros can be reused in different
 analyses. The directory structure described above is designed to keep

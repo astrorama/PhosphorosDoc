@@ -1,7 +1,7 @@
-.. _scale-factor:
+.. _scale-factor: 
 
-Scale Factor
-=====================================
+SED Normalization (Scale Factor)
+=========================================
 
 Template fitting methods usually fix the normalization of SED
 templates (or **scale factor**) to the value that minimizes the
@@ -57,6 +57,12 @@ redshift PDF computation, three steps are required:
   :math:`\alpha_{best}\pm n\times\sigma_{\alpha}`, can be modified by
   users (see :numref:`scalfac`).
 
+.. warning::
+
+   Samping of the scale factor will rise the memory footprint: set the
+   ``Cap Memory Usage`` in the ``Configuration-->General`` sub-panel
+   to avoid crashing the GUI
+  
 .. figure:: /_static/advanced_steps/scale_factor.png
     :name: scalfac
     :align: center 
@@ -64,7 +70,6 @@ redshift PDF computation, three steps are required:
 	     
     SED normalization sampling with the GUI
 
-  
 Scale Factor in the CLI
 ------------------------------------------------
 
@@ -90,3 +95,9 @@ template can be specified through::
 where the filter and the solar SED are expected to be found in the
 ``$PHOSPHOROS_ROOT/AuxiliaryData/Filters`` and
 ``$PHOSPHOROS_ROOT/AuxiliaryData/SEDs`` directories, respectively.
+
+.. warning::
+
+   Samping of the scale factor will rise the memory footprint: it is a
+   good practice to reduce the number of sources held in memory
+   using the ``input-buffer-size`` option (the default is 5000).

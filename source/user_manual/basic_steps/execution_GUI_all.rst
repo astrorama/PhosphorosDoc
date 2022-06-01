@@ -58,7 +58,7 @@ opened:
   select logs information to be printed in the terminal when the
   Phosphoros GUI is running.
 
-  .. figure:: /_static/basic_steps/General_v12.png
+  .. figure:: /_static/basic_steps/General_v13.png
      :name: conf_gen
      :align: center
      :scale: 40 %
@@ -92,7 +92,7 @@ opened:
   without modifying the original templates (see the
   :ref:`emission-lines` section for more details).
 
-  .. figure:: /_static/basic_steps/AuxDataManagement_v12.png
+  .. figure:: /_static/basic_steps/AuxDataManagement_v13.png
      :name: bconfig
      :align: center
      :scale: 50 %
@@ -102,7 +102,10 @@ opened:
 
   The ``Import Folder`` tab opens a *finder* window and allows users
   to import a directory with its entire content to the location of the
-  selected ``Auxiliary Data`` directory.
+  selected ``Auxiliary Data`` directory. On the other hand, ``Delete``
+  buttons remove the corresponding folders. This is an irreversible
+  action, and a confirmation message will be always displayed before
+  deleting. 
 
   Here, users can also select the reference solar SED used to
   normalize SED templates (see :ref:`SED Template
@@ -142,7 +145,7 @@ the catalog type). Moreover, the column name providing source ID must
 be entered through the ``Source ID Column`` drop down menu that
 shows all the column names in the input catalog.
 
-.. figure:: /_static/basic_steps/Catalog_type_v018.png
+.. figure:: /_static/basic_steps/Catalog_Type_v12.png
     :name: bsetup
     :width: 700px
     :align: center
@@ -213,14 +216,18 @@ MAG`` column of the ``Filter Mapping`` table (the default is
 ``False``). AB magnitudes will be then transformed to fluxes by
 Phosphoros.
 
-.. figure:: /_static/basic_steps/Catalog_Errors_v018.png
+Finally, users can map filters to the catalog columns that contain the
+filter shift (if present). This is required when flux corrections due to
+filter variations are taken into account in the redshift computation
+(see :ref:`Advanced Features: Filter Variation<filter-var>`).
+
+.. figure:: /_static/basic_steps/Catalog_Errors_v12.png
     :name: bsetup2
     :align: center
     :scale: 50 %
    
     ``Catalog Setup`` panel and the error re-calibration operation in the GUI
    
-
 Few optional fields are present in the top-right of the ``Catalog
 Setup`` panel: the column name of
 
@@ -580,9 +587,9 @@ Users need to fill the following information:
   * the source ID,
   * the best model (:math:`z`, SED, E(B-V), reddening cuve) from the
     likelihood and/or posterior distribution,
-  * the amplitude of the likelihood and/or posterior distribution at the
-    maximum,
-  * the normalized scale factor :math:`\alpha`,
+  * the amplitude of the likelihood and/or posterior distribution for
+    the best-fit model,
+  * the normalized scale factor :math:`\alpha` for the best-fit model,
   * the redshift value at the peak of the redshift PDF.
  
 
@@ -641,10 +648,13 @@ above.
    such case, just hover the mouse pointer on the button and a tool
    tip will apears with a list of the missing steps.
 
-The button ``Save Config. File`` exports the settings into the
-configuration files ``ModelGrid.CMG.conf``, ``SedWeightGrid.CSW.conf``
-and ``TemplateFitting.CR.conf``, located in a directory choosen by the
-user (by default ``$PHOSPHOROS_ROOT/config/``).
+The button ``Save Config. File`` exports the settings of the different
+actions used for the redshift computation into configuration files
+(e.g., ``ModelGrid.CMG.conf``, ``GalacticCorrGrid.CGCCG.conf``,
+``TemplateFitting.CR.conf``, etc.). They are located in a directory
+choosen by the user (by default ``$PHOSPHOROS_ROOT/config/``). A file,
+named ``command``, is also generated with the list of the Phosphoros
+commands needed to repeat the GUI run using the CLI.
    
 .. The ``Save Config. File`` exports the settings into a configuration
    file. The file is stored into::

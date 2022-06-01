@@ -87,9 +87,11 @@ functions for different redshift ranges and SED groups.
    usage requires to compute this grid before launching the redshifts
    computation (see below).
 
-.. note::
+.. warning::
 
-   The volume prior is automatically included in luminosity priors.
+   In the GUI, the volume prior is automatically included in
+   luminosity priors. On the contrary, in the CLI it must be
+   explicitly added in the configuration file.
 
 
 Luminosity Priors in the GUI

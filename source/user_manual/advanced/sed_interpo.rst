@@ -37,7 +37,8 @@ The directory where interpolated SEDs are stored is specified in the
 ``Save in a new Folder with name`` tab. The directory is expected to
 be new, otherwise, it will be cleaned before storing the new SEDs.
 Input SEDs used for the interpolation can be also included in the
-directory.
+directory by selecting the ``Copy selected SEDs in the output
+folder`` tab.
    
 The name used to store a new SED is explanatory of how interpolation
 is computed: in the example of :numref:`sedint`, 2 new SEDs are
@@ -47,7 +48,6 @@ from ``Ell2_A_0.sed`` and ``Ell3_A_0.sed``; their names will be::
   > 1:3_Ell1_A_0_+_2:3_Ell2_A_0.sed
   > 2:3_Ell1_A_0_+_1:3_Ell2_A_0.sed 
   > 1:2_Ell2_A_0_+_1:2_Ell3_A_0.sed 
-
   
 .. figure:: /_static/basic_steps/SED_interpo.png
     :name: sedint
@@ -76,7 +76,8 @@ and one by interpolating the ``Ell2_A_0.sed`` and ``Ell3_A_0.sed``
 SEDs. Output files are stored in the directory ``<dir-name>`` below
 ``AuxiliaryData/SEDs/CosmosEll`` (the location of the output directory
 is relative to the directory provided by ``--sed-dir``), and named as
-shown in the previous sub-section.
+shown in the previous sub-section. Input SEDs are not copied into the
+output directory.
 
 .. note::
 

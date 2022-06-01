@@ -137,13 +137,14 @@ particular, the following plots can be produced:
   and shown in the plot (right-top plot in :numref:`bvis1`).
 
 - The :math:`photoZ\,{\rm vs}\,specZ` plot is interactive, and allows
-  users to examine the redshift PDF of sources in the plot. By a
-  single click on a source, its ID will be presented at the top left
-  of the window and the 1D PDF for redshift and :math:`E(B-V)` will be
-  plotted in a separated windows (right-bottom plot in
-  :numref:`bvis1`).
+  users to examine the 1D PDF of model parameters for the sources in
+  the plot (right-bottom plots in :numref:`bvis1`). By a single **click
+  on a source**, in fact, its ID will be presented at the top left of
+  the window and all the 1D PDFs that have been computed will be
+  displayed in separated windows, up to eight plots (i.e., the PDF of
+  *z*, SED, :math:`E_{B-V}` and reddening curve for both the
+  likelihood and posterior distribution). 
   
-
 .. figure:: /_static/quickstart/SPECZ-PHZ_v018.png
    :name: bvis1
    :align: center

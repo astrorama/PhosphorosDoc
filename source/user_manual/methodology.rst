@@ -737,7 +737,7 @@ galaxies at redshift :math:`z`. In the above equation, we have assumed
 We refer users to the :ref:`luminosity-prior` section for a detailed
 explanation on luminosity priors in Phosphoros and their use.
 
-.. note::
+.. note
 
    In Phosphoros, volume correction is automatically added to luminosity priors.
 
